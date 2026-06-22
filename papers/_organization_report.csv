@@ -1,0 +1,246 @@
+current_path,suggested_topic,proposed_path,is_duplicate_of,size_bytes,pages,title,author
+006_Geometry_Normalisation_sep07_3842039_01.ppt,acquisition,acquisition/David Brown - DP2 - PSTM geometry issues.ppt,,4686336,,DP2 - PSTM geometry issues,David Brown
+02_FOOTPRINT_Omega2_may06_4039690_01.ppt,acquisition,acquisition/Footprint Omega2.ppt,,5118464,,PowerPoint Presentation,David Brown
+GEOMETRY_LAND.pdf,acquisition,acquisition/Geometry Land.pdf,,6074,1,Untitled,Unknown
+1984_Problem_of_Deconvolving_Noisy_Seismic_TECHCO.pdf,deconvolution,"deconvolution/Dave Hutchinson, Brian Link - Surface consistency - A solution to the problem of deconvolving noisy seismic data.pdf",,342615,4,Surface consistency: A solution to the problem of deconvolving noisy seismic data,"Dave Hutchinson, Brian Link"
+03_WP_Decon_4433491_01.ppt,deconvolution,deconvolution/David Brown - DP3 MBWP Module.ppt,,9447936,,DP3 MBWP Module,David Brown
+04_DECON_Issues_Omega2_3737355 _01 (2).ppt,deconvolution,deconvolution/Deconvolution Issues Omega2.ppt,,2851328,,No Slide Title,Western Atlas Intl.
+04_DECON_Issues_Omega2_3737355 _01 (3).ppt,deconvolution,deconvolution/Deconvolution Issues Omega2_1.ppt,04_DECON_Issues_Omega2_3737355 _01 (2).ppt,2851328,,No Slide Title,Western Atlas Intl.
+04_DECON_Issues_Omega2_3737355 _01.ppt,deconvolution,deconvolution/Deconvolution Issues Omega2_2.ppt,04_DECON_Issues_Omega2_3737355 _01 (2).ppt,2851328,,No Slide Title,Western Atlas Intl.
+03_Strategies_Parameters_Omega2_3737355 _01 (2).ppt,deconvolution,deconvolution/Deconvolution Strategies and Parameters Omega2.ppt,,5424128,,No Slide Title,Western Atlas Intl.
+03_Strategies_Parameters_Omega2_3737355 _01 (3).ppt,deconvolution,deconvolution/Deconvolution Strategies and Parameters Omega2_1.ppt,03_Strategies_Parameters_Omega2_3737355 _01 (2).ppt,5424128,,No Slide Title,Western Atlas Intl.
+03_Strategies_Parameters_Omega2_3737355 _01.ppt,deconvolution,deconvolution/Deconvolution Strategies and Parameters Omega2_2.ppt,03_Strategies_Parameters_Omega2_3737355 _01 (2).ppt,5424128,,No Slide Title,Western Atlas Intl.
+EAGE_course_multiples_PDFs/03_predictive_deconvolution.pdf,deconvolution,deconvolution/EAGE EET 03 - Predictive Deconvolution.pdf,,3273974,24,EET Course 2006,Eric Verschuur
+2010_osobennosti-algoritma-f_x-dekonvolyutsii (2).pdf,deconvolution,deconvolution/Features of FX Deconvolution Algorithm.pdf,,1522429,13,1_denisov,User
+2010_osobennosti-algoritma-f_x-dekonvolyutsii (3).pdf,deconvolution,deconvolution/Features of FX Deconvolution Algorithm_1.pdf,2010_osobennosti-algoritma-f_x-dekonvolyutsii (2).pdf,1522429,13,1_denisov,User
+2010_osobennosti-algoritma-f_x-dekonvolyutsii.pdf,deconvolution,deconvolution/Features of FX Deconvolution Algorithm_2.pdf,2010_osobennosti-algoritma-f_x-dekonvolyutsii (2).pdf,1522429,13,1_denisov,User
+mbwp_instructions_4948128_01/MBWP_model_equations.ppt,deconvolution,deconvolution/MBWP Model Equations.ppt,,121344,,Slide 1,Administrator
+mbwp_instructions_4948128_01/MBWP_report_blurb_for zero phasing.doc,deconvolution,deconvolution/MBWP Report Blurb - Zero Phasing.doc,,41472,1,"Phase matching of mixed source seismic surveys is accomplished by the use of Model-based Wavelet Processing (MBWP)  In MBWP, a model is created of the wavelet assumed to be imbedded in the data",Goofy
+mbwp_instructions_4948128_01/step_1_initial_MBWP_OPER_CREATE.ppt,deconvolution,deconvolution/MBWP Step 1 - Initial Operator.ppt,,4750848,,MBWP:  How to do it,Administrator
+mbwp_instructions_4948128_01/step_2_estimating_MBWP_paramters.ppt,deconvolution,deconvolution/MBWP Step 2 - Estimating Parameters.ppt,,1976320,,MBWP:  How to do it,Administrator
+mbwp_instructions_4948128_01/step_3_final_MBWP_oper.ppt,deconvolution,deconvolution/MBWP Step 3 - Final Operator.ppt,,1006080,,MBWP:  How to do it,Administrator
+mbwp_instructions_4948128_01/DGS_MBWP_update_2008.ppt,deconvolution,deconvolution/MBWP Update 2008.ppt,,1533440,,No Slide Title,Douglas Hart
+CGG/ODT4 - Deconvolution/ODT04_DECONVOLUTION_PART1_v7.0_sesimic_wavelet.pptx,deconvolution,deconvolution/ODT04_DECONVOLUTION_PART1_v7.0_sesimic_wavelet.pptx,,49489485,,,
+CGG/ODT4 - Deconvolution/ODT04_DECONVOLUTION_PART2_v7.0_signature_decon.pptx,deconvolution,deconvolution/ODT04_DECONVOLUTION_PART2_v7.0_signature_decon.pptx,,24809296,,,
+CGG/ODT4 - Deconvolution/ODT04_DECONVOLUTION_PART3_v7.0_deconvolution_demult.pptx,deconvolution,deconvolution/ODT04_DECONVOLUTION_PART3_v7.0_deconvolution_demult.pptx,,72478334,,,
+O-zadachakh-dekonvolyutsii-seysmicheskikh-zapisey_2022 (2).pdf,deconvolution,deconvolution/On Deconvolution of Seismic Records.pdf,,2280381,10,Сборка74.cdr,user
+O-zadachakh-dekonvolyutsii-seysmicheskikh-zapisey_2022.pdf,deconvolution,deconvolution/On Deconvolution of Seismic Records_1.pdf,O-zadachakh-dekonvolyutsii-seysmicheskikh-zapisey_2022 (2).pdf,2280381,10,Сборка74.cdr,user
+RobustDec2019_ZhangYuan.pdf,deconvolution,deconvolution/Robust Deconvolution 2019 Zhang Yuan.pdf,,1475071,4,,USER-
+the-application-of-wavelet-deconvolution-for-noise-reduction-in-seismic-data-preprint.pdf,deconvolution,deconvolution/Wavelet Deconvolution for Noise Reduction.pdf,,2395822,49,,mokutima okon
+mbwp_instructions_4948128_01.zip,deconvolution,deconvolution/mbwp_instructions_4948128_01.zip,,9300160,,,
+SEG-1991-1428.pdf,formats,formats/SEG 1991-1428.pdf,,223579,4,Random Noise Attenuation by F-X Prediction: A Tutorial,"Mike Galbraith, Seismic Image Software Ltd., Canada"
+SEG-SPS-Format-rev-2_1.pdf,formats,formats/SEG SPS Format rev 2.1.pdf,,777890,,,Word
+Segd_rev2.pdf,formats,"formats/SEG Technical Standards Committee - SEG Field Tape Standards Committee Proposal for SEG-D, Rev 2..pdf",,730106,65,"SEG Field Tape Standards Committee Proposal for SEG-D, Rev 2.",SEG Technical Standards Committee
+seg_ukooa_ads_meta_format_ver1.pdf,formats,formats/SEG-UKOO ADS Meta-format ver 1-01.doc.pdf,,246481,48,Microsoft Word - SEG-UKOO ADS Meta-format ver 1-01.doc,mwnorr1
+Segy_rev2.pdf,formats,formats/SEG-Yrev2Release.pdf,,3873706,151,SEG-Yrev2Release,salevin
+2003-33.pdf,general,general/2003-33.pdf,,822578,22,Microsoft Word - zc1.mkedit.doc,kirtland
+Avtoref_Amani_Mangua.pdf,general,general/Avtoref_Amani_Mangua.pdf,,5377153,27,,user
+CRR201749.pdf,general,general/Bernard Law and Daniel Trad - Comparison of refraction inversion methods.pdf,,4654884,22,Comparison of refraction inversion methods,Bernard Law and Daniel Trad
+CRR201314.pdf,general,general/Comparison of Q-estimation methods - an update.pdf,,494189,38,Comparison of Q-estimation methods: an update,Peng Cheng and Gary F. Margrave
+drthesis_2020_Sarajaervi.pdf,general,general/Computationally Efficient.pdf,,9248148,,Computationally Efficient,
+CRR201211.pdf,general,general/Estimation of Q - a comparison of different computational methods.pdf,,544091,32,Estimation of Q: a comparison of different computational methods,Peng Cheng and Gary F. Margrave
+FlatironsTrainingManual.pdf,general,general/Flatirons - Seismic Processing Training Manual.pdf,,2664056,38,Flatirons™ Refraction Statics,Ding Liu
+369_1.9781560803041.all.pdf,general,"general/Gijs J. O. Vermeer - 3D Seismic Survey Design, Second Edition.pdf",,41452286,369,"3D Seismic Survey Design, Second Edition",Gijs J. O. Vermeer
+HATTON_Processing.pdf,general,general/Hatton - Seismic Data Processing.pdf,,16226793,210,Microsoft Word - HATTON.doc,roma
+lecture.pdf,general,general/LaTeX with Beamer class.pdf,lecture-1.pdf,206040,,,LaTeX with Beamer class
+lecture-1.pdf,general,general/Lecture 1.pdf,,206040,,,LaTeX with Beamer class
+lecture-2.pdf,general,general/Lecture 2.pdf,lecture-1.pdf,206040,,,LaTeX with Beamer class
+lecture5 (2).pdf,general,general/Lecture 5 - Surface Waves and Dispersion.pdf,,2540883,37,PEAT8002 - SEISMOLOGY  Lecture 5: Surface waves and dispersion,Nick Rawlinson
+1999_Xia_Li_OU_Thesis.pdf,general,general/Li - PhD Thesis 1999.pdf,,30538023,107,Spectral Analysis of Seismic Data Using Wavelet Transform,Li Xia
+CGG/ODT1- DATA Analysis/ODT01A_DATA_ANALYSIS_PART1_v8.2.pptx,general,general/ODT01A_DATA_ANALYSIS_PART1_v8.2.pptx,,38928493,,,
+CGG/ODT1- DATA Analysis/ODT01A_DATA_ANALYSIS_PART2_v8.3.pptx,general,general/ODT01A_DATA_ANALYSIS_PART2_v8.3.pptx,,87392742,,,
+CGG/ODT1- DATA Analysis/ODT01_APPENDIXA_paper_seismic_ex1.pptx,general,general/ODT01_APPENDIXA_paper_seismic_ex1.pptx,,275451,,,
+CGG/ODT1- DATA Analysis/ODT01_APPENDIXA_paper_seismic_ex2.pptx,general,general/ODT01_APPENDIXA_paper_seismic_ex2.pptx,,224649,,,
+2008-43.pdf,general,general/William A. Burnett and Robert J. Ferguson.pdf,,1054678,8,,William A. Burnett and Robert J. Ferguson
+CGG/ODT1- DATA Analysis/guided_waves3.pptx,general,general/guided_waves3.pptx,,92841797,,,
+ji0623002.pdf,general,general/ji0623002.pdf,,2220759,,,
+dissertation1-1.pdf,general,general/Давлетханов Ришат Талгатович - Коррекция сейсмических записей за влияние верхней части разреза с сохранением кинематики отражённых....pdf,,9393690,177,"Коррекция сейсмических записей за влияние верхней части разреза с сохранением кинематики отражённых волн, соответствующих пластовой модели среды",Давлетханов Ришат Талгатович
+dissertation1.pdf,general,general/Давлетханов Ришат Талгатович - Коррекция сейсмических записей за влияние верхней части разреза с сохранением кинематики отражённых..._1.pdf,dissertation1-1.pdf,9393690,177,"Коррекция сейсмических записей за влияние верхней части разреза с сохранением кинематики отражённых волн, соответствующих пластовой модели среды",Давлетханов Ришат Талгатович
+Bashir Y. Seismic Imaging Methods and Applications...Oil...2022.pdf,migration,migration/Bashir - Seismic Imaging Methods and Applications 2022.pdf,,66561306,,,Elsevier
+migr/008_Velocity_Building_dec06_3842039_01.ppt,migration,migration/Bruce Hootman - DP2 - PSTM velocity building.ppt,008_Velocity_Building_dec06_3842039_01.ppt,2890752,,DP2 - PSTM velocity building,Bruce Hootman
+Robein-2016/Chap 01_USB_EAGE_2016_Moscow_Intro_WaveEquation Anisotropy.pdf,migration,migration/Chap 01_EAGE_2016_Moscow_Intro_WaveEquation Anisotropy.pdf,,17588923,173,Microsoft PowerPoint - Chap 01_EAGE_2016_Moscow_Intro_WaveEquation Anisotropy,Pc Bureau Etienne
+Robein-2016/Chap 02_USB_EAGE_2016_Moscow_ Kirchhoff depth (2).pdf,migration,migration/Chap 02_EAGE_2016_Moscow_ Kirchhoff depth.pdf,,25271331,174,Microsoft PowerPoint - Chap 02_EAGE_2016_Moscow_ Kirchhoff depth,Pc Bureau Etienne
+Chap 03_USB_EAGE_2016_Moscow_ Kirchhoff Time (2).pdf,migration,migration/Chap 03_EAGE_2016_Moscow_ Kirchhoff Time.pdf,,8158705,71,Microsoft PowerPoint - Chap 03_EAGE_2016_Moscow_ Kirchhoff Time,Pc Bureau Etienne
+Chap 03_USB_EAGE_2016_Moscow_ Kirchhoff Time.pdf,migration,migration/Chap 03_EAGE_2016_Moscow_ Kirchhoff Time_1.pdf,Chap 03_USB_EAGE_2016_Moscow_ Kirchhoff Time (2).pdf,8158705,71,Microsoft PowerPoint - Chap 03_EAGE_2016_Moscow_ Kirchhoff Time,Pc Bureau Etienne
+Robein-2016/Chap 03_USB_EAGE_2016_Moscow_ Kirchhoff Time.pdf,migration,migration/Chap 03_EAGE_2016_Moscow_ Kirchhoff Time_2.pdf,Chap 03_USB_EAGE_2016_Moscow_ Kirchhoff Time (2).pdf,8158705,71,Microsoft PowerPoint - Chap 03_EAGE_2016_Moscow_ Kirchhoff Time,Pc Bureau Etienne
+Robein-2016/Chap 04_USB_EAGE_2016_Moscow_Beam Migrations (1).pdf,migration,migration/Chap 04_EAGE_2016_ Moscow_Beam Migrations.pdf,,10991249,108,Microsoft PowerPoint - Chap 04_EAGE_2016_ Moscow_Beam Migrations,Pc Bureau Etienne
+Datta_abm_mac_v3-1.pdf,migration,migration/Datta - Anisotropic Beam Migration.pdf,,48315766,,,TeX
+Datta_abm_mac_v3.pdf,migration,migration/Datta - Anisotropic Beam Migration_1.pdf,Datta_abm_mac_v3-1.pdf,48315766,,,TeX
+migr/003_Impulses_Operators_3842039_01.ppt,migration,migration/David Brown - DP2 - Impulse Responses and Operators.ppt,003_Impulses_Operators_3842039_01.ppt,1740288,,DP2 - Impulse Responses and Operators,David Brown
+migr/011_Conditioning_sep07_3842039_01.ppt,migration,migration/David Brown - DP2 - PSTM Conditioning and production issues.ppt,,13438976,,DP2 - PSTM Conditioning and production issues,David Brown
+002_PSTM_Overview_3842039_01.ppt,migration,migration/David Brown - DP2 - PSTM Overview.ppt,,4682752,,DP2 - PSTM Overview,David Brown
+migr/002_PSTM_Overview_3842039_01.ppt,migration,migration/David Brown - DP2 - PSTM Overview_1.ppt,002_PSTM_Overview_3842039_01.ppt,4682752,,DP2 - PSTM Overview,David Brown
+migr/012_Simulation_3842039_01.ppt,migration,migration/David Brown - DP2 - PSTM Simulation.ppt,,481792,,DP2 - PSTM Simulation,David Brown
+migr/010_Statics_sep07_3842039_01.ppt,migration,migration/David Brown - DP2 - PSTM Statics.ppt,,4381184,25,DP2 - PSTM Statics,David Brown
+migr/009_Anisotropy_sep07_3842039_01.ppt,migration,migration/David Brown - DP2 - PSTM anisostropy.ppt,,16740864,,DP2 - PSTM anisostropy,David Brown
+migr/006_Geometry_Normalisation_sep07_3842039_01.ppt,migration,migration/David Brown - DP2 - PSTM geometry issues.ppt,006_Geometry_Normalisation_sep07_3842039_01.ppt,4686336,,DP2 - PSTM geometry issues,David Brown
+migr/005_Important_Parameters_sep07_3842039_01.ppt,migration,migration/David Brown - DP2 - PSTM important parameters.ppt,,11412992,,DP2 - PSTM important parameters,David Brown
+migr/001_Migration_Basics_3842039_01 (2).ppt,migration,migration/David Brown - DP2 Migration Overview.ppt,,36321280,25,DP2 Migration Overview,David Brown
+migr/001_Migration_Basics_3842039_01.ppt,migration,migration/David Brown - DP2 Migration Overview_1.ppt,,34214400,25,DP2 Migration Overview,David Brown
+000_PSTM_Walkthrough_3842039_01.ppt,migration,migration/David Brown - DP2 PSTM Timetable.ppt,,103424,,DP2 PSTM Timetable,David Brown
+migr/000_PSTM_Walkthrough_3842039_01.ppt,migration,migration/David Brown - DP2 PSTM Timetable_1.ppt,000_PSTM_Walkthrough_3842039_01.ppt,103424,,DP2 PSTM Timetable,David Brown
+migr/02_FOOTPRINT_Omega2_may06_4039690_01.ppt,migration,migration/Footprint Omega2.ppt,02_FOOTPRINT_Omega2_may06_4039690_01.ppt,5118464,,PowerPoint Presentation,David Brown
+Piet Gerritsma IOSC (July 2020)/01-migration_1 [Compatibiliteitsmodus].pdf,migration,migration/Gerritsma - 01-migration_1 [Compatibiliteitsmodus].pdf,,9327314,155,01-migration_1 [Compatibiliteitsmodus],Gerritsma
+Piet Gerritsma IOSC (July 2020)/02-migration_2 [Compatibiliteitsmodus].pdf,migration,migration/Gerritsma - 02-migration_2 [Compatibiliteitsmodus].pdf,,1623096,130,02-migration_2 [Compatibiliteitsmodus],Gerritsma
+Piet Gerritsma IOSC (July 2020)/03-migration_3 [Compatibiliteitsmodus].pdf,migration,migration/Gerritsma - 03-migration_3 [Compatibiliteitsmodus].pdf,,6213972,176,03-migration_3 [Compatibiliteitsmodus],Gerritsma
+Piet Gerritsma IOSC (July 2020)/04-vel_analysis [Compatibiliteitsmodus].pdf,migration,migration/Gerritsma - 04-vel_analysis [Compatibiliteitsmodus].pdf,,3187279,79,04-vel_analysis [Compatibiliteitsmodus],Gerritsma
+Piet Gerritsma IOSC (July 2020)/05-vel_mod_build [Compatibiliteitsmodus].pdf,migration,migration/Gerritsma - 05-vel_mod_build [Compatibiliteitsmodus].pdf,,14168653,265,05-vel_mod_build [Compatibiliteitsmodus],Gerritsma
+004_Dip_Aperture_Calculation_3842039_01.ppt,migration,migration/Martin Bayly - DP2 - Dip & Aperture Calculations.ppt,,1184768,,DP2 - Dip & Aperture Calculations,Martin Bayly
+migr/004_Dip_Aperture_Calculation_3842039_01.ppt,migration,migration/Martin Bayly - DP2 - Dip & Aperture Calculations_1.ppt,004_Dip_Aperture_Calculation_3842039_01.ppt,1184768,,DP2 - Dip & Aperture Calculations,Martin Bayly
+migr/007_Velocity_Dec06_3842039_01.ppt,migration,migration/Martin Bayly - DP2 - Velocity in Time Imaging.ppt,007_Velocity_Dec06_3842039_01.ppt,3781632,,DP2 - Velocity in Time Imaging,Martin Bayly
+Robein-2016/Movie of Ray-based migration_USB (1).pdf,migration,migration/Movie of Ray-based migration.pdf,,12609434,104,Microsoft PowerPoint - Movie of Ray-based migration,Pc Bureau Etienne
+CGG/ODT6 - Imaging/ODT6_IMAGING_PART1_mig_fundamentals_v1.1(1).pptx,migration,migration/ODT6_IMAGING_PART1_mig_fundamentals_v1.1.pptx,,57894157,,,
+CGG/ODT6 - Imaging/ODT6_IMAGING_PART3_velocities_and_anisotropy_v1.1.pptx,migration,migration/ODT6_IMAGING_PART3_velocities_and_anisotropy_v1.1.pptx,,16424445,,,
+01_Rawlinson_Seismic_Ray_Tracing_and_2007.pdf,migration,migration/Rawlinson - Seismic Ray Tracing and Wavefront Tracking 2007.pdf,,5313316,,Seismic ray tracing and wavefront tracking in,source-receiver paths taken  seismic energy in the presence of lateral variations in
+migrate1.pdf,migration,"migration/S. H. Gray, J. Etgen, J. Dellinger, D. Whitmore - Seismic migration problems and solutions.pdf",,3507508,19,Seismic migration problems and solutions,"S. H. Gray, J. Etgen, J. Dellinger, D. Whitmore"
+EAGE_course_multiples_PDFs/00_titleslide_EET.pdf,multiples,multiples/EAGE EET - Title Slide.pdf,,227091,7,PowerPoint Presentation,mb
+EAGE_course_multiples_PDFs/01_whats_the_problem.pdf,multiples,multiples/EAGE EET 01 - Whats the Problem.pdf,,9250111,29,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/02_move-out_discrimination.pdf,multiples,multiples/EAGE EET 02 - Move-out Discrimination.pdf,,11785668,53,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/04_wave_field_extrapolation.pdf,multiples,multiples/EAGE EET 04 - Wave Field Extrapolation.pdf,,7247828,30,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/05_principles_SRME.pdf,multiples,multiples/EAGE EET 05 - Principles of SRME.pdf,,9161071,56,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/06_practical_aspects_SRME.pdf,multiples,multiples/EAGE EET 06 - Practical Aspects of SRME.pdf,,18600380,67,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/07_adaptive_substraction.pdf,multiples,multiples/EAGE EET 07 - Adaptive Subtraction.pdf,,11534194,36,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/08_towards_3d_multiple_removal.pdf,multiples,multiples/EAGE EET 08 - Towards 3D Multiple Removal.pdf,,5777635,32,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/09_internal_multiple_removal.pdf,multiples,multiples/EAGE EET 09 - Internal Multiple Removal.pdf,,11667416,44,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/10a_EPSI.pdf,multiples,multiples/EAGE EET 10a - EPSI.pdf,,5540847,53,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/10b_imaging_multiples.pdf,multiples,multiples/EAGE EET 10b - Imaging Multiples.pdf,,5193651,39,EET Course 2006,Eric Verschuur
+EAGE_course_multiples_PDFs/10c_towards_FWI.pdf,multiples,multiples/EAGE EET 10c - Towards FWI.pdf,,2222132,23,EET Course 2006,Eric Verschuur
+MPFI - 2013 EAGE paper_7274381_02 (2).pdf,multiples,multiples/Kirsten Brandt - EAGE Conference & Exhibition.pdf,,459706,5,EAGE Conference & Exhibition,Kirsten Brandt
+MPFI - 2013 EAGE paper_7274381_02.pdf,multiples,multiples/Kirsten Brandt - EAGE Conference & Exhibition_1.pdf,MPFI - 2013 EAGE paper_7274381_02 (2).pdf,459706,5,EAGE Conference & Exhibition,Kirsten Brandt
+MPFI - Step_Guide_v3_7274381_04 (2).pdf,multiples,multiples/Lynn - UniQ_Broadband_Workflow Analysis.pdf,,5237387,83,UniQ_Broadband_Workflow Analysis,Lynn
+MPFI - Step_Guide_v3_7274381_04.pdf,multiples,multiples/Lynn - UniQ_Broadband_Workflow Analysis_1.pdf,MPFI - Step_Guide_v3_7274381_04 (2).pdf,5237387,83,UniQ_Broadband_Workflow Analysis,Lynn
+MPFI - Best Practice v3_7274381_06 (2).pdf,multiples,multiples/MPFI Best Practice v3.pdf,,442760,4,AL InTouch Content Word Template Ver. 3,Greg Reese
+MPFI - Best Practice v3_7274381_06.pdf,multiples,multiples/MPFI Best Practice v3_1.pdf,MPFI - Best Practice v3_7274381_06 (2).pdf,442760,4,AL InTouch Content Word Template Ver. 3,Greg Reese
+CGG/ODT5 - Demultiple/ODT03B_MULTIPLES_v5.2.5_intro(1).pptx,multiples,multiples/ODT03B_MULTIPLES_v5.2.5_intro.pptx,,30942862,,,
+CGG/ODT5 - Demultiple/ODT05_DEMULTIPLE_PART1_v3.42_introSRME_16x10.pptx,multiples,multiples/ODT05_DEMULTIPLE_PART1_v3.42_introSRME_16x10.pptx,,59165983,,,
+CGG/ODT5 - Demultiple/ODT05_DEMULTIPLE_PART2_v3.63_SWD_MWD_WEMA_16x10.pptx,multiples,multiples/ODT05_DEMULTIPLE_PART2_v3.63_SWD_MWD_WEMA_16x10.pptx,,33102971,,,
+CGG/ODT5 - Demultiple/ODT05_DEMULTIPLE_PART3_v3.01_subtraction_16x10.pptx,multiples,multiples/ODT05_DEMULTIPLE_PART3_v3.01_subtraction_16x10.pptx,,59969213,,,
+SRME_Lecture_Part2_2005_09.ppt,multiples,multiples/SRME Lecture Part 2 2005.ppt,,13689344,,No Slide Title,mwortham3
+adsub_test.pptx,multiples,multiples/adsub_test.pptx,,1278817,,,
+DPSTART_noise_attenuation.ppt,noise_attenuation,noise_attenuation/Angeline Kneppers - Basic Geophysics.ppt,,1256448,42,Basic Geophysics,Angeline Kneppers
+002_AAA_4039688_01.ppt,noise_attenuation,noise_attenuation/Anomalous Amplitude Attenuation (AAA).ppt,,2447872,25,No Slide Title,David Brown
+Best_Practice_CADZOW_v2_7017202_03.pdf,noise_attenuation,noise_attenuation/Cadzow Best Practice v2.pdf,,4364179,19,AL InTouch Content Word Template Ver. 3,Greg Reese
+Best_Practice_NUCNS_v4_7206366_03.pdf,noise_attenuation,noise_attenuation/NUCNS Best Practice v4.pdf,,2275276,33,AL InTouch Content Word Template Ver. 3,Greg Reese
+NUCNS.pdf,noise_attenuation,noise_attenuation/NUCNS.pdf,,299729,47,Untitled,Unknown
+CGG/ODT2 - De-noise/ODT02_DENOISE0_INTRO_v8.pptx,noise_attenuation,noise_attenuation/ODT02_DENOISE0_INTRO_v8.pptx,,44007035,,,
+CGG/ODT2 - De-noise/ODT02_DENOISE1_APP_Mean_and_median_v1.2.pptx,noise_attenuation,noise_attenuation/ODT02_DENOISE1_APP_Mean_and_median_v1.2.pptx,,12318437,,,
+CGG/ODT2 - De-noise/ODT02_DENOISE1_SWELL_NOISE_v8.0.pptx,noise_attenuation,noise_attenuation/ODT02_DENOISE1_SWELL_NOISE_v8.0.pptx,,43784994,,,
+CGG/ODT2 - De-noise/ODT02_DENOISE2_K_FILTER_v8(1).pptx,noise_attenuation,noise_attenuation/ODT02_DENOISE2_K_FILTER_v8.pptx,,37989662,,,
+CGG/ODT2 - De-noise/ODT02_DENOISE3_LINEAR_NOISE_REMOVAL_v8.pptx,noise_attenuation,noise_attenuation/ODT02_DENOISE3_LINEAR_NOISE_REMOVAL_v8.pptx,,83948503,,,
+CGG/ODT2 - De-noise/ODT02_DENOISE3_tauP_plane_wave_decomposition_v1.2.pptx,noise_attenuation,noise_attenuation/ODT02_DENOISE3_tauP_plane_wave_decomposition_v1.2.pptx,,595664,,,
+swami_techniques (2).pdf,noise_attenuation,noise_attenuation/ONLYOFFICE_7.4.0.163.pdf,,378025,,,ONLYOFFICE/7.4.0.163
+swami_techniques (3).pdf,noise_attenuation,noise_attenuation/ONLYOFFICE_7.4.0.163_1.pdf,swami_techniques (2).pdf,378025,,,ONLYOFFICE/7.4.0.163
+swami_techniques.pdf,noise_attenuation,noise_attenuation/ONLYOFFICE_7.4.0.163_2.pdf,swami_techniques (2).pdf,378025,,,ONLYOFFICE/7.4.0.163
+RSCD Best Practice v3_7284556_01.pdf,noise_attenuation,noise_attenuation/RSCD Best Practice v3.pdf,,3663610,57,AL InTouch Content Word Template Ver. 3,Gabriele Busanello
+Этап_2_04_Тр_Обработка_Подавление_помех_до_деконволюции_оценка_результатов_v2.pdf,noise_attenuation,noise_attenuation/Russian Report - Noise Attenuation Before Deconvolution.pdf,,17452958,39,Презентация PowerPoint,Irina Lisafeva
+miao2009.pdf,noise_attenuation,noise_attenuation/Xiaogui Miao - Surface consistent full wave imaging from topography for complex structures.pdf,,3524776,4,Surface consistent full wave imaging from topography for complex structures,Xiaogui Miao
+ggz137.pdf,q_and_absorption,q_and_absorption/Authors - Square-root variable metric based elastic fullwaveform inversion-Part 2 - Uncertainty estimation.pdf,,13806831,,Square-root variable metric based elastic fullwaveform inversion-Part 2: Uncertainty estimation,Authors
+InverseQ_Training_4022514_01 (2).ppt,q_and_absorption,q_and_absorption/David Brown - Q & Inverse-Q for Seismic Data.ppt,,4998656,,Q & Inverse-Q for Seismic Data,David Brown
+InverseQ_Training_4022514_01 (3).ppt,q_and_absorption,q_and_absorption/David Brown - Q & Inverse-Q for Seismic Data_1.ppt,InverseQ_Training_4022514_01 (2).ppt,4998656,,Q & Inverse-Q for Seismic Data,David Brown
+InverseQ_Training_4022514_01.ppt,q_and_absorption,q_and_absorption/David Brown - Q & Inverse-Q for Seismic Data_2.ppt,InverseQ_Training_4022514_01 (2).ppt,4998656,,Q & Inverse-Q for Seismic Data,David Brown
+Kjartansson.pdf,q_and_absorption,q_and_absorption/Einar Kjartansson - Constant Qwave propagation and attenuation.pdf,,1222347,12,Constant Qwave propagation and attenuation,Einar Kjartansson
+Derivation_Kramers-Kronig.pdf,q_and_absorption,q_and_absorption/Michael Schönleber - A simple derivation of the Kramers-Kronig relations from the perspective of system theory.pdf,,437902,3,A simple derivation of the Kramers-Kronig relations from the perspective of system theory,Michael Schönleber
+qapp.pdf,q_and_absorption,q_and_absorption/Q Application Reference.pdf,,483035,14,Echos™ Reference Guide,Paradigm™
+qest.pdf,q_and_absorption,q_and_absorption/Q Estimation Reference.pdf,,631361,18,Echos™ Reference Guide,Paradigm™
+Q-Compensation P22.pptx,q_and_absorption,q_and_absorption/Q-Compensation P22.pptx,,2570725,,,
+Futterman.pdf,q_and_absorption,q_and_absorption/Walter I. Futterman - Dispersive body waves.pdf,,866978,13,Dispersive body waves,Walter I. Futterman
+waveequations-4speedsound.pdf,q_and_absorption,q_and_absorption/Wave Equations for Sound Speed.pdf,,3263007,,,LaTeX with hyperref
+Wang2002G_Q.pdf,q_and_absorption,q_and_absorption/Yanghua Wang - A stable and efficient approach of inverse Q filtering.pdf,,636891,7,A stable and efficient approach of inverse Q filtering,Yanghua Wang
+Wang2006G_Q.pdf,q_and_absorption,q_and_absorption/Yanghua Wang - Inverse Q -filter for seismic resolution enhancement.pdf,,1996913,10,Inverse Q -filter for seismic resolution enhancement,Yanghua Wang
+wit2002-hertweck.pdf,q_and_absorption,q_and_absorption/pdftk 2.02 - www.pdftk.com.pdf,,668521,,,pdftk 2.02 - www.pdftk.com
+2011_Стандартные_оценки_качества_полевого_сейсмического_материала (3).pdf,qc,qc/pdfsam-console (Ver. 2.4.0e).pdf,,1437679,,,pdfsam-console (Ver. 2.4.0e)
+Optimising_taup (2).pdf,radon_taup,radon_taup/JGoto - intouch_taup_200103.ppt.pdf,,3245745,47,Microsoft PowerPoint - intouch_taup_200103.ppt,JGoto
+Optimising_taup.pdf,radon_taup,radon_taup/JGoto - intouch_taup_200103.ppt_1.pdf,Optimising_taup (2).pdf,3245745,47,Microsoft PowerPoint - intouch_taup_200103.ppt,JGoto
+Focusing aspects of the parabolic Radon transform_4153070_01 (2).pdf,radon_taup,radon_taup/PINNACLE - Maeland.tex.pdf,,318502,8,Maeland.tex,PINNACLE
+Focusing aspects of the parabolic Radon transform_4153070_01 (3).pdf,radon_taup,radon_taup/PINNACLE - Maeland.tex_1.pdf,Focusing aspects of the parabolic Radon transform_4153070_01 (2).pdf,318502,8,Maeland.tex,PINNACLE
+Focusing aspects of the parabolic Radon transform_4153070_01.pdf,radon_taup,radon_taup/PINNACLE - Maeland.tex_2.pdf,Focusing aspects of the parabolic Radon transform_4153070_01 (2).pdf,318502,8,Maeland.tex,PINNACLE
+Focusing_aspects_of_the_hyperbolic_Radon_transform_4153070_01 (2).pdf,radon_taup,radon_taup/S.H. Bickel - Focusing aspects of the hyperbolic Radon transform.pdf,,886658,4,Focusing aspects of the hyperbolic Radon transform,S.H. Bickel
+Focusing_aspects_of_the_hyperbolic_Radon_transform_4153070_01 (3).pdf,radon_taup,radon_taup/S.H. Bickel - Focusing aspects of the hyperbolic Radon transform_1.pdf,Focusing_aspects_of_the_hyperbolic_Radon_transform_4153070_01 (2).pdf,886658,4,Focusing aspects of the hyperbolic Radon transform,S.H. Bickel
+Focusing_aspects_of_the_hyperbolic_Radon_transform_4153070_01.pdf,radon_taup,radon_taup/S.H. Bickel - Focusing aspects of the hyperbolic Radon transform_2.pdf,Focusing_aspects_of_the_hyperbolic_Radon_transform_4153070_01 (2).pdf,886658,4,Focusing aspects of the hyperbolic Radon transform,S.H. Bickel
+02_Why_TauP_Transform_jan07_3737355 _01 (2).ppt,radon_taup,radon_taup/Why Tau-P Transform.ppt,,4163072,,No Slide Title,Western Atlas Intl.
+02_Why_TauP_Transform_jan07_3737355 _01 (3).ppt,radon_taup,radon_taup/Why Tau-P Transform_1.ppt,02_Why_TauP_Transform_jan07_3737355 _01 (2).ppt,4163072,,No Slide Title,Western Atlas Intl.
+02_Why_TauP_Transform_jan07_3737355 _01.ppt,radon_taup,radon_taup/Why Tau-P Transform_2.ppt,02_Why_TauP_Transform_jan07_3737355 _01 (2).ppt,4163072,,No Slide Title,Western Atlas Intl.
+138_5dregularization.pdf,regularization,regularization/Edip Baysal.pdf,,11834401,60,Presentation Title Goes Here,Edip Baysal
+CGG/ODT3 - regularisation/ODT03_Regularisation_App1_COVvsOFFSET_V1.1.pptx,regularization,regularization/ODT03_Regularisation_App1_COVvsOFFSET_V1.1.pptx,,4829753,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_App1b_COVvsOFFSET_v2.0.pptx,regularization,regularization/ODT03_Regularisation_App1b_COVvsOFFSET_v2.0.pptx,,1458557,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_App2_Xspread_orthongal_geom_v1.1.pptx,regularization,regularization/ODT03_Regularisation_App2_Xspread_orthongal_geom_v1.1.pptx,,1330890,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt1_v8.0.pptx,regularization,regularization/ODT03_Regularisation_Pt1_v8.0.pptx,,35436484,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Appendix2.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Appendix2.pptx,,767236,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter01.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter01.pptx,,2427254,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter02.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter02.pptx,,1424409,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter03.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter03.pptx,,1666796,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter04.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter04.pptx,,1403132,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter05.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter05.pptx,,3415588,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter06.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter06.pptx,,5082245,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter07.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter07.pptx,,862718,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter08.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter08.pptx,,1930811,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter09.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter09.pptx,,2222816,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter10.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter10.pptx,,4282538,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter11.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter11.pptx,,4595170,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter12.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter12.pptx,,1960488,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Chapter13.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Chapter13.pptx,,732494,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_Split_Contents.pptx,regularization,regularization/ODT03_Regularisation_Pt2_Split_Contents.pptx,,1409184,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_Pt2_v8.0(1).pptx,regularization,regularization/ODT03_Regularisation_Pt2_v8.0.pptx,,21724797,,,
+CGG/ODT3 - regularisation/ODT03_Regularisation_furtherappendices_v1.0(1).pptx,regularization,regularization/ODT03_Regularisation_furtherappendices_v1.0.pptx,,12615682,,,
+DPSTART_frequency_filtering.ppt,signal_processing,signal_processing/Angeline Kneppers - Basic Geophysics.ppt,,193536,42,Basic Geophysics,Angeline Kneppers
+CurveletTransform.pdf,signal_processing,signal_processing/Curvelet Transform.pdf,,671058,56,Untitled,Unknown
+003_Impulses_Operators_3842039_01.ppt,signal_processing,signal_processing/David Brown - DP2 - Impulse Responses and Operators.ppt,,1740288,,DP2 - Impulse Responses and Operators,David Brown
+mbwp_instructions_4948128_01/MBWP_w_constraining_filter_procedure3.ppt,signal_processing,signal_processing/MBWP Constraining Filter Procedure.ppt,,3742208,,Slide 1,Administrator
+foti2011 (2).pdf,statics,statics/Foti - Surface Wave Methods.pdf,,2986286,,,Arbortext Advanced Print Publisher 9.0.114/W
+foti2011.pdf,statics,statics/Foti - Surface Wave Methods_1.pdf,foti2011 (2).pdf,2986286,,,Arbortext Advanced Print Publisher 9.0.114/W
+2012_FB_IJones_NearSurface.pdf,statics,statics/Jones - Near Surface.pdf,,1330026,,,Adobe InDesign CS5 (7.0)
+IvanovEtAlsegam2017-17793766.1 (2).pdf,statics,statics/Julian Ivanov - Benefits of using the high-resolution linear Radon transform with the multichannel analysis of....pdf,,1135854,7,Benefits of using the high-resolution linear Radon transform with the multichannel analysis of surface waves method,"Julian Ivanov, Richard Miller, Daniel Feigenbaum, and Jacob Schwenk"
+IvanovEtAlsegam2017-17793766.1 (3).pdf,statics,statics/Julian Ivanov - Benefits of using the high-resolution linear Radon transform with the multichannel analysis of..._1.pdf,IvanovEtAlsegam2017-17793766.1 (2).pdf,1135854,7,Benefits of using the high-resolution linear Radon transform with the multichannel analysis of surface waves method,"Julian Ivanov, Richard Miller, Daniel Feigenbaum, and Jacob Schwenk"
+IvanovEtAlsegam2017-17793766.1.pdf,statics,statics/Julian Ivanov - Benefits of using the high-resolution linear Radon transform with the multichannel analysis of..._2.pdf,IvanovEtAlsegam2017-17793766.1 (2).pdf,1135854,7,Benefits of using the high-resolution linear Radon transform with the multichannel analysis of surface waves method,"Julian Ivanov, Richard Miller, Daniel Feigenbaum, and Jacob Schwenk"
+3a-Refraction_Seismic.pdf,statics,statics/Refraction_Seismic.pdf,,521496,18,Refraction_Seismic,
+Этап_1_04_Тр_Обработка_Построение_модели_ВЧР_по_преломленным_волнам_ext.pdf,statics,statics/Russian Report - Refraction Statics Model Building.pdf,,4092548,18,Презентация PowerPoint,Irina Lisafeva
+sedi_surface.pdf,statics,statics/SEDI Surface Waves.pdf,,2386404,46,PowerPoint-Präsentation,Prof. Dr. Heiner Igel
+57951-whats-the-datum-01 (2).pdf,statics,statics/What's the Datum.pdf,,2175471,7,,Jason
+57951-whats-the-datum-01 (5).pdf,statics,statics/What's the Datum_1.pdf,57951-whats-the-datum-01 (2).pdf,2175471,7,,Jason
+57951-whats-the-datum-01 (6).pdf,statics,statics/What's the Datum_2.pdf,57951-whats-the-datum-01 (2).pdf,2175471,7,,Jason
+57951-whats-the-datum-01 (7).pdf,statics,statics/What's the Datum_3.pdf,57951-whats-the-datum-01 (2).pdf,2175471,7,,Jason
+57951-whats-the-datum-01.pdf,statics,statics/What's the Datum_4.pdf,57951-whats-the-datum-01 (2).pdf,2175471,7,,Jason
+PickingGeop10 (2).pdf,statics,"statics/out - GEOPHYSICS, VOL. 75, NO. 4 共JULY-AUGUST 2010兲; P. V67–V76, 8 FIGS., 3 TABLES..pdf",,884575,,"GEOPHYSICS, VOL. 75, NO. 4 共JULY-AUGUST 2010兲; P. V67–V76, 8 FIGS., 3 TABLES.",out  a visual inspection of the amplitudes and waveform changes
+PickingGeop10 (3).pdf,statics,"statics/out - GEOPHYSICS, VOL. 75, NO. 4 共JULY-AUGUST 2010兲; P. V67–V76, 8 FIGS., 3 TABLES._1.pdf",PickingGeop10 (2).pdf,884575,,"GEOPHYSICS, VOL. 75, NO. 4 共JULY-AUGUST 2010兲; P. V67–V76, 8 FIGS., 3 TABLES.",out  a visual inspection of the amplitudes and waveform changes
+geokniga-kolichestvennaya-seysmologiya-tom-2.pdf,textbooks,"textbooks/Aki and Richards - Quantitative Seismology, Vol 2.pdf",,62041471,,,
+bleistein2001.pdf,textbooks,textbooks/Bleistein - Mathematical Methods for Wave Phenomena 2001.pdf,,50344450,,,
+2007-Бондарев Сейсморазведка.pdf,textbooks,textbooks/Bondarev - Seismorazvedka.pdf,,447634187,,,HP PDF Formatter version 3.2.0.947
+Robein-2016/Chap 06_USB_EAGE_2016_Moscow_Wavefield Extrapolation Migrations RTM (1).pdf,textbooks,textbooks/Chap 06_EAGE_2016_Moscow_Wavefield Extrapolation Migrations RTM.pdf,,67780390,304,Microsoft PowerPoint - Chap 06_EAGE_2016_Moscow_Wavefield Extrapolation Migrations RTM,Pc Bureau Etienne
+486_cherepovskij_a_v_nazemnaya_sejsmorazvedka_novogo_tehnologicheskogo.pdf,textbooks,textbooks/Cherepovsky - Land Seismic Surveying.pdf,,118049951,,,
+Methods_of_Seismic_Data_Processing-1.pdf,textbooks,textbooks/Methods of Seismic Data Processing.pdf,,92364757,410,notes cover page.cv5,gary
+Methods_of_Seismic_Data_Processing.pdf,textbooks,textbooks/Methods of Seismic Data Processing_1.pdf,Methods_of_Seismic_Data_Processing-1.pdf,92364757,410,notes cover page.cv5,gary
+514_1.9781560803621.pdf,textbooks,textbooks/Stephen J. Hill and Andreas Rüger - Illustrated Seismic Processing - Volume 1 - Imaging.pdf,,51546190,331,Illustrated Seismic Processing: Volume 1: Imaging,Stephen J. Hill and Andreas Rüger
+596_596_illustrated_seismic_processing_volume2_preimaging.pdf,textbooks,textbooks/Steve J Hill - Introduction to Seismic Processing.pdf,,61703183,327,Introduction to Seismic Processing,Steve J Hill
+Introduction to Linear Algebra Fifth Edition by Gilbert Strang.pdf,textbooks,textbooks/Strang - Introduction to Linear Algebra 5th Ed.pdf,,62507516,585,"Introduction to Linear Algebra, 5th Edition",Gilbert Strang
+geokniga-tsvankiniseismicwavefieldsinlayeredisotropicmediasamizdatpress1995tk105sgsp.pdf,textbooks,textbooks/Tsvankin - Seismic Wavefields in Layered Isotropic Media.pdf,,3394270,105,coursesam.dvi,
+geokniga-advanced-digital-signal-processing-seismic-data.pdf,textbooks,textbooks/Yilmaz - Advanced Digital Signal Processing of Seismic Data.pdf,,33688114,342,Advanced Digital Signal Processing of Seismic Data,
+geokniga-15355379782982.pdf,textbooks,textbooks/Yilmaz - Seismic Data Analysis.pdf,,86975099,,,
+geokniga-practical-seismic-data-analysis.pdf,textbooks,textbooks/Yilmaz - Seismic Data Analysis_1.pdf,,56200028,,,
+geokniga-seismicdataanalysis.pdf,textbooks,textbooks/Yilmaz - Seismic Data Analysis_2.pdf,,82681249,426,ПРЕДИСЛОВИЕ К ПЕРВОМУ ИЗДАНИЮ,1
+2017_d-2017-476-6-693.pdf,uncategorized,uncategorized/2017_d-2017-476-6-693.pdf,,356991,,Untitled,Adobe InDesign CC 2015 (Macintosh)
+25856559.pdf,uncategorized,uncategorized/25856559.pdf,,1716415,4,This is the title of an example SEG abstract using Microsoft Word 11-point bold type,Afarmer
+814572354.pdf,uncategorized,uncategorized/814572354.pdf,,5768859,,,
+zhou1994.pdf,uncategorized,uncategorized/Binzhong Zhou and Stewart A. Greenhalgh - Linear and parabolic τ-p transforms revisited.pdf,,1969394,17,Linear and parabolic τ-p transforms revisited,Binzhong Zhou and Stewart A. Greenhalgh
+jge_12_6_1024.pdf,uncategorized,"uncategorized/Dehui Kong, Zhenming Peng - Seismic random noise attenuation using shearlet and total generalized variation.pdf",,7272592,,Seismic random noise attenuation using shearlet and total generalized variation,"Dehui Kong, Zhenming Peng"
+Chapter_4.pdf,uncategorized,uncategorized/Egon der Dritte - Seismic Signals and Noise.pdf,,3324186,62,Seismic Signals and Noise,Egon der Dritte
+lopez2015.pdf,uncategorized,uncategorized/Gabriel A. Lopez and D. J. Verschuur - Closed-loop surface-related multiple elimination and its application to simultaneous data....pdf,,3372700,11,Closed-loop surface-related multiple elimination and its application to simultaneous data reconstruction,Gabriel A. Lopez and D. J. Verschuur
+2692.+Sumihar+Simangunsong+20051-20057+(Rian).pdf,uncategorized,uncategorized/LENOVO.pdf,,793997,7,,LENOVO
+2018_d-2018-482-6-708.pdf,uncategorized,uncategorized/PDFium.pdf,,116325,,Untitled,PDFium
+2016_gp-2016-64-1-129.pdf,uncategorized,uncategorized/Poststack diffraction imaging using reverse&#x02010;time migration.pdf,,284105,14,Poststack diffraction imaging using reverse&#x02010;time migration,
+9407e8cef923204f7fc5a1d29abb079827aa.pdf,uncategorized,uncategorized/Qi-sheng Zhang - Seismic random noise attenuation using modified wavelet thresholding.pdf,,3370698,10,Seismic random noise attenuation using modified wavelet thresholding,Qi-sheng Zhang
+s10518-017-0206-7.pdf,uncategorized,uncategorized/Sebastiano Foti - Guidelines for the good practice of surface wave analysis - a product of the InterPACIFIC project.pdf,,8645962,54,Guidelines for the good practice of surface wave analysis: a product of the InterPACIFIC project,Sebastiano Foti
+ndx_nagh.pdf,uncategorized,uncategorized/Seismic Trace Interpolation using Adaptive Prediction Filters.pdf,,1675225,4,Seismic Trace Interpolation using Adaptive Prediction Filters,
+feart-11-1121648.pdf,uncategorized,uncategorized/Songling Li - An explicit stable Q-compensated reverse time migration scheme for complex heterogeneous....pdf,,5746027,,An explicit stable Q-compensated reverse time migration scheme for complex heterogeneous attenuation media,"Songling Li, Ying Shi, Weihong Wang, Ning Wang, Liwei Song, Yinfeng Wang"
+Robein-2016/WF_Movie_Modele08_aniso_USB (1).pdf,uncategorized,uncategorized/WF_Movie_Modele08_aniso.pdf,,12220881,88,Microsoft PowerPoint - WF_Movie_Modele08_aniso,Pc Bureau Etienne
+Volltext.pdf,uncategorized,uncategorized/diss.dvi.pdf,,10668634,147,diss.dvi,
+SCAC_LMS_3 (2).pdf,uncategorized,uncategorized/metcas - SCAC.ppt.pdf,,4572718,112,Microsoft PowerPoint - SCAC.ppt,metcas
+SCAC_LMS_3.pdf,uncategorized,uncategorized/metcas - SCAC.ppt_1.pdf,SCAC_LMS_3 (2).pdf,4572718,112,Microsoft PowerPoint - SCAC.ppt,metcas
+330-Article-583-1-10-20230415.pdf,uncategorized,uncategorized/pdftk 2.02 - www.pdftk.com.pdf,,5081984,,,pdftk 2.02 - www.pdftk.com
+67-Article-68-1-10-20190731.pdf,uncategorized,uncategorized/pdftk 2.02 - www.pdftk.com_1.pdf,,2612261,,,pdftk 2.02 - www.pdftk.com
+smfksi1 (2).pdf,uncategorized,uncategorized/smfksi1.pdf,,185181,36,Untitled,Unknown
+smfksi1.pdf,uncategorized,uncategorized/smfksi1_1.pdf,smfksi1 (2).pdf,185181,36,Untitled,Unknown
+008_Velocity_Building_dec06_3842039_01.ppt,velocity,velocity/Bruce Hootman - DP2 - PSTM velocity building.ppt,,2890752,,DP2 - PSTM velocity building,Bruce Hootman
+Robein-2016/Chap 05_USB_EAGE_2016_Moscow_Velocity Model Building Tomography.pdf,velocity,velocity/Chap 05_EAGE_2016_Moscow_Velocity Model Building Tomography.pdf,,13777878,169,Microsoft PowerPoint - Chap 05_EAGE_2016_Moscow_Velocity Model Building Tomography,Pc Bureau Etienne
+Robein-2016/Chap 07_USB_EAGE_2016_Moscow_WE basedVMB _ FWI (1).pdf,velocity,velocity/Chap 07_EAGE_2016_Moscow_WE basedVMB _ FWI.pdf,,8265336,97,Microsoft PowerPoint - Chap 07_EAGE_2016_Moscow_WE basedVMB _ FWI,Pc Bureau Etienne
+007_Velocity_Dec06_3842039_01.ppt,velocity,velocity/Martin Bayly - DP2 - Velocity in Time Imaging.ppt,,3781632,,DP2 - Velocity in Time Imaging,Martin Bayly
+CGG/ODT6 - Imaging/ODT6_IMAGING_PART2_Model_building_v1.1(1).pptx,velocity,velocity/ODT6_IMAGING_PART2_Model_building_v1.1.pptx,,104143325,,,

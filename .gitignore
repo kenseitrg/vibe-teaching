@@ -176,9 +176,17 @@ Desktop.ini
 
 # Ignore generated PDFs (e.g., compiled lecture notes) by default.
 # Source papers/textbooks in papers/ are also ignored to avoid committing large/copyrighted files.
-# Uncomment the next line if you want to keep source PDFs in papers/ under version control.
 *.pdf
-# !papers/**/*.pdf
+
+# Ignore presentations and documents in the paper library.
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.zip
+
+# If you want to keep a specific source document in version control, force-add it:
+# git add -f papers/textbooks/some-book.pdf
 
 # Windows / macOS metadata and alternate data streams
 Thumbs.db
