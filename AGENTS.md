@@ -66,7 +66,7 @@ More complex processing topics.
 |------|--------|-------|
 | PowerPoint presentations | Exists | One deck per lecture. The agent can read, summarize, suggest improvements, and produce PNG figures for slides. |
 | Handwritten lecture notes | Poor condition | **Rewrite from scratch** in Markdown. Do not try to transcribe. |
-| Papers and textbooks | Coming soon | Instructor will add a folder of PDFs. The agent will extract definitions, equations, workflows, and figures of merit. |
+| Papers and textbooks | Organized | Library is in `papers/` sorted by topic. The agent extracts text locally and summarizes sources in `wiki/sources/`. |
 | Existing scripts | Partial | Can be reused or rewritten for quality. Target modern Python with clean, reusable visualization code. |
 
 ---
@@ -150,6 +150,34 @@ When simplifying or visualizing a topic, follow these priorities:
 - Write Python scripts to illustrate key concepts.
 - Favor parameter-driven scripts so the instructor can tweak inputs easily.
 - Produce publication-quality PNG figures with clear labels and captions.
+
+### Wiki maintenance
+
+The project maintains a persistent LLM wiki in `wiki/`.
+
+- **Purpose:** accumulate compiled knowledge from papers and textbooks so answers do not have to be re-derived from raw sources every time.
+- **Structure:**
+  - `wiki/concepts/` — core ideas (e.g., deconvolution, NMO, migration).
+  - `wiki/techniques/` — practical workflows.
+  - `wiki/sources/` — one summary page per paper/book.
+  - `wiki/comparisons/` — method comparisons.
+  - `wiki/lecture_ready/` — material synthesized for specific lectures.
+  - `wiki/index.md` — catalog of pages.
+  - `wiki/log.md` — chronological ingest/query/lint history.
+- **Conventions:**
+  - Every page should have YAML frontmatter with `title`, `status`, `sources`, and `tags`.
+  - Status values: `stub`, `draft`, `reviewed`, `lecture-ready`.
+  - Source pages link to concepts they inform; concept pages cite their sources.
+- **Ingest workflow:**
+  1. Extract text locally with `uv run python scripts/extract_source_text.py ...`
+  2. Summarize the source in `wiki/sources/<name>.md`.
+  3. Update or create relevant `wiki/concepts/*.md` pages.
+  4. Update `wiki/index.md` and append to `wiki/log.md`.
+- **Query workflow:**
+  1. Read `wiki/index.md`.
+  2. Read relevant concept/source pages.
+  3. Synthesize answer; file valuable new insights back into the wiki.
+- **Token discipline:** do not feed whole large textbooks to the LLM. Extract relevant pages/sections locally first, then summarize.
 
 ---
 

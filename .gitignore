@@ -185,6 +185,9 @@ Desktop.ini
 *.docx
 *.zip
 
+# Ignore locally extracted raw text from source documents (can be regenerated).
+wiki/sources/_raw_text/
+
 # If you want to keep a specific source document in version control, force-add it:
 # git add -f papers/textbooks/some-book.pdf
 
