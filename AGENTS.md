@@ -176,11 +176,30 @@ Suggested directory layout (create/adapt as needed):
 ├── figures/                # PNG figures for slides and notes
 ├── scripts/                # Python visualization/processing scripts
 ├── data/                   # Small example datasets for scripts and exercises
-├── papers/                 # PDF library (instructor-managed)
+├── papers/                 # PDF/PPT library organized by topic
+│   ├── acquisition/
+│   ├── deconvolution/
+│   ├── formats/
+│   ├── general/
+│   ├── migration/
+│   ├── multiples/
+│   ├── noise_attenuation/
+│   ├── q_and_absorption/
+│   ├── qc/
+│   ├── radon_taup/
+│   ├── regularization/
+│   ├── signal_processing/
+│   ├── statics/
+│   ├── textbooks/          # Broad reference works and textbooks
+│   ├── uncategorized/      # Files awaiting manual classification
+│   ├── velocity/
+│   └── duplicates/         # Byte-for-byte duplicates (quarantine)
 ├── references/             # Bibliography files and source annotations
 ├── exercises/              # Concept checks and small assignments
 └── references.bib          # Shared bibliography
 ```
+
+**Note on `papers/`:** Source PDFs/PPTs are ignored by Git to avoid committing large or copyrighted files. Only the folder structure, scripts, and organization reports are tracked.
 
 ### Before generating large outputs
 
