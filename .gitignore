@@ -179,3 +179,9 @@ Desktop.ini
 # Uncomment the next line if you want to keep source PDFs in papers/ under version control.
 *.pdf
 # !papers/**/*.pdf
+
+# Windows / macOS metadata and alternate data streams
+Thumbs.db
+*.Zone.Identifier
+*:$DATA
+.DS_Store
