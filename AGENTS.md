@@ -83,7 +83,7 @@ More complex processing topics.
   2. Once the English version is approved, produce a Russian translation.
   3. Keep English and Russian files synchronized; update both when edits are made.
 - **File naming:** Use a suffix to distinguish languages, e.g., `term01_lec05_velocity_analysis.en.md` and `term01_lec05_velocity_analysis.ru.md`.
-- **Tooling:** Prefer lightweight CLI tools such as **Pandoc** (e.g., `pandoc notes.md -o notes.pdf`) or similar. The exact command can be documented per lecture once chosen.
+- **Tooling:** Use **Pandoc with XeLaTeX** for Markdown → PDF conversion. Render via `uv run python scripts/render_lecture.py <path-to-notes.md>`. Math is written in LaTeX syntax (`$...$` and `$$...$$`) and rendered automatically.
 - Use headers, bullet points, numbered derivations, and figure captions.
 - Embed Python-generated figures as PNG/SVG and reference them.
 

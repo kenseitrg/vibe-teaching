@@ -188,6 +188,10 @@ Desktop.ini
 # Ignore locally extracted raw text from source documents (can be regenerated).
 wiki/sources/_raw_text/
 
+# Ignore generated PDFs and example artifacts.
+*.pdf
+lecture_notes/en/_example_with_math.en.md
+
 # If you want to keep a specific source document in version control, force-add it:
 # git add -f papers/textbooks/some-book.pdf
 

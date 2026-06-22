@@ -193,6 +193,30 @@ git commit -m "Add Term X Lecture Y: <topic>"
 
 ---
 
+## Math rendering
+
+Lecture notes and derivations use LaTeX math syntax inside Markdown. Pandoc with XeLaTeX renders them to PDF.
+
+Inline math: `$f = v / (2d)$`
+
+Display math:
+
+```markdown
+$$
+x(t) = w(t) * r(t)
+$$
+```
+
+To render a file:
+
+```bash
+uv run python scripts/render_lecture.py lecture_notes/en/termXX_lecYY_<topic>.en.md
+```
+
+This produces a PDF with the same base filename. See `lecture_notes/en/_example_with_math.en.md` for a working example.
+
+---
+
 ## Timing and iteration
 
 | Step | Estimated time | Who drives |
