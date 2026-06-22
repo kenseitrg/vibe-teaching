@@ -7,7 +7,7 @@ This repository contains teaching materials and tooling for an undergraduate cou
 | Directory | Purpose |
 |-----------|---------|
 | `AGENTS.md` | Instructions for the LLM teaching assistant |
-| `lecture_notes/` | Markdown lecture notes in English and Russian |
+| `lecture_notes/` | Markdown lecture notes in English and Russian, plus derivations |
 | `slides/` | PowerPoint presentations and outlines |
 | `figures/` | PNG/SVG figures for notes and slides |
 | `scripts/` | Python scripts for text extraction, organization, and visualization |

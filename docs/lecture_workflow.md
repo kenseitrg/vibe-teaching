@@ -84,6 +84,9 @@ Create an outline file `lecture_notes/_drafts/termXX_lecYY_<topic>_outline.md` w
   - Buffer for questions (5–10 min)
 - List of figures/visualizations needed.
 - List of key equations (if any).
+- For each key equation, decide whether to:
+  - Include it directly in the lecture notes (brief, conceptual derivation).
+  - Create a separate derivation document in `lecture_notes/derivations/` (step-by-step, full mathematical detail).
 - Links to relevant `wiki/concepts/` pages.
 
 Review and adjust this outline with the instructor before writing prose.
@@ -100,6 +103,7 @@ Guidelines:
   - Use worked examples with realistic numbers.
   - Embed generated figures and reference them.
 - Cite wiki source pages and papers where appropriate.
+- Include key equations. For equations whose full derivation is too long for the notes, reference the matching derivation document in `lecture_notes/derivations/`.
 - Include comprehension questions at the end.
 - Use consistent notation; add new terms to the notation glossary in `AGENTS.md`.
 
@@ -185,6 +189,7 @@ git commit -m "Add Term X Lecture Y: <topic>"
 | Slide deck | `slides/termXX/lecYY_<topic>/lecYY_<topic>.pptx` | `slides/term01/lec05_velocity_analysis/lec05_velocity_analysis.pptx` |
 | Exercises | `exercises/termXX_lecYY_<topic>.md` | `exercises/term01_lec05_velocity_analysis.md` |
 | Wiki lecture-ready page | `wiki/lecture_ready/termXX_lecYY_<topic>.md` | `wiki/lecture_ready/term01_lec05_velocity_analysis.md` |
+| Derivation document | `lecture_notes/derivations/<topic>_derivation.en.md` | `lecture_notes/derivations/wiener_deconvolution_derivation.en.md` |
 
 ---
 
@@ -198,6 +203,7 @@ git commit -m "Add Term X Lecture Y: <topic>"
 | 4: English notes | 45–90 min | Agent |
 | 5: Figures | 30–90 min | Agent |
 | 6: Russian notes | 30–60 min | Agent + instructor review |
+| 6a: Derivation documents | 30–60 min | Agent |
 | 7: Slides | 30–60 min | Instructor (agent assists) |
 | 8: Exercises | 15–30 min | Agent |
 | 9: Review | 15–30 min | Both |
@@ -224,6 +230,16 @@ Do not ingest the whole book. Identify the specific chapters/sections relevant t
 ### Lecture that reuses figures from the internet
 
 Replace internet images with self-generated PNGs in Step 5. Keep a list of replaced images in `slides/termXX/lecYY_<topic>/replaced_figures.md` for attribution or reference.
+
+### Lecture with important derivations
+
+If a topic depends on a key equation whose derivation is too detailed for the main notes (e.g., Wiener deconvolution normal equations):
+
+1. State the equation and its meaning in the lecture notes.
+2. Create a separate derivation document in `lecture_notes/derivations/<topic>_derivation.en.md`.
+3. Include the full step-by-step derivation, starting from the convolutional model.
+4. Translate the derivation document to Russian if students are expected to read it in Russian.
+5. Link to it from the lecture notes and optionally from the wiki concept page.
 
 ---
 

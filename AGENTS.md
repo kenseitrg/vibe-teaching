@@ -199,7 +199,8 @@ Suggested directory layout (create/adapt as needed):
 ├── README.md
 ├── lecture_notes/          # Markdown lecture notes
 │   ├── en/                 # English versions (.en.md)
-│   └── ru/                 # Russian versions (.ru.md)
+│   ├── ru/                 # Russian versions (.ru.md)
+│   └── derivations/        # Step-by-step mathematical derivations
 ├── slides/                 # PowerPoint files and slide outlines
 ├── figures/                # PNG figures for slides and notes
 ├── scripts/                # Python visualization/processing scripts
