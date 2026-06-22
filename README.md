@@ -16,6 +16,7 @@ This repository contains teaching materials and tooling for an undergraduate cou
 | `wiki/` | Persistent LLM-maintained knowledge base |
 | `exercises/` | Concept checks and small assignments |
 | `references/` | Bibliography and source annotations |
+| `docs/` | Project documentation, including the lecture development workflow |
 
 ## Python environment
 
@@ -87,6 +88,10 @@ uv run python scripts/lint_wiki.py --warn-stub
 The `wiki/` directory follows the LLM-wiki / second-brain pattern: raw sources are summarized once into concept and source pages, and those summaries are reused for lecture preparation and Q&A.
 
 See `wiki/README.md` for detailed conventions.
+
+## Lecture development workflow
+
+For a step-by-step guide on how to turn existing slide decks and rough outlines into finished, bilingual lecture notes and updated slides, see `docs/lecture_workflow.md`.
 
 ## Git notes
 

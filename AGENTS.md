@@ -204,6 +204,8 @@ Suggested directory layout (create/adapt as needed):
 ├── figures/                # PNG figures for slides and notes
 ├── scripts/                # Python visualization/processing scripts
 ├── data/                   # Small example datasets for scripts and exercises
+├── docs/                   # Project documentation
+│   ├── lecture_workflow.md # Step-by-step lecture development process
 ├── papers/                 # PDF/PPT library organized by topic
 │   ├── acquisition/
 │   ├── deconvolution/
