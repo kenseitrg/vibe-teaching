@@ -70,7 +70,7 @@ Transform the data to the **linear Radon (τ-p) domain**, where data are organiz
 - [Deconvolution](deconvolution.md)
 - [Seismic wavelet](seismic_wavelet.md)
 - [Wiener filter](wiener_filter.md)
-- [Radon transform](radon_transform.md) (to be created)
+- [Radon transform](radon_transform.md) (stub)
 
 ## Sources
 

@@ -4,7 +4,7 @@ type: course slides
 year: 2006
 author: Eric Verschuur
 source_file: papers/deconvolution/EAGE EET 03 - Predictive Deconvolution.pdf
-status: summarized
+status: reviewed
 tags: [deconvolution, predictive, wiener-filter, radon, multiples]
 ---
 

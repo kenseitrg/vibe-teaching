@@ -53,6 +53,7 @@ Deconvolution designs an **inverse filter** that, when convolved with the trace,
 - [Predictive deconvolution](predictive_deconvolution.md)
 - [Surface-consistent deconvolution](surface_consistent_deconvolution.md)
 - [Wiener filter](wiener_filter.md)
+- [Comparison of deconvolution methods](../comparisons/deconvolution_methods.md)
 
 ## Sources
 

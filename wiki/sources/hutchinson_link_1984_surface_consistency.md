@@ -4,7 +4,7 @@ type: paper
 year: 1984
 authors: Dave Hutchinson, Brian Link
 source_file: papers/deconvolution/Dave Hutchinson, Brian Link - Surface consistency - A solution to the problem of deconvolving noisy seismic data.pdf
-status: summarized
+status: reviewed
 tags: [deconvolution, surface-consistent, noise, wavelet]
 ---
 

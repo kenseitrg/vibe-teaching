@@ -4,7 +4,7 @@ type: training slides
 year: 2015
 author: CGG (internal training)
 source_file: papers/deconvolution/ODT04_DECONVOLUTION_PART1_v7.0_sesimic_wavelet.pptx
-status: summarized
+status: reviewed
 tags: [wavelet, source-signature, ghost, bubble, bandwidth, resolution]
 ---
 
