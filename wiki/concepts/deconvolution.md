@@ -6,6 +6,9 @@ sources:
   - cgg_odt04_deconvolution_part1_wavelet
   - verschuur_2006_predictive_deconvolution
   - hutchinson_link_1984_surface_consistency
+  - hatton_worthington_makin_1986_seismic_data_processing
+  - margrave_2006_methods_of_seismic_data_processing
+  - yilmaz_2001_seismic_data_analysis_deconvolution
 tags: [deconvolution, inverse-filter, wavelet, resolution]
 ---
 
@@ -50,13 +53,24 @@ Deconvolution designs an **inverse filter** that, when convolved with the trace,
 ## Related concepts
 
 - [Seismic wavelet](seismic_wavelet.md)
+- [Minimum phase](minimum_phase.md)
+- [Deterministic deconvolution](deterministic_deconvolution.md)
+- [Statistical deconvolution](statistical_deconvolution.md)
 - [Predictive deconvolution](predictive_deconvolution.md)
 - [Surface-consistent deconvolution](surface_consistent_deconvolution.md)
 - [Wiener filter](wiener_filter.md)
 - [Comparison of deconvolution methods](../comparisons/deconvolution_methods.md)
+
+## Lecture-ready distillations
+
+- [Term 1 Lecture 6 — Single-channel deconvolution](../lecture_ready/term01_lec06_single_channel_deconvolution.md)
+- [Term 1 Lecture 7 — Surface-consistent deconvolution](../lecture_ready/term01_lec07_surface_consistent_deconvolution.md)
 
 ## Sources
 
 - [Hutchinson & Link (1984)](../sources/hutchinson_link_1984_surface_consistency.md)
 - [Verschuur (2006)](../sources/verschuur_2006_predictive_deconvolution.md)
 - [CGG ODT04 Part 1](../sources/cgg_odt04_deconvolution_part1_wavelet.md)
+- [Hatton, Worthington & Makin (1986)](../sources/hatton_worthington_makin_1986_seismic_data_processing.md)
+- [Margrave (2006)](../sources/margrave_2006_methods_of_seismic_data_processing.md)
+- [Yilmaz (2001)](../sources/yilmaz_2001_seismic_data_analysis_deconvolution.md)

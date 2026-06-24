@@ -4,6 +4,9 @@ status: draft
 course_term: 1
 sources:
   - verschuur_2006_predictive_deconvolution
+  - hatton_worthington_makin_1986_seismic_data_processing
+  - margrave_2006_methods_of_seismic_data_processing
+  - yilmaz_2001_seismic_data_analysis_deconvolution
 tags: [deconvolution, predictive, multiples, reverberations, radon]
 ---
 
@@ -68,10 +71,15 @@ Transform the data to the **linear Radon (τ-p) domain**, where data are organiz
 ## Related concepts
 
 - [Deconvolution](deconvolution.md)
+- [Statistical deconvolution](statistical_deconvolution.md)
 - [Seismic wavelet](seismic_wavelet.md)
 - [Wiener filter](wiener_filter.md)
+- [Minimum phase](minimum_phase.md)
 - [Radon transform](radon_transform.md) (stub)
 
 ## Sources
 
 - [Verschuur (2006)](../sources/verschuur_2006_predictive_deconvolution.md)
+- [Hatton, Worthington & Makin (1986)](../sources/hatton_worthington_makin_1986_seismic_data_processing.md)
+- [Margrave (2006)](../sources/margrave_2006_methods_of_seismic_data_processing.md)
+- [Yilmaz (2001)](../sources/yilmaz_2001_seismic_data_analysis_deconvolution.md)

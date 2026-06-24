@@ -184,6 +184,8 @@ Desktop.ini
 *.doc
 *.docx
 *.zip
+*.djvu
+*.djv
 
 # Ignore locally extracted raw text from source documents (can be regenerated).
 wiki/sources/_raw_text/

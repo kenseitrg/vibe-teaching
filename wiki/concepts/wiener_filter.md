@@ -5,6 +5,9 @@ course_term: 1
 sources:
   - verschuur_2006_predictive_deconvolution
   - hutchinson_link_1984_surface_consistency
+  - hatton_worthington_makin_1986_seismic_data_processing
+  - margrave_2006_methods_of_seismic_data_processing
+  - yilmaz_2001_seismic_data_analysis_deconvolution
 tags: [deconvolution, wiener-filter, least-squares, autocorrelation]
 ---
 
@@ -70,10 +73,15 @@ The autocorrelation matrix is Toeplitz and symmetric, so the system can be solve
 ## Related concepts
 
 - [Deconvolution](deconvolution.md)
+- [Statistical deconvolution](statistical_deconvolution.md)
 - [Predictive deconvolution](predictive_deconvolution.md)
 - [Surface-consistent deconvolution](surface_consistent_deconvolution.md)
+- [Minimum phase](minimum_phase.md)
 
 ## Sources
 
 - [Verschuur (2006)](../sources/verschuur_2006_predictive_deconvolution.md)
 - [Hutchinson & Link (1984)](../sources/hutchinson_link_1984_surface_consistency.md)
+- [Hatton, Worthington & Makin (1986)](../sources/hatton_worthington_makin_1986_seismic_data_processing.md)
+- [Margrave (2006)](../sources/margrave_2006_methods_of_seismic_data_processing.md)
+- [Yilmaz (2001)](../sources/yilmaz_2001_seismic_data_analysis_deconvolution.md)

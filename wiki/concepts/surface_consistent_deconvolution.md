@@ -4,6 +4,7 @@ status: draft
 course_term: 1
 sources:
   - hutchinson_link_1984_surface_consistency
+  - yilmaz_2001_seismic_data_analysis_deconvolution
 tags: [deconvolution, surface-consistent, source, receiver, noise, wavelet]
 ---
 
@@ -61,8 +62,11 @@ A wedge model with surface-consistent minimum-phase wavelets showed that trace-b
 ## Related concepts
 
 - [Deconvolution](deconvolution.md)
+- [Statistical deconvolution](statistical_deconvolution.md)
 - [Wiener filter](wiener_filter.md)
+- [Predictive deconvolution](predictive_deconvolution.md)
 
 ## Sources
 
 - [Hutchinson & Link (1984)](../sources/hutchinson_link_1984_surface_consistency.md)
+- [Yilmaz (2001)](../sources/yilmaz_2001_seismic_data_analysis_deconvolution.md)

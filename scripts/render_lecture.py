@@ -34,6 +34,10 @@ def main():
     # Compute resource path relative to input file so image links resolve.
     resource_path = input_path.parent
 
+    # Detect language from filename suffix for font selection
+    stem = input_path.stem  # e.g. "term01_lec06_single_channel_deconvolution.ru"
+    lang = "ru" if stem.endswith(".ru") else "en"
+
     cmd = [
         "pandoc",
         str(input_path),
@@ -41,8 +45,13 @@ def main():
         "--pdf-engine=xelatex",
         "-V", "geometry:margin=2.5cm",
         "-V", "fontsize=11pt",
+        "-V", f"lang={lang}",
         "--resource-path", str(resource_path),
     ]
+
+    if lang == "ru":
+        # DejaVu Serif supports Cyrillic glyphs
+        cmd += ["-V", "mainfont=DejaVu Serif"]
 
     print("Running:", " ".join(cmd))
     subprocess.run(cmd, check=True)
