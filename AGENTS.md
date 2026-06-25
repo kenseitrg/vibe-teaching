@@ -256,22 +256,22 @@ Maintain a shared notation list here as the course develops. Add terms once they
 | Symbol | Meaning | Russian term | First introduced |
 |--------|---------|--------------|------------------|
 | $x(t)$ | Recorded seismic trace | сейсмическая трасса | Term 1, Lec 6 |
-| $w(t)$ | Embedded seismic wavelet | встроенный сейсмический импульс | Term 1, Lec 6 |
-| $r(t)$ | Earth reflectivity series | серия коэффициентов отражения | Term 1, Lec 6 |
+| $w(t)$ | Embedded seismic wavelet | зарегистрированный сейсмический импульс | Term 1, Lec 6 |
+| $r(t)$ | Earth reflectivity series | последовательность коэффициентов отражения | Term 1, Lec 6 |
 | $n(t)$ | Additive noise | аддитивный шум | Term 1, Lec 6 |
 | $*$ | Convolution operator | оператор свёртки | Term 1, Lec 6 |
 | $z$ | Unit-delay operator ($z$-transform) | оператор единичной задержки | Term 1, Lec 6 |
 | $W(z)$ | $z$-transform of wavelet $w$ | $z$-преобразование импульса | Term 1, Lec 6 |
-| $\varepsilon^2$ | Prewhitening constant | константа отбеливания | Term 1, Lec 6 |
+| $\varepsilon^2$ | Prewhitening constant | аддитивная константа отбеливания | Term 1, Lec 6 |
 | $\phi_{xx}[k]$ | Autocorrelation of $x$ at lag $k$ | автокорреляция $x$ | Term 1, Lec 6 |
 | $\phi_{dx}[k]$ | Cross-correlation of $d$ and $x$ | взаимная корреляция $d$ и $x$ | Term 1, Lec 6 |
 | $\alpha$ | Prediction gap (samples) | интервал предсказания | Term 1, Lec 6 |
 | $s_s(t)$ | Source-location wavelet | импульс источника | Term 1, Lec 7 |
 | $r_r(t)$ | Receiver-location wavelet | импульс приёмника | Term 1, Lec 7 |
-| $h_h(t)$ | Offset-class wavelet | импульс удаления | Term 1, Lec 7 |
-| $c_c(t)$ | CDP-location wavelet | импульс ОГТ | Term 1, Lec 7 |
-| $G$ | Surface-consistent design matrix | матрица планирования | Term 1, Lec 7 |
-| $f[n]$ | Prediction-error filter (PEF) | фильтр ошибки предсказания | Term 1, Lec 6 |
+| $h_h(t)$ | Offset-class wavelet | компонента удаления | Term 1, Lec 7 |
+| $c_c(t)$ | CDP-location wavelet | компонента ОСТ | Term 1, Lec 7 |
+| $G$ | Surface-consistent design matrix | матрица поверхностно-согласованного решения | Term 1, Lec 7 |
+| $f[n]$ | Prediction-error filter (PEF) | фильтр ошибки предсказания (ФОП) | Term 1, Lec 6 |
 | $h[k]$ | Prediction filter coefficients | коэффициенты фильтра предсказания | Term 1, Lec 6 |
 | $F(z)$ | Z-transform of PEF | $z$-преобразование ФОП | Term 1, Lec 6 |
 | $H(z)$ | Z-transform of prediction filter | $z$-преобразование фильтра предсказания | Term 1, Lec 6 |
