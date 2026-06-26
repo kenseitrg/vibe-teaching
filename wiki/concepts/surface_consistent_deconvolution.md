@@ -25,17 +25,19 @@ A trace-by-trace operator may therefore introduce phase and amplitude distortion
 
 ## Surface-consistent model
 
-Each trace can be written as a convolution of a source-location wavelet, a receiver-location wavelet, and the subsurface reflectivity:
+Each trace is written as a convolution of four surface-consistent factors and the subsurface reflectivity:
 
 ```text
-trace_{s,r}(t) = source_s(t) * receiver_r(t) * reflectivity_{s,r}(t)
+trace_{s,r,h,c}(t) = source_s(t) * receiver_r(t) * offset_h(t) * cdp_c(t) * reflectivity_{s,r,h,c}(t)
 ```
 
 The deconvolution operator for that trace is then:
 
 ```text
-operator_{s,r}(t) = source_operator_s(t) * receiver_operator_r(t)
+operator_{s,r,h,c}(t) = source_operator_s(t) * receiver_operator_r(t) * offset_operator_h(t) * cdp_operator_c(t)
 ```
+
+In this split, source and receiver factors mainly represent near-surface coupling and shallow-layer filtering that should be compensated. Offset and CDP factors carry the geological response (moveout, AVO, stratigraphy) that should be preserved. Once the near-surface source/receiver effects are removed, a single stable spiking operator can be applied across the survey instead of a separate noisy operator for each trace.
 
 ## Advantages
 
@@ -43,11 +45,13 @@ operator_{s,r}(t) = source_operator_s(t) * receiver_operator_r(t)
 - **Noise robustness**: noisy offsets can be excluded from the design; a median or robust criterion reduces the influence of outliers.
 - **Uniformity**: the final stack has more consistent wavelet character across the section.
 - **Compensation for near-surface effects**: source and receiver coupling variations are explicitly separated.
+- **Stable spiking operator**: the corrected data allow a single, survey-wide operator rather than trace-by-trace estimates.
 
 ## Practical notes
 
 - The method derives amplitude spectra in a surface-consistent way and can use minimum-phase spiking operators.
-- It is especially useful in noisy land data and in multiple-prone areas where conventional deconvolution is unstable.
+- It is the preferred deconvolution approach for land and OBC data, where source/receiver coupling and the near surface vary across the survey.
+- It is also useful in multiple-prone areas where conventional deconvolution is unstable.
 - It does not remove all noise; after correcting the embedded wavelet, zero-phase spectral balancing can be applied.
 
 ## Synthetic example (Hutchinson & Link, 1984)

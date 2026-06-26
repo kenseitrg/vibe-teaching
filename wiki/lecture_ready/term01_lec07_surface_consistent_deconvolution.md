@@ -22,7 +22,7 @@ tags: [lecture-ready, term01, deconvolution, surface-consistent, practical]
 ## Learning objectives
 
 After this lecture students should be able to:
-1. Explain why trace-by-trace deconvolution can be unstable in noisy or variable-coupling data.
+1. Explain how surface-consistent deconvolution reduces the near-surface influence on source and receiver wavelets.
 2. Write the surface-consistent convolutional model and the linear system $d = Gm$.
 3. List the four surface-consistent factors and describe how they enter the trace operator.
 4. Choose deconvolution parameters (prediction gap, operator length, prewhitening, analysis window) for a given goal.
@@ -39,11 +39,11 @@ After this lecture students should be able to:
 
 | Section | Time | Key idea |
 |---------|------|----------|
-| 1. Recap and limitations of trace-by-trace deconvolution | 5 min | Noise, short windows, non-stationarity |
+| 1. Recap and limitations of trace-by-trace deconvolution | 5 min | Four-factor model; near-surface source/receiver effects vs. geological offset/CDP effects |
 | 2. Surface-consistent deconvolution | 25 min | Four-factor model, linear system, robust solutions |
-| 3. Deconvolution parameters in practice | 15 min | Gap, length, prewhitening, window selection |
+| 3. Deconvolution parameters in practice | 15 min | Gap (first/second zero crossing), length, prewhitening, window selection (exclude first breaks/guided waves) |
 | 4. Python practical: deterministic and Wiener deconvolution | 30 min | Spectral division, normal equations, apply to synthetic data |
-| 5. Choosing a deconvolution flow | 10 min | Marine vs. land, available prior information |
+| 5. Choosing a deconvolution flow | 10 min | Land/OBC: surface-consistent preferred; marine: designature → deghosting → predictive → zero-phase; land: min-phase conversion → instrument inverse filter → surface-consistent → zero-phase |
 | 6. Comprehension questions and discussion | 5 min | |
 
 ## Key equations
@@ -53,6 +53,8 @@ After this lecture students should be able to:
 $$
 trace_{s,r}(t) = source_s(t) * receiver_r(t) * offset_{s,r}(t) * cdp_{s,r}(t) * reflectivity_{s,r}(t)
 $$
+
+Source and receiver factors encode near-surface filtering to be compensated; offset and CDP factors encode the geological response to be preserved.
 
 ### Linear system
 
@@ -79,7 +81,7 @@ where $d$ contains trace spectra or autocorrelations, $m$ contains source/receiv
 ## Concept-check questions
 
 1. Why does surface-consistent deconvolution need more than one trace per source/receiver location?
-2. What happens if the analysis window contains strong ground roll?
+2. What happens if the analysis window contains strong ground roll, first breaks, or guided waves?
 3. When would you prefer deterministic deconvolution over statistical deconvolution?
 4. How does prewhitening affect the deconvolved spectrum at frequencies with weak signal?
 5. What is the parallel between surface-consistent deconvolution and residual statics?

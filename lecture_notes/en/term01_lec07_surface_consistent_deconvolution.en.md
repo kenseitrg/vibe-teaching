@@ -10,7 +10,7 @@ date: "2026"
 
 After this lecture you should be able to:
 
-1. Explain why trace-by-trace deconvolution can be unstable in noisy or variable-coupling data.
+1. Explain how surface-consistent deconvolution reduces the near-surface influence on source and receiver wavelets.
 2. Write the surface-consistent convolutional model and the linear system $d = Gm$.
 3. List the four surface-consistent factors and describe how they enter the trace operator.
 4. Choose deconvolution parameters (prediction gap, operator length, prewhitening, analysis window) for a given goal.
@@ -21,24 +21,16 @@ After this lecture you should be able to:
 
 ## 1. Why trace-by-trace deconvolution is not always enough
 
-In Lecture 6 we designed a single deconvolution operator from one trace. That works well when:
+In Lecture 6 we designed a single deconvolution operator from one trace. That works well when the signal-to-noise ratio is high, the wavelet is stationary, the reflectivity is white, and we only need a local answer. Real land and OBC data usually violate these assumptions: coupling, near-surface filtering, and noise change from trace to trace, so a trace-by-trace operator is estimated from too few samples and can amplify noise.
 
-- the signal-to-noise ratio is high,
-- the wavelet is stationary,
-- the reflectivity is white,
-- we only need a local answer.
+**Surface-consistent deconvolution** attacks this problem with a four-factor model. The effective wavelet on a trace is split into
 
-Real data often violate these conditions:
+- a **source factor** $s_s(t)$,
+- a **receiver factor** $r_r(t)$,
+- an **offset factor** $h_h(t)$,
+- a **CDP factor** $c_c(t)$.
 
-- **Noise.** A noisy trace gives a noisy autocorrelation, and the operator amplifies the noise spectrum.
-- **Short design windows.** To satisfy stationarity we sometimes use only a few hundred milliseconds. A short window gives poor statistics.
-- **Variable coupling.** On land, source and receiver coupling change with location, weather, and surface type.
-- **Near-surface filtering.** The shallow layer beneath each shot or receiver point filters the wavelet in a location-dependent way.
-- **Non-stationarity.** Attenuation, arrays, and ghosts make the wavelet change with time and offset.
-
-The result is that trace-by-trace operators can be radically different from trace to trace, even when the geology does not change. The stack of many such traces is degraded.
-
-**Surface-consistent deconvolution** attacks this problem by using the redundancy of surface geometry.
+The source and receiver factors carry the location-dependent, near-surface filtering that we want to compensate. The offset and CDP factors carry the geological response (moveout, AVO, stratigraphy) that we want to keep unchanged. Because every shot and receiver location appears in many traces, the near-surface factors can be estimated far more stably than a separate operator for each trace. Once those factors are removed, a single spiking operator can be used across the survey, which is more stable than trace-by-trace estimates.
 
 ---
 
@@ -103,6 +95,8 @@ $$
 m = (G^T G)^{-1} G^T d.
 $$ {#eq:ls-solution}
 
+A step-by-step derivation of this system — from the four-factor model through autocorrelations, logarithms, and least-squares minimization — is given in `lecture_notes/derivations/surface_consistent_deconvolution_derivation.en.md`.
+
 Because $G$ is sparse and structured, the normal matrix $G^T G$ has a block structure that can be exploited for efficiency. In practice:
 
 - The system may be solved iteratively (Gauss-Seidel, conjugate gradients) to avoid forming $G^T G$ explicitly.
@@ -120,7 +114,7 @@ All three methods exploit the fact that the same surface location participates i
 
 ![](figures/term01_lec07/term01_lec07_surface_consistent_example.png){width=85%}
 
-**Figure 2.** Synthetic example. (Left) Trace-by-trace deconvolution: operators vary wildly because each trace is noisy. (Right) Surface-consistent deconvolution: source and receiver factors are estimated from many traces, giving a more stable result.
+**Figure 2.** Real-data example. (Left) Trace-by-trace deconvolution: the section is noisier and events are less continuous because each trace is processed independently. (Right) Surface-consistent deconvolution: source and receiver factors are estimated from many traces, giving a more stable result with better event continuity.
 
 ---
 
@@ -135,7 +129,7 @@ All three methods exploit the fact that the same surface location participates i
 | Water-layer two-way time | Reverberation suppression |
 | Longer | Multiple suppression, little wavelet compression |
 
-A useful rule: pick the gap from the autocorrelation. The first zero crossing or the lag of the first strong repetitive peak guides the choice.
+A useful rule: pick the gap from the autocorrelation. The first zero crossing or the lag of the first strong repetitive peak guides the choice. Choosing the **second zero crossing** leaves the signal spectrum almost unchanged while suppressing short-period multiples.
 
 ### 3.2 Operator length
 
@@ -154,7 +148,7 @@ Start with a small value (0.1%) for numerical stability. Increase to 1–5% if t
 The window should:
 
 - contain strong signal (reflections, not noise),
-- avoid multiples and ground roll,
+- avoid multiples, ground roll, first breaks, and guided-wave zones,
 - be short enough to be stationary,
 - be long enough to give reliable statistics,
 - have amplitudes balanced by a smooth gain function.
@@ -309,23 +303,26 @@ The right method depends on what distorts the data and what prior information is
 | General wavelet compression | Spiking / Wiener deconvolution | No wavelet measurement needed |
 | Vibroseis data | Convert to minimum phase, then spiking | Makes phase assumptions valid |
 
-A typical marine flow might be:
+For **land and OBC data**, surface-consistent deconvolution is generally preferred because source and receiver coupling and the near surface vary strongly across the survey.
+
+A typical **marine** flow is:
 
 ```text
 raw data
   → deterministic designature
+  → deghosting
   → predictive deconvolution (reverberations)
-  → surface-consistent deconvolution (stabilize across the survey)
   → final zero-phase shaping
 ```
 
-A typical land flow might be:
+A typical **land** flow focuses on deconvolution:
 
 ```text
 raw data
-  → surface-consistent amplitude corrections
-  → spiking or predictive deconvolution
-  → surface-consistent residual statics
+  → minimum-phase conversion (vibroseis data)
+  → inverse filtering for instrument signature
+  → surface-consistent deconvolution
+  → zero-phasing
 ```
 
 The order matters: deterministic methods that use measured information usually come first; statistical methods that make strong assumptions come after the data have been conditioned.
@@ -335,10 +332,11 @@ The order matters: deterministic methods that use measured information usually c
 ## 6. Summary
 
 - Trace-by-trace deconvolution is noisy and unstable when data quality or coupling varies.
-- Surface-consistent deconvolution separates the trace wavelet into source, receiver, offset, and CDP factors and solves a sparse linear system.
+- Surface-consistent deconvolution uses a four-factor model to separate near-surface source/receiver effects from geological offset/CDP effects, and solves a sparse linear system.
+- For land and OBC data it is the preferred deconvolution approach because it compensates variable near-surface filtering.
 - Parameter choices (gap, length, prewhitening, window) control the trade-off between wavelet compression, multiple suppression, and noise amplification.
 - Deterministic deconvolution and Wiener filtering are straightforward matrix/spectral operations in Python.
-- The choice of method should follow the wavelet model and the available prior information.
+- The choice of method should follow the wavelet model and the available prior information: designature and deghosting first for marine data, minimum-phase conversion and instrument correction first for land data.
 
 ---
 

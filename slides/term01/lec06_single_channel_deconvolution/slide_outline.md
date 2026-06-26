@@ -1,8 +1,7 @@
 # Slide outline — Term 1, Lecture 6: Single-channel deconvolution
 
-## Slide 1 — Title
-- **Title:** Single-channel deconvolution
-- **Subtitle:** Recovering reflectivity by removing the embedded wavelet
+## Slide 1 — Single-channel deconvolution
+- Recovering reflectivity by removing the embedded wavelet
 - Figure: none
 
 ## Slide 2 — Goal of seismic processing
