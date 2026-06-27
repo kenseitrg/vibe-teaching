@@ -1,0 +1,1305 @@
+--- Slide 1 ---
+V8.2   01Jun2018
+WARNING –STRICTLY INTERNAL USE ONLY
+ UK Internal Training document - Assume no show-rights for any images – Do not keep copies
+UK Training ODT01
+Data Analysis – Part2
+
+--- Slide 2 ---
+All information in this training document should be considered STRICTLY FOR INTERNAL USE ONLY and should not be used for any training purposes where external candidates may be present. 
+
+All images in the presentation should be considered NOT to have show rights.
+
+These presentation are available through QED so there is no need to keep individual copies of these documents, especially as these documents will be continually updated. 
+
+If you download a copy of this presentation it is your responsibility to communicate this information to anyone who may see said copy of this document.
+
+If in any doubt over the usage or content of this training information, please contact the DLUKGeophysicalSupportGroup@CGGVeritas.com  or add a comment to the corresponding QED workflow page.
+2
+Please read
+
+--- Slide 3 ---
+There are notes associated with this presentation, which whilst not required to view the presentation may provide further information on some of the slides. 
+
+If you would like to view the notes whilst still having access to the animation within the presentation  follow these quick steps;
+
+
+
+
+
+
+
+
+Your view should now look like this, 
+	with the speaker notes visible on the
+	right hand side of the window.
+3
+Notes accompanying slides.
+Go to the Slide Show menu 
+Check the ‘Use Presenter View’ check box. 
+Under the option ‘Show presentation On’ Select a monitor other than your primary monitor. 
+Now enter slide show mode F5 .
+
+--- Slide 4 ---
+4
+Contents
+§1 - Introduction : what is data analysis?
+§2 - What do we record?
+§3 - Some Basic Geophysics
+§4 - The recorded wave-field
+§5 - Shot point data
+§6 - The CMP domain/gather
+§7 - 2d and 3d geometry
+§8 - Other processing (sorting) domains / gathers
+§9 - Introduction to Spatial Aliasing
+§10 -Other QC domains for mapping the data
+§11 -Introduction to Noise
+§12 -Introduction to Multiple
+§13 -Tools for data analysis
+§14 –Conclusion
+
+--- Slide 5 ---
+§7  2d and 3d geometry
+5
+
+--- Slide 6 ---
+2d and 3d Geometry
+6
+So in processing, how do we collect traces with the same similar mid point position ; a CMP bin?
+When the data is recorded the data has a shot and receiver position, it does not have a CMP bin location. 
+We need to create a CMP bin location so we can process and visualise the data.
+
+--- Slide 7 ---
+Typical 3d Marine acquisition geometry
+7
+Cable 1
+Cable 2
+Cable 3
+Cable 4
+Gun 1
+Gun 2
+
+--- Slide 8 ---
+Typical 3d Marine acquisition geometry
+8
+Cable 1
+Cable 2
+Cable 3
+Cable 4
+Gun 1
+Gun 2
+
+--- Slide 9 ---
+Typical 3d Marine acquisition geometry
+9
+Gun 1
+Gun 2
+
+--- Slide 10 ---
+Typical 3d Marine acquisition geometry
+10
+Gun 1
+Gun 2
+
+--- Slide 11 ---
+Typical 2d Marine acquisition geometry
+11
+Gun 2
+
+--- Slide 12 ---
+2d geometry
+12
+SP#
+CHN1
+CMPN+1
+Here we see our marine example of a boat towing a cable. For 2D geometry we are going to assume our cable is directly behind the boat.
+CMPN
+CMPN-1
+CMPN-2
+6        5      4        3        2        1
+
+--- Slide 13 ---
+2d geometry
+13
+As the boat “moves up” more CMP locations are added.  In this example we assume the boat and cable are travelling in a perfectly straight line.  The shot spacing and trace spacing stays perfectly regular, and therefore the CMP locations remain perfectly spaced.
+CMPN+1
+CMPN
+CMPN-1
+CMPN+2
+CMPN-2
+CMPN+3
+CMPN+4
+CMPN+5
+6        5      4        3        2        1
+10       9      8         7        6        5       4        3        2        1
+
+--- Slide 14 ---
+2d geometry
+14
+Shot spacing on subline
+Moveup = no. of CMPs added for each new shot on a subline
+
+Moveup      Shot spacing on subline / 2dCMP spacing
+2*Shot spacing on subline / channel spacing
+Channel spacing
+2dCMPs spacing
+SP#
+CHN1
+CHN2
+CHN3
+CHN4
+CHN5
+Nominal fold = Number of channels per streamer  / Moveup
+
+             2dCMP# =      [  (Shot point# / #of guns)   * Moveup    ]    + Channel#     +   X
+                                        
+
+
+                                                           
+                                                                  *the shot point number in this formula needs to increase in the direction of acquisition.
+OFF_NB2D
+or SHOTRECORD increment on a sub-surface line*
+#of CMPs added for each new shot
+(a constant number – you can change this number to shift the origin of the 2d CMP number.)
+(#1 at the near offset)
+With knowledge of the acquisition details we can work out a 2d CMP number from the Shot point number and the channel number.  This is set automatically by modules such as geomdb, but geos should know how to check it themselves.
+CMPN+1
+CMPN
+CMPN-1
+CMPN+2
+CMPN-2
+CMPN+3
+CMPN+4
+CMPN+5
+6        5      4        3        2        1
+10       9      8         7        6        5       4        3        2        1
+
+--- Slide 15 ---
+2d geometry
+15
+As we add more shots more and more traces are given the same 2d CMP number and thus the fold at each 2d CMP number builds up.
+6        5      4        3        2        1
+10       9      8         7        6        5       4        3        2        1
+
+--- Slide 16 ---
+2d geometry
+16
+All the CMP locations have the same distribution of traces within them and the trace spacing etc.. is perfectly regular. 
+
+For 2d geometries we can perfectly predict from the acquisition parameters what trace numbers will fall into which CMP gather (and the other types of gather that you will see later).
+Sub_surface_coverage.xls
+6        5      4        3        2        1
+10       9      8         7        6        5       4        3        2        1
+
+--- Slide 17 ---
+3d geometry
+17
+3d bin crossline spacing
+3d bin subline spacing
+geovation grids.xls
+A subsurface grid of cells or “3d bins” is defined by the ‘3d geometry’ or ‘grid library’, each bin having a unique inline number and crossline number and unique bin centre X,Y co-ordinates.   (CDPX,CDPY in g2, not the best names, but too late to change now.)
+Crossline
+subline
+Bin centre X, Y
+
+--- Slide 18 ---
+3d geometry
+18
+SP#
+CHN1
+CMP
+This grid which is fixed in space is imposed on the acquired seismic data.
+
+This time we consider a real case where our boat and cable were not travelling in a straight line.
+
+--- Slide 19 ---
+3d geometry
+19
+Again each trace has a shot and receiver co-ordinate.  The mid point is still halfway between the shot and receiver location but as the boat “moves up” the CMPs are no longer regularly spaced or fall on a perfect straight line.
+
+--- Slide 20 ---
+3d geometry
+20
+SP#
+CHN1
+CHN2
+CHN3
+CHN4
+CHN5
+Crossline
+subline
+Mid point X,Y
+Bin centre X, Y
+SHOT X,SHOT Y
+REC X,REC Y
+3d offset
+Channel spacing
+Each trace is assigned a 3d bin number;  a Crossline and Subline, purely depending on which 3d bin the mid-point coordinates (MIDX,MIDY) of the trace falls into.
+That 3d bin has an associated bin centre co-ordinate.
+Therefore, unlike the Shot, Receiver and Midpoint co-ordinates, the 3d bin number and bin centre co-ordinates are dependent on the chosen geometry. Change the geometry and the inline, crossline number and bin centre co-ordinate can all potentially change.
+
+--- Slide 21 ---
+3d geometry
+21
+As we acquire more shots, each individual 3d bin can still contain multiple traces and thus build up “fold coverage”.
+
+--- Slide 22 ---
+3d geometry
+22
+However, the coverage is not perfectly regular as for a 2d geometry.  We end up with CMP values that, whilst not being ‘random’, drift across the 3d bins set up by the 3d geometry.
+
+--- Slide 23 ---
+3d geometry
+23
+As shown in the previous slides the CMPs are assigned to the bin into which they fall. When we sort the data based on the subline and crossline we gather together the traces falling into the same 3d bin.
+
+--- Slide 24 ---
+3d geometry
+24
+Here the data has been snapped to the nearest bin centre location. Now it is easier to see the populated 3d bins.  For a real survey this would result in some over or under-populated (compared to the coverage in the case of a “perfect” acquisition) or even empty bins.
+Sort by,
+level 1 : 3d subline
+level 2 : 3d crossline
+
+--- Slide 25 ---
+Pseudo 2d geometry
+25
+Sort by,
+level 1 : subsurface line #
+level 2 : 3d crossline
+We could even ‘force’ the data to have the same line number but keep the 3d crossline number. This is the effect of sorting a single subline using the 3d crossline  
+
+For a real survey this would result in a pseudo 2d geometry but still with some slight over and under-populated bins where mid-point locations drift across the edge of bins. It is still possible to get some completely empty bins especially in the run in and out areas.
+
+--- Slide 26 ---
+2d geometry
+26
+We can compare this back to a 2d geometry where we have a perfectly regular population of the bins. 
+
+What difference might we see in the data if we stacked with these different styles of geometry?
+Sort by,
+level 1 : subsurface line #
+level 2 : 2d CMP #
+
+--- Slide 27 ---
+Single subsurface line STK sorted on 2d CMP
+27
+Select single shot/cable pair
+Sort by  2d CMP #
+
+--- Slide 28 ---
+Single subsurface line STK sorted on 3d crossline
+28
+Select single shot/cable pair
+Sort by  3d crossline#
+
+--- Slide 29 ---
+29
+2d CMP sorted on 2d CMP and offset
+SP_NB
+TRACE#
+USER_ACQ_CABTR
+ACQ_CHN
+OFF_NB
+ZOOM on ‘true’ 2d CMP gather
+Trace#
+
+CHANNEL
+
+CABTR
+
+SHOTRECORD
+
+OFFSET
+
+--- Slide 30 ---
+30
+Pseudo 2d CMP sorted on 3d CMP and offset
+ACQ_CHN
+ZOOM on ‘Pseudo’ 2d CMP gather
+Rather than using the 2d CMP we can create a pseudo 2d stack by sorting our 2dline using the 3d crossline header. Whether it is cable feather ; variations in boat speed ; direction, the true 3d location of the traces will skip in and out of phase with the 2d CMP meaning a fold which varies around the nominal fold ; a mixture of odd and even traces in each bin; the possibility of consecutive traces in a bin ; and therefore has an irregular offset variation in the gather.
+CHANNEL
+
+--- Slide 31 ---
+31
+Single subsurface line STK sorted on 2d CMP
+Using the 2d CMP results in perfectly regular data with nominal fold except where data is missing/edited.
+FOLD
+FOLD
+
+--- Slide 32 ---
+32
+Single subsurface line STK sorted on 3d crossline
+xxxxxxxxxxxxxxxxxxxx
+A pseudo 2d stack using the 3d crossline number  results in a fold which varies around the nominal fold.
+FOLD
+FOLD
+
+--- Slide 33 ---
+33
+3d binned STK (sorted inline number, crossline number)
+The 2d CMP will always increase in the  direction of acquisition (increasing shot).  You can tell the shooting direction here is left to right as the run out is on the left.
+
+The run out is a good way of QC’ing the quality of the NMO and muting.
+A true 3d stack using inline/crossline results in a fold which varies around the nominal fold but can vary much more wildly depending on the acquisition; boat direction, cable feather & overlap.  If two sail-lines slightly overlap ,  i.e where an infill is shot, the fold can quickly double.
+Here the near traces (short offsets) have drifted out of the 3d inline bins causing a small hole in the fold. This is not a problem as long as the lines either side contain the traces.  Thin holes in the fold  along the shooting direction can be common.  If QC ing a 3d stack before regularisation always keep an eye on the fold. That way you can see it a noisy area is really due to increased noise or due to decreased fold.
+FOLD
+FOLD
+Select all data sort on 
+Sort by 3d subline# / 3d crossline#
+
+--- Slide 34 ---
+34
+3d binned gather (sorted inline,crossline,offset)
+ZOOM on 3d binned CMP gather
+On a true 3d gather the trace distribution is more random. 
+You see we will still have in general a moveup of 6 traces. 
+However, we may get skips in the data, maybe due to some missing offsets.
+OFFSET         SEQUENCE
+
+--- Slide 35 ---
+3d fold coverage.
+35
+TIP: Be careful when using terms such as “the inline direction” or the “crossline direction” as these terms are ambiguous and can frequently need clarification.   Terms such as “the direction along a constant inline number” ,  or “the direction along a constant crossline” can be less subjective.  For NAZ acquisitions terms such as parallel or orthogonal to the shooting direction can also be clearer.
+Crossline axis
+Inline axis
+
+--- Slide 36 ---
+CMP number Pros and cons
+36
+2d CMP numbering
+
++ Pros
+Nominal fold gathers and regular trace spacing in gather 
+No mixing of different acquisition lines
+- Cons
+Data not positioned in ‘correct’ subsurface location
+Uses
+Most marine pre-processing and QC.
+
+True 3d binned CMP numbering
+
++ Pros
+Data positioned in ‘correct’ subsurface location
+- Cons
+Irregular fold and trace spacing in gather
+Gathers have mix of different acquisition lines
+Uses
+3d processing and in case of strong cable feather (see notes).
+
+
+Pseudo 2d CMP numbering
+
++ Pros
+No mixing of different acquisition lines
+Data is “reasonably” regular fold and trace spacing 
+- Cons
+Data not positioned in ‘correct’ subsurface location
+Data has “reasonably” regular fold and trace spacing
+Uses
+Limited to mainly QC only.
+
+--- Slide 37 ---
+37
+CMP numbering in Production
+Modules that use the 2d CMP number are becoming less numerous so you may actually find you do not have to set it.  But watch out as some modules may use it without you knowing.   As stated in the previous slide if just wanting to produce 2d stacks for QC purpose (and the 2d line is the same orientation as you 3d grid) you can use the 3d crossline number.  
+
+Note that 2d CMP and 3d crossline number to not necessarily have to have the same spacing.  Why is this?
+
+Example  - A survey has a 12.5m channel spacing meaning the natural cmp spacing is 6.25m.  
+
+The geo sets the 2d CMP number to have a 6.25m interval .
+
+However. The geo knows early on that the final processing grid will have 12.5 cmp bin spacing.  At some point they will either drop every alternate trace in each shotpoint or sum traces together onto 12.5m bins at the regularisation stage.   The geo therefore sets the 3d Crossline using a geometry having 12.5m bins.  This results in a dataset that when stacked has twice the acquisition fold.   
+
+If the geo set the 2d CMP using a 12.5m cmp bin form the start , then each CMP would have twice the fold containing trace from two neighbouring bins,  but also irregular offset spacing (look back at the fold tables).   
+
+What types of processing would be safe to do and what wouldn’t?   1d filtering? 2d shot linear denoise?  2d cmp radon?
+
+--- Slide 38 ---
+§9  Regularisation and Spatial Aliasing
+38
+
+--- Slide 39 ---
+39
+What do we record?
+
+--- Slide 40 ---
+40
+What do we record?
+Seismic records
+SAMPLING EFFECTS
+Temporal and spatial
+KINEMATIC EFFECTS
+Statics, DMO, NMO, Migration
+DYNAMIC EFFECTS
+Attenuation
+AQUISITION ISSUES
+Instrument/ Positioning /Timing errors
+The shot gathers we record do not represent a continuous wave-field. We record a limited portion of the wave-field in time and in space and even this we are forced to spatially sample at discrete receiver positions.
+
+It is this sampling of the wave-field from which the need for regularisation arises
+
+--- Slide 41 ---
+What do we mean by irregular data?
+41
+However, we saw what happens when we move from a 2d to a 3d geometry…
+In the Regularisation course ODT3 we take a loose definition of Regularisation as “moving the data to a regular grid”.  We will then show how this loose definition encompasses a whole host of processing techniques in 2d, 3d and higher order domains that attempt to mitigate for the finite and poorly sampled wavefield that we record. But in processing we deal with many ‘grids’ in different domains, some ease to conceptualise, some not so easy.
+For example, we saw ealier we that could sort the data as a 2d shot gather which could be perfectly regularly sampled in 2d offset and which gives perfectly regular sampling (cmp spacing, fold etc…) on a 2d geometry.
+
+--- Slide 42 ---
+What do we mean by irregular data?
+42
+In a 3d geometry our shot and receivers rarely fall on a perfectly regular surface grid, and our midpoint locations rarely fall perfectly within the centre of the bin on the subsurface grid. We also have missing and duplicated coverage to deal with. So in this domain we have highly irregular spatial sampling of our wavefield.
+
+--- Slide 43 ---
+What do we mean by irregular data?
+43
+However, even if the data was perfectly regular on one grid does not mean the same data is still regular if we were to choose another grid, for example where processing dictates we match the grid used in a different survey.
+In this case at no point did we change the actual seismic but already we had several different sampling conditions. We will cover all the factors one has to consider in regularising data in ODT3. One issue we will focus on in particular whenever sampling data or changing data from one grid to another, is the topic of Spatial Aliasing.
+
+--- Slide 44 ---
+Spatial aliasing
+44
+True Dip
+Spatial aliasing of higher frequencies occurs where the trace spacing is too great to adequately define the dip of the data.  This gives us our three criteria for spatial aliasing.
+Frequency
+Trace spacing
+Dip.
+Note, we may be talking about geological dip, or apparent dip due to moveout, or both simultaneously as we saw in our shot points.  You should be able to recognise spatial aliasing and understand how it relates to the different domains.
+
+--- Slide 45 ---
+Spatial aliasing in CMP domain
+45
+CMP 37.5m trace spacing
+
+--- Slide 46 ---
+Spatial aliasing in XY
+46
+WARNING : No show rights for pictures
+Strictly internal use only
+Offset plane 25m trace spacing
+TIP: Don’t confuse spatial aliasing for a display issue…
+
+Computer screens have a fixed display resolution which at small trace spacing frequently may not be able to display all your seismic traces properly. 
+Or maybe you are only displaying every other trace 
+
+..therefore your data may appear aliased when it is not.  Zooming in on the data and/or changing to a filled wiggle display can sometime help. The same is true for QC maps.
+
+--- Slide 47 ---
+Spatial Aliasing in CMP domain manifested as noise in the stack
+47
+
+--- Slide 48 ---
+Spatial Aliasing in CMP under different conditions
+48
+
+--- Slide 49 ---
+Spatial Aliasing in CMP under different conditions
+49
+
+--- Slide 50 ---
+Spatial Aliasing in CMP under different conditions
+50
+Again, in this last example we experienced different aliasing condition even though we didn’t change the actual seismic.  So it is important you are familiar with the different ways in which we sort and processing the  data.
+
+--- Slide 51 ---
+§8 Other processing (sorting) domains / gathers
+51
+Gather (noun) -  a group of traces having one or more common attributes.
+i.e. a shot gather : a group of traces having the same shot point number.
+
+--- Slide 52 ---
+Shot gathers
+52
+
+--- Slide 53 ---
+Shot gathers
+53
+POST NMO
+POST NMO
+POST NMO
+PRE NMO
+PRE NMO
+
+--- Slide 54 ---
+Shot gathers
+54
+POST NMO
+POST NMO
+POST NMO
+PRE NMO
+PRE NMO
+The shot gather.  For multi-streamer data a single gather is called a shot/cable pair (and is given a unique number in the attribute  SP_GUNCAB.
+When processing in shot gathers the most common mistake is to mix together in the processing window, the shot cable pairs from different streamers.
+ The traces will be the most similar in terms of noise characteristics and regularity as all the traces are recorded at the same time from the same source location.
+This makes the shot gather a good choice for noise attenuation and interpolation. 
+However, the shot gather contains all the structure so we cannot use velocity based de-multiple technique and we have to be very careful if removing coherent noise to QC that what is being removed is not primary signal.
+
+--- Slide 55 ---
+Receiver Gathers
+55
+POST NMO
+POST NMO
+POST NMO
+PRE NMO
+PRE NMO
+
+--- Slide 56 ---
+Receiver Gathers
+56
+POST NMO
+POST NMO
+POST NMO
+PRE NMO
+PRE NMO
+In marine processing a receiver gather refers to traces recorded at a common location in space, which is NOT the same as traces recorded by the same physical hydrophone ( this being a channel gather)
+Note for land processing OBC etc.. Where the receivers are stationary a common receiver and a common channel can mean the same thing.
+For multi-streamer data a single gather is called a receiver/cable pair.  The 2d RCV number needs to be set by the Geo. 
+When processing in RCV gathers the most common mistake is to accidentally mix together the RCV /cable pairs from different streamers.
+The traces have a similar character as they are recorded at the same surface location. It looks very much like a shot gather but usually with lower fold. 
+This makes it a good choice for applying the same processes that you would in a shot domain, 
+Because of the different sort order some types of noise coherent in the shot domain may become random in the RCV domain. 
+The natural trace spacing in a RCV gather is the shot spacing (on a single subsurface line i.e flip to flip). This means it usually suffers from aliasing and needs interpolation prior to some processes.
+Each trace represents a different shot location which makes it a good choice of domain for interpolating shots.
+
+--- Slide 57 ---
+CMP gather
+57
+POST NMO
+POST NMO
+POST NMO
+POST NMO
+POST NMO
+
+--- Slide 58 ---
+CMP gather
+58
+POST NMO
+POST NMO
+POST NMO
+POST NMO
+POST NMO
+
+--- Slide 59 ---
+CMP gather
+59
+POST NMO
+POST NMO
+POST NMO
+POST NMO
+POST NMO
+The CMP gather as we have seen can be 2d , pseudo 2d or 3d. 
+Traces in the same CMP gather have the same midpoint, not to be confused with CIG common image gathers where we attempt to position the data at the correct reflection point.
+The CMP domain minimises (but does not remove) the effect of structure on the gathers.  
+This makes it ideal for stacking the data.
+This also makes it a good choice for velocity based de-multiple.
+Gathering traces with the same midpoint and thus minimising the effect of the structure  allows us to make use of the different offsets to make estimates of the seismic velocities (but be aware of DMO).
+Traces in the same CMP gathers represent different offsets. 
+The nominal spacing of traces is the moveup distance.
+The most common mistake is sorting two consecutive gathers together by using a CMP number having twice the bin size of the native acquisition.
+
+--- Slide 60 ---
+Common channel (mono valued 2d offset)
+60
+PRE NMO
+POST NMO
+
+--- Slide 61 ---
+Common channel (mono valued 2d offset)
+61
+PRE NMO
+POST NMO
+A single channel is a gather of traces with the same channel number and importantly the same subsurface line.  Most modern acquisition has more than one source and therefore the same channel will exist on two subsurface lines. We therefore need to make sure we select a single subsurface line or single gun.
+The traces will all have the same offset so NMO is not usually required for any processing. However, we usually apply NMO anyway as horizons and processing windows are usually referenced to the zero offset time. 
+The natural trace spacing in a rcv gather is the shot spacing (on a single subsurface line i.e flip to flip). This means it usually suffers from aliasing so it is not usually used for 3d processes, these would usually be applied in the offset plane (see next slide)
+The most common mistake in this domain, especially processes such as multiple subtraction stage (see later training course) is to mix the data from two subsurface lines together. 
+Each trace in a channel belongs to a different shot point. Therefore this domain is commonly used for interpolating shots although we frequently prefer the rcv domain for this, as in the channel domain each trace has a different source and rcv position whereas in the rcv domain only the source location is changing each time.
+
+--- Slide 62 ---
+Offset plane
+62
+PRE NMO
+POST NMO
+
+--- Slide 63 ---
+Offset plane
+63
+PRE NMO
+POST NMO
+An offset plane is a selection of consecutive traces designed to give us a single fold volume.
+The offset domain also has 2d or 3d versions.
+For a 2d offset plane we make the selection of a number of consecutive traces equal to the move up.
+For a 3d offset plane we make the selection by selecting  a range of offsets equal to the move up distance. 
+ As we still have traces with different offsets (albeit very similar) we need to apply NMO before any processing that mixes traces (fx denoise etc..). 
+The resultant volume is like a single fold cube although because of irregularities in the acquisition there will be some holes and some areas of over-fold (or multiple traces per bin.  This domain is used for :
+interpolation; to fill in holes in the coverage, 
+applying de-multiple or de-noise techniques of the sort that could be applied to a post stack volume.
+applying common offset migration algorithms such as Kirchhoff and Beam migrations.
+
+--- Slide 64 ---
+Back to our example of spatial aliasing in different domains. 
+It important to understand the trace spacing in different domains and also how interpolating trace in one domain effects the trace spacing in another. 
+
+This is also really important for deciding how much data you need to use in testing a job*.
+Spatial Aliasing in CMP under different conditions
+64
+SPN with NMO
+
+--- Slide 65 ---
+Trace spacing in different domains.
+65
+“Offset” can also be considered a spatial direction. 
+
+
+When we talk about “trace spacing” it usually falls into two categories;
+
+
+Gathers of different offset : CMP , RCV, SPN gathers – trace spacing refers to the offset spacing. 
+
+
+Gathers of the same offset : Common channel/trace , stack (essentially zero offset as all the offsets have been stacked together), offset class*– trace spacing refers to the spatial subsurface distance between traces.
+Sub_surface_coverage.xls
+Excerise : Go to the subsurface stacking charts. Take the case of a 25m flip/flop shooting with a 12.5m channel spacing i.e  6.25m CMP spacing.  Compare the trace spacing for each of the domains with and without shot interpolation.
+
+
+*offset class is a special case: We normally talk about trace spacing as the distance between CMP locations but as it contains several different offsets you could refer to spacing between offsets.
+
+--- Slide 66 ---
+Trace spacing for 25m flip/flop shooting and 12.5m channel spacing.
+66
+
+--- Slide 67 ---
+Trace spacing for 25m flip/flop shooting and 12.5m channel spacing.
+67
+
+--- Slide 68 ---
+Trace spacing for 25m flip/flop shooting and 12.5m channel spacing.
+68
+
+--- Slide 69 ---
+§10 Other QC domains for mapping the data
+69
+
+--- Slide 70 ---
+Attribute maps
+70
+Other than looking at seismic sections we also look at amplitude maps and other attribute QCs. 
+These maps can also be thought of as different domains.
+To interpret our QCs we need to understand what the attribute represents; what the patterns in our attributes represent; what represents a bad value?
+
+--- Slide 71 ---
+SP_X, SP_Y Map of Av. amplitude
+71
+This amplitude map is plotted in the SPX,SPY domain.   However, the amplitude is the target Average amplitude window, so is therefore most likely sampling the subsurface geology (i.e a constant subsurface or CMP position). So anything coherent in CMP plotted at shot location will be shifted in the acquisition direction by half the SPN/RCV offset such as the feature seen on the near trace cube.
+
+--- Slide 72 ---
+SP_X, SP_Y Map of Av. amplitude
+72
+Without knowing this you couldn’t possibly pass this amplitude map through the QC. 
+
+Only once we know the what the map is plotting, only then can we make a decision on what represents a bad value.
+?
+So what about these points?  Good or bad?
+
+--- Slide 73 ---
+SP_X, SP_Y Map of Av. amplitude
+73
+This map is the average amplitude over a 2 second window across the target.
+
+8cables /  320tr. per cable = 2560tr.
+To make one point 10x that of the surrounding data.  What amplitude must the data have?
+… an entire shot with 10x the amplitude of the surrounding data?
+…one shot cable pair with 80x the amplitude of the surrounding data?
+…1 trace with 25,000x the amplitude of the surrounding data?
+…1 sample >25,000,000x the amplitude of the surrounding data?
+….and it has to be in our window!  
+Why might we use RMS rather than average amplitude?
+
+--- Slide 74 ---
+What mechanism causes amplitude changes
+74
+It is important to be able to work out if features in your maps are as expected, i.e. due to the geology, or due to something else? So can you relate the patterns you see in the amplitude maps to a physical situation? Here are some examples.
+Channel#
+Shot#
+
+--- Slide 75 ---
+What mechanisms may cause amplitude changes?
+75
+It is important to be able to work out if features in your maps are as expected, i.e. due to the geology, or due to something else? So can you relate the patterns you see in the amplitude maps to a physical situation? Here are some examples.
+Very shallow feature: All source energy passing down through feature. All traces on cable are affected, whilst source passes over anomaly.  Vertical stripe in geology term of amplitude shot channel map.
+
+--- Slide 76 ---
+What mechanisms may cause amplitude changes?
+76
+It is important to be able to work out if features in your maps are as expected, i.e. due to the geology, or due to something else? So can you relate the patterns you see in the amplitude maps to a physical situation? Here are some examples.
+Very shallow feature: Source has passed over feature but increasing offsets are affected with increasing shot number. Diagonal stripe in geology term of amplitude shot channel map, starting at the near trace and moving to the far trace. Note: Stripe is similar to a common RCV domain as it is a stationary point on the surface.
+
+--- Slide 77 ---
+What mechanisms may cause amplitude changes?
+77
+Buried feature: Only certain offsets affected at any time. Increasing offsets are affected with increasing shot number. Diagonal stripe in geology term of amplitude shot channel map, starting at the near trace and moving to the far trace.
+It is important to be able to work out if features in your maps are as expected, i.e. due to the geology, or due to something else? So can you relate the patterns you see in the amplitude maps to a physical situation? Here are some examples.
+
+--- Slide 78 ---
+What mechanisms may cause amplitude changes?
+78
+It is important to be able to work out if features in your maps are as expected, i.e. due to the geology, or due to something else? So can you relate the patterns you see in the amplitude maps to a physical situation? Here are some examples.
+Buried feature: Only certain offsets affected at any time. Increasing offsets are affected with increasing shot number. Diagonal stripe in geology term of amplitude shot channel map, starting at the near trace and moving to the far trace.
+
+--- Slide 79 ---
+What mechanisms may cause amplitude changes?
+79
+It is important to be able to work out if features in your maps are as expected, i.e. due to the geology, or due to something else? So can you relate the patterns you see in the amplitude maps to a physical situation? Here are some examples.
+Buried feature: Only certain offsets affected at any time. Increasing offsets are affected with increasing shot number. Diagonal stripe in geology term of amplitude shot channel map, starting at the near trace and moving to the far trace.
+
+--- Slide 80 ---
+Shot/Channel Map of RMS amplitude
+80
+CHANNELS
+Average RMS amplitude calculated per channel
+Which channel on cable 1 is the near trace, ch#1 or ch#400?
+
+--- Slide 81 ---
+Shot/Channel Map of RMS amplitude
+81
+Average RMS amplitude calculated per channel
+
+--- Slide 82 ---
+Shot/Channel Map of RMS amplitude
+82
+Map plots tell you things  – don’t ignore the signs!
+
+What went wrong here?
+
+--- Slide 83 ---
+Shot/Channel Map of RMS amplitude
+83
+Map plots tell you things  – don’t ignore the signs!
+
+What went wrong here?
+
+--- Slide 84 ---
+Shot/Channel Map of RMS amplitude
+84
+Map plots tell you things  – don’t ignore the signs!
+
+What went wrong here?
+
+--- Slide 85 ---
+§11  Introduction to Noise
+85
+
+--- Slide 86 ---
+What is Noise?
+86
+Random, unorganised noise;
+Swell noise (random noise due to waves and turbulence effecting the cable) 
+Background noise (background random noise from environment and  recording system)
+Spiking noise (from problems with the acquisition equipment).
+Remnant multiple
+Random noise
+Coherent noise
+Unwanted signal; refractions
+1
+2
+3
+4
+Coherent organised noise;
+Noise from external stationary or moving point sources (industrial noise), 
+Coherent noise generated by the acquisition equipment and environment; such as prop/screw noise, bulge waves.
+Noise where the source energy is reflected from stationary or moving surface obstructions such as rigs.
+Noise generated by artefacts of the processing applied. 
+Aliased energy.
+Unwanted signal (random or coherent); 
+remnant multiple ,
+refracted energy,
+converted wave energy, 
+energy from complex ray-paths that cannot be imaged depending on algorithms used… eg. Prism waves
+
+--- Slide 87 ---
+Coherent noise removal
+87
+When we look at Coherent noise, the techniques to remove it fall into two main categories; 
+Removed as coherent noise : separating signal and noise by change of domain.
+	Typical example is Linear and random noise removal in TauP.  
+Removed as random noise : randomising coherent noise by change of domain.
+	Typical example of this is the removal of certain types of coherent noise in the shot domain by sorting to the receiver domain to randomise the noise and removing the noise with a pass of swell noise removal.
+
+--- Slide 88 ---
+Coherent noise removal
+88
+When we look at Coherent noise, the techniques to remove it fall into two main categories; 
+Removed as coherent noise : separating signal and noise by change of domain.
+	Typical example is Linear and random noise removal in TauP.  
+Removed as random noise : randomising coherent noise by change of domain.
+	Typical example of this is the removal of certain types of coherent noise in the shot domain by sorting to the receiver domain to randomise the noise and removing the noise with a pass of swell noise removal.
+
+--- Slide 89 ---
+Example – reflected noise
+89
+When you see noise bursts like this on the data we can try and imagine the mechanism that creates this type of noise burst on the data.
+We will look at noise and the above techniques in more detail in the later courses on De-noise.  As this course is more about trying to relate what we see in the seismic to the how it is created, we will look at a particular type of noise; that which is generated from an external point source, or where an obstruction at the surface reflects the shot energy and thus becomes a point source of noise.
+
+--- Slide 90 ---
+RJJ11
+x
+y
+z
+The noise spreads out from the point source.  It only travels through the near surface, so it is different from the reflected primary energy.
+But how does this appear in the time domain?
+In the time domain the noise appears as a cone.
+How the noise appears in the data depends on where the receivers are relative to the noise source and thus how the shot record cuts the none of noise.
+The noise cone
+90
+Most linear and parabolic noise in the data emanating, or reflected from, external points, are sections through a noise cone.
+
+--- Slide 91 ---
+External noise cone.
+Exercise : look at the attached spreadsheet.
+
+Move the noise “point source” around and see how the noise looks on the shot?
+
+Find a location where the noise looks like a primary reflection.
+
+Find a location where the noise looks like linear noise.
+
+What happens to the noise cone if the source of the noise happened before or after the seismic shot was fired?
+
+ How might the shape of the noise make it more difficult for us to remove in the processing?
+The noise cone - Exercise
+91
+The noise cone can explain both linear and parabolic noise types.
+
+--- Slide 92 ---
+Example – reflected noise
+92
+So when we see noise like this we can estimate where it may be coming from.  You can now see in this example, on the left of the screen the noise source is off to the side and near the font of the cable. Then as the boat moves, by the right hand side of the screen,  the noise source moves to off the back end of the cable.  This can help tell you what it is which in turn will help us decide how to remove it.
+
+--- Slide 93 ---
+Multi vessel tripple source acquisition
+93
+8km
+Vega
+Sirius
+A current project in the North Sea (shallow water) is shooting with 3 vessel to save time.  The Vega, Sirius and Coral.  The Vega and Sirius are shooting in Tandem with the Vega following 25km behind the Sirius.  Whilst the Coral is shooting an area somewhere to the east. Each vessel is shooting in triple source configuration.
+75m
+triple source configuration
+Direction of travel
+
+--- Slide 94 ---
+Exercise
+94
+0sec
+9sec
+Make a simple sketch of a shot point with a record length of 9sec for both the Vega and the Sirius.
+For each vessel where would the direct arrival time be for the current shot in the triple source firing pattern? 
+
+For each vessel where would the direct arrival time be for the next shot (n+1) in the triple source firing pattern? 
+
+Can you then sketch where these same arrivals would be for the energy arriving from the other vessel?
+
+--- Slide 95 ---
+Example Raw Shots
+95
+Here are some real shot gathers from this survey. But can you work out which is the recorded shot from the Vega and which is the recorded shot from the Sirius?
+What energy belongs to which shot from which vessel? Remember the Sirius is ahead of the Vega.
+
+--- Slide 96 ---
+Example Raw Shots  (With Annotations)
+96
+Vega Seq.  Both vessels are shooting. Vega is behind so the Sirius SI comes in at the front of the cable.
+Sirius Seq.  Both vessels are shooting. Vega is behind so the Vega SI comes in from the end of the cable.
+Sirius N+1 Shot
+Sirius N Shot
+Vega M-1 Shot
+Vega M Shot
+Sirius Y+1 Shot
+Sirius Y Shot
+Vega X Shot
+Vega X+1 Shot
+Vega M+1 Shot
+A third vessel is also acquiring some distance to the east of the Vega. Can you identify energy form this vessel?
+
+--- Slide 97 ---
+Example Raw 2D Stack
+97
+12.5m between shots at approximately 2.5m per second gives 5seconds of record before the next shot goes off
+However with the dither time the first shot could go off 400ms later and the next 400ms earlier meaning there could be as little as 4.2sec before the next shot goes off.  On this line you can see the vessel was travelling a little faster or had a larger dither as the N+1 shots are arriving before the 4sec mark.
+
+--- Slide 98 ---
+§12  Introduction to multiple.
+98
+
+--- Slide 99 ---
+Multiple attenuation is one of our most challenging processing problems.
+They interfere with primaries, mask or can be falsely interpreted as primaries
+They adversely effect imaging processes (which usually assume multiple free data) 
+They contaminate AVO calculations
+99
+Introduction
+
+--- Slide 100 ---
+Why data analysis
+100
+DESIGN – frame the problem
+Look at the data
+Identify the problem
+Design the testing / select input data
+TEST – implement the testing
+Identify workflow
+Modification of workflow
+Run testing
+REFINE – Analyse the results
+Analyse and critique the results
+Modify testing plan
+Present the results
+PRODUCE – put the process into production
+Convert test job into production
+Identify and add QCs to production flow
+Perform and record QCs
+So identifying and understanding the multiple in our data a key skill of any processor.
+
+--- Slide 101 ---
+Definition of Multiples
+101
+Definition: A multiple is energy which has at least one downward reflection in its travel path.
+Multiples occur because an interface is a bidirectional reflector ;  down-going energy is reflected to the surface, but up-going energy is also reflected back down into the data.
+One layer may thus contributes to the generation of different types of multiple.  So to be able to describe these different types of multiple it helps to have some kind of classification system.
+
+--- Slide 102 ---
+Classification of Multiples
+102
+1st order 
+Water bottom 
+Internal multiple
+2nd order 
+Free surface 
+multiple
+There are lots of different classification schemes for multiples. A popular one is based upon shallowest reflector, and order of multiple or the ‘number of downward bounces’ and whether the multiple path has a reflection with the free surface or not.
+Within these categories of internal and free surface multiple there are a host of other sub-categories, additional terminology which are used to varying degrees within the industry; peg-leg, 1st layer multiples, intrabed, reverberation, ghosts, diffracted multiple...  We will look at all of this in the dedicated demultiple training course.
+
+--- Slide 103 ---
+Classification of Multiples
+103
+Many of you will be used to estimating the twt of a multiple. Take this internal water bottom multiple. First we postulate its ray-path. This requires us to choose at least two generating horizons.
+We add the twt intervals that represent the different legs of the multiple ray path and this gives us an estimate of the multiple twt.
++
+=
+
+--- Slide 104 ---
+Surface
+RCV
+Primary reflector
+Sea floor
+Surface
+SPN
+RCV
+Primary reflector
+Multiple
+Primary
+Multiple
+Primary
+Multiples - Basic Principles: Position on Section of Multiples
+104
+Multiple ‘Parallels’ a primary (additional bounce is constant)
+Multiple is double primary (double dip: travel time is essentially doubled)
+Adding the ray path twts leads to the multiples having predictable shapes, as in these two classic examples;
+However, there are other properties of multiples, that we will look at in the dedicated de-multiple training course, which can be used to identify multiples in the post and pre-stack domains. For this course we will just look at an example of multiple in the context of data analysis.
+SPN
+
+--- Slide 105 ---
+Data analysis – example (showing the full offset 2dCMP stack)
+105
+This is something we think we can easily identify as a free surface multiple.  
+
+However, one of the key targets for this type of data is the base salt. We typically see the multiple sitting exactly on top of the base salt. So as well as multiple, is there something which is definitely primary, so we have something to gauge our test results by?
+Here is a deep water 2d stk.  Imagine you are going to start de-multiple testing.  What is multiple and what is primary?
+
+--- Slide 106 ---
+Data analysis – example (showing the full offset 2dCMP stack)
+106
+This for example?
+Is this Base salt…
+..or is it the free surface multiple from here?
+
+--- Slide 107 ---
+Data analysis – example (showing the full offset 2dCMP stack)
+107
+What might some shot gathers tell us?
+
+--- Slide 108 ---
+Data analysis – example (showing selected shot gathers without NMO)
+108
+We can see our main multiple from top salt + water bottom period. Water bottom is approx 2.2sec so 1st water bottom multiple is approx 4.4sec. Shallow  salt is approx 2.3sec so we also have the water bottom peg-leg from top salt at approx 4.5sec. So we get a complex package of multiples.
+But what is this?
+Is it arriving before the multiple moveout; too early to be multiple (unless it is from out of plane or interbed multiple).
+
+--- Slide 109 ---
+Data analysis – example (showing selected shot gathers with NMO)
+109
+Looking at the shots with NMO it is starting to look more and more like our base salt, or other primary event. It could be a diffraction from out of plane – but cutting through a steep dip would show as being very low frequency.
+And there is more data here that looks like primary
+
+--- Slide 110 ---
+Data analysis – example (showing the full offset 2dCMP stack)
+110
+Back to the stack. Just by simply looking at a couple of shots we can identify three possible areas of primary data to concentrate on when we analyse our de-multiple (the lower frequency signal)
+
+--- Slide 111 ---
+Data analysis – example (showing a CMP with NMO)
+111
+So we are looking for something with this twt on an NMO corrected CMP.  There will also be multiple present but the primary  is   probably going to be lower frequency?
+Swapping now to NMO CMPs. Can we identify the primary on these…
+Here it is!
+
+--- Slide 112 ---
+Data analysis – example (showing selected shot gathers with NMO)
+112
+Back to our NMO shots. What else can we predict about our data…
+You would expect this energy to come out on the near stack.
+and expect this to come out on the far stack.
+
+--- Slide 113 ---
+Data analysis – example (showing a near offset 2dCMP stack)
+113
+.. So let’s look at the near stack
+
+--- Slide 114 ---
+Data analysis – example (showing a far offset 2dCMP stack)
+114
+Here is the energy we are looking for on the fars.
+… and the far stack
+
+--- Slide 115 ---
+Data analysis – example (showing the full offset 2dCMP stack)
+115
+So when we get to our production QCs we also have something we are looking for…
+
+--- Slide 116 ---
+Data analysis – example (showing the full offset 2dCMP stack)
+116
+So post de-multiple we can check our primary is not being attenuated by the de multiple process.
+
+--- Slide 117 ---
+Data analysis – example (showing 2dCMP with NMO every 80th)
+117
+We know What to look for…
+
+--- Slide 118 ---
+Data analysis – example (showing 2dCMP with NMO every 80th)
+118
+…and we can make sure we design our production QCs so they can pick up any issues.
+And can verbalise to whomever is performing the QCs, what it is they are looking out for.
+
+--- Slide 119 ---
+§13 Tools for data analysis
+119
+
+--- Slide 120 ---
+Data analysis - example
+120
+We have introduced many of the processing issues which will be built upon in future courses
+De-noise.
+Designature and deconvolution.
+Regularisation
+De-multiple
+Velocities
+Migration
+
+However much of this course was about getting you to approach your work with a “questioning mind”; what am I seeing? Does it make sense? Does it show what I think it should show?  (Whether this is checking a test job, a production QC, or building a PowerPoint)
+
+It is also about how we can use the simple tools we have as processors to work this out.
+
+--- Slide 121 ---
+What are our basic tools of data analysis?
+121
+There are many tools for data analysis but let us review again the basic tools we have at our disposal as a geo for analysing the data.
+
+Toggling
+Input/Output (and Differencing)  - The obvious one is toggling the input and output of a processing stage, which goes hand in hand with differencing. We all do this but not everyone really stops and thinks about the difference. Can you explain all the features that are different? What is removed/added & why? Has it worked as you expect?
+Domains – As we saw in previous slides, toggling between different domains is a powerful tool for data analysis.  Matching the event between different sorting domains especially between stack and pre-stack domains can tell us whether something is noise, multiple, diffractions etc…
+Stacking
+Full – The stack obviously gives us information on what you are seeing. Remember to consider how the mute and velocities relate to what you see in the stack. If you are looking to improve far offsets if your mute wide enough to show it?  If you are looking at improving near offsets; is the mute so wide that you stack out any benefit of the process? This leads us on to…
+Partial Stack – looking at the difference between near, mid far stacks can give us information on what we are looking at.. This is similar to varying the stacking mute. 
+3d Stack – Traditionally most of our QCs have been done using 2d stacks , but now 3d stacks should be used at every major phase in the processing. Analysing events in 3d gives us more information and is especially important in the complex geological environments we typically work in these days.
+
+--- Slide 122 ---
+What are our basic tools of data analysis?
+122
+Moveout
+Moveout / Moveout scans/ Stacking scans. – Moveout can tell us a lot about what something is; whether it is multiple or not etc. NMO velocities are essential in processing and understanding the error in your velocity is therefore crucial. Scanning the velocities is an under-used data analysis technique. 
+Percentage scans (or Constant velocity / ETA scans) – Scanning can help add error bars to your processing. How can you apply Radon demultiple to your data with a tight cut value without knowledge of the error in your moveout?  It can also give us information on what we are looking at i.e. something that stacks in at slower and slower velocities compared with the data around it is more likely to be multiple; something that needs 12000m/s Vrms to flatten it may be a diffraction or refracting event,  rather than a primary etc…
+Dip/apparent velocity - Measuring the dip and apparent velocity of data in different domains or looking at FK spectra may tell us if something is primary, noise, refraction etc…  Whether it is aliased?
+Frequency content
+Frequency spectra – analysing the frequency content may tell us something. i.e a multiple may be higher frequency that the primary it overlays. This can be done with spectra of by simply filtering the data.
+Quick signal processing i.e. Radon/TXDBS
+ Why sit there trying to work out what is multiple and what is primary on a brute stack.  Maybe applying a quick processes such single channel DBS or a quick Radon de-multiple will shed some light on it?  
+Say you have a dataset with massive aliased multiple in the CMP domain; can you analyse the benefits of an FK filter on the data without applying radon to the results? Maybe not.
+
+--- Slide 123 ---
+Here is another example of a 2d stack at the start of the processing., where the geo has overlaid an NMO corrected 2dCMP on the data.  What can we already predict about the de-multiple and about the general processing sequence at this early stage?
+Data analysis - example
+123
+
+--- Slide 124 ---
+Let’s start with the obvious things. 
+
+We used this example earlier. There is no obvious strong cone of reflected post critical energy in this record but even so, we can see the post critical water bottom energy cuts across some useful primary events.  So we will need apply Linear noise attenuation as there is clearly far angle primary energy that can be recovered
+Data analysis - example
+124
+
+--- Slide 125 ---
+These are clearly the multiples.  They are very strong and are starting to look aliased.   As with most of our projects demultiple is going top be the big challenge. For this part of the multiple handling the aliasing is the challenge. Will I be too aliased in CMP domain to attenuate these tails, will I have to think about trying to attack them with the LNA in the shot and recv domains early in the processing?
+Data analysis - example
+125
+
+--- Slide 126 ---
+There is heaving ringing multiple on the near traces which can clearly be seen in the stack in places.  
+
+Is this water bottom reverberation? No, the water bottom is 400ms!
+
+There are strong shallow events under the water bottom, so is the ringing from here; an interbed?
+No, because the multiple is not present in the area just under the water bottom.
+
+So these multiple are most likely to be created just from the first, second, third bounces at the water bottom all starting to overlap. They are free surface multiples, so that and the water depth, immediately tell me I am thinking MWD/SRME + RADON rather than SWD/TauP decons etc…
+Data analysis - example
+126
+
+--- Slide 127 ---
+This is about the deepest primary that I can clearly currently identify.
+But what is the client’s target?
+Data analysis - example
+127
+
+--- Slide 128 ---
+A quick email later and here are some horizons provided by the client.  This is the client’s target horizon. How can I start my testing without knowing what I am looking to improve?
+
+It is covered by the multiple, so let’s run a simple radon with very basic parameters to see what it does.  Quickly I can see parameters from my CMP scan range to +1500ms and a cut moveout of a couple of hundred ms should be a good starting point.
+Data analysis - example
+128
+
+--- Slide 129 ---
+Great. Now we can start to see our target event.
+Data analysis - example
+129
+
+--- Slide 130 ---
+Immediately I see there is an aliased component of the multiple left by the radon, so I am thinking shot interpolation to double or even quadruple the fold. 
+
+I also know that SRME will probably need shot interpolation so I am already thinking about my production flow “do not drop the traces – keep the extra fold through to radon”; I am also  thinking to be careful with my spatial anti alias filter tests.
+Data analysis - example
+130
+
+--- Slide 131 ---
+I am also seeing the noise being left is on the far offsets.  This tells me when I start my proper testing I need to use a wide stacking mute for QCs or QC using a far stack.
+Data analysis - example
+131
+
+--- Slide 132 ---
+I also see the near offset multiple left – this is what I need to concentrate on in the SRME tests.
+Data analysis - example
+132
+
+--- Slide 133 ---
+Data analysis - example
+133
+So I have created a simple 2d stack and run a simple radon.
+When the client comes to the first meeting I can tell them…
+
+We want to apply LNA to access far offsets
+We most likely need shot interpolation in the sequence
+The main de-multiple is most likely MWD/ SRME + Radon de-multiple  (check the contract)
+
+For myself I know
+I have located the client’s target event and other primaries. I know what I am looking to improve in my testing.
+I need to be careful with the FK spatial anti alias filter. I might want to QC my tests by putting the radon on top of any other processes.
+I need to pick some mutes for my QCs which access the far offsets.
+I know what’s in my SRME testing that I am looking to improve. 
+I already have a feel for what Radon is going to remove.
+I have already thought about the production flow – shot interpolation  SRME  keep the extra fold and run Radon.
+
+--- Slide 134 ---
+QC.
+134
+So we use data analysis skills to plan our processing steps. But as we discussed at the start of the presentation we use data analysis skills at every step including production QCs. 
+
+Why do we do QC? 
+To find problems with our data 
+
+What problems are we likely to find?
+Recording instrument problems
+Time in Nav header
+Polarity flips on recording instruments
+Gun drop outs. 
+Problems due to the recording environment
+Extra ship noise, boat noise, rig noise
+Cable feathering
+User error
+Wrong swaths defined
+Wrong parameterisation of modules
+Nav assignment
+Processing machine problems
+Data not being output
+Data not responding to processing as desired
+Unwanted primary removal
+Not enough multiple/noise removal
+
+Your analysis skill are essential to making your QCs intelligent.  Can you anticipate what can go wrong. What are the key things you are looking for?
+
+--- Slide 135 ---
+§14 Conclusion
+135
+
+--- Slide 136 ---
+Why do we mean by data analysis?
+
+--- Slide 137 ---
+Why do we mean by data analysis?
+So back to where we started .  Data analysis is demonstrating your understanding of the data and your ability to frame the problem.  It is showing you ;
+understand the acquisition geometry: shot; channel; CMP; receiver; fold of data in those domains
+understand the processing issues: de-noise; de-multiple; imaging, and can therefore design your testing accordingly.
+can select the correct data to test on.
+can gauge the need for any pre-conditioning: interpolation in specific domains to avoid spatial aliasing issues etc…
+
+--- Slide 138 ---
+Why do we mean by data analysis?
+Data analysis is analysing the results of your testing.
+Rather than blindly running tests purely perturbing parameters. We approach our work methodically…
+I have designed my testing
+I run my first test.
+Has each step of the process done what it should?
+What has the process added/removed?
+Do I understand the difference? What has the process added/ removed and is it acceptable?
+Can I run my suite of tests or do I need to talk to my Team Leader and modify my tests accordingly?
+
+--- Slide 139 ---
+Why do we mean by data analysis?
+Data analysis is analysing the results of your testing so you can talk confidently to your clients about the data.  Whether this is Internal clients; team leader, supervisor etc…. as well as external clients. 
+
+You can articulate to them;
+The problem 
+Your test plan 
+Your observations
+Your conclusions
+
+--- Slide 140 ---
+Why do we mean by data analysis?
+And Data analysis is effective QC.
+What is the input to the process?
+What is the process doing?
+Has each step of the process done what it should?
+What has the process added/ removed.
+Do I understand the difference?
+What has the process added/ removed? Is it acceptable? 
+Do the QCs adequately sample the data to show this?
+Can I infer from my QCs that the process has worked on all the data and all the data has been input and output.
+
+No-one got into trouble for asking for help. However, you can do things to help yourself. For example use some of the data analysis techniques to try and work out what you are looking at, or at least to give you more to show your Team Leader when you ask them for help.                               
+-end-
+
+--- Slide 141 ---
+Why do we mean by data analysis?
+
+--- Slide 142 ---
+UK Training Resources

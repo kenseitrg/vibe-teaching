@@ -1,0 +1,1085 @@
+--- Page 1 ---
+ 
+ 
+Flatirons™ 
+Refraction Statics 
+Training Manual 
+Revised October 24, 2018 
+      
+
+
+--- Page 2 ---
+1 
+ 
+Table of Contents 
+SEG-Y Import/Project Creation…………………………………………………………………………………………………2 
+Picker Window…………………………………………………………………………………………………………………………6 
+Delay Time Analysis…………………………………………………………………………………………………………………13 
+VNS Tomography…………………………………………………………………………………………………………………….24 
+Stack QC (Statics QC)……………………………………………………………………………………………………………….32 
+Database…………………………………………………………………………………………………………………………………36 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 3 ---
+2 
+ 
+SEG-Y Import/Project Creation 
+Projects in Flatirons™ are created from prestack SEG-Y files (other methods for project creation using 
+proprietary formats are available but are not covered in this tutorial). 
+Summary of Workflow: 
+Create SEG-Y dictionary 
+Set project name, units, dimensions 
+Set compression options 
+Select SEG-Y file(s) 
+Scan SEG-Y file using SEG-Y dictionary 
+ 
+1. Create SEG-Y Dictionary 
+ 
+The program launch window is shown above.  In order to import a SEG-Y file and create a project, a 
+SEG-Y dictionary (header map) must first be created to define byte locations in the trace headers.  
+Begin by clicking on the menu option to “Open the SEG-Y viewer and dictionary editor.” 
+ 
+The Dictionary Editor will appear as a new popup window.  First select the SEG-Y file by clicking on 
+the open folder icon.  Note: if using multiple SEG-Y files, be aware that all files must have the same 
+trace headers in the same byte locations.  Only one of the files needs to be used in this step. 
+
+
+--- Page 4 ---
+3 
+ 
+ 
+The file header and EBCDIC can be viewed in the panel.  Next, click the new file icon on the middle 
+bar to create a new SEG-Y dictionary.  Note that some default locations are already populated.  
+These byte locations need to be checked either against the EBCDIC or external byte location data (in 
+any case these should be available to the user). 
+ 
+The following headers are required for the import to work correctly:  
+Shot: LineNumber, PointNumber, X, Y, Z (Easting, Northing, Elevation) 
+Receiver: LineNumber, PointNumber, X, Y, Z (Easting, Northing, Elevation) 
+Trace: TraceCode (Note: this value must be 1 in order for the trace to appear as valid) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 5 ---
+4 
+ 
+2. Set Project Name, Units, Dimensions 
+ 
+On this first page, set the project name.  Select the units (feet or meters) and dimensions (2D or 3D).  
+Note: the 2D option should only be used for reasonably straight 2D lines.  Crooked or turning lines 
+should be imported as 3D projects. 
+Set whether the marine options should be used.  These options are for marine streamer data only, 
+not OBC or land surveys.  For marine streamer surveys, the program will bin receivers by proximity 
+in order to have more than one trace per “receiver.” 
+ 
+ 
+3. Set Compression Options 
+ 
+The imported data may be compressed and stored in the project so that the original data will no 
+longer be needed.  This offers a 3 to 1 compression ratio on disk and speeds up a number of 
+processes (particularly the loading of trace gathers), but the import process will take longer to 
+complete.  Traces may be resampled and trace length may be modified during the compression if 
+the user chooses to do so. 
+If the compression option is used, precomputed sparse CMP gathers may also be created.  These will 
+speed up a number of processes as well. 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 6 ---
+5 
+ 
+4. Select SEG-Y File(s) 
+ 
+In the next window, select the SEG-Y file(s) to import.  As mentioned earlier, all header byte 
+locations must be the same across all files being imported.  
+ 
+ 
+5. Scan SEG-Y File(s) Using Dictionary 
+ 
+In the first tab, “Dictionary selection,” select the SEG-Y dictionary file created at the beginning of this 
+tutorial. 
+In the second tab, scan the SEG-Y file(s) to check the validity of the dictionary file.  It is possible to 
+scan all traces; however, we recommend simply scanning the first 100000 traces of each file as that 
+will provide sufficient information. 
+Look for abnormal numbers of shots and/or receivers.  Shot and receiver conflicts will show up in 
+the relevant “Conflicts” tab.  Check the basemap tab to ensure that the partial map looks 
+reasonable. 
+ 
+If all parameters are correct, click the Finish button.  Import will begin. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 7 ---
+6 
+ 
+Picker Window 
+To open a Picker window, go to the Picking menu and select "New picker window - shot/receiver/bin 
+plane".  This will bring up the primary Picker. 
+ 
+ 
+There are three panels in this window.  On the left side is the navigation and display panel.  The icons 
+here allow the user to select trace gathers from the basemap and choose how the traces will be 
+displayed.  The middle panel is the trace display panel.  The right panel is the pick control panel.  The 
+options here allow the user to select tools for first break picking. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 8 ---
+7 
+ 
+Navigation and Display Panel 
+Basemap Options 
+ 
+Click a location on the basemap to select a trace gather.  The type of gather selected is dependent upon 
+the Pick Plane (explained below).  Any database column may be used to color the basemap.  The visible 
+shots/receivers in the picker window will be displayed on the basemap.  The vector display at the top is 
+used to display the predicted geometry error (this is explained in the Pick QC section of the Delay Time 
+Analysis tutorial). 
+ 
+Navigation Options 
+ 
+Select any primary and secondary columns from the database to set the navigation order when moving 
+between shots/receivers.  The navigation order is displayed at the bottom, along with the values for the 
+two columns selected. 
+
+
+--- Page 9 ---
+8 
+ 
+ 
+Processing Options 
+ 
+Set the interactive processing sequence for the trace display.  Batch jobs (such as autopickers) are 
+launched from this flow as well.  If an autopicker is active in the flow, the predicted picks will be 
+displayed on the traces. 
+ 
+Grouping Options 
+ 
+Split a gather into smaller groups for display purposes.  This is most commonly used to split a shot 
+gather into receiver lines. 
+ 
+Horizontal Axis Options 
+ 
+Set the order in which traces are organized from left to right.  If using a trace attribute, the traces may 
+be spaced irregularly. 
+ 
+ 
+ 
+
+
+--- Page 10 ---
+9 
+ 
+Trace Wiggle Display Options 
+ 
+Set options for displaying traces on screen. 
+ 
+Trace Color Display Options 
+ 
+Set options for first break pick overlay (including the color and size of picks), as well as trace coloring 
+based on branch assignment. 
+ 
+Visible Pick Options 
+ 
+Set which traces to display. 
+ 
+Prior Pick Usage 
+Allows the use of existing picks to predict future picks.  Not recommended in most cases as it is not 
+reliable. 
+ 
+
+
+--- Page 11 ---
+10 
+ 
+Trace Display Panel 
+ 
+At the top left of this panel is the Pick Plane selector.  By default this is set to Shot, meaning the traces 
+are organized in a shot gather, with each trace in the gather having a corresponding receiver.  The Pick 
+Plane may be changed to Receiver or CDP. 
+Next to the Pick Plane selector is a text box that allows the user to specify a gather by ID and load it.  To 
+the right are menus for picking defaults and additional operations. 
+Under these buttons are three rows for displaying trace header text values, and one row for plotted 
+values.  Select the header to display by right clicking on the row. 
+The traces are displayed in the main part of this panel.  To use a picking tool with either the mouse or 
+keyboard, move the mouse over the desired pick location and press the key or the mouse button. 
+Right click and drag to zoom in.  Right click once to zoom out. 
+In order to select a corresponding shot/receiver of a displayed trace, you must have another Picker 
+window open in the correct Pick Plane.  Move the mouse over the desired trace and press the ESC key. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 12 ---
+11 
+ 
+Pick Control Panel 
+Picker Options 
+ 
+Set event to pick (Peak, Trough, None), along with the mouse and keyboard picker command tools.  
+Some useful tools are mentioned below. 
+ 
+Axis Locks 
+ 
+Set zoom locks for the display axes.  Selected group info is also displayed here. 
+ 
+Trace Header Values 
+Display header values for a selected trace.  Must have "ViewTraceHeaders" set to a key. 
+ 
+Trace Sample Values 
+Display trace sample values for a selected trace.  Must have "ViewTraceData" set to a key. 
+ 
+Snapshots 
+Create a snapshot video of all shots.  Intended for quick QC.  Grouping must be turned off to use this 
+option. 
+
+
+--- Page 13 ---
+12 
+ 
+Useful Manual Picking Tools 
+The following are some of the more useful manual picking tools that can be assigned to the mouse and 
+keyboard: 
+ 
+ControlPointAdd 
+This should be selected for the left mouse action.  Click once to set a starting control point.  Click again 
+to set another, and so on, until all control points are set.  Double click to pick along the control point 
+lines. 
+ 
+AddLeft 
+This picks every event to the left of the mouse cursor location. 
+ 
+AddRight 
+This picks every event to the right of the mouse cursor location. 
+ 
+AddBoth 
+This picks every event to the left and right of the mouse cursor location. 
+ 
+GeomCorrection 
+This moves the current shot/receiver to the predicted spatial location. 
+ 
+FlipTracePolarity 
+This flips the polarity of the trace closest to the mouse cursor location. 
+ 
+KillTrace 
+This kills the trace closest to the mouse cursor location. 
+ 
+PickEventNearsetZero 
+This automatically picks the event closest to zero time on all visible traces.  This is used when the traces 
+have been flattened by applying model traveltime time shifts. 
+
+
+--- Page 14 ---
+13 
+ 
+Delay Time Analysis 
+Delay Time Analysis is a layer-based approach to solving near-surface statics.  Using either picks or 
+traces, the user specifies the number of layers as well as some initial parameters for the velocity and 
+delay times (which will relate to layer depth). 
+Summary of Workflow: 
+ 
+Branch assignment using traces (or picks) 
+ 
+Refine delay times using shot/receiver stack picker 
+ 
+Optional: Generate picks based on delay times 
+ 
+Run delay time analysis sequence 
+ 
+Perform geometry and pick QC 
+ 
+Re-run delay time analysis sequence 
+ 
+Create near-surface model 
+ 
+Compute statics 
+ 
+1. Branch Assignment 
+To open the branch assignment window, go to the DelayTime menu and select “Branch assignment - 
+use traces.”  If using picks, select “Branch assignment - use picks.”  These instructions will assume 
+you are using traces. 
+ 
+ 
+ 
+If you are using precomputed CMP gathers, you may select whether to use them using the 
+“Preselect” tab in the top left corner. 
+
+
+--- Page 15 ---
+14 
+ 
+Select a location on the basemap.  The program will load a trace gather for that location.  You can 
+using a larger bin size to show more data in the gather, or a smaller bin size to show less data. 
+The goal is now to find refractors.  As the traces go from smaller to larger offset (left to right), we 
+see that the slope of the first arrival changes.  Each of these sections with a unique slope is treated 
+as a refractor. 
+To pick a refractor, first select the refractor number by clicking in the “Select branch” box or by using 
+the numerical keys on your keyboard.  Then, then, click the mouse and drag along the first arrivals 
+for the section of traces, and release the mouse when finished.  You’ll see vertical lines at the start 
+and end of the refractor. 
+Next, select another location on the basemap.  It is necessary to track the changes in the refractor 
+along different parts of the survey (Note: in some cases it may be impossible to track a given 
+refractor across the survey.  They will sometimes disappear, especially in cases of dipping refractors 
+and other geological anomalies).  We will repeat this process for several locations across the 
+basemap. 
+The color maps on the right hand side are a useful guide when picking refractors.  Generally 
+speaking, the refractor velocity, delay times, min and max offsets should not change too drastically 
+across the survey.  The maps provide a visual QC to make sure the correct refractor is being tracked. 
+It is not necessary to pick all the refractors in order to generate an acceptable solution.  Oftentimes, 
+an adequate solution can be found by only using one or two refractors.  However, it should be noted 
+that picks will only be generated for offset ranges which have refractors picked. 
+Once the refractors have all been picked across the survey, click the “Apply changes” button in the 
+bottom left corner.  A series of dialog boxes will come up: 
+- 
+First, you will be prompted to interpolate refractor velocities and delay times based on the 
+branch assignment.  If you do not already have picks, and have not already done branch 
+assignment prior to this, you should click “YES.” 
+- 
+Next, you will be prompted to kill picks using the branch assignment information.  This is not a 
+recommended way to kill picks.  You’ll almost always want to click “NO” here. 
+- 
+Finally, you will be prompted to run the standard delay time analysis sequence.  This will 
+compute a much more accurate delay time model based on the picks.  However, this only works 
+if you have picks.  For the purposes of this tutorial, we do not have picks yet, so you should click 
+“NO.” 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 16 ---
+15 
+ 
+2. Shot/Receiver Stack Picking 
+Now that branches have been assigned, we can create some shot and receiver stacks in order to 
+refine the delay times. 
+Go to the DelayTime menu, and select “Shot/receiver stack picker.”  This will open up the stack 
+picker window.  On the left hand side, check that Refractor 1 is selected, then click the “Create 
+stacks” button. 
+ 
+ 
+Select the “globe” icon to view the navigation and sort options: 
+ 
+ 
+Each “trace” displayed in this window is not a trace, but either a shot or a receiver stack.  The 
+stacked trace is made by stacking all traces within a single shot or receiver that are within the 
+specified branch, with a time shift applied to each trace based on the delay time.  The more accurate 
+the delay time, the closer the picked event will be to zero. 
+It is possible to select a shot or receiver in the stack picker and view it in a Picker window.  First, 
+make sure there is a Picker window open, with the Plane set to “Shot” or “Receiver” (whichever one 
+you want to view).  Then, in the stack picker, mouse over the shot or receiver and press the “ESC” 
+key.  A green highlight bar should appear over that shot or receiver in the stack picker. 
+Go through all of the stacks and pick along the first arrivals.  Some useful picking tools are 
+“PickEventNearestTime,” “AddLeft,” “AddRight,” and “AddBoth” on the keyboard, as well as 
+“ControlPointAdd” using the mouse.  The delay times are updated instantaneously upon picking.  
+
+
+--- Page 17 ---
+16 
+ 
+Once the shots are picked, switch the navigation to receivers and pick those as well (TIP: it is easiest 
+to display shots by count by receivers by LineNumber). 
+ 
+ 
+ 
+ 
+Once all shots and receivers are picked, go back to the stacks icon and click the “Create stacks” 
+button again.  When the program finishes reloading the stacks, the events should now look flatter. 
+Pick all of the shots and receivers again, then create the stacks again.  At this point, the events may 
+be flat enough to move on.  If not, repeat the process again. 
+Repeat this entire process for each refractor picked in branch assignment. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 18 ---
+17 
+ 
+3. Generate Picks (optional) and Run Delay Time Analysis Sequence 
+While this step is optional if you already have picks, for the purposes of this tutorial, we will cover 
+this step. 
+In a Picker window (open one if necessary), click the “Defaults” button, then select “Prepare options 
+for delay time analysis.”  This will add some items to the interactive processing flow (which can be 
+viewed by clicking the Funnel icon on the top left), as well as set up some display options. 
+ 
+ 
+Click around the survey and confirm that the picks are acceptable: 
+ 
+ 
+Select the “Pick event nearest time” item in the flow window, then click “Start batch picker, add 
+entry to trace table” at the bottom.  This will start the autopicker. 
+ 
+ 
+
+
+--- Page 19 ---
+18 
+ 
+When the autopicker has finished running, a dialog box will pop up asking to copy the picks.  The 
+autopicker saves the picks to a trace table column called “FBP_PickT.”  In order for picks to be used 
+in analysis, the picks must be copied into a column called “FBP_User.”  Click “Open pick copy dialog” 
+on this prompt.  A new dialog box will appear: 
+ 
+ 
+The program will automatically select the columns to copy.  Confirm that they are correct and click 
+the “Copy column” button. 
+Once the program is finished copying the picks, a new dialog box will pop up, asking to reassign 
+branches and/or run the delay time analysis sequence.  It’s not necessary to reassign the branches 
+at this point.  Click “Execute standard delay time analysis sequence” to begin. 
+ 
+ 
+The program will now run the analysis sequence.  The progress of the job can be viewed while it’s 
+running: 
+ 
+
+
+--- Page 20 ---
+19 
+ 
+The standard delay time analysis sequence can also be run by going to the DelayTime menu and 
+selecting “Analysis → Default analysis sequence.” 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 21 ---
+20 
+ 
+4. Geometry and Pick QC 
+Now that the delay time analysis computations are complete, the solution can be used to QC both 
+the geometry and picks. 
+Open a Picker window, and set it to Shot Plane.  Select the navigation options (second from left 
+icon).  Change the Primary navigation order to “DTA_Error_1” – this is the delay time error term for 
+Refractor 1.  Check the “Descend” box so the program displays the larger errors first, then click 
+“Apply options.”  The shots are now ordered by highest error. 
+ 
+ 
+Navigate through shots using the list of error terms.  Fix any bad picks that are visible.  Ideally, the 
+error terms should be under 5.  However, this is not always possible. 
+Geometry errors can also be identified during this process.  Assuming all traces are picked correctly, 
+the vector plot in the top left shows the predicted geometry error from each trace.  A composite red 
+vector shows the total predicted move.  When the vectors show a strong trend such as in the image 
+below, the shot (shots are more likely to have geometry errors) is a good candidate for geometry 
+correction. 
+ 
+ 
+In order to automatically move a shot to the predicted location, the “GeomCorrection” picker key 
+command must be assigned to a key.  With the mouse cursor over the trace display panel, press the 
+GeomCorrection key to move the shot.  This operation can be undone by clicking the “Operations” 
+button and selecting “Undo geometry correction.” 
+
+
+--- Page 22 ---
+21 
+ 
+Once a shot has been moved, the traces that fall within its branch offset limits will change.  This 
+means that some traces will now be in the gather which have not yet been picked.  If this occurs, 
+pick any unpicked traces and fix any bad picks that are visible.  At this point, there may still be a 
+predicted geometry error.  Continue using the GeomCorrection key, along with fixing picks, until the 
+shot is in the correct location. 
+ 
+ 
+Once the shots have been checked (it is not practical in most cases to check all of them, so we 
+recommend just checking the ones with the largest error terms), switch the Pick Plane to Receiver, 
+and make sure the navigation order is set to “DTA_Error_1,” Descending, for the Receiver table.  Go 
+through the receivers with the largest error terms and fix any bad picks that are visible.  Generally 
+speaking, receiver geometry errors are less common, but they do occur, so keep an eye out for 
+those as well. 
+If there are multiple refractors assigned, repeat this QC process for the other refractors using 
+“DTA_Error_2,” etc. 
+Any time the picks and/or geometry are modified, the delay time analysis sequence should be run 
+again.  This can be done by going to the DelayTime menu and selecting “Analysis → Default analysis 
+sequence.” 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 23 ---
+22 
+ 
+5. Delay Time Model Building 
+The delay time information can now be used to construct a model of the near-surface.  Go to the 
+DelayTime menu and select “Model building window.” 
+ 
+ 
+Click the “Shortcut” button.  It will handle everything automatically with only a small amount of 
+parameterization.  A dialog box will pop up.  Enter the desired value for the weathering velocity.  
+This needs to be lower than the first refractor velocity, which can be viewed in the 
+“DTA_Velocity_1” column in the database.  The basemap can be colored using this value.  The 
+refractor smoothing radius can also be set; a lower value results in less smoothing, although the 
+default is recommended. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 24 ---
+23 
+ 
+6. Delay Time Statics Computation 
+In the Delay Time Model Building window from the previous step, click the “Compute statics” 
+button.  A dialog box will appear. 
+On the first page, enter a name for this set of statics.  The program will show the database column 
+name where it will be saved. 
+The next page will display the minimum and maximum values for the elevations of the surface and 
+all refractors.  Specify an intermediate datum.  The intermediate datum should be set just below the 
+bottom-most refractor. 
+ 
+ 
+The page after this displays the elevations from the prior page as well as refractor velocities.  Specify 
+the final datum and replacement velocity.  These values should be provided by the client. 
+On the fourth page, select the method of calculating the traveltime to the intermediate datum.  The 
+differences between the methods are explained in the dialog box.  There is only one case where 
+there is an actual difference in the result, and it’s not necessary to overthink this step. 
+On the final stage, specify whether to bulk shift the statics – this is useful for comparing statics, and 
+is covered in the Stack QC tutorial.  Please note: for production statics, do not bulk shift using this 
+step. 
+The statics values will be saved to the Shot and Receiver database tables. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 25 ---
+24 
+ 
+VNS Tomography 
+Tomography uses a node-based approach to model the near surface.  Typically, these nodes are evenly 
+spaced in depth.  However, Flatirons™ contains both a standard (evenly spaced) as well as variable 
+spaced tomography module.  This tutorial focuses on the variable node spacing (VNS) tomography.  
+ 
+Preparation 
+Tomography requires that good, accurate first break picks be available.  The more offsets covered by 
+these picks, the better the expected result – however, the priority should be accuracy in the near 
+offsets, as these picks are treated as more important by the algorithm. 
+For the purposes of this tutorial, we will assume that first break picks have already been generated. 
+To open the VNS Tomography window, go to the TomoVNS menu, and select “Variable node spacing 
+(VNS) tomography.” 
+ 
+ 
+Summary of Workflow: 
+Create coarse model 
+Update coarse model 
+QC coarse model 
+Create fine model 
+Update fine model 
+QC fine model 
+Repeat above as needed 
+Compute statics 
+(optional) Export velocity field to SEG-Y 
+ 
+ 
+
+
+--- Page 26 ---
+25 
+ 
+1. Create Coarse Model 
+To create a new model, click the “New model” button on the left panel.   A dialog box will appear. 
+ 
+Set the angle of the grid by dragging a line on the map.  The purpose of this is to minimize the 
+amount of unused space in the model, so it’s advisable to line the grid up with the survey. 
+Set the horizontal grid spacing for the model, and give it a name.  A good starting point for a coarse 
+model is between 150 and 250 feet (40 to 80 meters).  The coarser the model, the faster it will run, 
+and the first models should be fast. 
+Set the vertical grid spacing at the surface and at max depth.  This is the key to VNS.  The grid 
+spacing is finer near the surface, where velocities are expected to change more rapidly, but coarser 
+near the base of the model, where velocities are expected to change less rapidly. 
+Set the initial velocity at the surface and max depth, and select how the velocity is calculated at each 
+node – using elevation or depth. 
+If this is a marine streamer or OBC survey, check the “Marine survey” box and set the water velocity.  
+Note that the Shot and Receiver tables must have valid “WaterDepth” columns in order to use this 
+option. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 27 ---
+26 
+ 
+2. Update Coarse Model 
+Select the Update tab (second from left). 
+ 
+Set the minimum and maximum offsets used to update the model.  Recall that the near offsets are 
+the most important for tomography. 
+Select the number of iterations to run.  Since this is the first model, it is advisable to run less 
+iterations at first, to avoid wasting time if the parameters are not good.  The number of iterations 
+can be increased as the process is repeated. 
+The default smoothing radius and weight values should be used. 
+Select which pick version to use. 
+Picks should not be shifted unless there is a specific reason to do so. 
+Set the number of threads to use – more threads is faster; the maximum number is limited to twice 
+the number of processor cores available on the CPU.  If a value larger than the maximum is used, it 
+will default to the maximum. 
+Set the accuracy value – this may result in a marginal benefit but at the cost of a great deal of extra 
+time.  We recommend always using 2 unless time is not an issue. 
+Once parameters are acceptable, click “Start batch update” to begin updating the model. 
+This may take some time depending on the number of picks and the size of the model. 
+ 
+ 
+ 
+ 
+
+
+--- Page 28 ---
+27 
+ 
+3. QC Coarse Model 
+There are several options available for to QC tomography models.  They will be covered here.  These 
+QC methods should be used for the initial coarse model along with any finer models that are created 
+and updated hereafter. 
+ 
+Profile View 
+In the TomoVNS window, select the Model tab on the left panel and the Profile tab in the middle 
+panel. 
+Click and drag a line across the basemap in the bottom left.  A 2D depth view of the profile will be 
+displayed in the main panel.  The top plot is the velocity model.  The bottom plot is the node hit 
+count, or how many times a ray was traced through that node.  A larger hit count means that a node 
+has been updated more by the algorithm.  It gives an idea of far down the traces are traveling 
+through the model. 
+ 
+ 
+Error Term 
+Select the “History” tab on the left.  You may need to click the “Reload history” button. 
+The average error (in milliseconds) in each iteration is listed.  When a model has converged to a 
+solution, the change in error between iterations should be fairly small. 
+ 
+Picker Window 
+In a Picker window, click the Defaults button and select “Prepare options for TomoVNS analysis.”  
+This will set up the processing flow to apply VNS model time shifts to the traces. 
+The model currently selected in the TomoVNS window will be used to compute these time shifts. 
+If the model is perfectly correct, the gathers should be completely flat, with the picks all on zero 
+time. 
+Select different locations on the basemap and determine the quality of the model based on how 
+well they flatten gathers. 
+
+
+--- Page 29 ---
+28 
+ 
+ 
+ 
+TomoVNS Stack Picker 
+Go to the TomoVNS menu and select “Shot and receiver stacks using TomoVNS solution” 
+Make sure the correct model is selected in the TomoVNS window before creating stacks. 
+These work much like the Delay Time stacks, but uses the TomoVNS model time shifts instead of 
+delay times.  However, unlike the Delay Time stacks, you cannot iteratively pick and restack these.  
+These stacks may only be picked once to generate a residual error term. 
+This is primarily a visual QC tool, much like the Picker window option.  A better solution will create 
+flatter stacks. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 30 ---
+29 
+ 
+4. Create, Update, and QC Finer Models 
+Repeat the above process, but using finer node spacings.  If the models are not converging, increase 
+the number of iterations run.  It may require creating and updating several models before an 
+acceptable solution is found. 
+ 
+5. Common Mistakes 
+Refer to the following model: 
+ 
+Note the bottom of the hit count display – the rays are going all the way to the bottom of the 
+model.  There is no way of knowing if they should go even lower, because the model is not deep 
+enough.  In this case, a new model must be created with a greater depth. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 31 ---
+30 
+ 
+6. Compute TomoVNS Statics 
+Select the Statics tab.  All parameters for statics computation are edited on this page. 
+ 
+Refer to the node hit count chart on the profile. 
+If there are no rays updating the bottom part of the model, that part of the model should not be 
+used for computing statics, because it has not bee updated – it’s simply the starting velocity model.  
+The “Highlight intermediate datum” checkbox may be selected to display the selected datum on the 
+profile. 
+Refer to the below image.  In this example, the intermediate datum should be set around an 
+elevation of -850 or -900, where the orange line is drawn: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 32 ---
+31 
+ 
+7. Export velocity field to SEG-Y (optional) 
+It may sometimes be desirable to export the TomoVNS velocity field to an interval velocity model in 
+SEG-Y form.  This may be done in the Extra tab. 
+ 
+Set the elevation at the top and bottom datums to define the bounds of the exported model.  Also 
+set the sample interval. 
+Both the velocity and node counts may be exported. 
+There are three options for the output grid: 
+- 
+The tomography grid (x and y spacing defined at model creation) 
+- 
+The project grid (uses the internal Inline and Crossline values in the project) 
+- 
+User defined grid (a dialog box will appear asking for a three corner grid definition) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 33 ---
+32 
+ 
+Stack QC (Statics QC) 
+The QC menu contains options for statics QC using internally generated stacks.  This allows the user to 
+QC statics solutions before importing them into other processing software. 
+Summary of Workflow: 
+Pick stacking velocity field 
+Create profile lines and stacks along profiles 
+Compare stacks 
+ 
+1. Stacking Velocity Picker 
+From the “QC” menu, select “Stacking velocity picker”.  This will open a window for picking a rough 
+velocity model for QC purposes. 
+Please note that this is not intended to be a full-featured velocity picking tool.  It is only used for a 
+very rough approximation purely for internal QC. 
+First, apply a refraction statics solution.  Click on the processing funnel icon, then click the plus sign, 
+and select Shift T0 → Apply refraction statics.  Select the preferred statics solution from the drop 
+down selector under the processing flow, then click “Apply processing sequence.” 
+ 
+In the velocity picker, select a location to pick velocities by clicking on the basemap.  Precomputed 
+CMP gathers may be used. 
+ 
+
+
+--- Page 34 ---
+33 
+ 
+The “heat map” display shows the velocities that should be picked, with velocity plotted against 
+time.  Click on a spot in order to pick that velocity.  Velocities should increase with depth/time.  If 
+the surface velocity is known, a pick near zero time at that velocity may help the coherence of the 
+stacks. 
+Pick several locations.  Some locations will not show a coherent semblance anywhere; if that is the 
+case try to pick a nearby location.  Make sure to pick velocities in locations that are known to have 
+geological differences, if possible. 
+There is no need to save or do anything else once the velocities have been picked; all picks are saved 
+as soon as they are made. 
+ 
+ 
+ 
+ 
+2. Create Profile Lines and Stacks along Profiles 
+From the QC menu, select “View stacks along profile.”  This will open the stack profile 
+creation/comparison window. 
+In the first tab of this window, “Profile creation/selection,” click the box to “create a new profile: left 
+click and drag.”  Then select the profile by using the mouse on the basemap. 
+ 
+A dialog box will pop up asking for parameters.  Click “Create new profile” to start.  If processing a 
+crooked or turning 2D line as a 3D project, check the box to “snap all traces to the profile line.”  Do 
+not do this for actual 3D surveys. 
+Once a profile has been created, move to the second tab in the profile menu, “Create/view stacks 
+along profile.”  Click the bars icon (second from the left). 
+The stack creation options are here.  Note the “Statics column” field.  Stacks may be created with 
+any statics solution, or with no statics applied. 
+
+
+--- Page 35 ---
+34 
+ 
+ 
+First create a stack with no statics applied to serve as a point of comparison.  It may also be 
+informative to create a stack with elevation statics applied. 
+Next, create stacks with any statics solutions to be compared.  Stacks do not need to be created for 
+statics solutions that will not be compared or used. 
+Note: we recommend that for comparison stacks, statics tied to the same average value (generally 
+tied to the elevation statics field) be used.  Clean statics (not bulk-shifted for comparison) can be 
+recomputed after the comparisons are complete. 
+ 
+ 
+ 
+3. Compare statics 
+The third tab in this window, “Additional stack comparison options,” provides the display 
+functionality for stack QC. 
+First, click the button to “Reload list of stacks.”  Since stacks have just been created, they need to be 
+loaded into this window. 
+Next, select the two stacks to compare.  “Left” and “right” refer to the secondary option for display 
+(side-by-side) which is covered below. 
+The first option for comparison is to toggle between the two stacks.  Click the button to switch 
+between them. 
+The second option allows the user to display both using a sweeping cursor.  The left stack is 
+displayed to the left of the mouse cursor and the right stack is displayed to the right. 
+ 
+
+
+--- Page 36 ---
+35 
+ 
+Greyscale is available if the default color scheme is not preferred. 
+This is primarily a visual comparison.  Look for the coherence of events below the surface to judge 
+the quality of the statics solutions. 
+Refraction statics stacks should be compared to one another as well as to the elevation statics and 
+“no statics” stacks. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 37 ---
+36 
+ 
+Database 
+The refraction database contains all of the geometry information for the project.  By default, this 
+consists of the Shot and Receiver tables.  Additional tables may be imported, but that will not be 
+covered in this tutorial; other tutorials are available that cover additional table import.  Please note that 
+the Trace table is not contained in this database – it’s stored in a binary file and does not have the 
+functionality described in this tutorial. 
+The Shot and Receiver tables are both open by default.  If they are closed, they can be reopened by 
+going to the Database menu and selecting “Shot table” or “Receiver table.” 
+ 
+The database is modified and displayed using SQL commands; however, the display functionality may by 
+controlled by simply using the mouse and selecting options. 
+Select columns to display, then click on the “Run query” button in order to show the selected columns.  
+Clicking on the header of a column will sort the table using the data in that column.  Click again to switch 
+between value ascending and value descending for the sort. 
+Additional options are found in the bottom left corner.  To add a column to the database, click the “Add 
+column” button to bring up a dialog box.  Columns may be added to either or both the Shot and 
+Receiver tables. 
+The “Column modifications” button has a number of other database tools. 
+Overview: 
+Column math 
+Interpolating columns 
+Statics export 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+--- Page 38 ---
+37 
+ 
+Column Math 
+The column math dialog box is used to run SQL commands directly on the database in order to 
+modify its contents.  To open this dialog, click the “Column modifications” button in the bottom left 
+and select “Open column math dialog.” 
+ 
+Example statements are listed.  User-defined statements may be saved for later use.  Once the 
+command has been typed in, select the Shot/Receiver checkboxes to mark which databases to 
+modify.  Click the button to run the SQL modification. 
+ 
+Interpolating Columns 
+There are several different options available for interpolating data between columns.  All of them 
+are available from the “Column modifications” button. 
+ 
+ 
+Exporting Statics and Other Information 
+In order to export information from the database, first select the columns to export, then click “Run 
+query” in the main database window.  Once the columns are displayed, click the “Export options” 
+button in the bottom left corner, then select the desired output format.  CSV uses commas, and 
+column-delimited uses spaces. 
+A dialog box will appear simply asking for the file location to save.  Please note, this process only 
+exports the table that’s selected (Shot or Receiver), so it must be done for both tables. 

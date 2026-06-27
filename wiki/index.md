@@ -26,6 +26,11 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Radon transform](concepts/radon_transform.md) | Transform data to ray-parameter domain for filtering and deconvolution | draft |
 | [Surface-consistent deconvolution](concepts/surface_consistent_deconvolution.md) | Separating source/receiver coupling and near-surface effects | draft |
 | [Wiener filter](concepts/wiener_filter.md) | Optimal least-squares shaping filter and normal equations | draft |
+| [Seismic data processing](concepts/seismic_data_processing.md) | Overview, goals, and typical processing flow | draft |
+| [Seismic acquisition](concepts/seismic_acquisition.md) | 2D acquisition essentials, CMP method, parameters | draft |
+| [Common midpoint (CMP)](concepts/common_midpoint.md) | CMP/CDP gather, fold, stacking | draft |
+| [Seismic data sorts](concepts/seismic_data_sorts.md) | Shot, receiver, CMP, offset gathers and their uses | draft |
+| [Seismic data formats](concepts/seismic_data_formats.md) | SEGY, SEGD, SPS, UKOOA and data loading | draft |
 
 ## Techniques
 
@@ -43,6 +48,12 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Hatton, Worthington & Makin (1986)](sources/hatton_worthington_makin_1986_seismic_data_processing.md) | Seismic Data Processing: Theory and Practice | textbook | reviewed |
 | [Margrave (2006)](sources/margrave_2006_methods_of_seismic_data_processing.md) | Methods of Seismic Data Processing — lecture notes | lecture notes | reviewed |
 | [Yilmaz (2001) Vol. 1](sources/yilmaz_2001_seismic_data_analysis_deconvolution.md) | Seismic Data Analysis — deconvolution chapter | textbook | reviewed |
+| [Hill & Rüger (2020)](sources/hill_ruger_2020_illustrated_seismic_processing_preimaging.md) | Illustrated Seismic Processing, Vol. 2: Preimaging | textbook | summarized |
+| [CGG ODT01 Part 1](sources/cgg_odt01_data_analysis_part1.md) | Data Analysis Part 1: recorded wavefield, shot and CMP gathers | training slides | summarized |
+| [CGG ODT01 Part 2](sources/cgg_odt01_data_analysis_part2.md) | Data Analysis Part 2: 2D/3D geometry, sorts, aliasing, noise/multiples | training slides | summarized |
+| [SEG-Y rev 2.0](sources/seg_y_rev2_format.md) | SEG-Y rev 2.0 Data Exchange format | technical standard | draft |
+| [SEG SPS rev 2.1](sources/seg_sps_format_rev21.md) | Shell Processing Support format for 3D surveys | technical standard | draft |
+| [Vermeer (2012)](sources/vermeer_2012_3d_seismic_survey_design.md) | 3D Seismic Survey Design, 2nd ed. | textbook | draft |
 
 ## Comparisons
 
@@ -54,6 +65,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 
 | Page | Lecture | Status |
 |------|---------|--------|
+| [Term 1 Lecture 1 — Introduction to seismic data processing](lecture_ready/term01_lec01_introduction_to_seismic_processing.md) | term01_lec01 | lecture-ready |
 | [Term 1 Lecture 6 — Single-channel deconvolution](lecture_ready/term01_lec06_single_channel_deconvolution.md) | term01_lec06 | draft |
 | [Term 1 Lecture 7 — Surface-consistent deconvolution](lecture_ready/term01_lec07_surface_consistent_deconvolution.md) | term01_lec07 | draft |
 

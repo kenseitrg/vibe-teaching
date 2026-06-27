@@ -186,7 +186,7 @@ Desktop.ini
 *.zip
 *.djvu
 *.djv
-
+*.odt
 # Ignore locally extracted raw text from source documents (can be regenerated).
 wiki/sources/_raw_text/
 

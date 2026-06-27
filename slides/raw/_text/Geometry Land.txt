@@ -1,0 +1,10 @@
+--- Page 1 ---
+PARAMETER SET: Edit Traces (EDIT_TRCS)
+TableExample:
+< EDIT_TYPE     <FIRST_SHOT_SEQ_NUM     LAST_SHOT_SEQ_NUM     FIRST_TRC_NUM     LAST_TRC_NUM>
+KILL           110                    124                   1                   4
+REVERSE        129                    149                   1                 120
+>
+Land Geometry (GEOMETRY_LAND) 1
+Schlumberger Private – Customer Use
+July 2020

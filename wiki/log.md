@@ -140,10 +140,68 @@ Created initial concept pages:
 - All 4 rendered to PDF successfully.
 - Code comments kept in English (XeLaTeX monospace font lacks Cyrillic).
 
-## [2026-06-24] todo | Remaining work
+## [2026-06-27] ingest | Term 1 Lecture 1 — introduction sources
+
+Extracted raw text to `wiki/sources/_raw_text/`:
+
+- `ODT01A_DATA_ANALYSIS_PART1_v8.2.txt`
+- `ODT01A_DATA_ANALYSIS_PART2_v8.3.txt`
+- `Methods of Seismic Data Processing.txt` (pages 1–40, Chapter 1)
+- `Geometry Land.txt` (minimal content — 6 kB single slide)
+- `SEG-Yrev2Release.txt`
+- `SEG SPS Format rev 2.1.txt`
+- `Steve J Hill - Introduction to Seismic Processing.txt`
+
+Created source summaries:
+
+- `wiki/sources/hill_ruger_2020_illustrated_seismic_processing_preimaging.md`
+- `wiki/sources/cgg_odt01_data_analysis_part1.md`
+- `wiki/sources/cgg_odt01_data_analysis_part2.md`
+- `wiki/sources/seg_y_rev2_format.md`
+- `wiki/sources/seg_sps_format_rev21.md`
+- `wiki/sources/vermeer_2012_3d_seismic_survey_design.md`
+
+Updated source summary:
+
+- `wiki/sources/margrave_2006_methods_of_seismic_data_processing.md` (added Chapter 1 big-picture relevance)
+
+Created concept pages:
+
+- `wiki/concepts/seismic_data_processing.md`
+- `wiki/concepts/seismic_acquisition.md`
+- `wiki/concepts/common_midpoint.md`
+- `wiki/concepts/seismic_data_sorts.md`
+- `wiki/concepts/seismic_data_formats.md`
+
+Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term01_lec01`.
+
+## [2026-06-27] lecture | Term 1 Lecture 1 — English notes, Russian translation, figures, outline, exercises
+
+- Finalized outline: `lecture_notes/_drafts/term01_lec01_introduction_to_seismic_processing_outline.md`.
+- Dispatched worker subagents to create 9 self-contained Python figure scripts in `scripts/figures/term01_lec01/`:
+  - `plot_exploration_workflow.py`
+  - `plot_idealized_vs_recorded_trace.py`
+  - `plot_distortions_overview.py`
+  - `plot_kinematic_vs_dynamic.py`
+  - `plot_processing_flow.py` (rewritten for clean layout)
+  - `plot_2d_acquisition_geometry.py`
+  - `plot_cmp_gather_stack.py`
+  - `plot_data_sorts.py`
+  - `plot_segy_structure.py` (contrast fixed)
+- Generated PNGs in `figures/term01_lec01/`.
+- Wrote English lecture notes: `lecture_notes/en/term01_lec01_introduction_to_seismic_processing.en.md`.
+- Rendered English PDF successfully.
+- Dispatched worker subagent to translate notes to Russian: `lecture_notes/ru/term01_lec01_introduction_to_seismic_processing.ru.md`.
+- Rendered Russian PDF successfully.
+- Created slide outline: `slides/term01/lec01_introduction_to_seismic_processing/slide_outline.md`.
+- Created exercises: `exercises/term01_lec01_introduction_to_seismic_processing.md`.
+- Updated lecture-ready page status to `lecture-ready` and refreshed `wiki/index.md`.
+
+## [2026-06-27] todo | Remaining work
 
 - Add FX-deconvolution, robust deconvolution, and MBWP source summaries.
 - Build comparison page: predictive vs. surface-consistent deconvolution.
-- Review English notes with instructor and adjust content/timing as needed.
-- Optionally build final PowerPoint slides from outlines.
-- Translate exercises and slide outlines to Russian.
+- Review English notes for term01_lec06/lec07 with instructor and adjust content/timing as needed.
+- Optionally build final PowerPoint slides for term01_lec06/lec07 from outlines.
+- Translate exercises and slide outlines for term01_lec06/lec07 to Russian.
+- Optionally assemble the PowerPoint deck for term01_lec01 from the slide outline.

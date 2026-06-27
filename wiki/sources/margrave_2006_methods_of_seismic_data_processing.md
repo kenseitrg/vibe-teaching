@@ -5,30 +5,42 @@ type: lecture notes
 source_file: papers/textbooks/Methods of Seismic Data Processing.pdf
 pages: 410
 concepts:
+  - seismic_data_processing
   - deconvolution
   - minimum_phase
   - wiener_filter
   - predictive_deconvolution
   - convolutional_model
   - surface_consistent_deconvolution
-tags: [deconvolution, convolutional-model, minimum-phase, wiener-filter, predictive-decon, q-attenuation, lecture-notes]
+tags: [seismic-processing, deconvolution, convolutional-model, minimum-phase, wiener-filter, predictive-decon, q-attenuation, lecture-notes]
 ---
 
 # Margrave (2006) — Methods of Seismic Data Processing
 
 Course lecture notes for Geophysics 557/657, University of Calgary, Winter 2006.
 Extracted pages 125–205 cover minimum phase, the convolutional model, and deconvolution.
+Chapter 1 (pages 1-2 of the notes) provides a high-level “big picture” useful for an introductory lecture.
 
 ## Relevant chapters / sections
 
 | Section | Pages | Topic |
 |---------|-------|-------|
+| 1-1 to 1-2 | 6–9 | The big picture: imaging vs deconvolution, inverse problems, bandlimited reflectivity |
 | 3-14 to 3-18 | 125–129 | Constant-Q attenuation; non-stationary wavelet |
 | 3-18 to 3-26 | 129–137 | Minimum phase: intuitive, Hilbert transform, partial energy, dispersion |
 | 4-1 to 4-5 | 145–149 | Bandlimited reflectivity; convolutional model and simplifying assumptions |
 | 4-? | ~149– | Frequency-domain spiking deconvolution; Wiener spiking deconvolution; gapped predictive deconvolution; Burg deconvolution |
 
 ## Key takeaways
+
+### The big picture (introductory view)
+- Seismic data processing does **not** undo all physical effects exactly; we are limited by ignorance of the subsurface.
+- The problem is an **inverse problem**: to undo wave propagation we need to know the very subsurface properties we hope to discover.
+- We therefore subdivide, approximate, and compartmentalize the problem into solvable pieces.
+- Two broad families of processes:
+  - **Imaging processes** place energy at the correct spatial position (NMO, CMP stack, migration).
+  - **Deconvolution processes** remove the illuminating wavelet and improve resolution (gain recovery, statistical deconvolution, inverse-Q filtering, wavelet processing).
+- The simplest usable model is the **convolutional model**: trace ≈ wavelet convolved with reflectivity.
 
 ### Convolutional model
 - Ultimate goal: recover the earth's reflectivity as a function of position.

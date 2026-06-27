@@ -1,0 +1,218 @@
+--- Page 1 ---
+TPG4190 Seismic data acquisition and processing
+Deconvolution
+B. Arntsen
+NTNU
+Department of Geoscience and petroleum
+borge.arntsen@ntnu.no
+Trondheim fall 2025
+
+
+--- Page 2 ---
+Contents
+▶4.1 The convolutional model for seismic data
+▶4.2 Deconvolution
+▶4.3 Bandwidth and resolution
+
+
+--- Page 3 ---
+Convolutional model
+Figure: Layered earth model
+
+
+--- Page 4 ---
+Convolutional model
+▶vertical propagation
+Reflected signal
+a(t) = r0
+s(t −ϕ0)
+2d0
+.
+(1)
+▶ϕ0 = 2d0/c0: two-way traveltime
+▶r0 : reflection coefficient
+▶d0 : layer thickness
+
+
+--- Page 5 ---
+Convolutional model
+Reflection coefficient defined by
+r0 = c1ρ1 −c0ρ0
+c1ρ1 + c0ρ0
+.
+(2)
+▶c0, c1: Wave velocity
+▶ρ0, ρ1: Density
+
+
+--- Page 6 ---
+Convolutional model
+▶Signal recorded at the surface:
+a(t) = r0
+s(t −ϕ0)
+2d0
++ r1
+s[t −(ϕ0 + ϕ1)]
+2d0 + 2d1
+,
+(3)
+
+
+--- Page 7 ---
+Convolutional model
+▶Neglect spherical spreading
+▶General model
+a(t) =
+N
+X
+k=0
+rks(t −τk),
+(4)
+▶τk = Pk
+l=0 ϕl two way traveltime to interface no k.
+
+
+--- Page 8 ---
+Convolutional model
+▶τk = k∆t.
+ak =
+N
+X
+l=0
+rlsk−l,
+(5)
+ak = a(t = k∆t),
+sk = s(t = k∆t).
+(6)
+Continuous case:
+a(t) =
+Z +∞
+τ=0
+r(τ)s(t −τ),
+(7)
+
+
+--- Page 9 ---
+Convolutional model
+▶Vertical wave propagation
+▶Neglect vertical spreading
+▶Only primary reflections
+▶Earth is a linear filter
+▶r(t) Earth’s impulse response
+
+
+--- Page 10 ---
+Deconvolution
+▶Convolutional model for
+seismic waves
+y(t) = r(t) ∗s(t),
+(8)
+▶s(t): seismic source
+▶r(t): reflectivity
+
+
+--- Page 11 ---
+Deconvolution
+▶Recover r(t) when
+▶s(t) given
+▶y(t) given
+
+
+--- Page 12 ---
+Spiking deconvolution
+▶Fourier transformation of (8)
+Y (f ) = R(f )S(f )
+(9)
+▶Solution
+R(f ) = Y (f )
+S(f ) .
+(10)
+
+
+--- Page 13 ---
+Deconvolution
+▶Equation (10) slightly reformulated
+R(f ) = S−1(f )Y (f ),
+(11)
+▶S−1 = 1/S(f ): inverse filter.
+▶S−1 removes the source
+▶recovers reflection coefficients
+
+
+--- Page 14 ---
+Deconvolution
+Figure: Spiking decon
+The spectrum of a Ricker pulse and it’s inverse
+
+
+--- Page 15 ---
+Deconvolution
+Figure: Deconvolution spectrum
+The spectrum of the input data |G(f )| and the deconvolved output
+|R(f )|.
+
+
+--- Page 16 ---
+Deconvolution
+Figure: Deconvolution
+
+
+--- Page 17 ---
+Deconvolution
+▶Real seismic data contains noise
+Y (f ) = R(f )S(f ) + N(f ),
+(12)
+▶N(f ) : White (random) noise
+R(f ) = S−1(f )Y (f ) −S−1(f )N(f ).
+(13)
+
+
+--- Page 18 ---
+Deconvolution
+S−1(f ) modified:
+S−1(f ) =
+S∗(f )
+|S(f )|2 + ϵ,
+(14)
+whereϵ is a small constant.
+Inserting equation (14) into equation (13):
+R(f ) =
+S∗(f )
+|S(f )|2 + ϵY (f ) −
+S∗(f )
+|S(f )|2 + ϵN(f ).
+(15)
+Increase ϵ to become much larger than |s(f )|2
+R(f ) ≈
+1
+ϵ
+
+S∗(f )[Y (f ) −N(f )].
+(16)
+match-filtering is a stable approach for deconvolution.
+
+
+--- Page 19 ---
+Deconvolution
+Figure: The spectrum of the input data with added noise |Y (f ) + N(f )|
+and the deconvolved output |R(f )| (gray line).
+
+
+--- Page 20 ---
+Deconvolution
+Figure: The input seismic data with added noise is shown in the lower
+trace, while the ouput of a spiking deconvolution filter applied to the
+input data is shown in the upper trace.
+
+
+--- Page 21 ---
+Deconvolution
+Figure: The spectrum of the input data with added noise |Y (f ) + N(f )|
+and the stabilized deconvolved output |R(f )| (gray line).
+
+
+--- Page 22 ---
+Deconvolution
+Figure: The input seismic data is shown in the lower trace, while the
+ouput of a match filter applied to the input data is shown in the upper
+trace.

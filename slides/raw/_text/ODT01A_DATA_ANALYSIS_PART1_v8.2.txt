@@ -1,0 +1,1570 @@
+--- Slide 1 ---
+V8.0   01Aprr2018
+WARNING –STRICTLY INTERNAL USE ONLY
+ UK Internal Training document - Assume no show-rights for any images – Do not keep copies
+UK Training ODT01
+Data Analysis – Part1
+
+--- Slide 2 ---
+All information in this training document should be considered STRICTLY FOR INTERNAL USE ONLY and should not be used for any training purposes where external candidates may be present. 
+
+All images in the presentation should be considered NOT to have show rights.
+
+These presentation are available through QED so there is no need to keep individual copies of these documents, especially as these documents will be continually updated. 
+
+If you download a copy of this presentation it is your responsibility to communicate this information to anyone who may see said copy of this document.
+
+If in any doubt over the usage or content of this training information, please contact the DLUKGeophysicalSupportGroup@CGGVeritas.com  or add a comment to the corresponding QED workflow page.
+2
+Please read
+
+--- Slide 3 ---
+There are notes associated with this presentation, which whilst not required to view the presentation may provide further information on some of the slides. 
+
+If you would like to view the notes whilst still having access to the animation within the presentation  follow these quick steps;
+
+
+
+
+
+
+
+
+Your view should now look like this, 
+	with the speaker notes visible on the
+	right hand side of the window.
+3
+Notes accompanying slides.
+Go to the Slide Show menu 
+Check the ‘Use Presenter View’ check box. 
+Under the option ‘Show presentation On’ Select a monitor other than your primary monitor. 
+Now enter slide show mode F5 .
+
+--- Slide 4 ---
+4
+Contents
+§1 - Introduction : what do we mean by data analysis?
+§2 - What do we record?
+§3 - Some Basic Geophysics
+§4 - The recorded wave-field
+§5 - Shot point data
+§6 - The CMP domain/gather
+§7 - 2d and 3d geometry
+§8 - Other processing (sorting) domains / gathers
+§9 - Introduction to Spatial Aliasing
+§10 -Other QC domains for mapping the data
+§11 -Introduction to Noise
+§12 -Introduction to Multiple
+§13 -Tools for data analysis
+§14 –Conclusion
+
+--- Slide 5 ---
+§1 Introduction what do we mean by data analysis?
+5
+
+--- Slide 6 ---
+6
+What is quality?
+Quality of service is intrinsic to the quality of the final product.
+Our VisionTo be the geoscience partner of choice
+
+--- Slide 7 ---
+7
+What is quality?
+Our VisionTo be the geoscience partner of choice
+“Quality is measured by customer expectation.”
+Essentials of quality management.
+“Quality is consistently meeting or exceeding customer expectations.”
+Essentials of quality management.
+Managing client expectation is intrinsic to the quality of the service we offer.
+
+--- Slide 8 ---
+Why do we mean by data analysis?
+
+--- Slide 9 ---
+Why do we mean by data analysis?
+We always start with analysing the problem….
+
+--- Slide 10 ---
+Why do we mean by data analysis?
+and every production step ends with analysing our QCs….
+
+--- Slide 11 ---
+Why do we mean by data analysis?
+
+--- Slide 12 ---
+CGG SI Ambitions
+12
+We impress all of the stakeholders of every project, every time
+We deliver excellent projects in high-end imaging
+We always find a way to do things better than the previous time
+We passionately develop new technical solutions
+We meet or exceed our clients expectations every time
+We do not compete on price for commodity processing
+We are identified as 
+the innovation and excellence driven company in the industry
+
+--- Slide 13 ---
+13
+Why do we mean by data analysis?
+The ‘black box’ stage can be the natural first steps of learning any process.  
+It is possible to become a productive geophysicist by just doing this; knowing how to change parameters to get the desired effect.  But what then if our software or the technology changes?
+To move to the next level we need to be able to understand the cause. What mechanism caused what we are seeing; why does changing this parameter cause this to happen?
+
+--- Slide 14 ---
+§2 What do we record?
+14
+
+--- Slide 15 ---
+15
+What do we record?
+
+--- Slide 16 ---
+16
+What do we record?
+What  do we put into the earth ?
+?
+
+--- Slide 17 ---
+17
+What do we record?
+Seismic records
+Initial Seismic signal
+Primary reflections/diffractions
+Noise
+Multiples
+SAMPLING EFFECTS
+Temporal and spatial
+KINEMATIC EFFECTS
+Statics, DMO, NMO, Migration
+DYNAMIC EFFECTS
+Attenuation
+AQUISITION ISSUES
+Instrument/ Positioning /Timing errors
+
+--- Slide 18 ---
+18
+What do we record?
+We start with this image of a shotpoint. Does this look simple or complex to you?
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 19 ---
+§3 Some basicsKinematics and Dynamics
+19
+
+--- Slide 20 ---
+depth
+offset
+t
+ime
+Diffraction curve (.xls)
+20
+Reflection times from a diffracting point
+Any discontinuity in the data results in the scattering of seismic energy, creating “diffractions”.  The diffracting point acts as a secondary point source;  energy propagating as wavefronts back to each receiver at the surface.
+
+Diffractions will occur at any discontinuity.  It could be an abrupt change like a fault or a larger scale feature like a channel or syncline feature or the opposite such as a salt dome.
+V
+How would the diffraction curve change if the layer….
+was faster?
+was slower?
+had a velocity gradient from left to right?
+had a localized speed up under the shot location?
+Had a localized speed up under one of the receiver locations?
+(x,z)
+For a constant velocity this is a perfect hyperbolae. Assuming a constant velocity V, how by looking at the data would we work out…
+The spatial location of the diffracting point? 
+The depth of the diffracting point?
+
+--- Slide 21 ---
+depth
+21
+Superposition principle
+We need to have a natural feel for what happens to diffractions.  The superposition principle tells us from what happens with single diffractions, we can infer what happen to continuous events.
+
+--- Slide 22 ---
+depth
+22
+Superposition principle
+We need to have a natural feel for what happens to diffractions.  The superposition principle tells us from what happens with single diffractions, we can infer what happen to continuous events.
+
+--- Slide 23 ---
+depth
+23
+Superposition principle
+We need to have a natural feel for what happens to diffractions.  The superposition principle tells us from what happens with single diffractions, we can infer what happen to continuous events.
+
+--- Slide 24 ---
+depth
+24
+Superposition principle
+We need to have a natural feel for what happens to diffractions.  The superposition principle tells us from what happens with single diffractions, we can infer what happen to continuous events.
+
+--- Slide 25 ---
+25
+Superposition principle
+We need to have a natural feel for what happens to diffractions.  The superposition principle tells us from what happens with single diffractions, we can infer what happen to continuous events.
+
+--- Slide 26 ---
+The earth can be seen as an infinite number of diffracting points. All the diffractions superimpose  to give the image we see,   Where there are discontinuities in the reflection model the diffractions do not cancel and we see the recorded diffraction curves.
+26
+Superposition principle
+depth
+
+--- Slide 27 ---
+27
+Huygens–Fresnel principle
+depth
+What we know as Huygens’ principle, stated that each point on the wavefront can be regarded as the source of a subsequent wave. Destructive interference destroys the subsequent waves except along the common tangent producing a new wavefront.
+
+--- Slide 28 ---
+This is the basis for wavefield propagation.  If we know the seismic image at a snap shot time T and we know the velocity field, then with enough computer power we can predict the seismic wavefield at time T + dT or indeed T - dT.
+28
+Huygens–Fresnel principle
+depth
+
+--- Slide 29 ---
+depth
+29
+Superposition principle
+The Huygens-Fresnel principle also predicted regular reflections from dipping continuous events.
+
+--- Slide 30 ---
+depth
+30
+Superposition principle
+As well as the diffraction at the edges of the event
+
+--- Slide 31 ---
+depth
+31
+Superposition principle
+The regular reflection can be defined by the rays that follows Snell’s law and the basic law of reflection incidence angle = reflection angle.  Also known as the specular ray / specular reflection.
+
+--- Slide 32 ---
+depth
+32
+Superposition principle
+Whereas the other rays that cancel each out are  non-specular rays or  diffuse reflection.  These non-specular rays are really important to understand when it comes to topics like SRME demultiple where we estimate the specular regular reflection of the multiple by summing the data over all possible ray-paths.
+
+--- Slide 33 ---
+Reflected wave
+DOWNGOING
+UPGOING
+A diffracting point is a change in the acoustic impedance at one location,  
+A horizon is an interface between continuous layers with different acoustic impedances (acoustic impedance being the product of velocity and density).
+At an interface part of the energy is reflected and part transmitted. 
+The percentage of reflected energy and transmitted energy ( the reflection and transmission coefficients) depends on the acoustic impedance of the two layers. It also varies with incidence angle as described by the Zoeppritz equations .  These coefficient simplifies for P waves at normal incidence to;
+33
+Reflection and Transmission
+Transmitted /
+ Refracted wave
+Transmitted /
+ Refracted wave
+Reflected wave
+Rock A
+ AI1 = v1 .ρ1
+Rock B
+ AI2 = v2 .ρ2
+
+--- Slide 34 ---
+Reflected wave
+Transmitted /
+ Refracted wave
+Rays refract at an interface according to Snell’s Law. The amount of refraction (bending) is only dependent on the velocity rather than the AI of the layers.
+34
+Snell’s Law
+energy “bent” away from the normal
+θi
+θr
+β
+Ray tracing (.xls) 
+See how Snell’s law is used in ray-tracing.
+Rock A
+    V1
+Rock B
+    V2
+V2 > V1
+
+--- Slide 35 ---
+Refracted wave
+No energy is transmitted when the incidence angle reaches the critical angle
+35
+Snell’s Law
+θ
+θ
+β < 90o
+If β = 90o at θcr  then
+Reflected wave
+V2 > V1
+Rock A
+    V1
+Rock B
+    V2
+
+--- Slide 36 ---
+Refracted wave
+No energy is transmitted when the incidence angle reaches the critical angle
+36
+Snell’s Law
+θ
+θ
+β < 90o
+If β = 90o at θcr  then
+Reflected wave
+V2 > V1
+Rock A
+    V1
+Rock B
+    V2
+
+--- Slide 37 ---
+Refracted wave
+No energy is transmitted when the incidence angle reaches the critical angle
+37
+Snell’s Law
+θcr
+θcr
+β = 90o
+If β = 90o at θcr  then
+Reflected wave
+V2 > V1
+Rock A
+    V1
+Rock B
+    V2
+Beyond the critical angle we can expect total reflection (no transmission) so can expect the reflection to brighten.
+Refraction/ Head wave
+
+--- Slide 38 ---
+Refracted wave
+No energy is transmitted when the incidence angle reaches the critical angle
+38
+Snell’s Law
+θcr
+θcr
+β = 90o
+If β = 90o at θcr  then
+Reflected wave
+V2 > V1
+Rock A
+    V1
+Rock B
+    V2
+time = t
+
+--- Slide 39 ---
+Refracted wave
+No energy is transmitted when the incidence angle reaches the critical angle
+39
+Snell’s Law
+θcr
+θcr
+β = 90o
+If β = 90o at θcr  then
+Reflected wave
+V2 > V1
+Rock A
+    V1
+Rock B
+    V2
+t + dt
+
+--- Slide 40 ---
+Refracted wave
+No energy is transmitted when the incidence angle reaches the critical angle
+40
+Snell’s Law
+θcr
+θcr
+β = 90o
+If β = 90o at θcr  then
+Reflected wave
+V2 > V1
+Rock A
+    V1
+Rock B
+    V2
+t + 2.dt
+
+--- Slide 41 ---
+Refracted wave
+No energy is transmitted when the incidence angle reaches the critical angle
+41
+Snell’s Law
+θcr
+θcr
+β = 90o
+If β = 90o at θcr  then
+Reflected wave
+V2 > V1
+Rock A
+    V1
+Rock B
+    V2
+t + 3.dt
+
+--- Slide 42 ---
+Refracted wave
+No energy is transmitted when the incidence angle reaches the critical angle
+42
+Snell’s Law
+θcr
+θcr
+β = 90o
+If β = 90o at θcr  then
+Reflected wave
+V2 > V1
+Rock A
+    V1
+Rock B
+    V2
+t + 4.dt
+The energy returned to the surface is a Refraction or also known as a “Headwave”.
+
+--- Slide 43 ---
+Now lets add a third layer with velocity V3. Now will get another reflected wave from the interface between layer 2 and layer 3.
+43
+Diving Waves
+Rock A
+    V1
+Rock B
+    V2 (z)
+θ
+θ
+Reflected wave
+Reflected wave
+V2 > V1
+V3 > V2
+
+--- Slide 44 ---
+Now lets replace the constant velocity in the second layer with a positive velocity gradient
+However, any non-vertical ray transmitted into the second layer will start to bend.
+44
+Diving Waves
+Rock A
+    V1
+Rock B
+    V2 (z)
+θ
+θ
+Reflected wave
+Reflected wave
+V2(z) > V1
+V3 > V2 (z)
+Ray tracing (.xls) 
+See how Snell’s law alone is used in ray-tracing.
+
+--- Slide 45 ---
+With a strong enough gradient, before it encounters a reflection with another layer it may start to turn and come back to the surface.   
+The energy returned to the surface known as a “Diving wave” but can also be considered by many as a “refraction” as it has returned to the surface having only undergone refractions (and no reflection)
+45
+Diving Waves
+Rock A
+    V1
+Rock B
+    V2 (z)
+θ
+θ
+Reflected wave
+Diving wave
+The energy returned to the surface known as a “Diving wave”.
+V2(z) > V1
+V3 > V2 (z)
+
+--- Slide 46 ---
+At the critical angle you will still get a Headwave.
+Ask yourself what the vertical and horizontal scale of this picture is?
+Will the diving wave look like a Headwave or a reflection?
+46
+Diving Waves
+Rock A
+    V1
+Rock B
+    V2 (z)
+Refracted wave
+θ
+θ
+Reflected wave
+Diving wave
+V2(z) > V1
+V3 > V2 (z)
+θcr
+
+--- Slide 47 ---
+47
+Attenuation
+As well as the kinematics of the waves we must also understand what governs attenuation of our wavefront. We usually measure P-wave amplitude. Just for a simple 1d model, consider what affects the attenuation of the P-wave energy that we record?
+Attenuation
+  1. Reduction in amplitude or energy caused by the transmitting media or system. Usually includes geometric divergence effects as waves spread out from a source as well as conversion of energy into heat (absorption) and other factors affecting amplitude, such as transmissivity losses and mode conversion.  
+
+[Encyclopedic Dictionary of Applied Geophysics,  Robert E. Sheriff 4th Edition. ]
+Like seismic velocity, attenuation is frequency dependent. Some mechanisms such as absorption more than others.  The frequency dependent nature of phase and amplitude relative to a reference frequency is dealt with by our Q amplitude and phase corrections. 
+
+Question: Which of these attenuation effects do we correct for?  How good a job do we do?  How may the corrections we apply effect certain processing steps?
+What is the difference between amplitude recovery and spherical divergence correction?
+
+--- Slide 48 ---
+§4 The recorded Wavefield
+48
+
+--- Slide 49 ---
+The recorded wave-field
+49
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 50 ---
+Exercise - The recorded wave-field
+50
+How do we link the wave propagation in the video with the straight “rays” we usually draw when discussing primary and multiple paths?
+
+
+Exercise : Squared paper example 1 and 2 : A simple shot point.
+Squared paper example 1.
+Squared paper example 2.
+
+--- Slide 51 ---
+Pictures acknowledgement to Rita Streich at SINTEF
+The recorded wave-field
+51
+
+--- Slide 52 ---
+T=250ms
+52
+If we look at our video again we can imagine drawing straight lines perpendicular to the wavefront. 
+What would a shot for our video look like?
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 53 ---
+T=375ms
+53
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 54 ---
+T=500ms
+54
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 55 ---
+T=625ms
+55
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 56 ---
+T=750ms
+56
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 57 ---
+T=875ms
+57
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 58 ---
+T=1000ms
+58
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 59 ---
+T=1000ms
+59
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 60 ---
+T=1125ms
+60
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 61 ---
+Pictures acknowledgement to Rita Streich at SINTEF
+The recorded wave-field
+61
+
+--- Slide 62 ---
+T=0ms
+62
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Pictures acknowledgement to Rita Streich at SINTEF
+So our shot fires at time zero. In reality there may be a delay to when the shot fires or indeed a delay in when the recording system starts to record. This is the Start of data delay or SOD.
+
+--- Slide 63 ---
+T=125ms
+63
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Our data is recorded at the surface. At each time we record a “snapshot” of the wave-field at the surface to build up our shot point.
+
+After going through this exercise you could imagine what a shot point would look like for say an OBC (Ocean bottom cable) project where the receivers are at the water bottom rather than at the surface.
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 64 ---
+T=250ms
+64
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+So here we can see the primary down-going wavefield.  It appears to have a symmetrical wavelet with the central peak as the colour black – does this make it zero-phase?  No because it is causal! If it was zero-phase we would already see half the wavelet at time zero. This is a mixed phase wavelet (if it really is symmetrical around the peak it would make it linear phase). 
+What is the polarity? We do not know, as we do no know if black is represented by a positive of negative number!
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 65 ---
+T=375ms
+65
+This is the direct arrival spreading out across the surface. You can see the energy is already markedly dropping off.
+As the horizontal axis is ‘distance’ and the vertical axis is ‘time’,  The slope of a straight line through these point will give you the velocity of the water layer. 
+The line should pass through zero time at zero offset (which is in itself a very rough QC of the zero time of your data)
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Pictures acknowledgement to Rita Streich at SINTEF
+You can see the wavefield diverging; the attenuation of the wavefield purely just because it is spreading out.  This is why we apply a divergence correction.
+
+--- Slide 66 ---
+T=500ms
+66
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Here is the first primary reflection, the start of the up-going wavefield. However as of yet this has not reached the receiver so nothing has been recorded yet except for the direct arrival.
+Pictures acknowledgement to Rita Streich at SINTEF
+The wavefield is entering the second layer where is refract according to Snell’s law.  This means the divergence is dependant on the velocity.  The wavefield is further attenuated by absorption and scattering by the rocks in each layer.
+
+--- Slide 67 ---
+T=625ms
+67
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+You can see diffractions being produced. In this case it is because of the finite grid size used in the modelling (i.e, if you zoom in you wold see the horizon is stepped rather than smooth) . But in real life diffracting points at the surface or near surface would give the same effect.   It is also an example of constructive interference, like in the earlier slides on Huygen’s principle (see slide26).
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 68 ---
+T=750ms
+68
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+The first primary reflection is reaching the surface and is being recorded by the near offsets.
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 69 ---
+T=875ms
+69
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Pictures acknowledgement to Rita Streich at SINTEF
+The primary is being reflected at the surface adding to the downgoing wavefield. 
+This downgoing energy will be responsible for generating multiples.
+
+--- Slide 70 ---
+T=1000ms
+70
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Due to the free surface receiver ghost, the direct arrival is already nearly gone.
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 71 ---
+T=1125ms
+71
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+This is the transmitted energy from the original down going primary. As data is still being transmitted to the second layer it shows we have not yet reached the critical incidence angle.
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 72 ---
+T=1250ms
+72
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Here is the first multiple being produced following behind the second primary reflection, the reverse polarity of the primary reflection.
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 73 ---
+T=1375ms
+73
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 74 ---
+T=1500ms
+74
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+The energy transmitted from earlier times is allowed to run away along the interface as a “head wave” producing in the layer above a faint linear wavefront; a refraction!
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 75 ---
+T=1625ms
+75
+If you look carefully you can see the faint linear wavefront or refraction being transmitted back to the surface. However, it is going to be recorded by offsets too far to register in our exercise.
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 76 ---
+T=1750ms
+76
+This down going reflection of the first multiple will create the 2nd order multiple etc..
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 77 ---
+T=1875ms
+77
+0sec
+
+0.25sec
+
+0.5sec
+
+0.75sec
+
+1.0sec
+
+1.25sec
+
+1.5sec
+
+1.75sec
+
+2.0sec
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 78 ---
+T=2000ms
+78
+Pictures acknowledgement to Rita Streich at SINTEF
+We are now 2 seconds after the shot went off. 
+For land processing the acquisition system is stationary but for a marine acquisition, the receivers are moving. Imagine the vessel travels at 2.5m/s,  in this time what is the new position of the boat and thus the receivers?  It has changed and is the reason behind the need for receiver motion correction.
+
+--- Slide 79 ---
+T=2000ms
+79
+We can clearly join the dots to make out our direct arrival energy; our first and second primaries and the first direct multiple of the first event.
+This is all we can clearly make out without looking a lot more closely, but we have also recorded some of the diffractions generated by the first event.
+Note these inverted ‘v’ shapes are free surface reflections caused by the the finite width of the strip of the image we cut out.
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 80 ---
+T=2000ms
+80
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 81 ---
+T=2000ms
+81
+Pictures acknowledgement to Rita Streich at SINTEF
+So here is the real shot point produced from this exercise. As a processor you need to become fluent in converting between these depth and recorded time domains.
+
+--- Slide 82 ---
+T=250ms
+82
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+Pictures acknowledgement to Rita Streich at SINTEF
+
+--- Slide 83 ---
+T=375ms
+83
+Here we would record the direct arrival for an Ocean bottom cable.  For OBC data this is also the one-way water bottom time, so there is not a twt water bottom reflection..
+Pictures acknowledgement to Rita Streich at SINTEF
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+
+--- Slide 84 ---
+T=500ms
+84
+Pictures acknowledgement to Rita Streich at SINTEF
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+
+--- Slide 85 ---
+T=625ms
+85
+Pictures acknowledgement to Rita Streich at SINTEF
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+
+--- Slide 86 ---
+T=750ms
+86
+Pictures acknowledgement to Rita Streich at SINTEF
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+
+--- Slide 87 ---
+T=875ms
+87
+Pictures acknowledgement to Rita Streich at SINTEF
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+
+--- Slide 88 ---
+T=1000ms
+88
+Pictures acknowledgement to Rita Streich at SINTEF
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+Now we get a real sense for the terms we use in  OBS processing such as the up-going wavefield as it is arriving at the RCV in an upgoing direction.
+
+--- Slide 89 ---
+T=1000ms
+89
+Pictures acknowledgement to Rita Streich at SINTEF
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+And the down-going wavefield as it will arrive at the RCVs in a downgoing direction.
+The down going wavefield is formed form the 1st order free surface multiple.
+
+--- Slide 90 ---
+T=1000ms
+90
+Pictures acknowledgement to Rita Streich at SINTEF
+If you can become fluent in this, it means your knowledge is transferrable to other scenarios. For example we can predict the different character of events we would get from other acquisition geometries such deep tow streamer surveys or Ocean Bottom surveys (OBS) where the receivers are positioned on the sea floor.
+For OBS we have extra geophone recorders. As these measure acceleration they are directional, so can help separate the data into the up and downgoing wavefield.
+
+--- Slide 91 ---
+T=1000ms
+91
+Pictures acknowledgement to Rita Streich at SINTEF
+When we migrate the data we calculate travel times from the sources and the RCV, to the subsurface location we are migrating.
+
+--- Slide 92 ---
+T=1000ms
+92
+Pictures acknowledgement to Rita Streich at SINTEF
+When we migrate the data we calculate travel times from the sources and the RCV, to the subsurface location we are migrating.
+If we can separate the downgoing data from the upgoing data we can also migrate this downgoing data.  But these travel times we have calculated from the shot and RCV to the subsurface will be completely wrong for the downgoing data, as it has travelled and extra bounce with the free surface.
+
+--- Slide 93 ---
+T=1125ms
+93
+Pictures acknowledgement to Rita Streich at SINTEF
+When we migrate the data we calculate travel times from the sources and the RCV, to the subsurface location we are migrating.
+Note how this down-going energy  which is just about to hit the water bottom again, looks just like the up-going water bottom reflection folded back on itself along the water bottom  (i.e the mirror of the up-going wavefront).
+
+--- Slide 94 ---
+T=1125ms
+94
+Pictures acknowledgement to Rita Streich at SINTEF
+When we migrate the data we calculate travel times from the sources and the RCV, to the subsurface location we are migrating.
+
+--- Slide 95 ---
+T=375ms
+95
+Pictures acknowledgement to Rita Streich at SINTEF
+And the wavefront for the downgoing is much broader than this original wavefront so it will illuminate a lot more of the near surface.  This is one reason we do mirror migrations. 
+
+The ultimate processing goal is to migrate all the multiples rather than removing them.
+
+--- Slide 96 ---
+The recorded wave-field
+96
+Acknowledgement to SINTEF, Rita Streich
+If we can forward model shots through a given velocity model we can compare the modelled shots to the read shots and use the difference to refine our velocity model. This is Waveform inversion...
+
+--- Slide 97 ---
+The recorded wave-field
+97
+Acknowledgement to SINTEF, Rita Streich
+And we can run the modelling backwards.  Here we have just reversed the clip bit you could use the same wavefield extrapolation to run the modelling back in time.  If we can do this we a synthetic then we can do it with real data; meaning we can inject data (the recorded shot)  in at the surface and model it forwards or backwards in time. This leads us to migration algorithms such as Reverse Time migration RTM and wavefield extrapolation sytle demultiples
+
+--- Slide 98 ---
+§5 The shot point domain
+98
+
+--- Slide 99 ---
+SHOT
+99
+Here is a basic shot point showing a reflection from a single horizontal reflector.
+
+The reflecting points cover an area of the subsurface equal to half the cable length.
+
+--- Slide 100 ---
+Single fold (100%) section
+100
+If we take a shot point every half cable length, we cover all of the subsurface for our single horizontal reflector.
+
+This is called a 100% section and how acquisition was done a long time ago.
+
+--- Slide 101 ---
+Shot Point data : some properties
+101
+As recorded
+Here are some recorded shots. What can we make out? Where is our direct arrival?
+
+We can see the Normal Moveout (NMO) in our shot gathers; the extra travel time purely because the receivers are getting further away from the Source. 
+
+So with an “off-end” geometry the dips due to the  moveout is biased in one direction (opposite to the shooting direction)
+
+--- Slide 102 ---
+Shot Point data : some properties
+102
+NMO applied
+
+--- Slide 103 ---
+Here is our direct arrival. This is a deep water example so it is separated from the main part of the data. 
+As a T2 amplitude recovery has been applied we have had to apply an AGC to the data just to see it.
+
+It will have an apparent velocity (change in offset / change in twt) equal to the water velocity. Projected back to zero offset it should pass through zero time so can be used as a very rough QC that the start of data delays etc… have been applied properly. 
+
+What about the wavelet shape?  It is peak/trough (look at the colour scale below)  Why is this?
+Shot Point data : some properties
+103
+
+--- Slide 104 ---
+Shot Point data : some properties
+104
+t
+t=0
+
+--- Slide 105 ---
+Shot Point data : some properties
+105
+And here is the first reflected energy being recorded, for marine data usually the water bottom.  Analysis of the water bottom can give us some information on the phase.
+
+--- Slide 106 ---
+Phase and polarity will be discussed more in ODT4 designature. 
+The appendix on phase discusses how to correctly describe the phase of your data. For example if this dataset had been zerophased  we might be able to state…
+“Data is zero phased” ; statement of phase
+“Increase in acoustic impedance is represented by a negative number”. ; statement of polarity
+“In the current palette this is represented by the colour black”. ; statement of palette
+But, can we tell if this is zero phased just by looking at this picture?  We can’t!  A mixed phase wavelet can still look like this! What gives us the shape of the raw wavelet in the data.  This example is peak/trough/peak (look at the colour scale below)
+Shot Point data : some properties
+106
+
+--- Slide 107 ---
+WARNING : No show right for pictures
+Strictly internal use only
+Shot Point data : some properties
+107
+t=0
+
+--- Slide 108 ---
+Shot gathers – post critical data
+108
+So what is all this strong energy?
+Here is a shot point from some shallow data.
+Where is our direct arrival now?
+Due to the cancellation from the ghost, the direct arrival energy is actually very feint and can hardly be seen.
+
+--- Slide 109 ---
+Trapped/Guided Water waves and apparent velocity
+109
+If we look at a wave originating from source location 1, within a shallow water column. The spherical wavefront is reflected wave from the sea floor.
+1
+The reflected waves can be thought of as originating from a secondary source point 2 created at the same time as source 1, positioned at the mirror location below the sea floor.
+
+--- Slide 110 ---
+Trapped/Guided Water waves and apparent velocity
+110
+If we run this further on in time another wavefront is reflected from the sea surface.  This wave looks like it has originated from source location 3 which is the mirror location of source location 2 above the sea surface.  More and more reflections will be created in time, but for now just concentrate on these three wavefront.
+3
+2
+1
+
+--- Slide 111 ---
+Trapped/Guided Water waves and apparent velocity
+111
+3
+2
+1
+a
+b’
+b
+a’
+b’’
+a’’
+We can now jump to look at these three wavefronts at two points later in time. Although we could think of all the  wavefronts propagating at water velocity, the signal recorded at the sea surface measures the horizontal velocity of the waves. With increasing offset this appears that energy at b is catching up with the energy at a therefore travelling with a faster apparent velocity. I originally found this rather upsetting! “How can the wave travel faster then water velocity?!”  But of course speed and velocity are not the same thing.
+
+--- Slide 112 ---
+Trapped/Guided Water waves
+112
+a
+b
+Vwater
+acosb
+a
+So in the time the wavefront travels distance a the first reflection travels that same distance. But horizontally the water bottom reflection has only travelled distance acosb.  So the velocity of b is inversely proportional to cosb . i.e. Vwater/cosb .   
+
+As the wavefronts spreads out the angle  decreases so acosb  a .   So the water bottom reflection  apparent velocity starts as infinite and tends to water velocity i.e. converges with the direct arrival as shown below.
+Vwater
+
+
+--- Slide 113 ---
+Trapped/Guided Water waves
+113
+Vwater
+If we look at one fixed receiver location and the arrivals at different times, the angle  decreases with successive orders of reflections so the apparent velocity of each successive multiple order increases. We will look at this again in detail when we start to look a the TauP domain in ODT2. Note as before as we go to further offsets we still have the condition that acosb  a   i.e. all the arrival converge with the direct arrival.
+Vwater
+a
+
+--- Slide 114 ---
+Trapped/Guided Water waves and apparent velocity
+114
+3
+2
+1
+a
+b’
+b
+a’
+b’’
+a’’
+4
+5
+And this is what we can see in the video clip below of a trapped water wave (generated using a ray tracing technique).
+
+--- Slide 115 ---
+Trapped/Guided Water waves and apparent velocity
+115
+3
+2
+1
+a
+b’
+b
+a’
+b’’
+a’’
+4
+5
+Run the video again and you may see another effect. Concentrate on one of the wavefronts (like the location b in the above diagram) propagating along the sea surface.  You will see it changes phase several times along it path.  This is due to dispersion.
+
+--- Slide 116 ---
+Trapped/Guided Water waves
+116
+8km
+8000/5.4=1480m/s
+8000/6.2=1290m/s
+8000/(5.9-1.0)=1633m/s
+VP1480m/s, VS0m/s,  h200m
+VP1750m/s, VS500m/s,
+Here we see the shot gather recorded from the video on the previous slide. There are several different apparent velocities at play. We can see the first wavefront arriving around the apparent velocity of 1480m/s (blue line).   The green line shows the limit of where the multiples are going post critical.   This will depend on the water depth and the velocities. 
+Within the limits of these two apparent velocities, we can then see the faster apparent velocities of subsequent multiple wavefronts (e.g.orange line).
+However, in guided wave packages we can frequently observe velocities well exceeding these types of numbers. Where do these come from?
+
+--- Slide 117 ---
+Trapped/Guided Water waves
+117
+8km
+8000/5.4=1480m/s
+8000/6.2=1290m/s
+8000/(5.9-1.0)=1633m/s
+VP1480m/s, VS0m/s,  h200m
+VP1750m/s, VS500m/s,
+8000/3.0=2600m/s
+If we zoom in on the arrivals, as observed in the video on the previous slide, we can see the phase change along each arrival due to dispersion. This gives another apparent dip due to the dispersion effect which is much faster than the other apparent velocities. 
+
+So you cold join up the areas of high pressure from different arrivals to make arrivals at much faster propagation velocities. These are higher order modes of propagation and are important for processes such as SWI as they gives us information on the shallow velocity model.
+
+--- Slide 118 ---
+Shot gathers – post critical data
+118
+So let’s look again at this strong package on energy on our shallow water marine shot gather.
+So whilst this package of energy contains reflections and refractions, most of the energy consists of post critical water layer multiples; guided waves.  
+
+The first break i.e the first arrival at each receiver is typically the refractions/diving waves which can give us useful information.
+
+--- Slide 119 ---
+Shot gathers – post critical data
+119
+L1=1480m/s
+L2=1750m/s
+L3=2150m/s
+Critcal L1/L2= approx60o
+Critcal L2/L3 = approx55o
+water depth = 70m 
+Q: What is the Critical offset for the water bottom?
+  2* 70m.tan60o
+ approx 240m offset.
+< 20 traces in a shot
+(Maybe as low as 2 or 3 traces into a CMP).
+So whilst this package of energy contains reflections and refractions, most of the energy consists of post critical water layer multiples; guided waves.  
+
+The first break i.e the first arrival at each receiver is typically the refractions/diving waves which can give us useful information.
+1333m/s
+
+--- Slide 120 ---
+Shot gathers - After Linear noise Attenuation
+120
+Although we can use this data for model building etc…
+post critical data can mask useful primary data.  So for the data we take through to final imaging we typically attenuate this energy.
+
+--- Slide 121 ---
+Shot gathers
+121
+STACK
+This section is from a deeper part of the North Sea.  We can line up a shot with the corresponding part of the stack.   We can start to pick out events on the shot that correspond with the stack. 
+
+We will come back to this example later, but for now let’s concentrate again on the post critical energy. Can we see a similar “cone” of noise to what we saw on the last example?
+
+--- Slide 122 ---
+Shot gathers (with NMO)
+122
+It is much easier to see what is happening if we apply an NMO to the shot.
+STACK
+This section is from a deeper part of the North Sea.  We can line up a shot with the corresponding part of the stack.   We can start to pick out events on the shot that correspond with the stack. 
+
+We will come back to this example later, but for now let’s concentrate again on the post critical energy. Can we see a similar “cone” of noise to what we saw on the last example?
+
+--- Slide 123 ---
+Some properties of shot records/gathers
+123
+Raw Shots will contain all types of data; primary; multiple; diffractions; noise; refractions, all of which have different characteristics.
+Shot points mix traces with different offsets, so the shot points present “Normal moveout” (the increase in reflection arrival time from having travelled the extra distance due to the longer offset).
+Also as the offset increases and as we get to further reflection angles we can also start to see the data in the shot domain refracting, diving waves and even mode converted events.
+And also mix traces with different subsurface reflection points,  so the recorded shot gather also presents moveout (differences in reflection arrival time) due to different offsets being reflected from different parts of the subsurface. Thus the recorded seismic shot can also show us information on the structure.
+So taking out the travel time due to NMO (apply an NMO correction), although we have not correctly positioned the data,  we will start to see the structure, although the far offsets may appear to be stretched due to the NMO correction.
+Thus if we are to apply shot domain processing (FK filter, Linear noise attenuation etc..) it is essential we recognise what the different events in shot gather are.   Pre prepared to answer questions form you supervisor’s as to which events in the shot domain match up with which events on the stack section.
+
+--- Slide 124 ---
+§6 The CMP domain/gather
+124
+
+--- Slide 125 ---
+SHOT
+125
+Here is a basic shot point showing a reflection from a single horizontal reflector.
+
+The reflecting points cover an area of the subsurface equal to half the cable length.
+
+--- Slide 126 ---
+SHOT
+126
+However, as we all know, acquisition is acquired with multiple fold.
+
+--- Slide 127 ---
+Multiple fold acquisition
+127
+The shot position “moves up” by a certain distance and each time it does a few more new subsurface positions are recorded .
+
+--- Slide 128 ---
+Multiple fold acquisition
+128
+Adding more shots increases the number of subsurface positions and builds up the duplication or “fold” of the traces at the subsurface positions  which already exist.
+
+--- Slide 129 ---
+Multiple fold acquisition
+129
+The fold reaches a maximum for subsurface locations in the majority of the line but locations at the end of the lines are left with a decreasing number of traces (the run in and run out).
+
+--- Slide 130 ---
+CDPs
+130
+We can take traces from the different shots which all have the same midpoint location – for our single horizontal reflector these traces will also all have the same point of reflection. So we can call this point a CDP; a common depth point.
+
+--- Slide 131 ---
+CMPs
+131
+However, in the presence of dip the reflection points move up dip from the midpoint location, although the complexity of the velocities will also play a role. So all we can really say is the that these traces share a common midpoint location (CMP).
+
+--- Slide 132 ---
+CDPs
+132
+However, people still frequently call CMPs and CDPs the same name. 
+
+The CMP domain is one of the most widely used domains in processing.
+It helps us visualise the data by allowing us to stack similar traces together to see the structure.
+
+--- Slide 133 ---
+Properties of CMPs – the stack
+133
+WARNING : No show right for pictures
+Strictly internal use only
+Here is a simple brute stack section created by “stacking” the traces of each CMP together.  
+
+The stack remains to this day our most important tool for de-noise, de-multiple and imaging. However, to interpret features in the stack we must understand how the data looks in the CMP domain.
+
+--- Slide 134 ---
+Properties of CMPs (with NMO)
+134
+WARNING : No show right for pictures
+Strictly internal use only
+
+--- Slide 135 ---
+Properties of CMPs (with NMO)
+135
+WARNING : No show right for pictures
+Strictly internal use only
+PPT TIP: When viewing gathers in Qosmic, it is good to  also display a header such as the CMP number (as well as the other attributes you need) along the top of your gathers and stack when grabbing pictures. Then it will be very easy to align pictures with the stack in PowerPoint. Right click and add a shadow to make the overlay stand out a bit more.
+
+--- Slide 136 ---
+Properties of CMPs
+136
+WARNING : No show right for pictures
+Strictly internal use only
+Here, we see the main multiple package coming in from 2x the water bottom twt.  We will look at this multiple example later in the course.
+
+--- Slide 137 ---
+Properties of CMPs
+137
+WARNING : No show right for pictures
+Strictly internal use only
+There are some faint multiples coming in prior to 2x the water bottom twt.  But to arrive at this travel time they would have to be short path interbed multiples.  The multiple course will cover classification of multiples and how to identify the different types of multiple.
+
+--- Slide 138 ---
+Properties of CMPs
+138
+WARNING : No show right for pictures
+Strictly internal use only
+Here, we see some nice primary reflections from horizontal well behaved sediments.  But even here the far offset are curling up considerably.  Why is this?
+
+This is anellipticity due to higher order NMO effects such as ray bending and anisotropy. You will learn more about this in the velocity course. 
+
+At very far offsets we may even see NMO stretch. 
+
+Or it could be DMO (Dip Move-Out) which we will discuss in a few slides time.
+
+--- Slide 139 ---
+Properties of CMPs
+139
+WARNING : No show right for pictures
+Strictly internal use only
+Here, we see an event which is curling up overlying other primaries which are relatively flat  What is this? See how on the stack we see diffractions from the salt feature cutting across flatter primary events. This is the diffraction in the CMP domain.
+
+--- Slide 140 ---
+Properties of CMPs
+140
+WARNING : No show right for pictures
+Strictly internal use only
+Some of the CMPs still exhibit some remnant “swell noise” left over from noise removal, (something we will touch on later). You can see that the stacking process is strong enough that this noise has little or no effect on the full stack.
+
+--- Slide 141 ---
+Properties of CMPs
+141
+WARNING : No show right for pictures
+Strictly internal use only
+Here we have an event that at far offset has returned even faster than the water bottom.
+
+It looks a bit like our diffraction from the previous slide.
+
+You can see the same event in the shot data if you go back to the section on “shot point data”. 
+
+Although it is certainly a diffraction, to return so quickly the data has most likely either travelled through the salt to get to the diffracting point, or even maybe refracted along the salt boundary.
+
+--- Slide 142 ---
+Properties of CMPs
+142
+WARNING : No show right for pictures
+Strictly internal use only
+Here, we see an event at the top of the salt.
+We can see a refraction starting; by the change in character of the event; the brightening of  amplitudes and linear moveout.  The seismic is starting to refract at short offsets due to the large velocity contrast into the salt leading to a smaller critical angle.
+
+--- Slide 143 ---
+Properties of CMPs
+143
+WARNING : No show right for pictures
+Strictly internal use only
+As the wide angle/long offset reflection and the refraction can be close together, we frequently have NMO stretch problems around high velocity contrasts such as top salt.
+
+In addition to this, as mode conversion at an interface  between P and S waves generally increases beyond the critical angle, we sometimes see converted waves below refractions. You may be able to see a converted  wave of the both the refraction and the long offset reflection.  These will have a slower velocity than the p-wave reflections.  Converted waves are discussed in the support documentation.
+
+--- Slide 144 ---
+Properties of CMPs
+144
+WARNING : No show right for pictures
+Strictly internal use only
+Here, again we see an event on the edge of the salt.  Even for very experienced geos it can be difficult to make out exactly which event is which in the recorded data.  
+
+Our gathers will be complicated by the moveout of the diffractions from the top and flanks of the salt and refractions starting at unpredictable offsets  due to the steeply dipping salt flanks and the sedimentary events terminating up against the salt. 
+
+We can also have illumination issues around such features. Maybe the complexity of the geology means the far offset reflected energy just never returns to the surface to be recorded?
+
+--- Slide 145 ---
+Properties of CMPs (with NMO)
+145
+WARNING : No show right for pictures
+Strictly internal use only
+Before stacking the data we remove or “mute” any energy that we do not wish to include in the stack.  What we remove depends on what we want our stack to show; 
+do we want to make the image of certain events stand out, or be as high resolution as possible? 
+do we want to only include certain reflection angles? 
+or for example are we trying to gauge the result of a de-multiple process?
+
+The mute can be the same for all locations (and therefore a compromise) or can vary across the survey (which can be difficult to design).
+
+--- Slide 146 ---
+Properties of CMPs
+146
+WARNING : No show right for pictures
+Strictly internal use only
+Returning to our  diffraction in the CMP domain. 
+
+Why does this diffraction curl up in the NMO corrected gather?
+
+The next slide shows why and how this leads us to the concept of Dip move out (DMO) in unmigrated data.
+
+--- Slide 147 ---
+depth
+Properties of CMPs
+147
+time
+offset
+PRE-NMO
+t0
+
+--- Slide 148 ---
+depth
+Properties of CMPs
+148
+time
+offset
+PRE-NMO
+t0
+x
+x
+
+--- Slide 149 ---
+depth
+Properties of CMPs
+149
+A dipping diffracting surface (.xls)
+What about a dipping event?
+
+Exercise - Look at the attached .xls which shows you what a dipping event looks like in the time domain as recorded by a series of zero offset shot/receiver pairs. 
+
+This shows you that in the time domain the dipping event you see can be thought of as the result of interference between all the diffractions from points along the dipping event.
+
+When the event is dipping what happens to the position of the event in the time domain relative to it’s position in the depth domain?
+
+What consequence might this have on the moveout of the dipping event in the CMP gathers.
+
+--- Slide 150 ---
+depth
+Properties of CMPs
+150
+time
+offset
+PRE-NMO
+t0
+x
+x
+Simple DMO (.xls)
+
+--- Slide 151 ---
+An image of the subsurface  - stack section in the depth domain (not to scale)
+151
+Depth section
+So the recorded data is positioned directly below the midpoint of the shot and receiver. 
+What does this mean for our data? 
+This is a section in the migrated depth domain. Let us assume this is indeed the correct subsurface image. 
+We frequently look at our data with a stretched vertical axis. Let us quickly swap to a 1:1 ratio.
+
+--- Slide 152 ---
+to scale
+An image of the subsurface  - stack section in the depth domain (to scale)
+152
+Depth section
+Actual raypath
+Image ray /  Zero offset path
+With a 1:1 ratio we can imagine a mid offset ray-path through our data (drawn in blue)
+
+The red line is what we call the “image ray”; the zero offset ray traced back to the surface.
+
+Now, according to what we said in the previous slide, this dipping event in the un-migrated time domain, will appear recorded beneath the mid point location of the shot and receiver.
+
+--- Slide 153 ---
+A stack section as recorded  - time domain prior to imaging
+153
+Un-migrated time section
+And indeed this is what we see; in a stack of the data as recorded. The energy is positioned directly below the mid point.
+
+--- Slide 154 ---
+Summary of CMPs.
+154
+what the image ray is and what is meant by zero offset.
+that CMPs approximate CDPs, so stacking the CMPs gives us a section that looks ‘similar’ to the structure.
+what moveout is and that the moveout of a diffraction (and dipping events) can vary in the CMP domain because the data you record is not directly below the reflection point.
+That if the earth model is a simple layer cake horizontal model (both the data and the velocity model), the different offsets in a CMP will have the same reflection point and it would be possible to apply a moveout correction to flatten all the primary events.
+But in real world examples this is not true, so the actual reflection points will be from different places. This means we get different moveout for horizontal and for simple dipping events (basic DMO and even more complex moveout issues discussed in the velocity training course.
+We discussed that the process of moving data from its recorded position to form an image of the structure is called ‘imaging’ or ‘migration’, covered in future courses.
+When we add refractions, multiples, converted waves etc. to the ‘un-migrated’ CMP domain, we can see that CMPs can still contain a wide variety of moveout types.  So again it is important to be able to recognise the different events in this domain.
+We have looked at what the CMP domain is and how to identify features in the CMPs. 
+In addition to this we saw;
+
+--- Slide 155 ---
+Why do we mean by data analysis?
+
+--- Slide 156 ---
+UK Training Resources
