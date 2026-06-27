@@ -28,11 +28,11 @@ The broader context is **geological exploration**. Seismic is only one source of
 
 ![Geological exploration lifecycle](figures/term01_lec01/term01_lec01_exploration_workflow.png)
 
-**Figure 1 — Seismic processing in the exploration workflow.** Processing sits between acquisition and interpretation. Wells, geology, and a priori information also feed interpretation and geological modeling.
+**Figure 1 — Seismic processing in the exploration workflow.** (a) Geological maps and prior knowledge. (b) Seismic acquisition in the field. (c) Processed seismic sections and velocity models. (d) Geological model of the subsurface. (e) Well drilling and production. Seismic processing connects the field data to the interpretable image.
 
 The course is organized in three terms:
 
-- **Term 1 — Foundations:** data formats, geometry, statics, velocities, deconvolution.
+- **Term 1 — Foundations:** data formats, geometry, statics, velocities, single-channel filtering, deconvolution, surface-consistent processing.
 - **Term 2 — Intermediate methods:** absorption, FK/Radon filtering, multiples, imaging fundamentals.
 - **Term 3 — 3D and modern techniques:** 3D geometry, advanced denoise, regularization, QC, well-driven processing.
 
@@ -99,10 +99,6 @@ The same physical event can be signal in one context and noise in another. For e
 
 Processing algorithms can be grouped by which aspect of the data they address.
 
-![Kinematic vs dynamic problems](figures/term01_lec01/term01_lec01_kinematic_vs_dynamic.png)
-
-**Figure 4 — Kinematic vs dynamic problems.** Left: kinematic processing places energy at the correct time and position (statics, NMO, migration). Right: dynamic processing recovers true amplitudes and wavelet character (gain, deconvolution, Q-compensation, demultiple).
-
 ### Kinematic problem
 
 > **Where in space and time does the recorded energy belong?**
@@ -132,7 +128,7 @@ A typical 2D processing sequence has four phases.
 
 ![Processing flow](figures/term01_lec01/term01_lec01_processing_flow.png)
 
-**Figure 5 — Four-phase processing flow.** Preprocessing prepares the data; kinematic and dynamic processing are often iterated; imaging produces the final positioned image.
+**Figure 4 — Processing workflow (simplified).** Modern seismic processing begins with data input and geometry assignment, iterates between kinematic (positioning) and dynamic (amplitude) corrections, and ends with imaging and model building.
 
 ### Phase 1 — Preprocessing
 
@@ -192,7 +188,7 @@ In the first two terms we focus on 2D seismic lines. A source generates elastic 
 
 ![2D acquisition geometry](figures/term01_lec01/term01_lec01_2d_acquisition_geometry.png)
 
-**Figure 6 — 2D end-on acquisition geometry.** Sources move along the line; the receiver spread records each shot. Midpoints between source and receiver pairs build up the CMP coverage. The lower panel shows how fold increases from the line start to the full-fold plateau.
+**Figure 5 — 2D end-on acquisition geometry.** Sources move along the line; the receiver spread records each shot. Midpoints between source and receiver pairs build up the CMP coverage. The lower panel shows how fold increases from the line start to the full-fold plateau.
 
 ### Acquisition environments and sources
 
@@ -250,7 +246,7 @@ The **common-midpoint (CMP) method** records the same subsurface region many tim
 
 ![CMP gather and stack](figures/term01_lec01/term01_lec01_cmp_gather_stack.png)
 
-**Figure 7 — CMP gather and stack.** Left: source–receiver geometry for one CMP. Middle: raw CMP gather with a primary and a multiple. Right: after NMO correction the primary is flat and stacks constructively; the multiple is undercorrected and partially stacks out.
+**Figure 6 — CMP gather and stack.** Left: raw CMP gather with a primary and a multiple. Right: after NMO correction the primary is flat and stacks constructively; the multiple is undercorrected and partially stacks out.
 
 ---
 
@@ -262,7 +258,7 @@ A **gather** is a group of traces sharing a common attribute. Changing the sort 
 
 ![Data sorts](figures/term01_lec01/term01_lec01_data_sorts.png)
 
-**Figure 8 — Common seismic data sorts.** (a) Shot gather: traces from one source, ordered by receiver. (b) Receiver gather: traces at one receiver, ordered by source. (c) CMP gather: traces with the same midpoint, ordered by offset. (d) Common-offset gather: traces with the same offset, ordered by midpoint.
+**Figure 7 — Seismic data sorts on the source-receiver plane.** Each trace is a point $(x_s, x_r)$ in the source-receiver plane. A fixed source coordinate gives a shot gather, a fixed receiver coordinate gives a receiver gather, a fixed midpoint ($x_s+x_r=\text{const}$) gives a CMP gather, and a fixed offset ($x_s-x_r=\text{const}$) gives a common-offset gather.
 
 | Gather | Sort key | Typical use |
 |--------|----------|-------------|
@@ -284,9 +280,15 @@ Seismic data arrive in specialized formats that must be loaded before processing
 
 ![SEG-Y structure](figures/term01_lec01/term01_lec01_segy_structure.png)
 
-**Figure 9 — SEG-Y file organization.** A SEG-Y file starts with a 3200-byte textual header and a 400-byte binary header, followed by data traces. Each trace has a 240-byte header containing geometry and timing metadata, then the sample values.
+**Figure 8 — SEG-Y file organization.** SEG-Y rev 2.0 starts with an optional 128-byte tape label, a 3200-byte textual file header, and a 400-byte binary file header. Optional extended textual headers may follow. The bulk of the file is a sequence of data traces; each trace has a 240-byte trace header followed by sample values.
 
-Key trace header information includes:
+\pagebreak
+
+\includegraphics[width=0.75\linewidth]{figures/term01_lec01/term01_lec01_segd_structure.png}
+
+**Figure 9 — SEG-D file organization (raw field records).** SEG-D stores raw field data with a general header, multiple scan-type headers, channel-set headers, and trace headers preceding the data. It is used for archival and initial loading; traces are later converted to SEG-Y or a processing system's internal format.
+
+Key trace header information in SEG-Y includes:
 
 - shot and receiver line/point numbers;
 - source and receiver X, Y, Z coordinates;

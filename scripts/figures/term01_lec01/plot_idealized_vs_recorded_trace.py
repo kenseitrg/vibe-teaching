@@ -147,10 +147,6 @@ def main():
                  loc="left", fontsize=11)
     ax.set_ylim(ylim)
     ax.grid(True, alpha=0.3)
-    for ts, amp in zip(primary_times, primary_amps):
-        ax.annotate(f"$r={amp:+.3f}$", xy=(ts, amp),
-                    xytext=(6, 12), textcoords="offset points", fontsize=8,
-                    arrowprops=dict(arrowstyle="->", color="gray", lw=0.7))
 
     # (b) Ideal seismic trace
     ax = axes[1]
@@ -174,12 +170,7 @@ def main():
     ax.set_ylim(ylim)
     ax.grid(True, alpha=0.3)
 
-    # Highlight the multiple arrival
-    ax.annotate("First-order\nfree-surface\nmultiple",
-                xy=(mult_time, recorded[int(mult_time / dt)]),
-                xytext=(mult_time + 0.12, 0.25),
-                fontsize=8, color="C3",
-                arrowprops=dict(arrowstyle="->", color="C3", lw=0.8))
+
 
     fig.tight_layout()
 

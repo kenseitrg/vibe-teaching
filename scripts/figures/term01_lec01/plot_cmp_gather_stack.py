@@ -257,97 +257,6 @@ def plot_wiggle_gather(ax, gather, offsets, dt, title, color="C0",
 
 
 # ---------------------------------------------------------------------------
-# Panel 1: CMP geometry schematic
-# ---------------------------------------------------------------------------
-def draw_geometry_panel(ax):
-    """Draw shot/receiver geometry for one CMP location."""
-    ax.set_xlim(-1500, 1500)
-    ax.set_ylim(-180, 1100)
-    ax.set_aspect("equal")
-    ax.axis("off")
-
-    # --- Surface ---
-    ax.axhline(y=0, color="#8B4513", linewidth=2.5, zorder=2)
-    ax.text(1400, 30, "Surface", fontsize=8, color="#8B4513",
-            ha="right", va="bottom", style="italic")
-
-    # --- Reflector at depth ---
-    depth = 850  # m (chosen for visual clarity)
-    ax.axhline(y=depth, color="#666666", linewidth=1.8, linestyle="--", zorder=2)
-    ax.text(1400, depth - 25, "Reflector", fontsize=8, color="#666666",
-            ha="right", va="top", style="italic")
-
-    # --- Layer-velocity annotations ---
-    ax.text(-1350, depth / 2, r"$V_1 = 2000$ m/s (primary)", fontsize=7.5,
-            color="#444444", style="italic",
-            bbox=dict(boxstyle="round,pad=0.2", facecolor="white",
-                      edgecolor="none", alpha=0.8))
-    ax.text(-1350, depth / 2 - 80, r"$V_\mathrm{mult} = 1500$ m/s (multiple)",
-            fontsize=7.5, color="#C44E52", style="italic",
-            bbox=dict(boxstyle="round,pad=0.2", facecolor="white",
-                      edgecolor="none", alpha=0.8))
-
-    # --- CMP marker (vertical dashed line) ---
-    ax.axvline(x=0, color="black", linewidth=0.7, linestyle=":", alpha=0.4, zorder=1)
-    ax.plot(0, 0, marker="v", color="black", markersize=8, zorder=6)
-    ax.text(0, -35, "CMP", fontsize=9, ha="center", fontweight="bold",
-            bbox=dict(boxstyle="round,pad=0.15", facecolor="white",
-                      edgecolor="black", alpha=0.9))
-
-    # --- Representative source-receiver pairs ---
-    pair_offsets = [300, 800, 1400, 2000]
-    colors = plt.cm.viridis(np.linspace(0.25, 0.85, len(pair_offsets)))
-
-    for idx, x_off in enumerate(pair_offsets):
-        src_x = -x_off / 2
-        rcv_x = x_off / 2
-        clr = colors[idx]
-
-        # Source (star)
-        ax.plot(src_x, 0, marker="*", color=clr, markersize=14, zorder=7)
-        # Receiver (triangle)
-        ax.plot(rcv_x, 0, marker="v", color=clr, markersize=11, zorder=7)
-
-        # Ray paths: source -> reflection point (x=0, y=depth) -> receiver
-        ax.plot([src_x, 0, rcv_x], [0, depth, 0],
-                color=clr, linewidth=0.9, alpha=0.55, zorder=3)
-
-    # --- Sources / Receivers group labels ---
-    ax.text(-750, -120, "Sources", fontsize=8, ha="center",
-            color="#8B0000", fontweight="bold",
-            bbox=dict(boxstyle="round,pad=0.15", facecolor="white",
-                      edgecolor="#8B0000", alpha=0.85))
-    ax.text(750, -120, "Receivers", fontsize=8, ha="center",
-            color="#006400", fontweight="bold",
-            bbox=dict(boxstyle="round,pad=0.15", facecolor="white",
-                      edgecolor="#006400", alpha=0.85))
-
-    # --- Reflection point ---
-    ax.plot(0, depth, marker="o", color="orange", markersize=10, zorder=8,
-            markeredgecolor="black", markeredgewidth=0.5)
-    ax.annotate("Reflection\npoint", xy=(0, depth), xytext=(100, depth - 50),
-                fontsize=7, color="orange", fontweight="bold",
-                arrowprops=dict(arrowstyle="->", color="orange", lw=1.0),
-                zorder=9)
-
-    # --- Offset annotation on one pair ---
-    mid_idx = len(pair_offsets) // 2
-    x_off_mid = pair_offsets[mid_idx]
-    src_mid = -x_off_mid / 2
-    rcv_mid = x_off_mid / 2
-
-    ax.annotate("", xy=(rcv_mid, -70), xytext=(src_mid, -70),
-                arrowprops=dict(arrowstyle="<->", color="grey", lw=1.0),
-                zorder=5)
-    ax.text(0, -85, f"Offset = {x_off_mid} m", ha="center",
-            fontsize=7, color="grey")
-
-    # --- Title ---
-    ax.text(0, 1070, "CMP Geometry", ha="center", fontsize=10,
-            fontweight="bold", color="black")
-
-
-# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main():
@@ -361,24 +270,20 @@ def main():
     # -------------------------------------------------------------------
     # Figure layout
     # -------------------------------------------------------------------
-    fig = plt.figure(figsize=(15, 5.8))
+    fig = plt.figure(figsize=(12, 5.8))
     gs = fig.add_gridspec(
-        1, 3,
-        width_ratios=[1.15, 1.0, 1.15],
-        left=0.04, right=0.97, bottom=0.10, top=0.90,
-        wspace=0.22,
+        1, 2,
+        width_ratios=[1.0, 1.0],
+        left=0.08, right=0.97, bottom=0.10, top=0.90,
+        wspace=0.25,
     )
 
     # Colour palette for the two gather panels
     C_RAW = "#3B6BA5"    # blue for raw gather
     C_NMO = "#55A868"    # green for NMO-corrected
 
-    # ---- Panel 1: Geometry -------------------------------------------
-    ax1 = fig.add_subplot(gs[0])
-    draw_geometry_panel(ax1)
-
-    # ---- Panel 2: CMP gather before NMO ------------------------------
-    ax2 = fig.add_subplot(gs[1])
+    # ---- Panel 1: CMP gather before NMO ------------------------------
+    ax2 = fig.add_subplot(gs[0])
     plot_wiggle_gather(ax2, gather_raw, OFFSETS, DT,
                        title="CMP Gather (Before NMO)",
                        color=C_RAW)
@@ -405,27 +310,27 @@ def main():
 
     ax2.set_xlabel("Offset (m)", fontsize=9)
 
-    # ---- Panel 3: After NMO + Stack ----------------------------------
-    ax3 = fig.add_subplot(gs[2])
+    # ---- Panel 2: After NMO + Stack ----------------------------------
+    ax3 = fig.add_subplot(gs[1])
     plot_wiggle_gather(ax3, gather_nmo, OFFSETS, DT,
                        title="After NMO Correction + Stack",
                        color=C_NMO,
                        stack_trace=stacked)
 
-    # Annotate flattened primary
+    # Annotate flattened primary (keep text left of the stack trace)
     ax3.annotate(
         "Primary\n(flattened)",
         xy=(mid_idx, T0_PRIMARY),
-        xytext=(mid_idx + 6, T0_PRIMARY - 0.5),
+        xytext=(mid_idx - 7, T0_PRIMARY - 0.5),
         fontsize=7, color=C_NMO, fontweight="bold",
         arrowprops=dict(arrowstyle="->", color=C_NMO, lw=0.8),
         zorder=10,
     )
-    # Annotate undercorrected multiple
+    # Annotate undercorrected multiple (keep text left of the stack trace)
     ax3.annotate(
         "Multiple\n(undercorrected)",
         xy=(mid_idx, T0_MULTIPLE),
-        xytext=(mid_idx + 6, T0_MULTIPLE - 0.7),
+        xytext=(mid_idx - 7, T0_MULTIPLE - 0.7),
         fontsize=7, color="#C44E52", fontweight="bold",
         arrowprops=dict(arrowstyle="->", color="#C44E52", lw=0.8),
         zorder=10,

@@ -24,7 +24,7 @@ The instructor acts as the subject-matter expert; the agent acts as a **teaching
 
 The course runs in **three terms**.
 
-### Term 1 — Foundations (6 lectures)
+### Term 1 — Foundations (8 lectures)
 
 Familiarize students with seismic data processing.
 
@@ -33,8 +33,9 @@ Familiarize students with seismic data processing.
 3. Survey geometry
 4. Static corrections
 5. Velocity analysis and stacking
-6. Single-channel filtering and deconvolution
-7. Surface-consistent processing
+6. Single-channel filtering
+7. Deconvolution
+8. Surface-consistent processing
 
 ### Term 2 — Intermediate Methods (6–7 lectures)
 
