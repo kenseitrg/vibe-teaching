@@ -14,6 +14,8 @@ concepts:
   - z_transform
   - deterministic_deconvolution
   - statistical_deconvolution
+  - static_corrections
+  - normal_moveout
 tags: [deconvolution, wavelet, phase, wiener-filter, predictive-decon, deterministic-decon, textbook]
 ---
 
@@ -34,6 +36,8 @@ Text extracted from the DJVU version in `papers/general/`.
 | 3.4.1.5 | ~96–103 | Deterministic deconvolution: designature, ghosts, instrument response, wavelet estimation |
 | 3.4.1.6 | ~103–108 | Statistical deconvolution with Wiener filters: assumptions, parameters, operator length, prediction gap |
 | 3.5.1.4 | ~ | Predictive deconvolution in processing flows |
+| 3.7.1 | ~117–120 | Geometry and static corrections: vertical-ray assumption, datum, floating datum |
+| 5.10 | ~193–194 | Residual statics as a general linear inverse problem; 4-component surface-consistent model; Gauss–Seidel iteration |
 
 ## Key takeaways
 
@@ -109,3 +113,5 @@ Text extracted from the DJVU version in `papers/general/`.
 - Provides the dipole-based proof of minimum-phase front-loading requested for Term 1 Lecture 6.
 - Gives practical parameter guidance for spiking/predictive deconvolution.
 - Explains deterministic designature and ghost removal.
+- Provides the 4-component surface-consistent residual statics model and Gauss–Seidel solution (Section 5.10) for Term 1 Lecture 3.
+- Discusses vertical-ray statics and the role of datums/floating datum (Section 3.7.1).

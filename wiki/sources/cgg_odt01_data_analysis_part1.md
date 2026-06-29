@@ -10,6 +10,7 @@ concepts:
   - seismic_acquisition
   - common_midpoint
   - seismic_data_sorts
+  - normal_moveout
   - seismic_noise
   - seismic_multiples
 tags: [cgg, data-analysis, recorded-wavefield, shot-gather, cmp, qc]
@@ -59,3 +60,4 @@ Internal CGG training slides on seismic data analysis: understanding what is rec
 ## Relation to lecture notes
 - Provides the “what do we record?” motivation for Term 1 Lecture 1.
 - Gives concrete visual examples of shot gathers, CMP gathers, and wave propagation.
+- Supports the NMO introduction in Term 1 Lecture 2.

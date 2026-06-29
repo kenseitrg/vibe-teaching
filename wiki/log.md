@@ -197,6 +197,61 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
 - Created exercises: `exercises/term01_lec01_introduction_to_seismic_processing.md`.
 - Updated lecture-ready page status to `lecture-ready` and refreshed `wiki/index.md`.
 
+## [2026-06-29] lecture | Term 1 Lecture 02 — Kinematics, Velocities and Field Statics
+
+- Confirmed split of original kinematics/statics lecture into Lecture 02 (velocities, NMO, field statics, refraction) and Lecture 03 (layer replacement, residual statics, floating datum).
+- Extracted text from existing materials: `slides/raw/term01_lecture02_kinematics.pptx` and `slides/raw/plan_term01_lecture02_kinematics.docx`.
+- Drafted outline: `lecture_notes/_drafts/term01_lec02_kinematics_and_field_statics_outline.md`.
+- Generated 7 self-contained Python figure scripts in `scripts/figures/term01_lec02/` and PNGs in `figures/term01_lec02/`.
+- Wrote English lecture notes: `lecture_notes/en/term01_lec02_kinematics_and_field_statics.en.md`.
+- Rendered PDF successfully.
+- Created exercises: `exercises/term01_lec02_kinematics_and_field_statics.md`.
+- Created slide outline and starter PowerPoint deck in `slides/term01/lec02_kinematics_and_field_statics/`.
+- Updated `wiki/index.md` and `AGENTS.md` notation glossary.
+- Wiki lint passes with only stub warnings.
+
+## [2026-06-29] wiki | Populated sources and concepts for Lectures 02 and 03
+
+- Extracted and summarized:
+  - `papers/statics/What's the Datum.pdf` → `wiki/sources/noble_2020_whats_the_datum.md`
+  - `papers/statics/Jones - Near Surface.pdf` → `wiki/sources/jones_2012_incorporating_near_surface_velocity_anomalies.md`
+  - `papers/statics/Refraction_Seismic.pdf` → `wiki/sources/refraction_seismic_university_notes.md`
+- Updated `wiki/sources/hatton_worthington_makin_1986_seismic_data_processing.md` with Section 5.10 (residual statics, Gauss–Seidel) and Section 3.7.1 (datum/floating datum).
+- Updated `wiki/sources/cgg_odt01_data_analysis_part1.md` to link to `normal_moveout`.
+- Created/upgraded concept pages:
+  - `wiki/concepts/normal_moveout.md` — draft
+  - `wiki/concepts/velocity_analysis.md` — draft
+  - `wiki/concepts/seismic_velocities.md` — draft
+  - `wiki/concepts/static_corrections.md` — draft
+  - `wiki/concepts/residual_statics.md` — draft
+  - `wiki/concepts/floating_datum.md` — draft
+  - `wiki/concepts/layer_replacement.md` — draft
+- Wiki lint now passes cleanly.
+
+## [2026-06-29] lecture | Term 1 Lecture 03 — Advanced Statics and the Link to Velocity Analysis
+
+- Drafted outline: `lecture_notes/_drafts/term01_lec03_advanced_statics_and_velocity_link_outline.md`.
+- Wrote English lecture notes: `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md`.
+- Rendered PDF successfully.
+- Dispatched a worker subagent to create 6 self-contained Python figure scripts in `scripts/figures/term01_lec03/` and PNGs in `figures/term01_lec03/`.
+- Regenerated the statics-velocity-bias figure after identifying that it did not show a velocity bias; corrected the script so the semblance peak and $t^2$ vs $x^2$ slope both shift.
+- Created exercises: `exercises/term01_lec03_advanced_statics_and_velocity_link.md`.
+- Created slide outline and starter PowerPoint deck in `slides/term01/lec03_advanced_statics_and_velocity_link/`.
+- Created lecture-ready page: `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`.
+- Updated `wiki/index.md` and linked `wiki/concepts/static_corrections.md` to the new lecture-ready page.
+- Wiki lint passes cleanly.
+
+## [2026-06-29] todo | Remaining work
+
+- Add FX-deconvolution, robust deconvolution, and MBWP source summaries.
+- Build comparison page: predictive vs. surface-consistent deconvolution.
+- Review English notes for term01_lec06/lec07 with instructor and adjust content/timing as needed.
+- Optionally build final PowerPoint slides for term01_lec06/lec07 from outlines.
+- Translate exercises and slide outlines for term01_lec06/lec07 to Russian.
+- Optionally assemble the PowerPoint deck for term01_lec01 from the slide outline.
+- Translate Lecture 02 and Lecture 03 notes, exercises, and slide outlines to Russian once English versions are approved.
+- Renumber remaining Term 1 lectures after the split is finalized.
+
 ## [2026-06-27] todo | Remaining work
 
 - Add FX-deconvolution, robust deconvolution, and MBWP source summaries.
@@ -205,3 +260,5 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
 - Optionally build final PowerPoint slides for term01_lec06/lec07 from outlines.
 - Translate exercises and slide outlines for term01_lec06/lec07 to Russian.
 - Optionally assemble the PowerPoint deck for term01_lec01 from the slide outline.
+- Draft Lecture 03 (advanced statics, layer replacement, floating datum) after Lecture 02 is approved.
+- Renumber remaining Term 1 lectures after the split is finalized.

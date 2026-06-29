@@ -143,8 +143,14 @@ Slides should be derived from the lecture notes, not the other way around.
 1. Create/update a slide outline in `slides/termXX/lecYY_<topic>/slide_outline.md`:
    - One slide per bullet with title, body text, and figure reference.
 2. Generate any missing slide-specific PNG figures.
-3. Build the PowerPoint manually in `slides/termXX/lecYY_<topic>/lecYY_<topic>.pptx`.
-   - The agent can assist with outlines and figures; final assembly remains in PowerPoint.
+3. Generate a starter PowerPoint from the outline:
+   ```bash
+   uv run python scripts/build_slides.py \
+     slides/termXX/lecYY_<topic>/slide_outline.md \
+     -o slides/termXX/lecYY_<topic>/lecYY_<topic>.pptx
+   ```
+   - The script converts simple LaTeX math to plain text and places referenced figures automatically if they exist.
+   - Review and finalize the deck in PowerPoint (layout, animations, speaker notes, Russian translation if needed).
 4. Translate slide text, notes, and captions into Russian and save a copy if needed.
 
 ### Step 8 — Add exercises / concept-checks
@@ -228,7 +234,7 @@ This produces a PDF with the same base filename. See `lecture_notes/en/_example_
 | 5: Figures | 30–90 min | Agent |
 | 6: Russian notes | 30–60 min | Agent + instructor review |
 | 6a: Derivation documents | 30–60 min | Agent |
-| 7: Slides | 30–60 min | Instructor (agent assists) |
+| 7: Slides | 30–60 min | Instructor builds on agent-generated starter deck |
 | 8: Exercises | 15–30 min | Agent |
 | 9: Review | 15–30 min | Both |
 | 10: Commit | 5 min | Agent |
