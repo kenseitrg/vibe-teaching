@@ -94,7 +94,7 @@ Cross-correlation works well when shifts are small compared with the wavelet per
 
 ### 2.3 Wiggins et al. surface-consistent model
 
-A more robust approach models the total traveltime of a trace as the sum of surface-consistent components (Margrave, Chapter 5):
+A more robust approach models the total traveltime of a trace as the sum of surface-consistent components:
 
 $$
 T_{ij} = S_i + R_j + G_k + M_k X_{ij}^2,
@@ -190,7 +190,7 @@ After solving, check:
 - does the stack improve after applying the statics?
 - are the CMP terms geologically plausible?
 
-Margrave lists several practical controls that strongly affect the residual-statics solution:
+Several practical controls strongly affect the residual-statics solution:
 
 - **Correlation window.** Typically a 0.5–1 s window is chosen. It should avoid shallow, structurally complex intervals and low-frequency, ringy data that can cause cycle skipping. A window following a package of strong, continuous reflectors is often best.
 - **Correlation length.** The maximum number of lags computed on the trace-to-trace cross-correlations must be large enough to span the expected sum of source, receiver, structure, and residual-NMO shifts. Too small a length causes a poor solution; too large increases cost and cycle skipping.
@@ -224,7 +224,7 @@ Because the $t_0$ in the model is wrong, the best-fit velocity $V_\text{apparent
 
 Reliable velocity analysis requires hyperbolic events at the correct $t_0$. If static shifts are present, the events are hyperbolic but at the wrong $t_0$, so the picked velocities are biased. Biased velocities, in turn, prevent a clean NMO correction and make residual statics harder to estimate.
 
-Margrave describes this as a **chicken-and-egg problem**: velocity analysis requires statics corrections first, but residual statics work best when residual NMO is already minimal. The practical workflow is therefore iterative:
+This is a **chicken-and-egg problem**: velocity analysis requires statics corrections first, but residual statics work best when residual NMO is already minimal. The practical workflow is therefore iterative:
 
 1. Apply initial statics (field + layer replacement).
 2. Pick velocities on a floating datum.
@@ -250,7 +250,7 @@ After floating-datum correction:
 - velocity analysis gives unbiased picks,
 - the long-wavelength shift is applied only after velocities are known.
 
-Margrave also recommends that the datum should be a smoothed version of the topography and the replacement velocity should be an average near-surface velocity. Keeping the bulk static small during processing protects the velocity model; the final shift to the flat client datum is applied only after the velocities are stable.
+In practice, the datum should be a smoothed version of the topography and the replacement velocity should be an average near-surface velocity. Keeping the bulk static small during processing protects the velocity model; the final shift to the flat client datum is applied only after the velocities are stable.
 
 ![Floating datum](figures/term01_lec03/term01_lec03_floating_datum.png){width=90%}
 
