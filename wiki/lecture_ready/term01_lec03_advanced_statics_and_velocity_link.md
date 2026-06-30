@@ -6,6 +6,7 @@ sources:
   - hatton_worthington_makin_1986_seismic_data_processing
   - noble_2020_whats_the_datum
   - jones_2012_incorporating_near_surface_velocity_anomalies
+  - margrave_2006_methods_of_seismic_data_processing
 tags:
   - layer-replacement
   - residual-statics

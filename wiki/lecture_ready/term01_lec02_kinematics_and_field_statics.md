@@ -9,6 +9,7 @@ sources:
   - noble_2020_whats_the_datum
   - refraction_seismic_university_notes
   - hutchinson_link_1984_surface_consistency
+  - margrave_2006_methods_of_seismic_data_processing
 tags:
   - nmo
   - velocity-analysis

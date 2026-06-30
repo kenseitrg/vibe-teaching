@@ -4,6 +4,7 @@ status: draft
 sources:
   - hatton_worthington_makin_1986_seismic_data_processing
   - jones_2012_incorporating_near_surface_velocity_anomalies
+  - margrave_2006_methods_of_seismic_data_processing
 tags:
   - statics
   - residual-statics
@@ -68,6 +69,39 @@ $$
 $$
 
 Because $G^\top G$ is large and singular, direct inversion is impractical.
+
+## Wiggins et al. linear model
+
+Margrave (Chapter 5, page 5-19) gives the Wiggins, Larner & Wisecup (1976) model for the total traveltime of a trace from shot $i$ into receiver $j$ in CMP $k$:
+
+$$
+T_{ij} = S_i + R_j + G_k + M_k X_{ij}^2,
+$$
+
+where $S_i$ is the source static, $R_j$ the receiver static, $G_k$ the structure term, $M_k X_{ij}^2$ an approximate residual NMO term, and $X_{ij}$ the offset. The residual shift $\delta T_{ij}$ is measured by cross-correlation against a pilot trace. The model is written as an overdetermined linear system
+
+$$
+A \mathbf{p} = \mathbf{f},
+\qquad
+\mathbf{p} = (A^T A)^{-1} A^T \mathbf{f},
+$$
+
+and solved iteratively because $A$ is large and sparse.
+
+## Resolution limits and constraints
+
+A fundamental result of Wiggins et al. is that the linear system can **only resolve statics trends whose spatial wavelength is shorter than about a spread length**. Trends much longer than the spread length are not reliably recovered and, unless constrained, will leak into the source/receiver/structure solutions. For this reason residual statics solutions are usually forced to zero mean; the long-wavelength part is handled by field statics, layer replacement, or a floating datum.
+
+## Practical considerations
+
+Margrave lists several practical controls:
+
+- **NMO removal**: residual statics work best when residual NMO is already small. The linear model assumes the residual NMO is constant with time, so iterations of velocity analysis and residual statics are common.
+- **Correlation window**: typically a 0.5–1 s window that avoids shallow, structurally complex intervals and low-frequency "ringy" data that can cause cycle skipping.
+- **Correlation length**: must be large enough to span the expected sum of source, receiver, structure, and residual-NMO shifts; too small causes poor solutions, too large increases cost and cycle skipping.
+- **Pilot traces**: traces are correlated against a pilot trace (e.g., a stack of adjacent CMPs) rather than against every other trace. Better pilot traces improve the solution but can also bias it toward the pilot.
+- **Data preparation**: data are often bandpass filtered, AGC'd, or F-K filtered to build the statics solution, but the computed shifts are applied to the unfiltered data.
+- **Application order**: because statics are computed from moveout-corrected data, they are most properly applied after NMO; sometimes they are applied before NMO to improve velocity analysis or prestack migration.
 
 ## Gauss–Seidel solution
 

@@ -262,3 +262,25 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
 - Optionally assemble the PowerPoint deck for term01_lec01 from the slide outline.
 - Draft Lecture 03 (advanced statics, layer replacement, floating datum) after Lecture 02 is approved.
 - Renumber remaining Term 1 lectures after the split is finalized.
+
+## [2026-07-01] ingest | OCR extraction of Margrave Chapters 5–7 for Lectures 2 and 3
+
+- Used the new Unlimited-OCR pipeline (`scripts/extract_source_text_ocr.py`) to extract pages 206–298 of Margrave (2006) *Methods of Seismic Data Processing*.
+- Covered:
+  - Chapter 5: Surface-consistent methods, statics and datums, residual statics, refraction statics.
+  - Chapter 6: Velocity definitions (instantaneous, average, RMS, interval), Dix formula, Snell's law, ray parameter, raytracing in v(z).
+  - Chapter 7: Normal moveout, stacking velocity, dipping-reflector NMO, NMO in v(z) medium, CMP stacking, ZOS model, Fresnel zones.
+- Saved raw OCR text to `wiki/sources/_raw_text/Methods of Seismic Data Processing.txt`.
+- Updated `wiki/sources/margrave_2006_methods_of_seismic_data_processing.md` with the new chapters and added concepts to the frontmatter.
+- Updated concept pages:
+  - `concepts/static_corrections.md`
+  - `concepts/residual_statics.md`
+  - `concepts/floating_datum.md`
+  - `concepts/layer_replacement.md`
+  - `concepts/seismic_velocities.md`
+  - `concepts/normal_moveout.md`
+  - `concepts/velocity_analysis.md`
+- Updated lecture-ready pages:
+  - `lecture_ready/term01_lec02_kinematics_and_field_statics.md`
+  - `lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`
+- Ran `uv run python scripts/lint_wiki.py`; no issues found.

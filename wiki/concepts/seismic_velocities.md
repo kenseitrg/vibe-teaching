@@ -14,7 +14,7 @@ tags:
 
 # Seismic velocities
 
-Seismic processing uses several velocity definitions. Each is tied to a different assumption about the ray path through the subsurface.
+Seismic processing uses several velocity definitions. Each is tied to a different assumption about the ray path through the subsurface. Margrave (Chapter 6) derives these systematically from the instantaneous velocity $v(z)$ and the vertical traveltime $\tau$.
 
 ## Definitions
 
@@ -32,10 +32,22 @@ $$
 V_\text{avg} = \frac{\sum_i v_i \Delta t_i}{\sum_i \Delta t_i}.
 $$
 
+Equivalently, as a function of vertical traveltime:
+
+$$
+V_\text{avg}(\tau) = \frac{1}{\tau} \int_0^\tau v(\tau') \, d\tau'.
+$$
+
 **RMS velocity** — root-mean-square of interval velocities; assumes a straight ray / small offset:
 
 $$
 V_\text{rms}^2 = \frac{\sum_i v_i^2 \Delta t_i}{\sum_i \Delta t_i}.
+$$
+
+As a function of vertical traveltime:
+
+$$
+V_\text{rms}^2(\tau) = \frac{1}{\tau} \int_0^\tau v^2(\tau') \, d\tau'.
 $$
 
 **NMO velocity** — velocity that makes the reflection traveltime hyperbolic:
@@ -48,11 +60,31 @@ $$
 
 ## Relations
 
-For the same layered medium, $V_\text{rms} \ge V_\text{avg}$. Interval velocity can be estimated from RMS velocities with the Dix formula:
+For the same layered medium, $V_\text{rms} \ge V_\text{avg}$ (Schwartz inequality). Interval velocity can be estimated from RMS velocities with the Dix formula:
 
 $$
 v_\text{int}^2 = \frac{V_\text{rms,2}^2 t_2 - V_\text{rms,1}^2 t_1}{t_2 - t_1}.
 $$
+
+Margrave stresses that the Dix result must be physically plausible: the interval-velocity squared must be positive, which constrains how fast $V_\text{rms}$ can decrease with time. Noisy or invalid $V_\text{rms}$ estimates can produce imaginary or otherwise unphysical interval velocities.
+
+## Vertical traveltime and instantaneous velocity
+
+Margrave defines vertical traveltime as
+
+$$
+\tau(z) = \int_0^z \frac{dz'}{v(z')},
+\qquad
+z(\tau) = \int_0^\tau v(\tau') \, d\tau'.
+$$
+
+For a linear $v(z) = v_0 + c z$ medium, the instantaneous velocity as a function of vertical traveltime is exponential:
+
+$$
+v(\tau) = v_0 e^{c \tau}.
+$$
+
+This is a useful sanity check: a small velocity gradient with depth produces a large exponential variation with time, so velocity analysis must be performed in fine time gates.
 
 ## Relation to lecture notes
 

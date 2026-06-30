@@ -5,6 +5,7 @@ sources:
   - noble_2020_whats_the_datum
   - jones_2012_incorporating_near_surface_velocity_anomalies
   - hatton_worthington_makin_1986_seismic_data_processing
+  - margrave_2006_methods_of_seismic_data_processing
 tags:
   - statics
   - floating-datum
@@ -24,7 +25,7 @@ $$
 t^2(x) = (t_0 + \Delta t)^2 + \frac{x^2}{V^2}.
 $$
 
-If velocity analysis fits $t^2(x) = t_0^2 + x^2/V_\text{apparent}^2$ to shifted data, the apparent velocity $V_\text{apparent}$ is biased. The bias occurs because the wrong $t_0$ forces the hyperbola to stretch or compress in a way that mimics a velocity error.
+If velocity analysis fits $t^2(x) = t_0^2 + x^2/V_\text{apparent}^2$ to shifted data, the apparent velocity $V_\text{apparent}$ is biased. The bias occurs because the wrong $t_0$ forces the hyperbola to stretch or compress in a way that mimics a velocity error. Margrave emphasizes this is a **chicken-and-egg problem**: velocity analysis needs statics corrections first, but residual statics work best when residual NMO is minimal, so the data are usually improved by iterations of velocity analysis and residual statics.
 
 ## Definition
 
@@ -43,6 +44,7 @@ where $\Delta t_\text{smoothed}$ is a long-wavelength (low-spatial-frequency) ve
 - After floating-datum correction, events in a CMP gather are hyperbolic and near their true $t_0$.
 - Velocity analysis gives unbiased velocity picks.
 - The long-wavelength shift is applied only after velocities are known.
+- Margrave's recommendation is to keep the bulk static small during processing by removing the mean and applying the final shift to the interpretation datum at the end of the flow.
 
 ## Relation to lecture notes
 

@@ -5,6 +5,7 @@ sources:
   - hatton_worthington_makin_1986_seismic_data_processing
   - cgg_odt01_data_analysis_part2
   - jones_2012_incorporating_near_surface_velocity_anomalies
+  - margrave_2006_methods_of_seismic_data_processing
 tags:
   - velocity
   - semblance
@@ -40,9 +41,13 @@ where $M$ is the number of offsets. Semblance ranges from 0 to 1 and is high onl
 - A **vertical velocity spectrum** is computed at one CMP location.
 - **Horizontal** or horizon-consistent spectra show velocity variations along a line or around a picked horizon.
 
+## Stacking velocity as a best-fit hyperbola
+
+Margrave (Chapter 7) defines **stacking velocity** $V_s$ as the velocity parameter that produces the best-fit hyperbola to the actual traveltime curve on a CMP gather. The precise meaning of "best fit" depends on the software, and $V_s$ is a function of the maximum offset used in the analysis. If the maximum offset changes, the stacking velocity can change even for the same reflector. For flat, horizontally layered media with no lateral velocity variation, $V_s$ closely approximates the RMS velocity.
+
 ## Bias from statics
 
-Long-wavelength statics shift the whole CMP gather in time. The events remain hyperbolic but have the wrong $t_0$, which biases the velocity estimate. This is one reason floating datums are used.
+Long-wavelength statics shift the whole CMP gather in time. The events remain hyperbolic but have the wrong $t_0$, which biases the velocity estimate. This is one reason floating datums are used. Margrave describes this as a chicken-and-egg problem: velocity analysis requires statics corrections first, while residual statics work best when residual NMO is minimal. The practical solution is iterative refinement of velocities and statics, often with a floating datum between the iterations.
 
 ## Relation to lecture notes
 

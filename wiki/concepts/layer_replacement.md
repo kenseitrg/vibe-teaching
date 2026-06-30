@@ -4,6 +4,7 @@ status: draft
 sources:
   - hatton_worthington_makin_1986_seismic_data_processing
   - jones_2012_incorporating_near_surface_velocity_anomalies
+  - margrave_2006_methods_of_seismic_data_processing
 tags:
   - statics
   - layer-replacement
@@ -36,6 +37,8 @@ Replace the real near-surface geology with a simpler velocity model so that the 
 6. Estimate a replacement velocity for the layer being replaced.
 7. Compute long-wavelength static corrections from the difference between original and smoothed surfaces.
 8. Apply statics and QC by re-picking the reference horizon.
+
+Margrave (Chapter 5) connects this to the general statics model: the bulk, long-wavelength component of the total static should be removed from the data early and saved for a final datum shift, so that NMO, residual statics, and velocity analysis are not biased by large bulk shifts.
 
 ## Risks and pitfalls
 

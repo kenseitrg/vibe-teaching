@@ -6,6 +6,7 @@ sources:
   - cgg_odt01_data_analysis_part1
   - noble_2020_whats_the_datum
   - jones_2012_incorporating_near_surface_velocity_anomalies
+  - margrave_2006_methods_of_seismic_data_processing
 tags:
   - statics
   - near-surface
@@ -33,7 +34,35 @@ For land data, Jones (2012) decomposes near-surface statics into:
 
 ## Replacement velocity
 
-The velocity used to replace the weathered layer when moving data to a datum. A low replacement velocity gives large statics; a high replacement velocity gives small statics.
+The velocity used to replace the weathered layer when moving data to a datum. A low replacement velocity gives large statics; a high replacement velocity gives small statics. Margrave recommends choosing the datum as a smoothed version of the topography and the replacement velocity as an average near-surface velocity, then removing the mean shift so that the bulk static does not bias later processing.
+
+## Vertical-ray approximation and replacement model
+
+Margrave (Chapter 5) treats statics as an approximate **vertical-ray downward continuation** (or wave-equation datuming simplified to vertical paths). It strips the variable topography/weathering layer and replaces it with a smoother near-surface model defined by:
+
+- $\delta t_s$ — source-side traveltime from shot to the base of the near surface (BNS).
+- $\delta t_r$ — receiver-side traveltime from BNS to receiver.
+- $e_\text{bns}$ — elevation of the BNS.
+- $e_\text{dat}$ — elevation of the chosen datum.
+- $V_\text{rep}$ — replacement velocity used to convert elevation differences to time shifts.
+
+Because the correction assumes vertical raypaths through the near surface, it is only approximate for energy that actually travels slantingly. To keep NMO and migration from being distorted, the bulk (mean) static shift should be kept small; the mean is often removed and saved for a final shift to the interpretation datum.
+
+## Statics from uphole times
+
+When buried impulsive sources are used, a near-surface receiver can measure the **uphole time** $t_\text{uh}$ from the shot depth to the surface. The shot-to-datum static is then:
+
+$$
+\delta t_s \approx \frac{e_s - d_s - e_\text{dat}}{V_\text{rep}}
+$$
+
+and the receiver static includes the uphole time:
+
+$$
+\delta t_r = t_\text{uh}(r) + \frac{e_s(r) - d_s(r) - e_\text{dat}}{V_\text{rep}}.
+$$
+
+In practice, shots sometimes lie inside the weathered layer, uphole picks are noisy, and shot spacing can be too sparse for reliable interpolation.
 
 ## Related concepts
 
