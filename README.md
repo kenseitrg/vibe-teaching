@@ -61,6 +61,14 @@ Extract text from a PDF or PPTX locally:
 uv run python scripts/extract_source_text.py papers/deconvolution/file.pdf -o wiki/sources/_raw_text
 ```
 
+For scanned PDFs without a selectable text layer (e.g. the Hatton or Margrave textbooks), use the OCR pipeline:
+
+```bash
+uv run python scripts/extract_source_text.py papers/textbooks/Methods.pdf --ocr --no-mmproj-offload -o wiki/sources/_raw_text
+```
+
+See `docs/ocr_setup.md` for one-time setup instructions for the Unlimited-OCR GGUF model and llama.cpp.
+
 Then create or update a source summary in `wiki/sources/`, update the relevant concept pages in `wiki/concepts/`, and refresh `wiki/index.md` and `wiki/log.md`.
 
 ### Lint the wiki

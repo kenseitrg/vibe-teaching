@@ -1,0 +1,1 @@
+{% for message in messages %}{% if message['role'] == 'user' %}<|User|>{{ message['content'] }}{% elif message['role'] == 'assistant' %}<|Assistant|>{{ message['content'] }}<|EOT|>{% endif %}{% endfor %}<|Assistant|>

@@ -104,8 +104,20 @@ def extract_file(path: Path, page_range: str | None = None) -> str:
 def main():
     parser = argparse.ArgumentParser(description="Extract text from source documents.")
     parser.add_argument("inputs", nargs="+", help="Input file(s) or directory/ies")
-    parser.add_argument("--output", "-o", help="Output directory (default: same as input)")
+    parser.add_argument("--output", "-o", help="Output directory (default: wiki/sources/_raw_text)")
     parser.add_argument("--pages", help="PDF page range, e.g. '10-20' or '5'")
+    parser.add_argument(
+        "--ocr",
+        action="store_true",
+        help="Use OCR for PDFs (for scanned pages without a text layer). "
+             "See docs/ocr_setup.md for one-time setup requirements.",
+    )
+    parser.add_argument(
+        "--no-mmproj-offload",
+        action="store_true",
+        help="When using --ocr, do not offload the vision projector to the GPU "
+             "(often needed on 6 GB cards).",
+    )
     args = parser.parse_args()
 
     output_dir = Path(args.output) if args.output else Path("wiki/sources/_raw_text")
@@ -119,12 +131,23 @@ def main():
         else:
             files.extend(sorted(q for q in p.iterdir() if q.suffix.lower() in {".pdf", ".ppt", ".pptx"}))
 
+    ocr_script = Path(__file__).parent / "extract_source_text_ocr.py"
+
     for f in files:
         try:
-            text = extract_file(f, args.pages)
-            out_file = output_dir / f"{f.stem}.txt"
-            out_file.write_text(text, encoding="utf-8")
-            print(f"Extracted: {f.name} -> {out_file}")
+            if args.ocr and f.suffix.lower() == ".pdf":
+                cmd = [sys.executable, str(ocr_script), str(f), "-o", str(output_dir)]
+                if args.pages:
+                    cmd.extend(["--pages", args.pages])
+                if args.no_mmproj_offload:
+                    cmd.append("--no-mmproj-offload")
+                print(f"OCR: {f.name}")
+                subprocess.run(cmd, check=True)
+            else:
+                text = extract_file(f, args.pages)
+                out_file = output_dir / f"{f.stem}.txt"
+                out_file.write_text(text, encoding="utf-8")
+                print(f"Extracted: {f.name} -> {out_file}")
         except Exception as e:
             print(f"FAILED: {f.name} - {e}", file=sys.stderr)
 
