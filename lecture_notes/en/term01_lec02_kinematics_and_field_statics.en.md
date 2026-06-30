@@ -34,25 +34,53 @@ Every traveltime correction in seismic processing needs a velocity. The same sta
 
 Consider a horizontally layered medium with layer interval velocities $v_i$ and two-way interval times $\Delta t_i$.
 
+Margrave introduces the **vertical traveltime** $\tau$ as the natural time coordinate for a vertically varying medium:
+
+$$
+\tau(z) = \int_0^z \frac{dz'}{v(z')}, \qquad z(\tau) = \int_0^\tau v(\tau') \, d\tau'.
+$$
+
+Using $\tau$, the velocity averages become continuous integrals rather than layer sums.
+
 **Interval velocity** is the velocity of one layer:
 
 $$
 v_i = \frac{2 \Delta z_i}{\Delta t_i}.
 $$
 
-**Average velocity** is the total depth divided by total one-way time. It assumes a vertical ray:
+**Average velocity** is the total depth divided by total one-way time. It assumes a vertical ray. In layer form:
 
 $$
 V_\text{avg}(T) = \frac{\sum_i v_i \Delta t_i}{\sum_i \Delta t_i} = \frac{z}{T/2}.
 $$
 
-**RMS velocity** is the root-mean-square of interval velocities weighted by interval time. It appears when a straight-ray (small-offset) approximation is used:
+As a function of vertical traveltime:
+
+$$
+V_\text{avg}(\tau) = \frac{1}{\tau} \int_0^\tau v(\tau') \, d\tau'.
+$$
+
+**RMS velocity** is the root-mean-square of interval velocities weighted by interval time. In layer form:
 
 $$
 V_\text{rms}^2(T) = \frac{\sum_i v_i^2 \Delta t_i}{\sum_i \Delta t_i}.
 $$
 
-Because velocities are squared before averaging, the RMS velocity is always greater than or equal to the average velocity for the same layered medium. The two are equal only when all interval velocities are identical.
+As a function of vertical traveltime:
+
+$$
+V_\text{rms}^2(\tau) = \frac{1}{\tau} \int_0^\tau v^2(\tau') \, d\tau'.
+$$
+
+Because velocities are squared before averaging, the RMS velocity is always greater than or equal to the average velocity for the same layered medium. The two are equal only when all interval velocities are identical. Margrave also notes the exact relation
+
+$$
+V_\text{rms}^2 = V_\text{avg} \, V_\text{m},
+$$
+
+where $V_\text{m}$ is the mean velocity over depth.
+
+> **Sanity check.** For a linear increase with depth $v(z) = v_0 + c z$, the instantaneous velocity as a function of vertical traveltime is exponential: $v(\tau) = v_0 e^{c \tau}$. A small velocity gradient with depth produces a large exponential variation with time, which is why velocity analysis is done in fine time gates.
 
 For a single horizontal layer the reflection traveltime as a function of source–receiver offset $x$ is exactly hyperbolic:
 
@@ -131,6 +159,26 @@ From the equation you can see that the NMO correction:
 
 These rules help interpreters spot velocity problems by eye. They also explain why picking velocities on far-offset data is harder than on near-offset data: the relative moveout is smaller and more sensitive to errors.
 
+For a dipping reflector beneath a constant-velocity overburden, the image-source construction gives the exact relation (Margrave):
+
+$$
+t^2(x) = t_0^2 + \frac{x^2 \cos^2(\delta)}{V^2},
+$$
+
+so the stacking velocity becomes
+
+$$
+V_\text{stack} = \frac{V}{\cos(\delta)}.
+$$
+
+In 3-D the line azimuth $\omega$ relative to the dip direction matters:
+
+$$
+V_\text{stack} = \frac{V}{\sqrt{1 - \sin^2(\delta) \cos^2(\omega)}}.
+$$
+
+This is why a single stacking velocity can fail for steeply dipping events.
+
 ### 3.3 Under-correction and over-correction
 
 If the wrong NMO velocity is used, the gather is not flattened:
@@ -173,11 +221,29 @@ Even after a careful NMO correction, small residual curvatures may remain. These
 
 Residual moveout is one reason velocity analysis is iterated and why residual statics are applied later. Residual statics and the link to velocity analysis are covered in detail in Term 1 Lecture 03.
 
+### 3.6 NMO in a vertically varying medium
+
+In a medium where velocity changes with depth, the exact traveltime is not a simple hyperbola. For small offsets it can be expanded as a power series (Margrave):
+
+$$
+t^2(x) = c_1 + c_2 x^2 + c_3 x^4 + \ldots,
+$$
+
+with
+
+$$
+c_1 = t_0^2, \qquad c_2 = \frac{1}{V_\text{rms}^2}.
+$$
+
+This is the theoretical link between the stacking velocity we pick from data and the RMS velocity of the medium. The higher-order coefficient $c_3$ is the **fourth-order moveout**. It becomes important when the offset-to-depth ratio $H/z_0$ is large or for converted/shear waves. To the extent that the higher-order terms are negligible, stacking velocities approximate RMS velocities, and interval velocities can be estimated with the Dix formula.
+
 ## 4. Velocity analysis
 
 ### 4.1 Principle
 
 Velocity analysis tries many candidate $(t_0, V)$ pairs and measures how well each pair flattens the gather. A good velocity produces a coherent, high-amplitude stack along the corresponding hyperbola; a poor velocity does not.
+
+> **Definition.** Margrave defines the **stacking velocity** as the velocity parameter that produces the best-fit hyperbola to the actual traveltime curve on a CMP gather. The precise meaning of “best fit” depends on the software, and the stacking velocity is a function of the maximum offset used in the analysis. Changing the maximum offset can change the stacking velocity even for the same reflector.
 
 ### 4.2 Computing a velocity spectrum
 
@@ -237,7 +303,23 @@ Field statics move the data from the physical surface to a reference level calle
 - **Intermediate datum**: usually chosen near the base of the weathering layer. It removes the most irregular part of the static and lets the final datum and replacement velocity be changed later.
 - **Floating datum** (Lecture 03): a smoothed surface that follows the long-wavelength statics trend; used during NMO and velocity analysis so that events stay hyperbolic.
 
+Margrave introduces the following statics model (Chapter 5). Let $e_\text{bns}$ be the elevation of the base of the near surface (BNS), $e_\text{dat}$ the datum elevation, and $V_\text{rep}$ the replacement velocity. The source-side and receiver-side statics are the vertical traveltimes from the source/receiver to the BNS plus the replacement-velocity shift from the BNS to the datum:
+
+$$
+\delta t_s = \text{traveltime from source to BNS} + \frac{e_\text{bns} - e_\text{dat}}{V_\text{rep}}.
+$$
+
+For the receiver side, if the source is below the BNS and the uphole time $t_\text{uh}$ has been measured, the receiver static is
+
+$$
+\delta t_r = t_\text{uh}(r) + \frac{e_\text{bns} - e_\text{dat}}{V_\text{rep}}.
+$$
+
+The total static applied to a trace is $\delta t_s + \delta t_r$ and must be subtracted from the measured arrival times.
+
 Between the surface and the datum we replace the real low-velocity weathering layer with a **replacement velocity** $V_\text{r}$. This velocity should be a best estimate of the vertical velocity in the consolidated material just below the weathering. Because the static shift is $T = D/V$, a low replacement velocity gives a large static and a high replacement velocity gives a small static. The wrong choice does not just shift the section; it can introduce long-wavelength structural distortions (a figure demonstrating this distortion is still needed).
+
+Margrave warns that the statics process is an approximate form of downward continuation that is only correct for vertical raypaths. For energy that travels slantingly through the near surface, the correction is approximate. To keep later processing (NMO, migration) from being distorted, the **bulk (mean) static shift should be kept small**. A common practice is to remove the mean from the statics solution and save it to be applied as the final shift to the interpretation datum.
 
 ![Statics datums](figures/term01_lec02/term01_lec02_statics_datums.png){width=90%}
 
@@ -264,6 +346,8 @@ A reliable near-surface model is needed for accurate field statics. Information 
 - well logs and geological maps,
 - microgravity and surface-wave methods.
 
+Uphole surveys are attractive because they measure the vertical traveltime directly, but in practice shots sometimes lie inside the weathered layer, uphole picks are noisy, and shot spacing can be too sparse for reliable interpolation.
+
 ### 6.2 Refraction problem statement
 
 Refraction statics use first arrivals to estimate the weathering-layer thickness and velocity. The classic model is a low-velocity layer over a higher-velocity half-space. At offsets larger than the **crossover distance** the first arrival is a critically refracted head wave rather than the direct wave.
@@ -281,6 +365,14 @@ $$
 $$
 
 where $i_c = \sin^{-1}(V_1/V_2)$ is the critical angle. This isolates the near-surface contribution and is the basis for refraction statics.
+
+Margrave gives the refraction traveltime for a flat two-layer model as
+
+$$
+t_\text{refraction} = \frac{X}{V_2} + t_i, \qquad t_i = \frac{2 Z_1}{V_1} \cos(i_c),
+$$
+
+where $t_i$ is the **intercept time** and $Z_1$ is the weathering-layer thickness. The critical distance is $X_c = Z_1 \tan(i_c)$. When $V_1 \ll V_2$, the delay time becomes a good approximation to the vertical traveltime through the weathering layer.
 
 Important classical methods include:
 

@@ -92,16 +92,31 @@ The simplest residual-statics method works trace by trace:
 
 Cross-correlation works well when shifts are small compared with the wavelet period. When shifts exceed about half a period, the method can **cycle skip**: the correlation peak locks onto the wrong cycle of the wavelet. This is why residual statics are usually applied after an initial NMO correction and after the largest field statics have been removed.
 
-### 2.3 From trace shifts to surface-consistent components
+### 2.3 Wiggins et al. surface-consistent model
 
-A single measured shift for a trace contains several physical effects:
+A more robust approach models the total traveltime of a trace as the sum of surface-consistent components (Margrave, Chapter 5):
 
-- a source-side residual static,
-- a receiver-side residual static,
-- an offset-dependent residual moveout,
-- a structural term tied to the CMP location.
+$$
+T_{ij} = S_i + R_j + G_k + M_k X_{ij}^2,
+$$
 
-The structural term is geology, not a static, so it should not be removed. The other terms are separated by solving a linear system.
+where
+
+- $S_i$ = source static,
+- $R_j$ = receiver static,
+- $G_k$ = structure term at CMP $k$,
+- $M_k X_{ij}^2$ = residual normal-moveout term,
+- $X_{ij}$ = offset of the trace from source $i$ to receiver $j$.
+
+The residual shift $\delta T_{ij}$ is measured by cross-correlation against a **pilot trace** (a reference trace, usually a stack of adjacent CMPs). The measured shifts for all traces form an overdetermined linear system
+
+$$
+A \mathbf{p} = \mathbf{f},
+$$
+
+which is solved iteratively because $A$ is large and sparse.
+
+A fundamental result from Wiggins, Larner & Wisecup (1976) is that the linear system can **only resolve statics trends whose spatial wavelength is shorter than about a spread length**. Longer-wavelength trends will leak into the source, receiver, and structure solutions unless they are constrained. For this reason residual statics are usually forced to zero mean; the long-wavelength component is handled by field statics, layer replacement, or a floating datum.
 
 ## 3. The surface-consistent 4-component model
 
@@ -160,7 +175,7 @@ $$
 
 where $N_i$ is the number of traces with source $i$. Then update receivers, offset classes, and CMP terms in turn. Each update is just an average over the appropriate traces, which is why Gauss–Seidel is natural here.
 
-Hatton reports that 4–5 sweeps are usually enough for convergence on a typical 2-D seismic profile.
+Hatton reports that 4–5 sweeps are usually enough for convergence on a typical 2-D seismic profile. The result is order-dependent because the model is underdetermined for very long wavelengths, so constraints such as zero mean are applied before the Gauss–Seidel sweeps begin.
 
 ![Gauss–Seidel](figures/term01_lec03/term01_lec03_gauss_seidel.png){width=90%}
 
@@ -174,6 +189,14 @@ After solving, check:
 - do the offset terms look like a small residual moveout?
 - does the stack improve after applying the statics?
 - are the CMP terms geologically plausible?
+
+Margrave lists several practical controls that strongly affect the residual-statics solution:
+
+- **Correlation window.** Typically a 0.5–1 s window is chosen. It should avoid shallow, structurally complex intervals and low-frequency, ringy data that can cause cycle skipping. A window following a package of strong, continuous reflectors is often best.
+- **Correlation length.** The maximum number of lags computed on the trace-to-trace cross-correlations must be large enough to span the expected sum of source, receiver, structure, and residual-NMO shifts. Too small a length causes a poor solution; too large increases cost and cycle skipping.
+- **Pilot traces.** Traces are correlated against a pilot trace rather than against every other trace. The pilot is usually the best current stack of adjacent CMPs. Better pilots improve the solution but can also bias it toward the pilot, so external pilot traces are sometimes used.
+- **Data preparation.** Data are often bandpass filtered, AGC'd, or F–K filtered to build the statics solution, but the computed shifts are applied to the unfiltered data.
+- **Application order.** Because statics are computed from moveout-corrected data, they are most properly applied after NMO. Sometimes they are applied before NMO to improve velocity analysis or for prestack migration.
 
 ## 4. The link between statics and velocity analysis
 
@@ -201,13 +224,15 @@ Because the $t_0$ in the model is wrong, the best-fit velocity $V_\text{apparent
 
 Reliable velocity analysis requires hyperbolic events at the correct $t_0$. If static shifts are present, the events are hyperbolic but at the wrong $t_0$, so the picked velocities are biased. Biased velocities, in turn, prevent a clean NMO correction and make residual statics harder to estimate.
 
-This creates an iterative workflow:
+Margrave describes this as a **chicken-and-egg problem**: velocity analysis requires statics corrections first, but residual statics work best when residual NMO is already minimal. The practical workflow is therefore iterative:
 
 1. Apply initial statics (field + layer replacement).
 2. Pick velocities on a floating datum.
 3. Apply residual statics with the new velocity.
 4. Re-pick velocities.
 5. Repeat until convergence.
+
+During this iteration, **large bulk (long-wavelength) shifts should be kept out of the data**. A common practice is to remove the mean from the statics solution and save it to be applied as the final shift to the interpretation datum. This keeps NMO, residual statics, and velocity analysis from being biased by a bulk time shift.
 
 ### 4.3 Floating datum as the solution
 
@@ -224,6 +249,8 @@ After floating-datum correction:
 - their $t_0$ values are close to the true zero-offset times,
 - velocity analysis gives unbiased picks,
 - the long-wavelength shift is applied only after velocities are known.
+
+Margrave also recommends that the datum should be a smoothed version of the topography and the replacement velocity should be an average near-surface velocity. Keeping the bulk static small during processing protects the velocity model; the final shift to the flat client datum is applied only after the velocities are stable.
 
 ![Floating datum](figures/term01_lec03/term01_lec03_floating_datum.png){width=90%}
 
