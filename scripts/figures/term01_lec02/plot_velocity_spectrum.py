@@ -2,7 +2,10 @@
 Velocity spectrum / semblance figure for Term 1 Lecture 02.
 
 Builds a synthetic CMP gather with three reflection events, computes a
-semblance-based velocity spectrum, and overlays the picked velocity trend.
+semblance-based velocity spectrum by flattening the gather with a range of
+trial velocities, and overlays the picked velocity trend.
+
+The script is self-contained and writes a single PNG to figures/term01_lec02/.
 """
 
 import numpy as np
@@ -11,9 +14,11 @@ import matplotlib.pyplot as plt
 # ---------------------------------------------------------------------------
 # Acquisition parameters
 # ---------------------------------------------------------------------------
-offsets = np.linspace(0.0, 3000.0, 40)
+nx = 60
+xmax = 2000.0                   # m — consistent with Figure 3/4
+offsets = np.linspace(0.0, xmax, nx)
 dt = 0.004
-nt = 400
+nt = 500                        # 2.0 s time window
 times = np.arange(nt) * dt
 
 # Three reflectors: (t0, vnmo, amplitude)
@@ -24,67 +29,69 @@ reflectors = [
 ]
 
 # Ricker wavelet
-wavelet_t = np.arange(-0.05, 0.05 + dt, dt)
+wavelet_t = np.arange(-0.08, 0.08 + dt, dt)
 
 
-def ricker(t, f=25.0):
+def ricker(t, f=18.0):
     t = np.asarray(t)
     pi2f2 = (np.pi * f) ** 2
     return (1.0 - 2.0 * pi2f2 * t ** 2) * np.exp(-pi2f2 * t ** 2)
 
 
 # ---------------------------------------------------------------------------
-# Build synthetic CMP gather
+# Build synthetic CMP gather with wavelets placed on the hyperbolae
 # ---------------------------------------------------------------------------
-gather = np.zeros((nt, len(offsets)))
+gather = np.zeros((nt, nx))
 for t0, vnmo, amp in reflectors:
     tx = np.sqrt(t0 ** 2 + (offsets / vnmo) ** 2)
     for ix, t_x in enumerate(tx):
-        shift = t_x - t0
-        shifted = np.interp(wavelet_t + shift, wavelet_t, ricker(wavelet_t))
-        idx = np.round((t0 + wavelet_t) / dt).astype(int)
-        valid = (idx >= 0) & (idx < nt)
-        gather[idx[valid], ix] += amp * shifted[valid]
+        for tw in wavelet_t:
+            t_abs = t_x + tw
+            it = int(round(t_abs / dt))
+            if 0 <= it < nt:
+                gather[it, ix] += amp * ricker(tw, f=18.0)
 
 # Add a small amount of random noise
 np.random.seed(42)
 gather += 0.03 * np.max(np.abs(gather)) * np.random.randn(*gather.shape)
+
+
+# ---------------------------------------------------------------------------
+# Helper: apply NMO correction for a given velocity
+# ---------------------------------------------------------------------------
+def apply_nmo(gather, times, offsets, v_used):
+    out = np.zeros_like(gather)
+    for ix, x in enumerate(offsets):
+        t_in = np.sqrt(times ** 2 + (x / v_used) ** 2)
+        out[:, ix] = np.interp(t_in, times, gather[:, ix], left=0, right=0)
+    return out
+
 
 # ---------------------------------------------------------------------------
 # Velocity spectrum grid
 # ---------------------------------------------------------------------------
 v_min, v_max, nv = 1400.0, 3200.0, 80
 velocities = np.linspace(v_min, v_max, nv)
-# Time windows for semblance (centred on each sample)
+
+# Time window for semblance (centred on each output sample)
 hw = 3  # half window in samples
 
 semblance = np.zeros((nt, nv))
 
-for it0, t0 in enumerate(times):
-    # Window around t0
-    iw_start = max(0, it0 - hw)
-    iw_end = min(nt, it0 + hw + 1)
-    if iw_end - iw_start < 3:
-        continue
-    win_data = gather[iw_start:iw_end, :]  # (time_window, offsets)
+for iv, v in enumerate(velocities):
+    # Flatten the gather with the trial velocity
+    flattened = apply_nmo(gather, times, offsets, v)
 
-    for iv, v in enumerate(velocities):
-        # NMO shift for each offset at this t0
-        shifts = np.sqrt(t0 ** 2 + (offsets / v) ** 2) - t0
-        shifted_indices = np.round((iw_start + np.arange(win_data.shape[0]))[:, None] * dt
-                                    - shifts[None, :]) / dt
-        shifted_indices = shifted_indices.astype(int)
-        valid = (shifted_indices >= 0) & (shifted_indices < nt)
+    for it0 in range(nt):
+        iw_start = max(0, it0 - hw)
+        iw_end = min(nt, it0 + hw + 1)
+        win = flattened[iw_start:iw_end, :]
+        if win.shape[0] < 3:
+            continue
 
-        # Gather shifted window values
-        n_offset = len(offsets)
-        aligned = np.zeros((win_data.shape[0], n_offset))
-        aligned[valid] = gather[shifted_indices[valid], np.arange(n_offset)[None, :].repeat(win_data.shape[0], axis=0)[valid]]
-
-        # Semblance over the time window
-        stacked = np.sum(aligned, axis=1)
+        stacked = np.sum(win, axis=1)
         numerator = np.sum(stacked ** 2)
-        denominator = n_offset * np.sum(aligned ** 2)
+        denominator = nx * np.sum(win ** 2)
         if denominator > 1e-12:
             semblance[it0, iv] = numerator / denominator
 
@@ -94,6 +101,7 @@ for it0, t0 in enumerate(times):
 fig, axes = plt.subplots(1, 2, figsize=(12, 6), sharey=True)
 
 vm = 0.8 * np.max(np.abs(gather))
+t_display_max = 1.9
 
 # CMP gather
 ax = axes[0]
@@ -106,6 +114,7 @@ for t0, vnmo, _ in reflectors:
 ax.set_xlabel("Offset (m)", fontsize=11)
 ax.set_ylabel("Two-way time (s)", fontsize=11)
 ax.set_title("(a) Synthetic CMP gather", fontsize=11)
+ax.set_ylim(t_display_max, 0.0)
 ax.grid(True, alpha=0.3)
 
 # Velocity spectrum
@@ -118,6 +127,7 @@ ax.plot([r[1] for r in reflectors], [r[0] for r in reflectors], "co", markersize
         markeredgecolor="white", markeredgewidth=1.5, label="Picked velocities")
 ax.set_xlabel("Velocity (m/s)", fontsize=11)
 ax.set_title("(b) Semblance velocity spectrum", fontsize=11)
+ax.set_ylim(t_display_max, 0.0)
 ax.legend(loc="lower right", fontsize=9)
 ax.grid(True, alpha=0.3)
 

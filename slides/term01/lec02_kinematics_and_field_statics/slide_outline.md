@@ -59,6 +59,8 @@ $$t^2(x) = t_0^2 + \frac{x^2}{V_\text{nmo}^2}$$
 - Statics correct near-surface delays.
 - Result: a zero-offset stack section, improved later by migration.
 
+**Figure:** `figures/term01_lec02/term01_lec02_processing_flow.png`
+
 ---
 
 # NMO correction
@@ -90,7 +92,7 @@ $$\Delta t_\text{nmo} = \sqrt{t_0^2 + \frac{x^2}{V_\text{nmo}^2}} - t_0$$
 - Stretch worst for: far offsets, shallow events, low velocities.
 - Stretched samples are muted before stack.
 
-**Figure:** `figures/term01_lec02/term01_lec02_nmo_stretch_mute.png`
+**Figure:** `figures/term01_lec02/term01_lec02_wavelet_stretch.png`
 
 ---
 
@@ -145,9 +147,11 @@ Key assumption: one constant time shift per trace.
 - **Intermediate datum**: near base of weathering.
 - **Final datum**: flat reference for stack/migration.
 - **Replacement velocity** $V_\text{r}$: velocity used below the intermediate datum.
-- Choice of $V_\text{r}$ affects computed statics.
+- Choice of $V_\text{r}$ affects computed statics and can distort far offsets.
 
 **Figure:** `figures/term01_lec02/term01_lec02_statics_datums.png`
+
+**Figure:** `figures/term01_lec02/term01_lec02_replacement_velocity.png`
 
 ---
 
@@ -166,7 +170,7 @@ Refraction statics:
 - First arrivals: direct wave near source, head wave beyond crossover distance.
 - Delay time isolates near-surface effect.
 
-**Figure:** `figures/term01_lec02/term01_lec02_refraction_geometry.png`
+**Figure:** `figures/term01_lec02/term01_lec02_delay_time_scheme.png`
 
 ---
 
