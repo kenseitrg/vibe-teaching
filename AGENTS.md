@@ -294,10 +294,10 @@ Maintain a shared notation list here as the course develops. Add terms once they
 | $h$ | Weathering-layer thickness | мощность выветриванного слоя | Term 1, Lec 2 |
 | $s_i$ | Source residual static | остаточная статика источника | Term 1, Lec 3 |
 | $r_j$ | Receiver residual static | остаточная статика приёмника | Term 1, Lec 3 |
-| $h_k$ | Offset-class residual moveout | остаточная кинематика по удалениям | Term 1, Lec 3 |
-| $c_l$ | CMP structural term | структурный член ОСТ | Term 1, Lec 3 |
-| $G$ | Design matrix for surface-consistent statics | матрица поверхностно-согласованных статик | Term 1, Lec 3 |
-| $\Delta t_\text{floating}$ | Floating-datum correction | поправка к плавающему датуму | Term 1, Lec 3 |
+| $h_k$ | Offset-class residual moveout | остаточная кинематика на заданном удалении | Term 1, Lec 3 |
+| $c_l$ | CMP structural term | структурная компонента ОСТ | Term 1, Lec 3 |
+| $G$ | Design matrix for surface-consistent statics | матрица поверхностно-согласованных статических поправок | Term 1, Lec 3 |
+| $\Delta t_\text{floating}$ | Floating-datum correction | поправка к плавающему уровню | Term 1, Lec 3 |
 | $\Delta t_\text{smoothed}$ | Long-wavelength static component | длиннопериодная составляющая статики | Term 1, Lec 3 |
 | $V_\text{apparent}$ | Apparent velocity from biased velocity analysis | кажущаяся скорость | Term 1, Lec 3 |
 

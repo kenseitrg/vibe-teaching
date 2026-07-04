@@ -84,6 +84,24 @@ Limitation: cycle skipping when shifts exceed half a period.
 
 ---
 
+# Correlation domains
+
+Different data sorts isolate different static/dynamic effects:
+
+| Domain | Dip | Velocity | Source static | Receiver static |
+|--------|-----|----------|---------------|-----------------|
+| Common receiver | yes | yes | yes | no |
+| Common source | yes | yes | no | yes |
+| Common offset | yes | no | yes | yes |
+| Common midpoint | no | yes | yes | yes |
+
+- Common-receiver gather: source static can be isolated.
+- Common-source gather: receiver static can be isolated.
+- CMP / common-offset: both source and receiver statics appear; decomposition needed.
+- Dip/velocity are usually long-wavelength; source/receiver statics are short-wavelength.
+
+---
+
 # Surface-consistent 4-component model
 
 Total residual static for a trace:
@@ -115,6 +133,17 @@ $G^\top G$ is large and nearly singular — direct inversion is impractical.
 
 ---
 
+# Overdetermined and under-constrained
+
+Two contradictory properties of the system:
+
+- **Overdetermined**: many more traces than unknowns ($N_s \times N_r$ equations, $N_s + N_r$ source/receiver unknowns). Redundancy makes the solution robust.
+- **Under-constrained**: not unique. Adding a constant to all sources and subtracting it from all receivers leaves every trace equation unchanged. Long-wavelength trends can leak between components.
+
+This is why residual statics are forced to zero mean and long-wavelength trends are handled separately.
+
+---
+
 # Gauss–Seidel solution
 
 Update one component class at a time while holding others fixed.
@@ -127,23 +156,26 @@ Then receivers, offsets, CMPs. Repeat sweeps until convergence.
 
 Typically 4–5 sweeps.
 
-**Figure:** `figures/term01_lec03/term01_lec03_gauss_seidel.png`
-
 ---
 
 # Long-wavelength statics bias velocity analysis
 
-Long-wavelength static shifts the whole CMP gather by $\Delta t$:
+A long-wavelength static shifts the whole CMP gather uniformly. The event stays hyperbolic with the **same velocity**, but the wrong $t_0$:
 
 $$t^2(x) = (t_0 + \Delta t)^2 + \frac{x^2}{V^2}$$
 
-Velocity analysis fits:
+If velocity picking is tied to the original $t_0$ (fixed-time or horizon-consistent picking), the best-fit hyperbola is forced to a different slope:
 
 $$t^2(x) = t_0^2 + \frac{x^2}{V_\text{apparent}^2}$$
 
-Wrong $t_0$ forces wrong $V_\text{apparent}$.
+Result: $V_\text{apparent} \neq V_\text{true}$ even though the curvature never changed.
 
 **Figure:** `figures/term01_lec03/term01_lec03_statics_velocity_bias.png`
+
+Speaker notes:
+- Show panel (a): true and shifted hyperbolae have identical curvature.
+- Show panel (b): shifted semblance peak has the correct velocity but wrong $t_0$; fixing $t_0$ to the original value gives a biased velocity.
+- Show panel (c): true and shifted data have the same slope in $t^2$–$x^2$; the biased fit has a steeper slope.
 
 ---
 
@@ -167,25 +199,29 @@ After floating-datum correction:
 - events are hyperbolic,
 - $t_0$ values are near true,
 - velocity analysis is unbiased,
-- long-wavelength shift is applied later as a final static.
+- long-wavelength shift is applied later as a final static to the flat client datum.
+
+The same shot or receiver location can belong to several CMPs, so its residual static depends on the local CMP datum.
 
 **Figure:** `figures/term01_lec03/term01_lec03_floating_datum.png`
+
+Speaker notes:
+- Top panel: elevation view with final flat datum, floating datum, and local CMP datum bands.
+- Point out that a shared surface point has different statics for different local CMP datums.
+- Bottom panel: total static decomposed into long-wavelength (applied later) and floating-datum correction.
 
 ---
 
 # Practical computation
 
-For each trace:
+A practical floating-datum workflow works directly on the estimated source and receiver static fields:
 
-$$\Delta t_\text{total} = s_i + r_j + \Delta t_\text{long-wavelength}$$
+1. Smooth source and receiver static fields separately.
+2. Interpolate smoothed fields to CMP locations and add them → total long-wavelength static per CMP.
+3. For each trace in the CMP, subtract half of the long-wavelength static from both the source and receiver statics.
+4. Apply the resulting residual corrections.
 
-Then:
-
-- $\Delta t_\text{floating} = s_i + r_j$ (short wavelength)
-- $\Delta t_\text{final} = \Delta t_\text{smoothed}$ (long wavelength)
-
-Process from floating datum for NMO, velocity analysis, residual statics.
-Apply final static after velocities are stable.
+After this, each CMP sits on a locally flat surface near the recording surface, so reflectors remain hyperbolic and the large $t_0$ shift is avoided. The long-wavelength static is applied as a final static after velocities are stable.
 
 ---
 

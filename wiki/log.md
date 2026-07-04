@@ -284,3 +284,115 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
   - `lecture_ready/term01_lec02_kinematics_and_field_statics.md`
   - `lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`
 - Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-04] docs | Gauss–Seidel derivation for residual statics
+
+Created a new step-by-step derivation document:
+- `lecture_notes/derivations/gauss_seidel_residual_statics_derivation.en.md`
+- Rendered PDF: `lecture_notes/derivations/gauss_seidel_residual_statics_derivation.en.pdf`
+
+Content:
+- 4-component model and construction of the sparse design matrix.
+- Least-squares objective and why direct inversion of $G^\top G$ is impractical.
+- Gauss–Seidel update formulas for source, receiver, offset-class, and CMP components.
+- The specific sweep order requested: initialise source/receiver statics to zero, estimate CMP terms as averages of measured shifts, update source and receiver statics, then feed the updated values back into the CMP estimate at the start of the next sweep.
+- Worked numerical example with 2 sources, 2 receivers, 1 offset class, and 2 CMPs (4 traces).
+- Discussion of the under-constrained nature and the zero-mean constraint.
+
+Linked the derivation from `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md` §3.3 and listed it in `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`.
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-04] lecture | Lecture 3 notes — three-step workflow, NMO-stretch windowing, and expanded exercises
+
+Further polished `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md`:
+
+- Added an explicit **three-step workflow** at the start of §2: form reference traces → estimate time shifts by cross-correlation → decompose into surface-consistent source and receiver statics.
+- Noted in §2.2 that reference traces can be internal (selected from the same data set) or external (e.g., stacked or filtered data).
+- Added the **NMO-stretch** point to the correlation-window QC: after NMO correction, shallow parts of traces are stretched and distorted, so they are a poor choice for the correlation window.
+
+Re-rendered the English PDF successfully.
+
+Expanded `exercises/term01_lec03_advanced_statics_and_velocity_link.md`:
+- Added concept-check question on correlation domains.
+- Added concept-check question on the overdetermined/under-constrained nature of the surface-consistent system.
+- Added detailed answers for both new questions.
+
+Updated `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md` instructor notes to mention the NMO-stretch windowing consideration.
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-04] lecture | Lecture 3 notes — correlation domains and over/under-constrained system
+
+Updated `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md` with insights from Li (1999), Chapters 1–2:
+
+- Added §2.2.1 **Correlation domains** with a table showing which static and dynamic factors contribute to traveltime differences in common-source, common-receiver, common-offset, and common-midpoint domains. Explains why source/receiver statics can be isolated in some domains while both appear together in CMP/common-offset gathers.
+- Added §3.2.1 **Overdetermined and under-constrained** explaining the dual nature of the surface-consistent system: many more traces than unknowns (robust statistics) yet non-unique because a constant can be traded between source and receiver statics without changing the fit. This motivates the zero-mean constraint and the separate handling of long-wavelength statics.
+
+Updated the slide outline (`slides/term01/lec03_advanced_statics_and_velocity_link/slide_outline.md`) with two new slides covering the same points.
+
+Re-rendered the English PDF successfully.
+
+Updated `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md` to list the new concepts and add Li (1999) to the source frontmatter.
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-04] ingest | Li (1999) M.Sc. thesis, Chapters 1–2
+
+Extracted text from `papers/statics/Li-MSc-1999.pdf`, pages 16–49 (document pages 1–34), covering Chapters 1 and 2 of Xinxiang Li's M.Sc. thesis *Residual statics analysis using prestack equivalent offset migration*.
+
+Created source summary:
+- `wiki/sources/li_1999_introduction_to_residual_statics_analysis.md` (status: reviewed).
+
+Key insights captured:
+- Three basic assumptions of statics analysis: frequency/amplitude independent, time-invariant, and surface-consistent.
+- Physical justification of surface consistency: low-velocity near surface forces rays toward vertical by Snell's law, making near-surface traveltime depend mainly on source/receiver location.
+- Field statics categories (elevation, refraction, uphole) and the distinction between long-wavelength field statics and short-wavelength residual statics.
+- Residual statics as relative shifts with zero mean; a bulk shift biases velocity analysis, motivating floating datum.
+- Three-step residual statics workflow: form reference traces, estimate time shifts by cross-correlation, decompose into surface-consistent components.
+- Internal vs external reference traces; advantages and limitations of NMO correction before statics analysis.
+- Cross-correlation basics, normalized correlation, correlation domains (source/receiver/CMP/offset), cycle skipping, and trace windowing considerations.
+- Decomposition: initial two-component model, over-determined/under-constrained nature, subsurface-consistent (structure) term, residual NMO term after NMO correction.
+- Iterative techniques: Gauss-Seidel, reference-trace updating, velocity updating, and convergence limitations tied to cable length and CDP fold.
+
+Updated concept pages to cite the new source:
+- `wiki/concepts/residual_statics.md` — added source to frontmatter and expanded the Gauss–Seidel discussion with the over-determined/under-constrained point.
+- `wiki/concepts/static_corrections.md` — added source to frontmatter and noted Li's framing of near-surface traveltime anomalies as the core problem.
+- `wiki/concepts/floating_datum.md` — added source to frontmatter and added the relativity-of-residual-statics argument for using a floating datum.
+- `wiki/concepts/velocity_analysis.md` — added source to frontmatter and cited Li for the unchanged-curvature velocity-bias explanation.
+
+Updated `wiki/index.md`:
+- Added Li (1999) to the Sources table.
+- Corrected inconsistent status values for Hutchinson & Link, Verschuur (2006), CGG ODT04 Part 1, and Hill & Rüger (2020) to match their actual frontmatter statuses.
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-04] feedback | Sync Lecture 3 review into wiki
+
+Refined wiki pages following the latest review of `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md`:
+
+- `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`
+  - Added the new `term01_lec03_velocity_and_statics.png` figure to the figures table.
+  - Updated key concepts to stress that long-wavelength statics shift $t_0$ but leave curvature unchanged.
+  - Replaced the simplified floating-datum equation with the four-step operational workflow and the residual static equations.
+  - Added instructor notes on the new figure, the curvature argument, non-surface-consistent residuals after long-wavelength removal, source/receiver QC, and correlation-window avoidance of first arrivals and multiples.
+
+- `wiki/concepts/floating_datum.md`
+  - Clarified that the velocity bias comes from fitting unchanged curvature to a hyperbola with the wrong $t_0$.
+  - Replaced the generic `Δt_floating = Δt_total − Δt_smoothed` definition with the four-step workflow: smooth source/receiver fields, interpolate to CMPs, subtract half of the long-wavelength component from each side, apply residual corrections.
+  - Added the consequence that residual source/receiver statics are no longer strictly surface-consistent after the long-wavelength component is removed in the CMP domain.
+
+- `wiki/concepts/residual_statics.md`
+  - Added the physical justification for surface consistency: sharp near-surface velocity contrast forces vertical rays, so near-surface traveltime depends mainly on source/receiver location.
+  - Removed the specific `0.5–1 s` correlation-window recommendation; added the rule that windows must avoid first arrivals (too shallow) and multiples (too deep).
+  - Added a "Quality control" subsection: source and receiver statics should have the same sign in nearby locations, except for buried sources.
+  - Noted that after long-wavelength removal in the CMP domain, residuals are no longer strictly surface-consistent.
+
+- `wiki/concepts/velocity_analysis.md`
+  - Updated the "Bias from statics" section to state that the curvature is unchanged and that the same curvature is fitted to a wrong $t_0$.
+
+- `wiki/concepts/static_corrections.md`
+  - Connected the vertical-ray approximation to the sharp weathering-layer velocity contrast.
+  - Added the source/receiver consistency QC point (with the buried-source exception).
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.

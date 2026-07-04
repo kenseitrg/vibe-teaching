@@ -7,6 +7,7 @@ sources:
   - noble_2020_whats_the_datum
   - jones_2012_incorporating_near_surface_velocity_anomalies
   - margrave_2006_methods_of_seismic_data_processing
+  - li_1999_introduction_to_residual_statics_analysis
 tags:
   - statics
   - near-surface
@@ -16,6 +17,8 @@ tags:
 # Static corrections
 
 **Static corrections** are trace-constant time shifts that compensate for near-surface traveltime variations such as elevation changes and weathering-layer thickness/velocity anomalies.
+
+Static corrections are widely used to reduce traveltime anomalies. The methods to estimate statics are often called statics analysis methods. Li (1999, Chapter 1) stresses that the most serious near-surface effect in processing is the traveltime anomaly, and that decades of practice show near-surface effects can be virtually corrected by estimating these traveltime anomalies. Field statics (elevation, refraction, uphole) correct the long-wavelength part; residual statics correct the short-wavelength remainder.
 
 ## Components
 
@@ -46,7 +49,9 @@ Margrave (Chapter 5) treats statics as an approximate **vertical-ray downward co
 - $e_\text{dat}$ — elevation of the chosen datum.
 - $V_\text{rep}$ — replacement velocity used to convert elevation differences to time shifts.
 
-Because the correction assumes vertical raypaths through the near surface, it is only approximate for energy that actually travels slantingly. To keep NMO and migration from being distorted, the bulk (mean) static shift should be kept small; the mean is often removed and saved for a final shift to the interpretation datum.
+Because the correction assumes vertical raypaths through the near surface, it is only approximate for energy that actually travels slantingly. The vertical-ray assumption is physically reasonable because the strong velocity contrast at the base of the weathering layer forces rays to become nearly vertical in the low-velocity near surface. To keep NMO and migration from being distorted, the bulk (mean) static shift should be kept small; the mean is often removed and saved for a final shift to the interpretation datum.
+
+After residual statics are estimated, the source and receiver components should be checked for geophysical consistency: in nearby locations they should usually have the same sign. The main exception is a buried source, where source and receiver statics may legitimately differ.
 
 ## Statics from uphole times
 

@@ -14,6 +14,10 @@
 
 6. **Floating datum.**  Explain in words how a floating datum is computed from total statics and why it preserves hyperbolic moveout for velocity analysis.
 
+7. **Correlation domains.**  In which data domain can receiver statics be isolated most directly?  Why do common-midpoint gathers require surface-consistent decomposition to separate source and receiver statics?
+
+8. **Overdetermined and under-constrained.**  A surface-consistent residual-statics problem has far more traces than unknown source/receiver statics, yet the least-squares solution is not unique.  Explain why both statements can be true, and why residual statics are usually forced to zero mean.
+
 ## Short problems
 
 ### Problem 1 — Apparent velocity from a static shift
@@ -69,6 +73,10 @@ Open `scripts/figures/term01_lec03/plot_statics_velocity_bias.py`. Change the st
 5. A constant shift changes the zero-offset time $t_0$ of the hyperbola but does not change its shape. Velocity analysis fits $t^2 = t_0^2 + x^2/V^2$; the wrong $t_0$ forces a wrong $V$ to minimize the misfit.
 
 6. Total statics are split into a long-wavelength (smoothed) part and a short-wavelength (residual) part. The floating-datum correction applies only the short-wavelength part, so events in each CMP stay hyperbolic and near their true $t_0$. The long-wavelength part is applied later as a final static.
+
+7. Receiver statics can be isolated most directly in a **common-source gather**, because the source static is the same for both traces and cancels out. In a common-midpoint gather, both the source and receiver statics differ from trace to trace, so their contributions are mixed together and must be separated by surface-consistent decomposition.
+
+8. The system is **overdetermined** because there are many more traces (equations) than source/receiver/CMP unknowns, so the least-squares fit is statistically robust. It is **under-constrained** because adding a constant to every source static and subtracting the same constant from every receiver static leaves every trace equation $s_i + r_j$ unchanged; long-wavelength trends can therefore be traded between sources and receivers. Forcing the statics to zero mean removes this ambiguity and keeps the long-wavelength component in the field-statics / floating-datum part of the workflow.
 
 **Problem 1:**
 $$

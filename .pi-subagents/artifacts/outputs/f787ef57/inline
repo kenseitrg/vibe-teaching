@@ -1,0 +1,81 @@
+## Task: Remove Gauss–Seidel figure (Figure 4) from Lecture 03
+
+### Deleted files
+- `scripts/figures/term01_lec03/plot_gauss_seidel.py`
+- `figures/term01_lec03/term01_lec03_gauss_seidel.png`
+
+### Edited files
+1. **`lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md`**
+   - Removed the figure embed `![Gauss–Seidel](...)` and its caption at the end of §3.3.
+   - Renumbered remaining figures: old Fig 5→Fig 4, old Fig 6→Fig 5, old Fig 7→Fig 6.
+   - Gauss–Seidel section text (equations, derivation link) kept intact per instructions.
+
+2. **`slides/term01/lec03_advanced_statics_and_velocity_link/slide_outline.md`**
+   - Removed the `**Figure:** ...gauss_seidel.png` line under the Gauss–Seidel slide.
+   - Slide text (equations, prose) kept intact.
+
+3. **`wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`**
+   - Removed the Gauss–Seidel row from the generated-figures table.
+
+### Not modified (per scope)
+- Gauss–Seidel derivation documents (`lecture_notes/derivations/gauss_seidel_residual_statics_derivation.*.md`)
+- All Gauss–Seidel prose/sections in all files
+- Russian lecture notes (not yet created)
+
+### Residual reference (not in scope)
+- `lecture_notes/_drafts/term01_lec03_advanced_statics_and_velocity_link_outline.md` still lists the figure in a planning table. This is a draft planning document, not a published material; not modified to stay within scope.
+
+### Verification
+- No remaining `gauss_seidel.png` references in the three edited files.
+- Figure numbers are sequential (4, 5, 6) in the lecture notes.
+- Figure files confirmed deleted (shell `ls` returns error).
+
+```acceptance-report
+{
+  "criteriaSatisfied": [
+    {
+      "id": "criterion-1",
+      "status": "satisfied",
+      "evidence": "Deleted 2 figure files, removed 3 markdown references, renumbered 3 figure captions. Did not delete Gauss-Seidel derivation docs or text sections."
+    }
+  ],
+  "changedFiles": [
+    "scripts/figures/term01_lec03/plot_gauss_seidel.py",
+    "figures/term01_lec03/term01_lec03_gauss_seidel.png",
+    "lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md",
+    "slides/term01/lec03_advanced_statics_and_velocity_link/slide_outline.md",
+    "wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md"
+  ],
+  "testsAddedOrUpdated": [],
+  "commandsRun": [
+    {
+      "command": "rm -v scripts/figures/term01_lec03/plot_gauss_seidel.py figures/term01_lec03/term01_lec03_gauss_seidel.png",
+      "result": "passed",
+      "summary": "Deleted 2 files"
+    },
+    {
+      "command": "grep for gauss_seidel.png in .md files",
+      "result": "passed",
+      "summary": "No remaining references in edited files"
+    }
+  ],
+  "validationOutput": [
+    "Figure 4 (Gauss-Seidel) embed and caption removed from lecture_notes/en",
+    "Figure references renumbered: 5->4, 6->5, 7->6 in lecture_notes/en",
+    "Figure reference line removed from slide_outline.md",
+    "Gauss-Seidel row removed from wiki/lecture_ready figures table",
+    "No orphaned 'Figure 7' or 'Figure 4' (old) references remain"
+  ],
+  "residualRisks": [
+    "Outline draft at lecture_notes/_drafts/term01_lec03_advanced_statics_and_velocity_link_outline.md still references the Gauss-Seidel figure in a planning table. Not modified per scope constraint.",
+    "The Russian lecture notes (lecture_notes/ru/term01_lec03_advanced_statics_and_velocity_link.ru.md) do not exist yet, so no action needed.",
+    "The build_slides.py script will emit a warning if a slide outline references a non-existent figure. The slide_outline.md no longer references the deleted figure, so this is fine."
+  ],
+  "noStagedFiles": true,
+  "diffSummary": "Deleted 2 figure files, removed figure references from 3 markdown files, renumbered remaining figures 5/6/7 to 4/5/6",
+  "reviewFindings": [
+    "no blockers: all requested changes applied correctly"
+  ],
+  "manualNotes": "The draft outline at lecture_notes/_drafts/term01_lec03_advanced_statics_and_velocity_link_outline.md still lists plot_gauss_seidel.py / term01_lec03_gauss_seidel.png in a planning table. If you want that cleaned too, it's a one-line edit."
+}
+```

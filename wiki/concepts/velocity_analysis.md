@@ -6,6 +6,7 @@ sources:
   - cgg_odt01_data_analysis_part2
   - jones_2012_incorporating_near_surface_velocity_anomalies
   - margrave_2006_methods_of_seismic_data_processing
+  - li_1999_introduction_to_residual_statics_analysis
 tags:
   - velocity
   - semblance
@@ -47,7 +48,7 @@ Margrave (Chapter 7) defines **stacking velocity** $V_s$ as the velocity paramet
 
 ## Bias from statics
 
-Long-wavelength statics shift the whole CMP gather in time. The events remain hyperbolic but have the wrong $t_0$, which biases the velocity estimate. This is one reason floating datums are used. Margrave describes this as a chicken-and-egg problem: velocity analysis requires statics corrections first, while residual statics work best when residual NMO is minimal. The practical solution is iterative refinement of velocities and statics, often with a floating datum between the iterations.
+Long-wavelength statics shift the whole CMP gather in time. The events remain hyperbolic but have the wrong $t_0$, while the curvature — the $x^2$ term — is unchanged. Velocity analysis fits the same curvature to a hyperbola with the wrong zero-offset time, which biases the velocity estimate (Li, 1999, Chapter 1; Margrave, Chapter 7). This is one reason floating datums are used. Margrave describes this as a chicken-and-egg problem: velocity analysis requires statics corrections first, while residual statics work best when residual NMO is minimal. The practical solution is iterative refinement of velocities and statics, often with a floating datum between the iterations.
 
 ## Relation to lecture notes
 

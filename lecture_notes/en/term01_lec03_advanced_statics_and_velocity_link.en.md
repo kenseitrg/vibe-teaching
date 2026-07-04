@@ -66,6 +66,14 @@ Conceptually, we pick a reference horizon that should be flat or gently dipping,
 
 ## 2. Residual statics
 
+Almost every residual-statics method follows the same three-step workflow (Li, 1999, Chapter 2):
+
+1. **Form reference traces** that are as free as possible of near-surface traveltime errors.
+2. **Estimate time shifts** between each trace and its reference by cross-correlation.
+3. **Decompose** the estimated shifts into surface-consistent source and receiver statics.
+
+The following sections examine each step and the practical issues that arise.
+
 ### 2.1 Why residuals remain
 
 Even after careful field statics and layer replacement, small uncorrected time shifts usually remain. Causes include:
@@ -81,7 +89,7 @@ These remaining shifts are called **residual statics**. They are usually smaller
 
 The simplest residual-statics method works trace by trace:
 
-1. Build a **reference trace** (also called a pilot trace). This is often the stack of the CMP gather itself or a stack of neighbouring CMPs.
+1. Build a **reference trace** (also called a pilot trace). This is often the stack of the CMP gather itself or a stack of neighbouring CMPs. External references formed from stacked or filtered data are common; internal references selected from the same gather are also possible.
 2. Cross-correlate each trace of the gather with the reference trace.
 3. The lag of the maximum correlation gives an estimate of the time shift for that trace.
 4. Apply quality control: reject shifts with low correlation coefficient or large inconsistencies.
@@ -91,6 +99,19 @@ The simplest residual-statics method works trace by trace:
 **Figure 2.** *Residual statics by cross-correlation. Each trace in the CMP gather is correlated with a reference trace. The lag of the correlation peak gives the time shift.*
 
 Cross-correlation works well when shifts are small compared with the wavelet period. When shifts exceed about half a period, the method can **cycle skip**: the correlation peak locks onto the wrong cycle of the wavelet. This is why residual statics are usually applied after an initial NMO correction and after the largest field statics have been removed.
+
+### 2.2.1 Correlation domains
+
+Cross-correlation can be performed in different data domains, and each domain isolates different combinations of static and dynamic effects. The following table (after Li, 1999, Table 2-1) summarizes which factors contribute to the traveltime difference between two traces in each domain:
+
+| Domain | Dip | Velocity | Source static | Receiver static |
+|--------|-----|----------|---------------|-----------------|
+| Common receiver | yes | yes | yes | no |
+| Common source | yes | yes | no | yes |
+| Common offset | yes | no | yes | yes |
+| Common midpoint | no | yes | yes | yes |
+
+In a common-receiver gather, the receiver static is shared by both traces and cancels out, so the remaining traveltime difference is dominated by the source static (plus dip and velocity effects). In a common-source gather, the source static cancels and the receiver static can be isolated. In a CMP or common-offset gather, both source and receiver statics appear together and must be separated by surface-consistent decomposition. Dip and velocity effects are usually long-wavelength, while source and receiver statics are the short-wavelength signal we want to estimate.
 
 ### 2.3 Wiggins et al. surface-consistent model
 
@@ -107,6 +128,8 @@ where
 - $G_k$ = structure term at CMP $k$,
 - $M_k X_{ij}^2$ = residual normal-moveout term,
 - $X_{ij}$ = offset of the trace from source $i$ to receiver $j$.
+
+The surface-consistent form follows from the physics of the near surface. A sharp velocity contrast at the base of the weathering layer forces rays from many subsurface reflection points to become nearly vertical as they pass through the low-velocity near surface. Because the rays are almost vertical, the traveltime spent in the near surface is essentially the same for any ray that enters or leaves the surface at a given location. The source-side contribution therefore depends only on the source location $i$, and the receiver-side contribution depends only on the receiver location $j$.
 
 The residual shift $\delta T_{ij}$ is measured by cross-correlation against a **pilot trace** (a reference trace, usually a stack of adjacent CMPs). The measured shifts for all traces form an overdetermined linear system
 
@@ -165,6 +188,13 @@ $$
 
 For a realistic seismic line the matrix $G^\top G$ is enormous and close to singular, so direct inversion is impossible.
 
+### 3.2.1 Overdetermined and under-constrained
+
+The surface-consistent system has two seemingly contradictory properties (Li, 1999, Chapter 2):
+
+- **Overdetermined.** There are far more traces than unknowns. For example, with $N_s$ sources and $N_r$ receivers there are $N_s \times N_r$ traces but only $N_s + N_r$ source and receiver statics. This redundancy makes the least-squares solution statistically robust.
+- **Under-constrained.** The solution is not unique. If we add a constant $c$ to every source static and subtract the same constant $c$ from every receiver static, every trace equation $s_i + r_j$ is unchanged. The same kind of ambiguity applies to long-wavelength trends: a smooth source trend can be traded for a smooth receiver trend without changing the fit. This is why residual statics are forced to zero mean and why the long-wavelength component is handled separately by field statics, layer replacement, or a floating datum.
+
 ### 3.3 Gauss–Seidel iteration
 
 A practical solution is **Gauss–Seidel iteration**: update one component class at a time while holding the others fixed. For example, to update the source statics in iteration $n+1$:
@@ -175,24 +205,20 @@ $$
 
 where $N_i$ is the number of traces with source $i$. Then update receivers, offset classes, and CMP terms in turn. Each update is just an average over the appropriate traces, which is why Gauss–Seidel is natural here.
 
-Hatton reports that 4–5 sweeps are usually enough for convergence on a typical 2-D seismic profile. The result is order-dependent because the model is underdetermined for very long wavelengths, so constraints such as zero mean are applied before the Gauss–Seidel sweeps begin.
-
-![Gauss–Seidel](figures/term01_lec03/term01_lec03_gauss_seidel.png){width=90%}
-
-**Figure 4.** *Gauss–Seidel iteration for the 4-component model. The algorithm cycles through source, receiver, offset, and CMP classes, updating one class at a time while holding the others fixed.*
+Hatton reports that 4–5 sweeps are usually enough for convergence on a typical 2-D seismic profile. The step-by-step construction of the design matrix and the full Gauss–Seidel sweep are derived in `lecture_notes/derivations/gauss_seidel_residual_statics_derivation.en.md`. The result is order-dependent because the model is underdetermined for very long wavelengths, so constraints such as zero mean are applied before the Gauss–Seidel sweeps begin.
 
 ### 3.4 Quality control
 
 After solving, check:
 
-- are the estimated source and receiver statics spatially smooth?
+- are the estimated source and receiver statics geophysically consistent? In nearby spatial locations they should have the same sign (both positive or both negative). The exception is a buried source, where the source and receiver statics may legitimately have different signs.
 - do the offset terms look like a small residual moveout?
 - does the stack improve after applying the statics?
 - are the CMP terms geologically plausible?
 
 Several practical controls strongly affect the residual-statics solution:
 
-- **Correlation window.** Typically a 0.5–1 s window is chosen. It should avoid shallow, structurally complex intervals and low-frequency, ringy data that can cause cycle skipping. A window following a package of strong, continuous reflectors is often best.
+- **Correlation window.** The window should be long enough to capture a package of strong, continuous reflectors, but short enough to avoid shallow, structurally complex intervals and low-frequency, ringy data that can cause cycle skipping. It should also avoid first arrivals (so it cannot start too shallow) and avoid multiples (so it cannot extend too deep). After NMO correction, the shallow part of a trace is usually stretched and distorted, so it is also a poor choice for the correlation window. A window following a package of strong, continuous reflectors is often best.
 - **Correlation length.** The maximum number of lags computed on the trace-to-trace cross-correlations must be large enough to span the expected sum of source, receiver, structure, and residual-NMO shifts. Too small a length causes a poor solution; too large increases cost and cycle skipping.
 - **Pilot traces.** Traces are correlated against a pilot trace rather than against every other trace. The pilot is usually the best current stack of adjacent CMPs. Better pilots improve the solution but can also bias it toward the pilot, so external pilot traces are sometimes used.
 - **Data preparation.** Data are often bandpass filtered, AGC'd, or F–K filtered to build the statics solution, but the computed shifts are applied to the unfiltered data.
@@ -202,13 +228,19 @@ Several practical controls strongly affect the residual-statics solution:
 
 ### 4.1 Long-wavelength statics bias velocity picks
 
-Long-wavelength statics shift the **whole CMP gather** by a constant time $\Delta t$. The reflection events remain hyperbolic, but with the wrong zero-offset time:
+![Long-wavelength statics and velocity bias](figures/term01_lec03/term01_lec03_velocity_and_statics.png){width=90%}
+
+**Figure 4.** *Long-wavelength statics and velocity bias. Top: topography, floating datum, locally constant datum, and constant datum with ray paths to a reflecting boundary. Bottom: recorded CMP traveltime curve, traveltime curve computed from a floating datum, and traveltime curve computed from a constant datum. A long-wavelength static shifts the whole gather, changing $t_0$ without changing the curvature, which biases velocity analysis.*
+
+Long-wavelength statics shift the **whole CMP gather** by a constant time $\Delta t$. The reflection event now has a different zero-offset time, $t_0 + \Delta t$, but its curvature — the term proportional to $x^2$ — remains the same. Because the curvature is unchanged while $t_0$ is wrong, velocity analysis fits the same curvature to a hyperbola with an incorrect zero-offset time, and the best-fit velocity $V_\text{apparent}$ is forced away from the true velocity. This is the root cause of the velocity bias.
+
+Mathematically, the shifted gather follows
 
 $$
-t^2(x) = (t_0 + \Delta t)^2 + \frac{x^2}{V^2}.
+t^2(x) = (t_0 + \Delta t)^2 + \frac{x^2}{V^2},
 $$
 
-Velocity analysis, however, tries to fit the standard hyperbola
+while velocity analysis tries to fit the standard hyperbola
 
 $$
 t^2(x) = t_0^2 + \frac{x^2}{V_\text{apparent}^2}.
@@ -218,7 +250,7 @@ Because the $t_0$ in the model is wrong, the best-fit velocity $V_\text{apparent
 
 ![Statics bias velocity analysis](figures/term01_lec03/term01_lec03_statics_velocity_bias.png){width=90%}
 
-**Figure 5.** *Long-wavelength statics shift the whole CMP gather by a constant time. The events remain hyperbolic, but velocity analysis fits them with a wrong $t_0$ and therefore picks a biased velocity.*
+**Figure 5.** *Long-wavelength statics shift the whole CMP gather uniformly, so the event remains hyperbolic with the correct NMO velocity but a wrong $t_0$. If velocity picking is tied to the original $t_0$ (horizon-consistent or fixed-time picking), the best-fit velocity at that constrained $t_0$ is biased. (a) CMP gather: true hyperbola ($t_0=0.40$ s, $V=2000$ m/s) and static-shifted hyperbola ($t_0=0.55$ s, same $V$). (b) Semblance spectra: the shifted peak has the correct velocity but wrong $t_0$; the biased pick at the original $t_0$ gives $V_\text{apparent}=1867$ m/s. (c) In the $t^2$–$x^2$ domain the true and shifted data have the same slope (same velocity), while a fit forced through the original $t_0^2$ has a steeper slope — the velocity bias.*
 
 ### 4.2 Why we need statics before good velocities
 
@@ -254,29 +286,32 @@ In practice, the datum should be a smoothed version of the topography and the re
 
 ![Floating datum](figures/term01_lec03/term01_lec03_floating_datum.png){width=90%}
 
-**Figure 6.** *Floating datum concept. The total static is split into a long-wavelength part (applied later to a flat datum) and a short-wavelength part (floating-datum correction) that preserves hyperbolic moveout for velocity analysis.*
+**Figure 6.** *Floating datum concept. (a) Depth domain: the rugged surface is reduced to a smoothed floating datum, while each CMP is processed on a short, locally flat datum near the recording surface. A single shot or receiver location can belong to several CMPs and therefore carries a different static correction for each local datum. (b) Statics decomposition: the total static is split into a long-wavelength part (applied later to the final flat datum) and a short-wavelength part (floating-datum correction) that preserves hyperbolic moveout for velocity analysis.*
 
 ### 4.4 Practical computation
 
-For each trace:
+A practical floating-datum workflow works directly on the estimated source and receiver static fields:
 
-$$
-\Delta t_\text{total} = s_i + r_j + \Delta t_\text{long-wavelength},
-$$
+1. **Smooth the source and receiver static fields** separately to obtain their long-wavelength components, $S_i^\text{LW}$ and $R_j^\text{LW}$.
 
-where $s_i$ and $r_j$ are the high-frequency source and receiver statics. The long-wavelength component is obtained by spatial smoothing of the total static field. Then:
+2. **Interpolate the smoothed fields to each CMP location** and add them. This gives the total long-wavelength static at CMP $l$:
+   $$
+   \Delta t_\text{long-wavelength}(l) = S^\text{LW}(x_l) + R^\text{LW}(x_l),
+   $$
+   where $x_l$ is the CMP location.
 
-$$
-\Delta t_\text{floating} = s_i + r_j,
-$$
+3. **For each trace in CMP $l$, subtract half of this long-wavelength component from both the source and receiver statics**:
+   $$
+   s_i^\text{res}(l) = s_i - \frac{1}{2}\Delta t_\text{long-wavelength}(l),
+   $$
+   $$
+   r_j^\text{res}(l) = r_j - \frac{1}{2}\Delta t_\text{long-wavelength}(l).
+   $$
+   The residual source and receiver statics are now tied to each CMP, so a given physical source or receiver may carry different values for different CMP gathers.
 
-and
+4. **Apply the resulting residual corrections** to the traces.
 
-$$
-\Delta t_\text{final} = \Delta t_\text{smoothed}.
-$$
-
-The data are processed from the floating datum for NMO, velocity analysis, and residual statics. After the velocity model is stable, the final static $\Delta t_\text{final}$ is applied to move everything to the flat client datum.
+After this step, each CMP gather is placed on a locally flat surface close to the recording surface. Reflectors inside a gather can still be treated as hyperbolic, but the large $t_0$ shift associated with the long-wavelength static has been removed. This protects velocity analysis from a bulk time shift and keeps the NMO hyperbola close to its true zero-offset time. The data are then processed from this floating datum for NMO, velocity analysis, and residual statics. After the velocity model is stable, the full long-wavelength static $\Delta t_\text{long-wavelength}$ is applied as a final static to move the data to the flat client datum.
 
 ## Summary
 

@@ -84,7 +84,7 @@ By the end of this lecture students should be able to:
   $$ \min_{\mathbf{m}} \| \mathbf{d} - G\mathbf{m} \|^2 $$
 - Gauss–Seidel iteration: update one component class at a time while holding others fixed.
 - Why Gauss–Seidel is natural here: each update is a simple mean over the relevant traces.
-- Figure needed: small example of a design matrix; cartoon of Gauss–Seidel sweeps.
+- Figure needed: small example of a design matrix.
 
 ## Section 5 — Link between statics and velocity analysis
 
@@ -121,7 +121,6 @@ By the end of this lecture students should be able to:
 | Layer replacement workflow | `plot_layer_replacement.py` | `term01_lec03_layer_replacement.png` |
 | Cross-correlation statics | `plot_crosscorrelation_statics.py` | `term01_lec03_crosscorrelation_statics.png` |
 | 4-component decomposition example | `plot_four_component_model.py` | `term01_lec03_four_component_model.png` |
-| Gauss–Seidel iteration cartoon | `plot_gauss_seidel.py` | `term01_lec03_gauss_seidel.png` |
 | Statics bias velocity analysis | `plot_statics_velocity_bias.py` | `term01_lec03_statics_velocity_bias.png` |
 | Floating datum | `plot_floating_datum.py` | `term01_lec03_floating_datum.png` |
 
@@ -150,5 +149,5 @@ By the end of this lecture students should be able to:
 ## Open questions for instructor
 
 - Should the 4-component model derivation be in the lecture notes or in a separate derivation document?
-- Do you want a full numerical Gauss–Seidel example, or only a conceptual cartoon?
+- Do you want a full numerical Gauss–Seidel example, or only the conceptual update formula?
 - Should floating datum be introduced before or after residual statics in the lecture?
