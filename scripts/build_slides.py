@@ -117,16 +117,34 @@ def strip_backticks(text: str) -> str:
 
 
 def parse_outline(text: str):
-    """Parse a markdown slide outline into a list of slide dicts."""
+    """Parse a markdown slide outline into a list of slide dicts.
+
+    Supports two slide formats:
+      - Sections separated by `---` with a leading `# Title` line.
+      - Explicit `## Slide N — Title` markers.
+    """
     slides = []
     current = None
+    started = False  # becomes True after the first `---` separator
 
     for line in text.splitlines():
         line = line.rstrip()
         if not line:
             continue
 
-        # New slide header: ## Slide N — Title
+        # Section separator: reset for the next slide
+        if line.strip() == "---":
+            started = True
+            if current:
+                slides.append(current)
+                current = None
+            continue
+
+        # Skip the document title before the first separator
+        if not started and line.startswith("#"):
+            continue
+
+        # Explicit slide marker: ## Slide N — Title
         m = re.match(r"^##\s+Slide\s+\d+\s*—\s*(.+)$", line)
         if m:
             if current:
@@ -134,17 +152,20 @@ def parse_outline(text: str):
             current = {"title": m.group(1).strip(), "bullets": [], "figure": None}
             continue
 
+        # Slide title: # Title
+        if started and line.startswith("# "):
+            if current:
+                slides.append(current)
+            current = {"title": line[2:].strip(), "bullets": [], "figure": None}
+            continue
+
         if current is None:
             continue
 
-        # Also convert LaTeX in the title itself
-        current["title"] = latex_to_plain(current["title"])
-
-        # Figure reference (with optional backticks)
-        fig_m = re.match(r"^[-*]\s+Figure:\s*`?([^`]+)`?$", line, re.IGNORECASE)
+        # Figure reference (with optional backticks and optional bold markdown)
+        fig_m = re.match(r"^(?:[-*]\s+|\*\*)?Figure:\*\*?\s*`?([^`]+)`?$", line, re.IGNORECASE)
         if fig_m:
             current["figure"] = fig_m.group(1).strip()
-            # Skip placeholders like "(optional, can be added later)"
             if "optional" in current["figure"].lower() or "can be added" in current["figure"].lower():
                 current["figure"] = None
             continue
@@ -163,6 +184,15 @@ def parse_outline(text: str):
             txt = strip_backticks(sub_m.group(1).strip())
             txt = latex_to_plain(txt)
             current["bullets"][-1] += "\n    • " + txt
+            continue
+
+        # Plain text that is not a bullet: treat as a continuation bullet
+        plain = strip_backticks(line.strip())
+        plain = latex_to_plain(plain)
+        if current["bullets"]:
+            current["bullets"][-1] += " " + plain
+        else:
+            current["bullets"].append(plain)
 
     if current:
         slides.append(current)

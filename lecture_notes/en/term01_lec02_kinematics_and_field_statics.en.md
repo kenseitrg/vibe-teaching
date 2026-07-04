@@ -43,6 +43,8 @@ $$
 \tau(z) = \int_0^z \frac{dz'}{v(z')}, \qquad z(\tau) = \int_0^\tau v(\tau') \, d\tau'.
 $$
 
+For a simple linear gradient $v(z) = v_0 + k z$, the vertical traveltime is $t = (1/k)\,\ln(v/v_0)$; equivalently, depth grows exponentially with traveltime. A step-by-step derivation is given in `lecture_notes/derivations/linear_gradient_traveltime.en.md`.
+
 Using $\tau$, the velocity averages become continuous integrals rather than layer sums.
 
 **Interval velocity** is the velocity of one layer:
@@ -192,6 +194,27 @@ $$
 
 This is why a single stacking velocity can fail for steeply dipping events.
 
+![Dipping reflector geometry](figures/term01_lec02/term01_lec02_dip_moveout_cosine.png){width=90%}
+
+**Figure 7.** *Geometry of a dipping reflector. The source $S$ and receiver $R$ are separated by the surface offset $x$ with midpoint $M$. The mirror image $S'$ makes the reflected path $S \to I \to R$ equivalent to the straight line $S'R$. Decomposing $S'R$ into the zero-offset normal path $Vt_0 = 2z$ and the effective offset $x \cos\theta$ gives the hyperbola $t^2 = t_0^2 + x^2 \cos^2\theta / V^2$, so the stacking velocity is $V / \cos\theta$.*
+
+The construction works because the reflector is a mirror. Reflecting the source $S$ across the dipping reflector gives the image point $S'$. The distance from $S'$ to any point $I$ on the reflector is exactly the same as the distance from $S$ to that same point, so the two legs $S \to I$ and $S' \to I$ are equal. Therefore the total reflected path $S \to I \to R$ has the same length as the straight line $S' \to R$.
+
+In the zero-offset case the receiver is at the midpoint $M$, so $S' \to M$ is the normal-incidence ray (perpendicular to the reflector). Its length is $V t_0 = 2z$, where $z$ is the normal distance from $M$ to the reflector. When the receiver moves to $R$ by a horizontal offset $x$, the straight line $S'R$ is no longer along the normal. Decomposing it into a part parallel to the reflector and a part perpendicular to the reflector gives the right triangle shown in the figure: the perpendicular leg is still the zero-offset path $V t_0$, and the parallel leg is the projection of the surface offset onto the reflector direction, $x \cos\theta$.
+
+Because the hypotenuse is the total equivalent path $Vt$, Pythagoras gives
+
+$$
+(Vt)^2 = (Vt_0)^2 + (x\cos\theta)^2.
+$$
+
+Dividing by $V^2$ and comparing with the standard hyperbolic moveout $t^2 = t_0^2 + x^2/V_\text{stack}^2$ shows immediately that
+
+$$
+V_\text{stack} = \frac{V}{\cos\theta}.
+$$
+
+In other words, the dipping reflector has less curvature in a CMP gather than a flat reflector at the same depth because only the $x\cos\theta$ part of the offset contributes to the hyperbolic moveout.
 
 \newpage{}
 
@@ -359,17 +382,17 @@ $$
 
 The total static applied to a trace is $\delta t_s + \delta t_r$ and is **added** to the measured arrival times; a positive value shifts the trace down to later times.
 
-Between the surface and the datum we replace the real low-velocity weathering layer with a **replacement velocity** $V_\text{r}$. This velocity should be a best estimate of the vertical velocity in the consolidated material just below the weathering. Because the static shift is $T = D/V$, a low replacement velocity gives a large static and a high replacement velocity gives a small static. The wrong choice does not just shift the section; it can introduce long-wavelength structural distortions (Figure 8).
+Between the surface and the datum we replace the real low-velocity weathering layer with a **replacement velocity** $V_\text{r}$. This velocity should be a best estimate of the vertical velocity in the consolidated material just below the weathering. Because the static shift is $T = D/V$, a low replacement velocity gives a large static and a high replacement velocity gives a small static. The wrong choice does not just shift the section; it can introduce long-wavelength structural distortions (Figure 9).
 
 ![Replacement velocity choice](figures/term01_lec02/term01_lec02_replacement_velocity.png){width=90%}
 
-**Figure 8.** *Effect of replacement velocity choice. (a) Flat-surface model with a variable-thickness weathering layer and two flat sub-weathering reflectors with different velocities. (b) Traveltimes before static correction; the weathering anomaly is imprinted on both near- and far-offset events. (c) After correction with the correct replacement velocity the shallow and deep reflectors are flat for both offsets (solid and dashed lines); the semi-transparent dotted curves show where the same reflectors would land if a wrong replacement velocity were used. (d) Residual structural distortion when the replacement velocity is too low or too high; the error is much larger at far offsets because the wrong replacement velocity also changes the RMS velocity and therefore the NMO moveout.*
+**Figure 9.** *Effect of replacement velocity choice. (a) Flat-surface model with a variable-thickness weathering layer and two flat sub-weathering reflectors with different velocities. (b) Traveltimes before static correction; the weathering anomaly is imprinted on both near- and far-offset events. (c) After correction with the correct replacement velocity the shallow and deep reflectors are flat for both offsets (solid and dashed lines); the semi-transparent dotted curves show where the same reflectors would land if a wrong replacement velocity were used. (d) Residual structural distortion when the replacement velocity is too low or too high; the error is much larger at far offsets because the wrong replacement velocity also changes the RMS velocity and therefore the NMO moveout.*
 
 The statics process is an approximate form of downward continuation that is only correct for vertical raypaths. For energy that travels slantingly through the near surface, the correction is approximate. To keep later processing (NMO, migration) from being distorted, the **bulk (mean) static shift should be kept small**. A common practice is to remove the mean from the statics solution and save it to be applied as the final shift to the interpretation datum.
 
 ![Statics datums](figures/term01_lec02/term01_lec02_statics_datums.png){width=90%}
 
-**Figure 7.** *Field-statics geometry. The weathering layer (low velocity) is replaced by a replacement velocity down to an intermediate datum; the data are then shifted up to the final datum, which is placed above the highest surface elevation to avoid negative total static shifts. Vertical rays are assumed.*
+**Figure 8.** *Field-statics geometry. The weathering layer (low velocity) is replaced by a replacement velocity down to an intermediate datum; the data are then shifted up to the final datum, which is placed above the highest surface elevation to avoid negative total static shifts. Vertical rays are assumed.*
 
 ### 5.4 Computing field statics
 
@@ -406,7 +429,7 @@ Refraction statics use first arrivals to estimate the weathering-layer thickness
 
 ![Refraction geometry and delay time](figures/term01_lec02/term01_lec02_delay_time_scheme.png){width=90%}
 
-**Figure 9.** *Two-layer refraction model. Top: traveltime versus source–receiver offset; the direct arrival follows velocity $v_1$, the refracted head wave follows the higher velocity $v_2$, and the crossover distance $x_c$ marks where the refracted wave becomes the first arrival. The intercept time $T_i$ measures the delay introduced by the near-surface layer. Bottom: ray geometry with the critically refracted ray ($\\theta_c$) and the delay-time path that isolates the near-surface contribution.*
+**Figure 10.** *Two-layer refraction model. Top: traveltime versus source–receiver offset; the direct arrival follows velocity $v_1$, the refracted head wave follows the higher velocity $v_2$, and the crossover distance $x_c$ marks where the refracted wave becomes the first arrival. The intercept time $T_i$ measures the delay introduced by the near-surface layer. Bottom: ray geometry with the critically refracted ray ($\\theta_c$) and the delay-time path that isolates the near-surface contribution.*
 
 ### 6.3 Delay-time methods
 
@@ -425,6 +448,8 @@ t_\text{refraction} = \frac{X}{V_2} + t_i, \qquad t_i = \frac{2 Z_1}{V_1} \cos(i
 $$
 
 where $t_i$ is the **intercept time** and $Z_1$ is the weathering-layer thickness. The critical distance is $X_c = Z_1 \tan(i_c)$. When $V_1 \ll V_2$, the delay time becomes a good approximation to the vertical traveltime through the weathering layer.
+
+A full derivation of the delay-time formula from the refracted ray geometry, together with the linear system solved by delay-time methods, is given in `lecture_notes/derivations/refraction_delay_time_linear_system.en.md`.
 
 Important classical methods include:
 

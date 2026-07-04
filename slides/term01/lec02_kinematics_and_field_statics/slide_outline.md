@@ -75,6 +75,20 @@ $$\Delta t_\text{nmo} = \sqrt{t_0^2 + \frac{x^2}{V_\text{nmo}^2}} - t_0$$
 
 ---
 
+# Dipping reflectors
+
+- A dipping reflector is a mirror: reflect the source $S$ across it to get the image point $S'$.
+- Because $S'I = SI$, the reflected path $S \to I \to R$ has the same length as the straight line $S'R$.
+- Decompose $S'R$ into:
+  - $V t_0$: the zero-offset normal-incidence path (perpendicular to the reflector);
+  - $x \cos\theta$: the projection of the surface offset onto the reflector direction.
+- This gives $(Vt)^2 = (Vt_0)^2 + (x\cos\theta)^2$, so $V_\text{stack} = V / \cos\theta$.
+- In 3-D the line azimuth relative to the dip direction also matters.
+
+**Figure:** `figures/term01_lec02/term01_lec02_dip_moveout_cosine.png`
+
+---
+
 # Under- and over-correction
 
 - Velocity too high → event still curves down (**under-correction**).
