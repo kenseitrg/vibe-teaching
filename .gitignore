@@ -203,3 +203,6 @@ Thumbs.db
 *.Zone.Identifier
 *:$DATA
 .DS_Store
+
+codebook.toml
+.pi-subagents/*
