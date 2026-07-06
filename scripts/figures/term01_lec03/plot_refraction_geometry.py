@@ -1,5 +1,5 @@
 """
-Refraction geometry and delay-time figure for Term 1 Lecture 02.
+Refraction geometry and delay-time figure for Term 1 Lecture 03.
 
 Draws a two-layer refraction model with a low-velocity weathering layer over a
 higher-velocity half-space. Shows direct, critically refracted and reflected
@@ -78,5 +78,5 @@ ax.legend(loc="lower right", fontsize=9)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig("figures/term01_lec02/term01_lec02_refraction_geometry.png", dpi=200, bbox_inches="tight")
-print("Saved figures/term01_lec02/term01_lec02_refraction_geometry.png")
+plt.savefig("figures/term01_lec03/term01_lec03_refraction_geometry.png", dpi=200, bbox_inches="tight")
+print("Saved figures/term01_lec03/term01_lec03_refraction_geometry.png")

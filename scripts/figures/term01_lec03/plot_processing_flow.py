@@ -1,10 +1,10 @@
 """
-Processing flow diagram for Term 1 Lecture 02.
+Processing flow diagram for Term 1 Lecture 03.
 
 Shows the sequence of kinematic and static corrections from raw shot records to
 a zero-offset stack section, with migration deferred to Term 2/3.
 
-The script is self-contained and writes a single PNG to figures/term01_lec02/.
+The script is self-contained and writes a single PNG to figures/term01_lec03/.
 """
 
 from graphviz import Digraph
@@ -55,6 +55,6 @@ for i in range(len(nodes) - 1):
 # ---------------------------------------------------------------------------
 # Save
 # ---------------------------------------------------------------------------
-output_path = "figures/term01_lec02/term01_lec02_processing_flow"
+output_path = "figures/term01_lec03/term01_lec03_processing_flow"
 dot.render(output_path, cleanup=True)
 print(f"Saved {output_path}.png")

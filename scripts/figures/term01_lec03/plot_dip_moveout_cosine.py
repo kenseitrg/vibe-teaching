@@ -151,6 +151,6 @@ ax.legend(loc="upper right", fontsize=10)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-out_path = "figures/term01_lec02/term01_lec02_dip_moveout_cosine.png"
+out_path = "figures/term01_lec03/term01_lec03_dip_moveout_cosine.png"
 plt.savefig(out_path, dpi=300, bbox_inches="tight")
 print(f"Saved {out_path}")

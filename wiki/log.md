@@ -197,15 +197,15 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
 - Created exercises: `exercises/term01_lec01_introduction_to_seismic_processing.md`.
 - Updated lecture-ready page status to `lecture-ready` and refreshed `wiki/index.md`.
 
-## [2026-06-29] lecture | Term 1 Lecture 02 — Kinematics, Velocities and Field Statics
+## [2026-06-29] lecture | Term 1 Lecture 03 — Kinematics, Velocities and Field Statics
 
-- Confirmed split of original kinematics/statics lecture into Lecture 02 (velocities, NMO, field statics, refraction) and Lecture 03 (layer replacement, residual statics, floating datum).
+- Confirmed split of original kinematics/statics lecture into Lecture 03 (velocities, NMO, field statics, refraction) and Lecture 04 (layer replacement, residual statics, floating datum).
 - Extracted text from existing materials: `slides/raw/term01_lecture02_kinematics.pptx` and `slides/raw/plan_term01_lecture02_kinematics.docx`.
-- Drafted outline: `lecture_notes/_drafts/term01_lec02_kinematics_and_field_statics_outline.md`.
-- Generated 7 self-contained Python figure scripts in `scripts/figures/term01_lec02/` and PNGs in `figures/term01_lec02/`.
-- Wrote English lecture notes: `lecture_notes/en/term01_lec02_kinematics_and_field_statics.en.md`.
+- Drafted outline: `lecture_notes/_drafts/term01_lec03_kinematics_and_field_statics_outline.md`.
+- Generated 7 self-contained Python figure scripts in `scripts/figures/term01_lec03/` and PNGs in `figures/term01_lec03/`.
+- Wrote English lecture notes: `lecture_notes/en/term01_lec03_kinematics_and_field_statics.en.md`.
 - Rendered PDF successfully.
-- Created exercises: `exercises/term01_lec02_kinematics_and_field_statics.md`.
+- Created exercises: `exercises/term01_lec03_kinematics_and_field_statics.md`.
 - Created slide outline and starter PowerPoint deck in `slides/term01/lec02_kinematics_and_field_statics/`.
 - Updated `wiki/index.md` and `AGENTS.md` notation glossary.
 - Wiki lint passes with only stub warnings.
@@ -228,16 +228,16 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
   - `wiki/concepts/layer_replacement.md` — draft
 - Wiki lint now passes cleanly.
 
-## [2026-06-29] lecture | Term 1 Lecture 03 — Advanced Statics and the Link to Velocity Analysis
+## [2026-06-29] lecture | Term 1 Lecture 04 — Advanced Statics and the Link to Velocity Analysis
 
-- Drafted outline: `lecture_notes/_drafts/term01_lec03_advanced_statics_and_velocity_link_outline.md`.
-- Wrote English lecture notes: `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md`.
+- Drafted outline: `lecture_notes/_drafts/term01_lec04_advanced_statics_and_velocity_link_outline.md`.
+- Wrote English lecture notes: `lecture_notes/en/term01_lec04_advanced_statics_and_velocity_link.en.md`.
 - Rendered PDF successfully.
-- Dispatched a worker subagent to create 6 self-contained Python figure scripts in `scripts/figures/term01_lec03/` and PNGs in `figures/term01_lec03/`.
+- Dispatched a worker subagent to create 6 self-contained Python figure scripts in `scripts/figures/term01_lec04/` and PNGs in `figures/term01_lec04/`.
 - Regenerated the statics-velocity-bias figure after identifying that it did not show a velocity bias; corrected the script so the semblance peak and $t^2$ vs $x^2$ slope both shift.
-- Created exercises: `exercises/term01_lec03_advanced_statics_and_velocity_link.md`.
+- Created exercises: `exercises/term01_lec04_advanced_statics_and_velocity_link.md`.
 - Created slide outline and starter PowerPoint deck in `slides/term01/lec03_advanced_statics_and_velocity_link/`.
-- Created lecture-ready page: `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`.
+- Created lecture-ready page: `wiki/lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md`.
 - Updated `wiki/index.md` and linked `wiki/concepts/static_corrections.md` to the new lecture-ready page.
 - Wiki lint passes cleanly.
 
@@ -249,7 +249,7 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
 - Optionally build final PowerPoint slides for term01_lec06/lec07 from outlines.
 - Translate exercises and slide outlines for term01_lec06/lec07 to Russian.
 - Optionally assemble the PowerPoint deck for term01_lec01 from the slide outline.
-- Translate Lecture 02 and Lecture 03 notes, exercises, and slide outlines to Russian once English versions are approved.
+- Translate Lecture 03 and Lecture 04 notes, exercises, and slide outlines to Russian once English versions are approved.
 - Renumber remaining Term 1 lectures after the split is finalized.
 
 ## [2026-06-27] todo | Remaining work
@@ -260,7 +260,7 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
 - Optionally build final PowerPoint slides for term01_lec06/lec07 from outlines.
 - Translate exercises and slide outlines for term01_lec06/lec07 to Russian.
 - Optionally assemble the PowerPoint deck for term01_lec01 from the slide outline.
-- Draft Lecture 03 (advanced statics, layer replacement, floating datum) after Lecture 02 is approved.
+- Draft Lecture 04 (advanced statics, layer replacement, floating datum) after Lecture 03 is approved.
 - Renumber remaining Term 1 lectures after the split is finalized.
 
 ## [2026-07-01] ingest | OCR extraction of Margrave Chapters 5–7 for Lectures 2 and 3
@@ -281,8 +281,8 @@ Updated `wiki/index.md` with new pages. Ready to draft lecture outline for `term
   - `concepts/normal_moveout.md`
   - `concepts/velocity_analysis.md`
 - Updated lecture-ready pages:
-  - `lecture_ready/term01_lec02_kinematics_and_field_statics.md`
-  - `lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`
+  - `lecture_ready/term01_lec03_kinematics_and_field_statics.md`
+  - `lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md`
 - Ran `uv run python scripts/lint_wiki.py`; no issues found.
 
 ## [2026-07-04] docs | Gauss–Seidel derivation for residual statics
@@ -299,13 +299,13 @@ Content:
 - Worked numerical example with 2 sources, 2 receivers, 1 offset class, and 2 CMPs (4 traces).
 - Discussion of the under-constrained nature and the zero-mean constraint.
 
-Linked the derivation from `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md` §3.3 and listed it in `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`.
+Linked the derivation from `lecture_notes/en/term01_lec04_advanced_statics_and_velocity_link.en.md` §3.3 and listed it in `wiki/lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md`.
 
 Ran `uv run python scripts/lint_wiki.py`; no issues found.
 
-## [2026-07-04] lecture | Lecture 3 notes — three-step workflow, NMO-stretch windowing, and expanded exercises
+## [2026-07-04] lecture | Lecture 4 notes — three-step workflow, NMO-stretch windowing, and expanded exercises
 
-Further polished `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md`:
+Further polished `lecture_notes/en/term01_lec04_advanced_statics_and_velocity_link.en.md`:
 
 - Added an explicit **three-step workflow** at the start of §2: form reference traces → estimate time shifts by cross-correlation → decompose into surface-consistent source and receiver statics.
 - Noted in §2.2 that reference traces can be internal (selected from the same data set) or external (e.g., stacked or filtered data).
@@ -313,18 +313,18 @@ Further polished `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_li
 
 Re-rendered the English PDF successfully.
 
-Expanded `exercises/term01_lec03_advanced_statics_and_velocity_link.md`:
+Expanded `exercises/term01_lec04_advanced_statics_and_velocity_link.md`:
 - Added concept-check question on correlation domains.
 - Added concept-check question on the overdetermined/under-constrained nature of the surface-consistent system.
 - Added detailed answers for both new questions.
 
-Updated `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md` instructor notes to mention the NMO-stretch windowing consideration.
+Updated `wiki/lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md` instructor notes to mention the NMO-stretch windowing consideration.
 
 Ran `uv run python scripts/lint_wiki.py`; no issues found.
 
-## [2026-07-04] lecture | Lecture 3 notes — correlation domains and over/under-constrained system
+## [2026-07-04] lecture | Lecture 4 notes — correlation domains and over/under-constrained system
 
-Updated `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md` with insights from Li (1999), Chapters 1–2:
+Updated `lecture_notes/en/term01_lec04_advanced_statics_and_velocity_link.en.md` with insights from Li (1999), Chapters 1–2:
 
 - Added §2.2.1 **Correlation domains** with a table showing which static and dynamic factors contribute to traveltime differences in common-source, common-receiver, common-offset, and common-midpoint domains. Explains why source/receiver statics can be isolated in some domains while both appear together in CMP/common-offset gathers.
 - Added §3.2.1 **Overdetermined and under-constrained** explaining the dual nature of the surface-consistent system: many more traces than unknowns (robust statistics) yet non-unique because a constant can be traded between source and receiver statics without changing the fit. This motivates the zero-mean constraint and the separate handling of long-wavelength statics.
@@ -333,7 +333,7 @@ Updated the slide outline (`slides/term01/lec03_advanced_statics_and_velocity_li
 
 Re-rendered the English PDF successfully.
 
-Updated `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md` to list the new concepts and add Li (1999) to the source frontmatter.
+Updated `wiki/lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md` to list the new concepts and add Li (1999) to the source frontmatter.
 
 Ran `uv run python scripts/lint_wiki.py`; no issues found.
 
@@ -367,12 +367,12 @@ Updated `wiki/index.md`:
 
 Ran `uv run python scripts/lint_wiki.py`; no issues found.
 
-## [2026-07-04] feedback | Sync Lecture 3 review into wiki
+## [2026-07-04] feedback | Sync Lecture 4 review into wiki
 
-Refined wiki pages following the latest review of `lecture_notes/en/term01_lec03_advanced_statics_and_velocity_link.en.md`:
+Refined wiki pages following the latest review of `lecture_notes/en/term01_lec04_advanced_statics_and_velocity_link.en.md`:
 
-- `wiki/lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md`
-  - Added the new `term01_lec03_velocity_and_statics.png` figure to the figures table.
+- `wiki/lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md`
+  - Added the new `term01_lec04_velocity_and_statics.png` figure to the figures table.
   - Updated key concepts to stress that long-wavelength statics shift $t_0$ but leave curvature unchanged.
   - Replaced the simplified floating-datum equation with the four-step operational workflow and the residual static equations.
   - Added instructor notes on the new figure, the curvature argument, non-surface-consistent residuals after long-wavelength removal, source/receiver QC, and correlation-window avoidance of first arrivals and multiples.

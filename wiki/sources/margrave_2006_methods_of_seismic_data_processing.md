@@ -128,4 +128,4 @@ Chapter 1 (pages 1-2 of the notes) provides a high-level “big picture” usefu
 - Good source for the Hilbert-transform link between amplitude and phase spectrum.
 - Explains why bandlimited reflectivity, not the full impulse response, is the realistic processing target.
 - Provides matrix view of convolution and Wiener normal equations.
-- **Chapters 5–7 directly support Term 1 Lecture 02 (kinematics, velocities, field statics) and Lecture 03 (advanced statics, residual statics, floating datum, velocity-analysis link).**
+- **Chapters 5–7 directly support Term 1 Lecture 03 (kinematics, velocities, field statics) and Lecture 04 (advanced statics, residual statics, floating datum, velocity-analysis link).**

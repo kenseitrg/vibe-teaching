@@ -21,7 +21,7 @@ Three panels:
       constrained-fit line (forced through the true intercept) with a
       different slope = biased velocity.
 
-Undergraduate seismic data processing — Term 1 Lecture 03.
+Undergraduate seismic data processing — Term 1 Lecture 04.
 """
 
 import numpy as np
@@ -255,7 +255,7 @@ ax3.grid(True, alpha=0.3)
 ax3.set_xlim(-2e5, x2.max() * 1.15)
 
 plt.tight_layout()
-plt.savefig('figures/term01_lec03/term01_lec03_statics_velocity_bias.png',
+plt.savefig('figures/term01_lec04/term01_lec04_statics_velocity_bias.png',
             dpi=150, bbox_inches='tight')
 plt.close()
 
@@ -272,4 +272,4 @@ print(f"Free fit to shifted data:     V={v_app_shifted:.0f} m/s, "
 print(f"Fixed-t0 fit to shifted data: V={v_app_constrained:.0f} m/s, "
       f"t0={t0_true:.3f} s  (velocity biased)")
 print()
-print("Figure saved: figures/term01_lec03/term01_lec03_statics_velocity_bias.png")
+print("Figure saved: figures/term01_lec04/term01_lec04_statics_velocity_bias.png")

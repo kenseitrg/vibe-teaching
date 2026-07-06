@@ -158,4 +158,4 @@ Offset-dependent errors can also exist before NMO when the surface-consistent as
 
 ## Relation to lecture notes
 
-Supports Term 1 Lecture 03 — Advanced Statics and the Link to Velocity Analysis. Provides physical justification for the surface-consistent assumption, detailed discussion of the three-step residual-statics workflow, cross-correlation considerations, and the under-constrained nature of the Gauss–Seidel decomposition.
+Supports Term 1 Lecture 04 — Advanced Statics and the Link to Velocity Analysis. Provides physical justification for the surface-consistent assumption, detailed discussion of the three-step residual-statics workflow, cross-correlation considerations, and the under-constrained nature of the Gauss–Seidel decomposition.

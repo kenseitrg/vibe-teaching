@@ -1,8 +1,8 @@
 ---
-title: Term 1 Lecture 03 — Advanced Statics and the Link to Velocity Analysis
+title: Term 1 Lecture 04 — Advanced Statics and the Link to Velocity Analysis
 status: draft
 term: 01
-lecture: 03
+lecture: 04
 ---
 
 # Advanced Statics and the Link to Velocity Analysis
@@ -19,7 +19,7 @@ By the end of this lecture you should be able to:
 
 ## Prerequisites
 
-- Term 1 Lecture 02: NMO, velocity analysis, field statics, refraction statics.
+- Term 1 Lecture 03: NMO, velocity analysis, field statics, refraction statics.
 - CMP geometry and stacking.
 - Basic linear algebra: systems of equations, iterative solution.
 
@@ -53,7 +53,7 @@ Conceptually, we pick a reference horizon that should be flat or gently dipping,
 7. **Compute long-wavelength static corrections** from the difference between the original and smoothed time/depth surfaces.
 8. **Apply statics and QC** by re-picking the reference horizon.
 
-![Layer replacement workflow](figures/term01_lec03/term01_lec03_layer_replacement.png){width=90%}
+![Layer replacement workflow](figures/term01_lec04/term01_lec04_layer_replacement.png){width=90%}
 
 **Figure 1.** *Layer replacement workflow. A reference horizon is picked in time, converted to depth, smoothed, and converted back to time. The difference between original and smoothed surfaces gives the long-wavelength static correction.*
 
@@ -94,7 +94,7 @@ The simplest residual-statics method works trace by trace:
 3. The lag of the maximum correlation gives an estimate of the time shift for that trace.
 4. Apply quality control: reject shifts with low correlation coefficient or large inconsistencies.
 
-![Cross-correlation statics](figures/term01_lec03/term01_lec03_crosscorrelation_statics.png){width=90%}
+![Cross-correlation statics](figures/term01_lec04/term01_lec04_crosscorrelation_statics.png){width=90%}
 
 **Figure 2.** *Residual statics by cross-correlation. Each trace in the CMP gather is correlated with a reference trace. The lag of the correlation peak gives the time shift.*
 
@@ -160,7 +160,7 @@ where
 
 The $c_l$ term represents the true geology at the CMP location. It must be removed before solving for the statics; otherwise the static solution would absorb structure and distort the section.
 
-![4-component model](figures/term01_lec03/term01_lec03_four_component_model.png){width=90%}
+![4-component model](figures/term01_lec04/term01_lec04_four_component_model.png){width=90%}
 
 **Figure 3.** *Four-component decomposition of a residual time shift. The total shift is the sum of a source static, a receiver static, an offset-dependent residual moveout, and a CMP structural term.*
 
@@ -228,7 +228,7 @@ Several practical controls strongly affect the residual-statics solution:
 
 ### 4.1 Long-wavelength statics bias velocity picks
 
-![Long-wavelength statics and velocity bias](figures/term01_lec03/term01_lec03_velocity_and_statics.png){width=90%}
+![Long-wavelength statics and velocity bias](figures/term01_lec04/term01_lec04_velocity_and_statics.png){width=90%}
 
 **Figure 4.** *Long-wavelength statics and velocity bias. Top: topography, floating datum, locally constant datum, and constant datum with ray paths to a reflecting boundary. Bottom: recorded CMP traveltime curve, traveltime curve computed from a floating datum, and traveltime curve computed from a constant datum. A long-wavelength static shifts the whole gather, changing $t_0$ without changing the curvature, which biases velocity analysis.*
 
@@ -248,7 +248,7 @@ $$
 
 Because the $t_0$ in the model is wrong, the best-fit velocity $V_\text{apparent}$ is also wrong. This is the central problem: a long-wavelength static does **not** destroy hyperbolicity, but it places the hyperbola at the wrong time, which forces a biased velocity pick.
 
-![Statics bias velocity analysis](figures/term01_lec03/term01_lec03_statics_velocity_bias.png){width=90%}
+![Statics bias velocity analysis](figures/term01_lec04/term01_lec04_statics_velocity_bias.png){width=90%}
 
 **Figure 5.** *Long-wavelength statics shift the whole CMP gather uniformly, so the event remains hyperbolic with the correct NMO velocity but a wrong $t_0$. If velocity picking is tied to the original $t_0$ (horizon-consistent or fixed-time picking), the best-fit velocity at that constrained $t_0$ is biased. (a) CMP gather: true hyperbola ($t_0=0.40$ s, $V=2000$ m/s) and static-shifted hyperbola ($t_0=0.55$ s, same $V$). (b) Semblance spectra: the shifted peak has the correct velocity but wrong $t_0$; the biased pick at the original $t_0$ gives $V_\text{apparent}=1867$ m/s. (c) In the $t^2$–$x^2$ domain the true and shifted data have the same slope (same velocity), while a fit forced through the original $t_0^2$ has a steeper slope — the velocity bias.*
 
@@ -284,7 +284,7 @@ After floating-datum correction:
 
 In practice, the datum should be a smoothed version of the topography and the replacement velocity should be an average near-surface velocity. Keeping the bulk static small during processing protects the velocity model; the final shift to the flat client datum is applied only after the velocities are stable.
 
-![Floating datum](figures/term01_lec03/term01_lec03_floating_datum.png){width=90%}
+![Floating datum](figures/term01_lec04/term01_lec04_floating_datum.png){width=90%}
 
 **Figure 6.** *Floating datum concept. (a) Depth domain: the rugged surface is reduced to a smoothed floating datum, while each CMP is processed on a short, locally flat datum near the recording surface. A single shot or receiver location can belong to several CMPs and therefore carries a different static correction for each local datum. (b) Statics decomposition: the total static is split into a long-wavelength part (applied later to the final flat datum) and a short-wavelength part (floating-datum correction) that preserves hyperbolic moveout for velocity analysis.*
 

@@ -1,5 +1,5 @@
 """
-NMO velocity sensitivity figure for Term 1 Lecture 02.
+NMO velocity sensitivity figure for Term 1 Lecture 03.
 
 Demonstrates under-correction (velocity too high), correct correction, and
 over-correction (velocity too low) for a single reflection hyperbola. The NMO
@@ -7,7 +7,7 @@ correction is applied numerically by mapping each output zero-offset sample to
 the corresponding offset time, which naturally produces wavelet stretch at far
 offsets.
 
-The script is self-contained and writes a single PNG to figures/term01_lec02/.
+The script is self-contained and writes a single PNG to figures/term01_lec03/.
 """
 
 import numpy as np
@@ -85,5 +85,5 @@ axes[0].set_ylabel("Two-way time (s)", fontsize=11)
 plt.suptitle(f"Effect of wrong NMO velocity (true $V_{{\\mathrm{{NMO}}}}$ = {v_true:.0f} m/s)",
              fontsize=12, y=1.02)
 plt.tight_layout()
-plt.savefig("figures/term01_lec02/term01_lec02_nmo_under_over.png", dpi=200, bbox_inches="tight")
-print("Saved figures/term01_lec02/term01_lec02_nmo_under_over.png")
+plt.savefig("figures/term01_lec03/term01_lec03_nmo_under_over.png", dpi=200, bbox_inches="tight")
+print("Saved figures/term01_lec03/term01_lec03_nmo_under_over.png")

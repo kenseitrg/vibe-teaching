@@ -63,4 +63,4 @@ The long-wavelength component is saved and applied later as a final static to th
 
 ## Relation to lecture notes
 
-Central concept in Term 1 Lecture 03: Advanced Statics and the Link to Velocity Analysis.
+Central concept in Term 1 Lecture 04: Advanced Statics and the Link to Velocity Analysis.

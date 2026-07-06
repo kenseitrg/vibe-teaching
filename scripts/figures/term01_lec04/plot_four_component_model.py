@@ -8,7 +8,7 @@ Shows 5 panels:
   c_l: CMP structural term (geology)
   Total = sum of components
 
-Undergraduate seismic data processing — Term 1 Lecture 03.
+Undergraduate seismic data processing — Term 1 Lecture 04.
 """
 
 import numpy as np
@@ -110,7 +110,7 @@ ax[5].grid(True, alpha=0.3)
 
 # Hide unused subplot (2x3 = 6, we use all 6)
 plt.tight_layout()
-plt.savefig('figures/term01_lec03/term01_lec03_four_component_model.png',
+plt.savefig('figures/term01_lec04/term01_lec04_four_component_model.png',
             dpi=150, bbox_inches='tight')
 plt.close()
-print('Saved: term01_lec03_four_component_model.png')
+print('Saved: term01_lec04_four_component_model.png')

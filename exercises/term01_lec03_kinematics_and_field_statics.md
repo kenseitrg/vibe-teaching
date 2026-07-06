@@ -1,4 +1,4 @@
-# Term 1 Lecture 02 — Exercises: Kinematics, Velocities and Field Statics
+# Term 1 Lecture 03 — Exercises: Kinematics, Velocities and Field Statics
 
 ## Concept-check questions
 
@@ -47,7 +47,7 @@ A two-layer model has weathering thickness $h = 80$ m, weathering velocity $v_1 
 
 ## Optional mini-project
 
-Open `scripts/figures/term01_lec02/plot_velocity_spectrum.py` and modify the reflector parameters (times, velocities, amplitudes).  Re-run the script and observe how the semblance peaks move in the velocity spectrum.  Write two or three sentences explaining what you learned about the trade-off between velocity resolution and time resolution.
+Open `scripts/figures/term01_lec03/plot_velocity_spectrum.py` and modify the reflector parameters (times, velocities, amplitudes).  Re-run the script and observe how the semblance peaks move in the velocity spectrum.  Write two or three sentences explaining what you learned about the trade-off between velocity resolution and time resolution.
 
 ## Answers
 

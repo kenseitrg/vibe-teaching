@@ -1,4 +1,4 @@
-# Term 1 Lecture 03 — Advanced Statics and the Link to Velocity Analysis
+# Term 1 Lecture 04 — Advanced Statics and the Link to Velocity Analysis
 
 ## Scope
 
@@ -8,7 +8,7 @@ This is the second half of the original "kinematics and statics" lecture. It cov
 2. Residual statics: from cross-correlation with a reference trace to the 4-component surface-consistent model and Gauss–Seidel solution.
 3. Link between statics corrections and velocity analysis: how large time shifts cause errors in velocity estimation, why good velocities require hyperbolic events, and the floating-datum solution.
 
-Lecture 02 must be covered first: velocity models, NMO, velocity analysis, field statics, and refraction-based near-surface model building.
+Lecture 03 must be covered first: velocity models, NMO, velocity analysis, field statics, and refraction-based near-surface model building.
 
 ## Learning objectives
 
@@ -22,7 +22,7 @@ By the end of this lecture students should be able to:
 
 ## Prerequisites
 
-- Term 1 Lecture 02: NMO, velocity analysis, field statics, refraction statics.
+- Term 1 Lecture 03: NMO, velocity analysis, field statics, refraction statics.
 - CMP geometry and stacking.
 - Basic linear algebra: systems of equations, iterative solution.
 
@@ -118,11 +118,11 @@ By the end of this lecture students should be able to:
 
 | Figure | Script | Output |
 |--------|--------|--------|
-| Layer replacement workflow | `plot_layer_replacement.py` | `term01_lec03_layer_replacement.png` |
-| Cross-correlation statics | `plot_crosscorrelation_statics.py` | `term01_lec03_crosscorrelation_statics.png` |
-| 4-component decomposition example | `plot_four_component_model.py` | `term01_lec03_four_component_model.png` |
-| Statics bias velocity analysis | `plot_statics_velocity_bias.py` | `term01_lec03_statics_velocity_bias.png` |
-| Floating datum | `plot_floating_datum.py` | `term01_lec03_floating_datum.png` |
+| Layer replacement workflow | `plot_layer_replacement.py` | `term01_lec04_layer_replacement.png` |
+| Cross-correlation statics | `plot_crosscorrelation_statics.py` | `term01_lec04_crosscorrelation_statics.png` |
+| 4-component decomposition example | `plot_four_component_model.py` | `term01_lec04_four_component_model.png` |
+| Statics bias velocity analysis | `plot_statics_velocity_bias.py` | `term01_lec04_statics_velocity_bias.png` |
+| Floating datum | `plot_floating_datum.py` | `term01_lec04_floating_datum.png` |
 
 ## Key equations to include
 

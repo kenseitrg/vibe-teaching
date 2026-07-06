@@ -1,5 +1,5 @@
 """
-Statics datums and replacement velocity figure for Term 1 Lecture 02.
+Statics datums and replacement velocity figure for Term 1 Lecture 03.
 
 Draws a cross-section showing surface elevation, a low-velocity weathering
 layer, an intermediate datum close to the base of weathering, and a final
@@ -88,5 +88,5 @@ ax.legend(loc="lower right", fontsize=9)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig("figures/term01_lec02/term01_lec02_statics_datums.png", dpi=200, bbox_inches="tight")
-print("Saved figures/term01_lec02/term01_lec02_statics_datums.png")
+plt.savefig("figures/term01_lec03/term01_lec03_statics_datums.png", dpi=200, bbox_inches="tight")
+print("Saved figures/term01_lec03/term01_lec03_statics_datums.png")

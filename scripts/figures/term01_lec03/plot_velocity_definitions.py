@@ -1,12 +1,12 @@
 """
-Velocity definitions figure for Term 1 Lecture 02.
+Velocity definitions figure for Term 1 Lecture 03.
 
 Shows a three-layer earth model and compares the ray paths associated with
 different velocity averages. The left panel draws the true refracted ray, the
 vertical ray (average velocity) and the straight ray (RMS velocity). The right
 panel plots interval, RMS and average velocity as functions of two-way time.
 
-The script is self-contained and writes a single PNG to figures/term01_lec02/.
+The script is self-contained and writes a single PNG to figures/term01_lec03/.
 """
 
 import numpy as np
@@ -127,5 +127,5 @@ ax_vel.set_xlim(0, 1.2 * np.max(v_interval))
 ax_vel.set_ylim(1.05 * t_cum[-1], -0.05)  # positive time points down
 
 plt.tight_layout()
-plt.savefig("figures/term01_lec02/term01_lec02_velocity_definitions.png", dpi=200, bbox_inches="tight")
-print("Saved figures/term01_lec02/term01_lec02_velocity_definitions.png")
+plt.savefig("figures/term01_lec03/term01_lec03_velocity_definitions.png", dpi=200, bbox_inches="tight")
+print("Saved figures/term01_lec03/term01_lec03_velocity_definitions.png")

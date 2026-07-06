@@ -1,5 +1,5 @@
 """
-Replacement velocity choice figure for Term 1 Lecture 02.
+Replacement velocity choice figure for Term 1 Lecture 03.
 
 Shows a flat surface with a variable-thickness weathering layer and two flat
 sub-weathering reflectors. The four panels illustrate:
@@ -8,7 +8,7 @@ sub-weathering reflectors. The four panels illustrate:
   (c) traveltimes after static correction with the correct replacement velocity (anomaly removed),
   (d) residual structural distortion when the replacement velocity is too low or too high.
 
-The script is self-contained and writes a single PNG to figures/term01_lec02/.
+The script is self-contained and writes a single PNG to figures/term01_lec03/.
 """
 
 import numpy as np
@@ -193,5 +193,5 @@ ax.invert_yaxis()
 
 plt.suptitle("Effect of replacement velocity on static correction", fontsize=13, y=1.02)
 plt.tight_layout()
-plt.savefig("figures/term01_lec02/term01_lec02_replacement_velocity.png", dpi=200, bbox_inches="tight")
-print("Saved figures/term01_lec02/term01_lec02_replacement_velocity.png")
+plt.savefig("figures/term01_lec03/term01_lec03_replacement_velocity.png", dpi=200, bbox_inches="tight")
+print("Saved figures/term01_lec03/term01_lec03_replacement_velocity.png")

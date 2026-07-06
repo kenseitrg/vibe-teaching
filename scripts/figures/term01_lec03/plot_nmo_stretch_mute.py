@@ -1,5 +1,5 @@
 """
-NMO stretch and mute figure for Term 1 Lecture 02.
+NMO stretch and mute figure for Term 1 Lecture 03.
 
 Shows how a constant-frequency wavelet is stretched at far offsets after NMO
 correction, plots the stretch factor as a function of offset and time, and
@@ -93,5 +93,5 @@ ax_map.set_title("Stretch factor (%) versus offset and time; mute corridor at 20
 cbar = plt.colorbar(im, ax=ax_map, fraction=0.04, pad=0.02)
 cbar.set_label("Fractional stretch (%)", fontsize=10)
 
-plt.savefig("figures/term01_lec02/term01_lec02_nmo_stretch_mute.png", dpi=200, bbox_inches="tight")
-print("Saved figures/term01_lec02/term01_lec02_nmo_stretch_mute.png")
+plt.savefig("figures/term01_lec03/term01_lec03_nmo_stretch_mute.png", dpi=200, bbox_inches="tight")
+print("Saved figures/term01_lec03/term01_lec03_nmo_stretch_mute.png")

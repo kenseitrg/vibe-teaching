@@ -49,4 +49,4 @@ Margrave (Chapter 5) connects this to the general statics model: the bulk, long-
 
 ## Relation to lecture notes
 
-Supports Term 1 Lecture 03: Advanced Statics and the Link to Velocity Analysis.
+Supports Term 1 Lecture 04: Advanced Statics and the Link to Velocity Analysis.

@@ -1,11 +1,11 @@
 """
-Velocity spectrum / semblance figure for Term 1 Lecture 02.
+Velocity spectrum / semblance figure for Term 1 Lecture 03.
 
 Builds a synthetic CMP gather with three reflection events, computes a
 semblance-based velocity spectrum by flattening the gather with a range of
 trial velocities, and overlays the picked velocity trend.
 
-The script is self-contained and writes a single PNG to figures/term01_lec02/.
+The script is self-contained and writes a single PNG to figures/term01_lec03/.
 """
 
 import numpy as np
@@ -134,5 +134,5 @@ ax.grid(True, alpha=0.3)
 plt.suptitle("Velocity analysis: scanning hyperbolae and measuring coherence",
              fontsize=12, y=1.02)
 plt.tight_layout()
-plt.savefig("figures/term01_lec02/term01_lec02_velocity_spectrum.png", dpi=200, bbox_inches="tight")
-print("Saved figures/term01_lec02/term01_lec02_velocity_spectrum.png")
+plt.savefig("figures/term01_lec03/term01_lec03_velocity_spectrum.png", dpi=200, bbox_inches="tight")
+print("Saved figures/term01_lec03/term01_lec03_velocity_spectrum.png")

@@ -1,4 +1,4 @@
-# Term 1 Lecture 02 — Kinematics, Velocities and Field Statics
+# Term 1 Lecture 03 — Kinematics, Velocities and Field Statics
 
 ## Scope
 
@@ -137,13 +137,13 @@ By the end of this lecture students should be able to:
 
 | Figure | Script | Output |
 |--------|--------|--------|
-| Velocity definitions | `plot_velocity_definitions.py` | `term01_lec02_velocity_definitions.png` |
-| NMO geometry and corrected gather | `plot_nmo_correction.py` | `term01_lec02_nmo_correction.png` |
-| Under/over-correction | `plot_nmo_velocity_sensitivity.py` | `term01_lec02_nmo_under_over.png` |
-| NMO stretch and mute | `plot_nmo_stretch_mute.py` | `term01_lec02_nmo_stretch_mute.png` |
-| Velocity spectrum / semblance | `plot_velocity_spectrum.py` | `term01_lec02_velocity_spectrum.png` |
-| Statics datums and replacement velocity | `plot_statics_datums.py` | `term01_lec02_statics_datums.png` |
-| Refraction delay-time geometry | `plot_refraction_geometry.py` | `term01_lec02_refraction_geometry.png` |
+| Velocity definitions | `plot_velocity_definitions.py` | `term01_lec03_velocity_definitions.png` |
+| NMO geometry and corrected gather | `plot_nmo_correction.py` | `term01_lec03_nmo_correction.png` |
+| Under/over-correction | `plot_nmo_velocity_sensitivity.py` | `term01_lec03_nmo_under_over.png` |
+| NMO stretch and mute | `plot_nmo_stretch_mute.py` | `term01_lec03_nmo_stretch_mute.png` |
+| Velocity spectrum / semblance | `plot_velocity_spectrum.py` | `term01_lec03_velocity_spectrum.png` |
+| Statics datums and replacement velocity | `plot_statics_datums.py` | `term01_lec03_statics_datums.png` |
+| Refraction delay-time geometry | `plot_refraction_geometry.py` | `term01_lec03_refraction_geometry.png` |
 
 ## Key equations to include
 

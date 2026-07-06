@@ -1,5 +1,5 @@
 """
-NMO correction figure for Term 1 Lecture 02.
+NMO correction figure for Term 1 Lecture 03.
 
 Creates a synthetic CMP gather with three flat reflectors, applies the correct
 NMO correction by mapping each zero-offset sample to the corresponding offset
@@ -7,7 +7,7 @@ time, and displays the raw gather and the flattened gather. The nonlinear
 mapping naturally stretches the wavelet at far offsets, which is visible in the
 NMO-corrected panel.
 
-The script is self-contained and writes a single PNG to figures/term01_lec02/.
+The script is self-contained and writes a single PNG to figures/term01_lec03/.
 """
 
 import numpy as np
@@ -102,5 +102,5 @@ ax.grid(True, alpha=0.3)
 
 plt.suptitle("Normal-moveout correction flattens reflection hyperbolae", fontsize=12, y=1.02)
 plt.tight_layout()
-plt.savefig("figures/term01_lec02/term01_lec02_nmo_correction.png", dpi=200, bbox_inches="tight")
-print("Saved figures/term01_lec02/term01_lec02_nmo_correction.png")
+plt.savefig("figures/term01_lec03/term01_lec03_nmo_correction.png", dpi=200, bbox_inches="tight")
+print("Saved figures/term01_lec03/term01_lec03_nmo_correction.png")

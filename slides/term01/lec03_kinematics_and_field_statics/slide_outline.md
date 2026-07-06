@@ -1,4 +1,4 @@
-# Slide outline — Term 1 Lecture 02
+# Slide outline — Term 1 Lecture 03
 ## Kinematics, Velocities and Field Statics
 
 ---
@@ -7,7 +7,7 @@
 
 **Kinematics, Velocities and Field Statics**
 
-Term 1, Lecture 02
+Term 1, Lecture 03
 
 ---
 
@@ -30,7 +30,7 @@ By the end of this lecture you should be able to:
 - Same layered medium can be described by several velocities.
 - Each velocity assumes a different ray path.
 
-**Figure:** `figures/term01_lec02/term01_lec02_velocity_definitions.png`
+**Figure:** `figures/term01_lec03/term01_lec03_velocity_definitions.png`
 
 ---
 
@@ -59,7 +59,7 @@ $$t^2(x) = t_0^2 + \frac{x^2}{V_\text{nmo}^2}$$
 - Statics correct near-surface delays.
 - Result: a zero-offset stack section, improved later by migration.
 
-**Figure:** `figures/term01_lec02/term01_lec02_processing_flow.png`
+**Figure:** `figures/term01_lec03/term01_lec03_processing_flow.png`
 
 ---
 
@@ -71,7 +71,7 @@ $$t(x) = \sqrt{t_0^2 + \frac{x^2}{V_\text{nmo}^2}}$$
 NMO correction:
 $$\Delta t_\text{nmo} = \sqrt{t_0^2 + \frac{x^2}{V_\text{nmo}^2}} - t_0$$
 
-**Figure:** `figures/term01_lec02/term01_lec02_nmo_correction.png`
+**Figure:** `figures/term01_lec03/term01_lec03_nmo_correction.png`
 
 ---
 
@@ -85,7 +85,7 @@ $$\Delta t_\text{nmo} = \sqrt{t_0^2 + \frac{x^2}{V_\text{nmo}^2}} - t_0$$
 - This gives $(Vt)^2 = (Vt_0)^2 + (x\cos\theta)^2$, so $V_\text{stack} = V / \cos\theta$.
 - In 3-D the line azimuth relative to the dip direction also matters.
 
-**Figure:** `figures/term01_lec02/term01_lec02_dip_moveout_cosine.png`
+**Figure:** `figures/term01_lec03/term01_lec03_dip_moveout_cosine.png`
 
 ---
 
@@ -95,7 +95,7 @@ $$\Delta t_\text{nmo} = \sqrt{t_0^2 + \frac{x^2}{V_\text{nmo}^2}} - t_0$$
 - Velocity too low → event curves up (**over-correction**).
 - Correct velocity → flat event ready to stack.
 
-**Figure:** `figures/term01_lec02/term01_lec02_nmo_under_over.png`
+**Figure:** `figures/term01_lec03/term01_lec03_nmo_under_over.png`
 
 ---
 
@@ -106,7 +106,7 @@ $$\Delta t_\text{nmo} = \sqrt{t_0^2 + \frac{x^2}{V_\text{nmo}^2}} - t_0$$
 - Stretch worst for: far offsets, shallow events, low velocities.
 - Stretched samples are muted before stack.
 
-**Figure:** `figures/term01_lec02/term01_lec02_wavelet_stretch.png`
+**Figure:** `figures/term01_lec03/term01_lec03_wavelet_stretch.png`
 
 ---
 
@@ -117,7 +117,7 @@ $$\Delta t_\text{nmo} = \sqrt{t_0^2 + \frac{x^2}{V_\text{nmo}^2}} - t_0$$
 - Display result as a velocity spectrum.
 - Bright peaks mark coherent reflections.
 
-**Figure:** `figures/term01_lec02/term01_lec02_velocity_spectrum.png`
+**Figure:** `figures/term01_lec03/term01_lec03_velocity_spectrum.png`
 
 ---
 
@@ -163,9 +163,9 @@ Key assumption: one constant time shift per trace.
 - **Replacement velocity** $V_\text{r}$: velocity used below the intermediate datum.
 - Choice of $V_\text{r}$ affects computed statics and can distort far offsets.
 
-**Figure:** `figures/term01_lec02/term01_lec02_statics_datums.png`
+**Figure:** `figures/term01_lec03/term01_lec03_statics_datums.png`
 
-**Figure:** `figures/term01_lec02/term01_lec02_replacement_velocity.png`
+**Figure:** `figures/term01_lec03/term01_lec03_replacement_velocity.png`
 
 ---
 
@@ -184,7 +184,7 @@ Refraction statics:
 - First arrivals: direct wave near source, head wave beyond crossover distance.
 - Delay time isolates near-surface effect.
 
-**Figure:** `figures/term01_lec02/term01_lec02_delay_time_scheme.png`
+**Figure:** `figures/term01_lec03/term01_lec03_delay_time_scheme.png`
 
 ---
 

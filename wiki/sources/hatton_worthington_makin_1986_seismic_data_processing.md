@@ -113,5 +113,5 @@ Text extracted from the DJVU version in `papers/general/`.
 - Provides the dipole-based proof of minimum-phase front-loading requested for Term 1 Lecture 6.
 - Gives practical parameter guidance for spiking/predictive deconvolution.
 - Explains deterministic designature and ghost removal.
-- Provides the 4-component surface-consistent residual statics model and Gauss–Seidel solution (Section 5.10) for Term 1 Lecture 3.
+- Provides the 4-component surface-consistent residual statics model and Gauss–Seidel solution (Section 5.10) for Term 1 Lecture 4.
 - Discusses vertical-ray statics and the role of datums/floating datum (Section 3.7.1).

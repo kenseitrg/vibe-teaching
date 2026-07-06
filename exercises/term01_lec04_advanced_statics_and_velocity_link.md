@@ -1,4 +1,4 @@
-# Term 1 Lecture 03 — Exercises: Advanced Statics and the Link to Velocity Analysis
+# Term 1 Lecture 04 — Exercises: Advanced Statics and the Link to Velocity Analysis
 
 ## Concept-check questions
 
@@ -55,7 +55,7 @@ For source 2 there are three measured time shifts: $d_{2111}=14$ ms, $d_{2122}=1
 
 ## Optional mini-project
 
-Open `scripts/figures/term01_lec03/plot_statics_velocity_bias.py`. Change the static shift from 0.1 s to 0.05 s and re-run. How much does the apparent velocity bias change? Write two sentences explaining what your experiment implies about the importance of removing long-wavelength statics before velocity analysis.
+Open `scripts/figures/term01_lec04/plot_statics_velocity_bias.py`. Change the static shift from 0.1 s to 0.05 s and re-run. How much does the apparent velocity bias change? Write two sentences explaining what your experiment implies about the importance of removing long-wavelength statics before velocity analysis.
 
 ## Answers
 

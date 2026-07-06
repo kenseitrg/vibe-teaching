@@ -6,7 +6,7 @@ Shows:
   Bottom panel: cross-correlation function with the lag of the
   maximum correlation marked as the estimated static shift.
 
-Undergraduate seismic data processing — Term 1 Lecture 03.
+Undergraduate seismic data processing — Term 1 Lecture 04.
 """
 
 import numpy as np
@@ -96,7 +96,7 @@ ax2.legend(fontsize=9)
 ax2.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('figures/term01_lec03/term01_lec03_crosscorrelation_statics.png',
+plt.savefig('figures/term01_lec04/term01_lec04_crosscorrelation_statics.png',
             dpi=150, bbox_inches='tight')
 plt.close()
-print('Saved: term01_lec03_crosscorrelation_statics.png')
+print('Saved: term01_lec04_crosscorrelation_statics.png')

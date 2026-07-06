@@ -1,4 +1,4 @@
-# Slide outline — Term 1 Lecture 03
+# Slide outline — Term 1 Lecture 04
 ## Advanced Statics and the Link to Velocity Analysis
 
 ---
@@ -7,7 +7,7 @@
 
 **Advanced Statics and the Link to Velocity Analysis**
 
-Term 1, Lecture 03
+Term 1, Lecture 04
 
 ---
 
@@ -49,7 +49,7 @@ Workflow:
 6. Compute statics from original vs. smoothed surfaces.
 7. Apply and QC.
 
-**Figure:** `figures/term01_lec03/term01_lec03_layer_replacement.png`
+**Figure:** `figures/term01_lec04/term01_lec04_layer_replacement.png`
 
 ---
 
@@ -80,7 +80,7 @@ Workflow:
 
 Limitation: cycle skipping when shifts exceed half a period.
 
-**Figure:** `figures/term01_lec03/term01_lec03_crosscorrelation_statics.png`
+**Figure:** `figures/term01_lec04/term01_lec04_crosscorrelation_statics.png`
 
 ---
 
@@ -115,7 +115,7 @@ $$\Delta t_{ijkl} = s_i + r_j + h_k + c_l + \text{noise}$$
 
 The $c_l$ term must be removed before solving; otherwise structure is absorbed into statics.
 
-**Figure:** `figures/term01_lec03/term01_lec03_four_component_model.png`
+**Figure:** `figures/term01_lec04/term01_lec04_four_component_model.png`
 
 ---
 
@@ -170,7 +170,7 @@ $$t^2(x) = t_0^2 + \frac{x^2}{V_\text{apparent}^2}$$
 
 Result: $V_\text{apparent} \neq V_\text{true}$ even though the curvature never changed.
 
-**Figure:** `figures/term01_lec03/term01_lec03_statics_velocity_bias.png`
+**Figure:** `figures/term01_lec04/term01_lec04_statics_velocity_bias.png`
 
 Speaker notes:
 - Show panel (a): true and shifted hyperbolae have identical curvature.
@@ -203,7 +203,7 @@ After floating-datum correction:
 
 The same shot or receiver location can belong to several CMPs, so its residual static depends on the local CMP datum.
 
-**Figure:** `figures/term01_lec03/term01_lec03_floating_datum.png`
+**Figure:** `figures/term01_lec04/term01_lec04_floating_datum.png`
 
 Speaker notes:
 - Top panel: elevation view with final flat datum, floating datum, and local CMP datum bands.

@@ -1,8 +1,8 @@
 ---
-title: Term 1 Lecture 02 — Kinematics, Velocities and Field Statics
+title: Term 1 Lecture 03 — Kinematics, Velocities and Field Statics
 status: draft
 term: 01
-lecture: 02
+lecture: 03
 ---
 
 # Kinematics, Velocities and Field Statics
@@ -31,7 +31,7 @@ By the end of this lecture you should be able to:
 
 Every traveltime correction in seismic processing needs a velocity. The same stack of layers can be described by several different velocities, each tied to a different simplifying assumption about the ray path (Figure 1).
 
-![Velocity definitions](figures/term01_lec02/term01_lec02_velocity_definitions.png){width=90%}
+![Velocity definitions](figures/term01_lec03/term01_lec03_velocity_definitions.png){width=90%}
 
 **Figure 1.** *Left:* a three-layer earth model with the true refracted ray (bent at each interface by Snell's law), the vertical-ray approximation used for average velocity, and the straight-ray approximation used for RMS velocity. *Right:* interval, average and RMS velocity curves as functions of two-way time for the same model.
 
@@ -132,7 +132,7 @@ The idealised imaging model assumes that every trace represents a vertical raypa
 
 **Kinematic processing** corrects for the offset-dependent part of the traveltime. **Static corrections** remove the near-surface delays. After both corrections, the CMP gather should contain a set of approximately zero-offset traces that can be stacked to form a zero-offset section (Figure 2).
 
-![Processing flow](figures/term01_lec02/term01_lec02_processing_flow.png){width=40%}
+![Processing flow](figures/term01_lec03/term01_lec03_processing_flow.png){width=40%}
 
 **Figure 2.** *Simplified processing flow around the kinematic stage. Mute removes stretched far-offset samples before stack. The zero-offset stack is only an approximation of the geology; it is improved later by migration.*
 
@@ -159,7 +159,7 @@ $$
 
 Figure 3 shows a synthetic CMP gather before and after applying the correct NMO correction.
 
-![NMO correction](figures/term01_lec02/term01_lec02_nmo_correction.png){width=90%}
+![NMO correction](figures/term01_lec03/term01_lec03_nmo_correction.png){width=90%}
 
 **Figure 3.** *(a) Synthetic CMP gather with three reflection hyperbolae. Dashed lines show the true hyperbolic moveout. (b) The same gather after NMO correction; the reflections are flattened. The wavelets are stretched at far offsets, especially for the shallowest event, because the NMO mapping is nonlinear.*
 
@@ -194,7 +194,7 @@ $$
 
 This is why a single stacking velocity can fail for steeply dipping events.
 
-![Dipping reflector geometry](figures/term01_lec02/term01_lec02_dip_moveout_cosine.png){width=90%}
+![Dipping reflector geometry](figures/term01_lec03/term01_lec03_dip_moveout_cosine.png){width=90%}
 
 **Figure 7.** *Geometry of a dipping reflector. The source $S$ and receiver $R$ are separated by the surface offset $x$ with midpoint $M$. The mirror image $S'$ makes the reflected path $S \to I \to R$ equivalent to the straight line $S'R$. Decomposing $S'R$ into the zero-offset normal path $Vt_0 = 2z$ and the effective offset $x \cos\theta$ gives the hyperbola $t^2 = t_0^2 + x^2 \cos^2\theta / V^2$, so the stacking velocity is $V / \cos\theta$.*
 
@@ -225,7 +225,7 @@ If the wrong NMO velocity is used, the gather is not flattened:
 - **Velocity too high** → the hyperbola is not curved enough to be removed; the event still smiles downward. This is **under-correction**.
 - **Velocity too low** → the correction is too large; the event curves upward. This is **over-correction**.
 
-![NMO velocity sensitivity](figures/term01_lec02/term01_lec02_nmo_under_over.png){width=90%}
+![NMO velocity sensitivity](figures/term01_lec03/term01_lec03_nmo_under_over.png){width=90%}
 
 **Figure 4.** *Effect of using the wrong NMO velocity. Left: velocity too high (under-correction, event still curves down). Centre: correct velocity. Right: velocity too low (over-correction, event curves up).*
 
@@ -236,7 +236,7 @@ If the wrong NMO velocity is used, the gather is not flattened:
 
 A reflection wavelet is not a mathematical impulse; it occupies a finite time window. In that window the NMO velocity is not constant: it usually increases with depth, and therefore with time. The top of the wavelet corresponds to a slightly shallower time than the bottom, so it is associated with a lower NMO velocity. Because a lower NMO velocity produces a larger NMO correction, the top of the wavelet must be shifted upward more than the bottom. The wavelet is therefore stretched in time, and its dominant frequency is lowered.
 
-![Wavelet stretch during NMO](figures/term01_lec02/term01_lec02_wavelet_stretch.png){width=90%}
+![Wavelet stretch during NMO](figures/term01_lec03/term01_lec03_wavelet_stretch.png){width=90%}
 
 **Figure 5.** *NMO stretch and reversal. (a) Two reflection hyperbolae on a CMP gather; the numbers mark the samples of the wavelet at different offsets. (b) After NMO correction the same samples no longer line up. At near offsets the wavelet is preserved; at larger offsets it is stretched, and eventually the sample order reverses.*
 
@@ -263,7 +263,7 @@ Even after a careful NMO correction, small residual curvatures may remain. These
 - residual statics,
 - structural dip.
 
-Residual moveout is one reason velocity analysis is iterated and why residual statics are applied later. Residual statics and the link to velocity analysis are covered in detail in Term 1 Lecture 03.
+Residual moveout is one reason velocity analysis is iterated and why residual statics are applied later. Residual statics and the link to velocity analysis are covered in detail in Term 1 Lecture 04.
 
 ### 3.6 NMO in a vertically varying medium
 
@@ -302,7 +302,7 @@ For each $t_0$ and each trial velocity $V$:
 
 The result is a 2-D panel with zero-offset time on the vertical axis and velocity on the horizontal axis. Peaks in the panel indicate coherent reflections (Figure 6).
 
-![Velocity spectrum](figures/term01_lec02/term01_lec02_velocity_spectrum.png){width=90%}
+![Velocity spectrum](figures/term01_lec03/term01_lec03_velocity_spectrum.png){width=90%}
 
 **Figure 6.** *(a) Synthetic CMP gather. Dashed lines show the true reflection hyperbolae. (b) Semblance velocity spectrum. Bright peaks mark velocities that flatten the gather; cyan dots show the picked trend.*
 
@@ -355,7 +355,7 @@ The key assumption is that the near-surface delay is the same for every reflecti
 - **Short-wavelength statics** vary rapidly from trace to trace, often within one spread length. They destroy stacking coherence and must be removed before stack.
 - **Long-wavelength statics** vary slowly and can distort the structural picture if not corrected.
 
-A common rule of thumb is that anomalies longer than about half the spread length are treated as long-wavelength statics. Long-wavelength statics shift the whole CMP gather up or down by a constant time; the events stay hyperbolic but are placed at the wrong $t_0$. This biases velocity analysis and is the main reason for using a floating datum (Lecture 03).
+A common rule of thumb is that anomalies longer than about half the spread length are treated as long-wavelength statics. Long-wavelength statics shift the whole CMP gather up or down by a constant time; the events stay hyperbolic but are placed at the wrong $t_0$. This biases velocity analysis and is the main reason for using a floating datum (Lecture 04).
 
 
 \newpage{}
@@ -366,7 +366,7 @@ Field statics move the data from the physical surface to a reference level calle
 
 - **Client datum** or **final datum**: the flat elevation datum used for delivery and final imaging.
 - **Intermediate datum**: usually chosen near the base of the weathering layer. It removes the most irregular part of the static and lets the final datum and replacement velocity be changed later.
-- **Floating datum** (Lecture 03): a smoothed surface that follows the long-wavelength statics trend; used during NMO and velocity analysis so that events stay hyperbolic.
+- **Floating datum** (Lecture 04): a smoothed surface that follows the long-wavelength statics trend; used during NMO and velocity analysis so that events stay hyperbolic.
 
 The statics model can be written as follows. Let $e_\text{bns}$ be the elevation of the base of the near surface (BNS), $e_\text{dat}$ the datum elevation, and $V_\text{rep}$ the replacement velocity. We adopt the convention that **a positive static shift is added to the trace and moves it down to later times**. We assume the source is located exactly at the BNS, so the source-side static is just the replacement-velocity shift from the BNS down to the datum:
 
@@ -384,13 +384,13 @@ The total static applied to a trace is $\delta t_s + \delta t_r$ and is **added*
 
 Between the surface and the datum we replace the real low-velocity weathering layer with a **replacement velocity** $V_\text{r}$. This velocity should be a best estimate of the vertical velocity in the consolidated material just below the weathering. Because the static shift is $T = D/V$, a low replacement velocity gives a large static and a high replacement velocity gives a small static. The wrong choice does not just shift the section; it can introduce long-wavelength structural distortions (Figure 9).
 
-![Replacement velocity choice](figures/term01_lec02/term01_lec02_replacement_velocity.png){width=90%}
+![Replacement velocity choice](figures/term01_lec03/term01_lec03_replacement_velocity.png){width=90%}
 
 **Figure 9.** *Effect of replacement velocity choice. (a) Flat-surface model with a variable-thickness weathering layer and two flat sub-weathering reflectors with different velocities. (b) Traveltimes before static correction; the weathering anomaly is imprinted on both near- and far-offset events. (c) After correction with the correct replacement velocity the shallow and deep reflectors are flat for both offsets (solid and dashed lines); the semi-transparent dotted curves show where the same reflectors would land if a wrong replacement velocity were used. (d) Residual structural distortion when the replacement velocity is too low or too high; the error is much larger at far offsets because the wrong replacement velocity also changes the RMS velocity and therefore the NMO moveout.*
 
 The statics process is an approximate form of downward continuation that is only correct for vertical raypaths. For energy that travels slantingly through the near surface, the correction is approximate. To keep later processing (NMO, migration) from being distorted, the **bulk (mean) static shift should be kept small**. A common practice is to remove the mean from the statics solution and save it to be applied as the final shift to the interpretation datum.
 
-![Statics datums](figures/term01_lec02/term01_lec02_statics_datums.png){width=90%}
+![Statics datums](figures/term01_lec03/term01_lec03_statics_datums.png){width=90%}
 
 **Figure 8.** *Field-statics geometry. The weathering layer (low velocity) is replaced by a replacement velocity down to an intermediate datum; the data are then shifted up to the final datum, which is placed above the highest surface elevation to avoid negative total static shifts. Vertical rays are assumed.*
 
@@ -427,7 +427,7 @@ Uphole surveys are attractive because they measure the vertical traveltime direc
 
 Refraction statics use first arrivals to estimate the weathering-layer thickness and velocity. The classic model is a low-velocity layer over a higher-velocity half-space. At offsets larger than the **crossover distance** the first arrival is a critically refracted head wave rather than the direct wave.
 
-![Refraction geometry and delay time](figures/term01_lec02/term01_lec02_delay_time_scheme.png){width=90%}
+![Refraction geometry and delay time](figures/term01_lec03/term01_lec03_delay_time_scheme.png){width=90%}
 
 **Figure 10.** *Two-layer refraction model. Top: traveltime versus source–receiver offset; the direct arrival follows velocity $v_1$, the refracted head wave follows the higher velocity $v_2$, and the crossover distance $x_c$ marks where the refracted wave becomes the first arrival. The intercept time $T_i$ measures the delay introduced by the near-surface layer. Bottom: ray geometry with the critically refracted ray ($\\theta_c$) and the delay-time path that isolates the near-surface contribution.*
 
@@ -468,7 +468,7 @@ These methods remain useful, but modern processing often replaces or supplements
 - Velocity analysis scans $(t_0, V)$ space and measures coherence with semblance.
 - Field statics move traces from the surface to a datum using the vertical-ray assumption and a replacement velocity. Wrong replacement velocity can distort structure.
 - Refraction data constrain the near-surface model through delay-time methods; tomography is the modern extension.
-- Long-wavelength statics shift whole CMP gathers and bias velocity analysis; the floating-datum solution is covered in Lecture 03.
+- Long-wavelength statics shift whole CMP gathers and bias velocity analysis; the floating-datum solution is covered in Lecture 04.
 
 ## Comprehension questions
 

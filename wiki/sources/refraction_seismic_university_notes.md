@@ -68,4 +68,4 @@ Some velocity contrasts are invisible in first arrivals:
 
 ## Relation to lecture notes
 
-Supports Term 1 Lecture 02 (refraction statics, delay-time methods) and provides context for Term 1 Lecture 03 (tomography as the modern extension).
+Supports Term 1 Lecture 03 (refraction statics, delay-time methods) and provides context for Term 1 Lecture 04 (tomography as the modern extension).

@@ -124,4 +124,4 @@ Li (1999, Chapter 2) emphasizes that the system is **over-determined** (far more
 
 ## Relation to lecture notes
 
-Core material for Term 1 Lecture 03: Advanced Statics and the Link to Velocity Analysis.
+Core material for Term 1 Lecture 04: Advanced Statics and the Link to Velocity Analysis.

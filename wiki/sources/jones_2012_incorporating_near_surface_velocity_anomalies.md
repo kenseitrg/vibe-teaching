@@ -53,4 +53,4 @@ NMO/PreSTM treats all traces in a CMP as if they propagated in a 1-D earth model
 
 ## Relation to lecture notes
 
-Directly supports Term 1 Lecture 03: floating datum, statics–velocity analysis interaction, and residual statics.
+Directly supports Term 1 Lecture 04: floating datum, statics–velocity analysis interaction, and residual statics.

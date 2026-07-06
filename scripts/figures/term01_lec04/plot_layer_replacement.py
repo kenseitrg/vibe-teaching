@@ -24,7 +24,7 @@ Workflow (6 panels):
   (e) Corrected traveltimes t_new = 2 z_smooth / v_rep vs raw t_obs.
   (f) Static correction Δt = t_obs - t_new.
 
-Undergraduate seismic data processing — Term 1 Lecture 03.
+Undergraduate seismic data processing — Term 1 Lecture 04.
 """
 
 import numpy as np
@@ -268,7 +268,7 @@ ax.grid(True, alpha=0.3)
 # Finalise
 # =========================================================================
 plt.tight_layout()
-plt.savefig('figures/term01_lec03/term01_lec03_layer_replacement.png',
+plt.savefig('figures/term01_lec04/term01_lec04_layer_replacement.png',
             dpi=150, bbox_inches='tight')
 plt.close()
-print('Saved: figures/term01_lec03/term01_lec03_layer_replacement.png')
+print('Saved: figures/term01_lec04/term01_lec04_layer_replacement.png')

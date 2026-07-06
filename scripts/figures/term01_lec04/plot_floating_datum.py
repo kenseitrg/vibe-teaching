@@ -17,7 +17,7 @@ Bottom panel (b) — statics decomposition:
   - Floating-datum correction = total - smoothed (blue shaded)
   - The three CMP locations from panel (a) are marked.
 
-Undergraduate seismic data processing — Term 1 Lecture 03.
+Undergraduate seismic data processing — Term 1 Lecture 04.
 """
 
 import numpy as np
@@ -175,7 +175,7 @@ ax2.legend(fontsize=8, loc='upper right')
 ax2.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('figures/term01_lec03/term01_lec03_floating_datum.png',
+plt.savefig('figures/term01_lec04/term01_lec04_floating_datum.png',
             dpi=150, bbox_inches='tight')
 plt.close()
-print('Saved: term01_lec03_floating_datum.png')
+print('Saved: term01_lec04_floating_datum.png')

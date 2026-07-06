@@ -88,4 +88,4 @@ This is a useful sanity check: a small velocity gradient with depth produces a l
 
 ## Relation to lecture notes
 
-Core topic in [Term 1 Lecture 02 — Kinematics, Velocities and Field Statics](../lecture_ready/term01_lec02_kinematics_and_field_statics.md).
+Core topic in [Term 1 Lecture 03 — Kinematics, Velocities and Field Statics](../lecture_ready/term01_lec03_kinematics_and_field_statics.md).

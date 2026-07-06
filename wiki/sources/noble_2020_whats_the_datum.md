@@ -39,4 +39,4 @@ Datum and replacement velocity are often treated as bulk shifts, but they have a
 
 ## Relation to lecture notes
 
-Supports Term 1 Lecture 02 (field statics, datums, replacement velocity) and Term 1 Lecture 03 (floating datum, link between statics and velocity analysis).
+Supports Term 1 Lecture 03 (field statics, datums, replacement velocity) and Term 1 Lecture 04 (floating datum, link between statics and velocity analysis).

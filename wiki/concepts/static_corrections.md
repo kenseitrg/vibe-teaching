@@ -77,5 +77,5 @@ In practice, shots sometimes lie inside the weathered layer, uphole picks are no
 
 ## Lectures
 
-- [Term 1 Lecture 02 — Kinematics, Velocities and Field Statics](../lecture_ready/term01_lec02_kinematics_and_field_statics.md)
-- [Term 1 Lecture 03 — Advanced Statics and the Link to Velocity Analysis](../lecture_ready/term01_lec03_advanced_statics_and_velocity_link.md)
+- [Term 1 Lecture 03 — Kinematics, Velocities and Field Statics](../lecture_ready/term01_lec03_kinematics_and_field_statics.md)
+- [Term 1 Lecture 04 — Advanced Statics and the Link to Velocity Analysis](../lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md)

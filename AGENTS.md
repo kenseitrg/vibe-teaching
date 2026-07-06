@@ -280,26 +280,26 @@ Maintain a shared notation list here as the course develops. Add terms once they
 | $H(z)$ | Z-transform of prediction filter | $z$-преобразование фильтра предсказания | Term 1, Lec 6 |
 | $\mathbf{R}$ | Toeplitz autocorrelation matrix | теплицева автокорреляционная матрица | Term 1, Lec 6 |
 | $\boldsymbol{\phi}_{dx}$ | Cross-correlation vector | вектор взаимной корреляции | Term 1, Lec 6 |
-| $v_i$, $V_\text{int}$ | Interval velocity | интервальная скорость | Term 1, Lec 2 |
-| $V_\text{avg}$ | Average velocity (vertical ray) | средняя скорость | Term 1, Lec 2 |
-| $V_\text{rms}$ | RMS velocity (straight ray) | среднеквадратичная скорость | Term 1, Lec 2 |
-| $V_\text{nmo}$ | NMO velocity | скорость NMO | Term 1, Lec 2 |
-| $V_\text{stack}$ | Stacking velocity | скорость суммирования | Term 1, Lec 2 |
-| $t_0$ | Zero-offset two-way time | двойное вертикальное время | Term 1, Lec 2 |
-| $x$ | Source–receiver offset | удаление источник–приёмник | Term 1, Lec 2 |
-| $\Delta t_\text{nmo}$ | NMO correction | кинематическая поправка | Term 1, Lec 2 |
-| $S(t_0, V)$ | Semblance | сэмбланс | Term 1, Lec 2 |
-| $V_\text{r}$ | Replacement velocity | скорость замещения | Term 1, Lec 2 |
-| $\delta t$ | Delay time (refraction statics) | время задержки | Term 1, Lec 2 |
-| $h$ | Weathering-layer thickness | мощность выветриванного слоя | Term 1, Lec 2 |
-| $s_i$ | Source residual static | остаточная статика источника | Term 1, Lec 3 |
-| $r_j$ | Receiver residual static | остаточная статика приёмника | Term 1, Lec 3 |
-| $h_k$ | Offset-class residual moveout | остаточная кинематика на заданном удалении | Term 1, Lec 3 |
-| $c_l$ | CMP structural term | структурная компонента ОСТ | Term 1, Lec 3 |
-| $G$ | Design matrix for surface-consistent statics | матрица поверхностно-согласованных статических поправок | Term 1, Lec 3 |
-| $\Delta t_\text{floating}$ | Floating-datum correction | поправка к плавающему уровню | Term 1, Lec 3 |
-| $\Delta t_\text{smoothed}$ | Long-wavelength static component | длиннопериодная составляющая статики | Term 1, Lec 3 |
-| $V_\text{apparent}$ | Apparent velocity from biased velocity analysis | кажущаяся скорость | Term 1, Lec 3 |
+| $v_i$, $V_\text{int}$ | Interval velocity | интервальная скорость | Term 1, Lec 3 |
+| $V_\text{avg}$ | Average velocity (vertical ray) | средняя скорость | Term 1, Lec 3 |
+| $V_\text{rms}$ | RMS velocity (straight ray) | среднеквадратичная скорость | Term 1, Lec 3 |
+| $V_\text{nmo}$ | NMO velocity | скорость NMO | Term 1, Lec 3 |
+| $V_\text{stack}$ | Stacking velocity | скорость суммирования | Term 1, Lec 3 |
+| $t_0$ | Zero-offset two-way time | двойное вертикальное время | Term 1, Lec 3 |
+| $x$ | Source–receiver offset | удаление источник–приёмник | Term 1, Lec 3 |
+| $\Delta t_\text{nmo}$ | NMO correction | кинематическая поправка | Term 1, Lec 3 |
+| $S(t_0, V)$ | Semblance | сэмбланс | Term 1, Lec 3 |
+| $V_\text{r}$ | Replacement velocity | скорость замещения | Term 1, Lec 3 |
+| $\delta t$ | Delay time (refraction statics) | время задержки | Term 1, Lec 3 |
+| $h$ | Weathering-layer thickness | мощность выветриванного слоя | Term 1, Lec 3 |
+| $s_i$ | Source residual static | остаточная статика источника | Term 1, Lec 4 |
+| $r_j$ | Receiver residual static | остаточная статика приёмника | Term 1, Lec 4 |
+| $h_k$ | Offset-class residual moveout | остаточная кинематика на заданном удалении | Term 1, Lec 4 |
+| $c_l$ | CMP structural term | структурная компонента ОСТ | Term 1, Lec 4 |
+| $G$ | Design matrix for surface-consistent statics | матрица поверхностно-согласованных статических поправок | Term 1, Lec 4 |
+| $\Delta t_\text{floating}$ | Floating-datum correction | поправка к плавающему уровню | Term 1, Lec 4 |
+| $\Delta t_\text{smoothed}$ | Long-wavelength static component | длиннопериодная составляющая статики | Term 1, Lec 4 |
+| $V_\text{apparent}$ | Apparent velocity from biased velocity analysis | кажущаяся скорость | Term 1, Lec 4 |
 
 ---
 
@@ -311,7 +311,7 @@ Use this section to track unresolved choices that the instructor and agent need 
 - [x] Agree on Markdown-to-PDF toolchain: lightweight CLI, default to **Pandoc**.
 - [ ] Set figure naming convention (suggested: `term01_lec05_nmo_correction.png`; bilingual figures may use `.en`/`.ru` suffixes).
 - [x] Keep Python scripts self-contained; no shared utilities module unless requested.
-- [ ] Renumber Term 1 after splitting kinematics/statics into Lecture 02 and Lecture 03 (current AGENTS.md still lists statics as Lec 4 and velocity analysis as Lec 5).
+- [ ] Renumber remaining Term 1 lectures after the kinematics/statics split (now Lectures 03 and 04). The Section 2 course structure still lists data formats as Lec 2, survey geometry as Lec 3, etc., and needs to be updated once the final lecture sequence is fixed.
 
 ---
 
