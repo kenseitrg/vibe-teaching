@@ -396,3 +396,46 @@ Refined wiki pages following the latest review of `lecture_notes/en/term01_lec04
   - Added the source/receiver consistency QC point (with the buried-source exception).
 
 Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-06] ingest | Term 1 Lecture 2 amplitude correction and QC sources
+
+Extracted text from source materials for Term 1 Lecture 2 (amplitude corrections and quality control of input data):
+
+- `papers/textbooks/Yilmaz - Seismic Data Analysis_1.pdf` (Ch. 1.3, pp. 25–31) — amplitude, gain control, geometric spreading, AGC, AVO.
+- `papers/textbooks/Steve J Hill - Introduction to Seismic Processing.pdf` (Ch. 21, pp. 88–100) — deterministic vs. statistical amplitude correction, spherical divergence, AGC, display issues.
+- `papers/signal_processing/metcas - SCAC.ppt.pdf` (full slide deck) — surface-consistent amplitude correction, 4-factor model, Gauss–Seidel iteration, QC.
+- `papers/general/ODT01A_DATA_ANALYSIS_PART1_v8.2.pptx` — attenuation definition, direct-arrival QC, divergence correction.
+- `papers/general/ODT01A_DATA_ANALYSIS_PART2_v8.3.pptx` — 2D/3D geometry, sorting domains, attribute maps, QC domains.
+
+Created new source pages:
+
+- `wiki/sources/yilmaz_practical_seismic_data_analysis_amplitude.md`
+- `wiki/sources/hill_introduction_to_seismic_processing_ch21.md`
+- `wiki/sources/brown_2002_surface_consistent_amplitude_correction.md`
+
+Updated existing source pages:
+
+- `wiki/sources/cgg_odt01_data_analysis_part1.md` — added attenuation and direct-arrival QC content.
+- `wiki/sources/cgg_odt01_data_analysis_part2.md` — added QC attribute maps and relation to Lecture 2.
+
+Created new concept pages:
+
+- `wiki/concepts/amplitude_effects.md`
+- `wiki/concepts/spherical_divergence.md`
+- `wiki/concepts/automatic_gain_control.md`
+- `wiki/concepts/surface_consistent_amplitude.md`
+- `wiki/concepts/seismic_data_qc.md`
+
+Updated `wiki/index.md` with the new concept and source pages.
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-06] lecture-ready | Term 1 Lecture 2 amplitude correction and QC
+
+Created lecture-ready page for Term 1 Lecture 2:
+
+- `wiki/lecture_ready/term01_lec02_amplitude_correction_and_qc.md`
+
+Updated `wiki/index.md` to include the new lecture-ready page.
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.

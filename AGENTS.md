@@ -300,6 +300,17 @@ Maintain a shared notation list here as the course develops. Add terms once they
 | $\Delta t_\text{floating}$ | Floating-datum correction | поправка к плавающему уровню | Term 1, Lec 4 |
 | $\Delta t_\text{smoothed}$ | Long-wavelength static component | длиннопериодная составляющая статики | Term 1, Lec 4 |
 | $V_\text{apparent}$ | Apparent velocity from biased velocity analysis | кажущаяся скорость | Term 1, Lec 4 |
+| $R$ | Reflection coefficient at normal incidence | коэффициент отражения | Term 1, Lec 2 |
+| $Z$ | Acoustic impedance ($\rho v$) | акустический импеданс | Term 1, Lec 2 |
+| $Q$ | Quality factor (inverse of absorption) | добротность | Term 1, Lec 2 |
+| $G(t)$ | Amplitude gain function | функция усиления | Term 1, Lec 2 |
+| $A_\text{rms}$ | RMS amplitude | среднеквадратичная амплитуда | Term 1, Lec 2 |
+| $A_{ij}$ | Measured trace amplitude (source $i$, receiver $j$) | измеренная амплитуда трассы | Term 1, Lec 2 |
+| $S_i$ | Source amplitude component in SCAC | амплитудная компонента источника | Term 1, Lec 2 |
+| $R_j$ | Receiver amplitude component in SCAC | амплитудная компонента приёмника | Term 1, Lec 2 |
+| $G_k$ | CMP/geology amplitude component in SCAC | амплитудная компонента ОСТ/геологии | Term 1, Lec 2 |
+| $M_l$ | Offset amplitude component in SCAC | амплитудная компонента удаления | Term 1, Lec 2 |
+| $v_\text{near}$ | Near-surface velocity for first-break/direct-arrival QC | скорость в верхней части разреза | Term 1, Lec 2 |
 
 ---
 
@@ -311,7 +322,7 @@ Use this section to track unresolved choices that the instructor and agent need 
 - [x] Agree on Markdown-to-PDF toolchain: lightweight CLI, default to **Pandoc**.
 - [ ] Set figure naming convention (suggested: `term01_lec05_nmo_correction.png`; bilingual figures may use `.en`/`.ru` suffixes).
 - [x] Keep Python scripts self-contained; no shared utilities module unless requested.
-- [ ] Renumber remaining Term 1 lectures after the kinematics/statics split (now Lectures 03 and 04). The Section 2 course structure still lists data formats as Lec 2, survey geometry as Lec 3, etc., and needs to be updated once the final lecture sequence is fixed.
+- [ ] Renumber remaining Term 1 lectures after the kinematics/statics split and the new Lecture 2 topic. The Section 2 course structure still needs to be updated to show: Lecture 2 = amplitude corrections and QC of input data; Lecture 3 = kinematics and field statics; Lecture 4 = advanced statics and the link to velocity analysis; and the placement of remaining lectures after the new Lecture 2.
 
 ---
 

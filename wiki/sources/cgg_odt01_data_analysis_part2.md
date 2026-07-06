@@ -12,7 +12,8 @@ concepts:
   - spatial_aliasing
   - seismic_noise
   - seismic_multiples
-tags: [cgg, data-analysis, 2d-geometry, 3d-geometry, sorting-domains, spatial-aliasing]
+  - seismic_data_qc
+tags: [cgg, data-analysis, 2d-geometry, 3d-geometry, sorting-domains, spatial-aliasing, qc, attribute-maps]
 ---
 
 # CGG ODT01 — Data Analysis Part 2
@@ -55,6 +56,16 @@ Internal CGG training slides on 2D/3D geometry, sorting domains, spatial aliasin
 - Relevant dip can be geological dip or apparent dip from moveout.
 - Aliasing appears differently in shot, CMP, and offset-plane domains.
 
+### QC attribute maps (§10)
+- Attribute maps are an important QC domain; understanding what the attribute represents is essential before deciding what is good or bad.
+- **SP_X/SP_Y amplitude maps**: average or RMS amplitudes plotted in shot coordinates. A subsurface feature appears shifted by half the source–receiver offset in the shooting direction, so coherent geology can look like shot-related stripes.
+- **Shot/channel maps**: RMS amplitude per channel. Stripes can reveal acquisition problems, source drop-outs, or shallow/buried features.
+- Mechanisms causing amplitude map patterns:
+  - Very shallow feature: affects all traces on the cable while the source passes over it → vertical stripe on a shot/channel map.
+  - Stationary surface feature (e.g., receiver coupling): appears as a common-receiver pattern.
+  - Buried feature: affects only certain offsets at a given time → diagonal stripe on shot/channel maps.
+- RMS is generally preferred over simple average amplitude because it is less dominated by a single extreme sample.
+
 ### Noise and multiples
 - Noise-removal strategies: separate signal/noise by domain change (e.g., tau-p) or randomize coherent noise by re-sorting.
 - Multiples have at least one downward reflection; classification by shallowest reflector, order, and free-surface involvement.
@@ -65,7 +76,9 @@ Internal CGG training slides on 2D/3D geometry, sorting domains, spatial aliasin
 - 3D geometry: bin grid, midpoint drift, fold variation.
 - Domain comparison: shot, receiver, CMP, offset plane.
 - Spatial aliasing examples in CMP and offset-plane domains.
+- Shot/channel RMS amplitude maps showing acquisition artifacts.
 
 ## Relation to lecture notes
 - Provides the acquisition-parameter and data-sort material for Term 1 Lecture 1.
 - Supports the discussion of fold, CMP, and why different processing domains are used.
+- **Supports the input-data QC section of Term 1 Lecture 2: geometry verification, attribute maps, and interpreting amplitude-map patterns.**

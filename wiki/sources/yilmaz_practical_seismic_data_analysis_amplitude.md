@@ -1,0 +1,60 @@
+---
+title: Yilmaz — Practical Seismic Data Analysis, Chapter 1.3 (Amplitude and Gain Control)
+status: draft
+type: textbook
+source_file: papers/textbooks/Yilmaz - Seismic Data Analysis_1.pdf
+language: en
+pages: 25-31
+concepts:
+  - amplitude_effects
+  - spherical_divergence
+  - automatic_gain_control
+  - seismic_wavelet
+tags: [seismic-processing, amplitude, gain-control, geometric-spreading, AGC, AVO]
+---
+
+# Yilmaz — *Practical Seismic Data Analysis*, Chapter 1.3 (Amplitude and Gain Control)
+
+Textbook chapter that introduces seismic amplitude, the physical factors that affect it, and the basic gain-control tools used in processing.
+
+## Relevant sections
+
+| Section | Book pages | Topic |
+|---------|------------|-------|
+| 1.3.1 | 25–26 | Seismic amplitude; gain controls; Fourier/amplitude spectrum |
+| 1.3.2 | 26–30 | Source radiation pattern; intrinsic attenuation; geometric spreading; structural properties |
+| 1.3.3 | 30–31 | Gain control: AGC, RMS AGC, surface-consistent gain |
+| 1.3.4 | 31 | Amplitude-versus-offset (AVO) and why AGC harms it |
+
+## Key takeaways
+
+### Seismic amplitude
+- Amplitude is the magnitude of the seismic wiggles; it quantifies the energy level of the wavefield as a function of time, space, and frequency.
+- Any process that alters amplitudes is called a **gain control**.
+
+### Physical factors affecting amplitude
+- **Source radiation pattern**: real sources are not isotropic; radiation varies with frequency, angle, and source type.
+- **Receiver response**: usually known/measurable and compensated.
+- **Media effects**:
+  - **Intrinsic attenuation (absorption)**: anelastic loss quantified by the quality factor *Q*; higher frequencies are attenuated more strongly, so the spectrum shifts toward lower frequencies with time/distance.
+  - **Geometric spreading**: systematic amplitude decay as the wavefront expands. In a homogeneous medium, a point source spreads spherically (amplitude ∝ 1/r), while a line source spreads cylindrically (amplitude ∝ 1/√r).
+  - **Structural properties**: elastic-impedance contrasts and anisotropy create reflection/transmission partitioning.
+
+### Gain control
+- Gain control balances time-variant amplitude variations.
+- **RMS amplitude AGC**: computes the RMS amplitude in a sliding gate and applies the reciprocal as a time-varying gain. The gate length can be constant or increase with time.
+- **Instantaneous AGC**: the gain is assigned sample-by-sample as the gate slides one sample at a time.
+- **Surface-consistent gain controls**: associate attenuation factors with each source and geophone location, accounting for near-surface effects.
+- AGC is useful for display but is **harmful to any study that depends on amplitude integrity**, such as AVO.
+
+## Figures useful for teaching
+- Figure 1.13: Fourier decomposition of a trace and its amplitude spectrum.
+- Figure 1.14: Airgun array radiation pattern at different frequencies.
+- Figure 1.15: Typical amplitude decay curve, between cylindrical and spherical spreading.
+- Figure 1.16: Shot gather before AGC, after trace AGC, and after trace balancing.
+- Figure 1.17: AVO example (migrated CMP gather, well logs, synthetic).
+
+## Relation to lecture notes
+- Provides the physical amplitude-effects section for Term 1 Lecture 2 (amplitude corrections and QC).
+- Supports the AGC discussion and the warning about AVO-sensitive processing.
+- Explains the energy-conservation argument behind geometric-spreading correction.

@@ -13,7 +13,10 @@ concepts:
   - normal_moveout
   - seismic_noise
   - seismic_multiples
-tags: [cgg, data-analysis, recorded-wavefield, shot-gather, cmp, qc]
+  - amplitude_effects
+  - spherical_divergence
+  - automatic_gain_control
+tags: [cgg, data-analysis, recorded-wavefield, shot-gather, cmp, qc, amplitude, attenuation, AGC, geometric-spreading]
 ---
 
 # CGG ODT01 — Data Analysis Part 1
@@ -42,22 +45,26 @@ Internal CGG training slides on seismic data analysis: understanding what is rec
 - **Dynamic effects** change amplitudes: attenuation, absorption, scattering, geometric spreading.
 - **Acquisition effects** include instrument response, positioning, timing, and spatial sampling.
 
-### Shot gathers
-- The direct arrival has an apparent velocity equal to the near-surface/water velocity and should project to zero time at zero offset.
-- NMO appears because receivers are at different offsets; off-end geometry biases the moveout dip.
-- Post-critical energy, guided waves, and swell noise often dominate far offsets.
+### Attenuation (slide 47)
+- Attenuation is a reduction in amplitude or energy caused by the transmitting medium or system.
+- It includes geometric spreading (wavefront expansion), absorption (conversion of elastic energy to heat), transmissivity losses, and mode conversion.
+- Absorption is frequency dependent; high frequencies are attenuated more than low frequencies.
+- Difference between **amplitude recovery** (broader correction for all amplitude loss) and **spherical divergence correction** (correction for geometric spreading only).
 
-### CMP gathers
-- CMP sorting groups traces with the same midpoint; for dipping reflectors the reflection point moves up-dip, so CDP ≠ CMP in general.
-- The stack remains the most important tool for denoising and demultiple.
-- NMO correction, muting, and velocity errors strongly influence what appears in the stack.
+### Shot gathers and the direct arrival
+- The direct arrival has an apparent velocity equal to the near-surface/water velocity and should project to zero time at zero offset (a rough QC of start-of-data timing).
+- Wavefront divergence is the amplitude decay purely from spreading; this is why divergence correction is applied (slide 65).
+- As the wavefield enters deeper layers it is refracted and further attenuated by absorption and scattering (slide 66).
 
 ## Figures useful for teaching
 - Slide sequence of modelled wavefield snapshots (direct arrival, first primary, multiple, refraction).
 - Shot gather examples before/after NMO, with post-critical noise cone annotated.
 - CMP gather examples showing multiples, diffractions, and anellipticity.
+- Slide 47: attenuation definition (geometric spreading, absorption, transmissivity, mode conversion).
+- Slides 65–66: direct arrival as a velocity QC and the physical origin of divergence correction.
 
 ## Relation to lecture notes
 - Provides the “what do we record?” motivation for Term 1 Lecture 1.
 - Gives concrete visual examples of shot gathers, CMP gathers, and wave propagation.
 - Supports the NMO introduction in Term 1 Lecture 3.
+- **Supports the physical amplitude-effects and spherical-divergence sections of Term 1 Lecture 2.**

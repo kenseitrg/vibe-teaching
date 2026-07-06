@@ -38,6 +38,11 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Common midpoint (CMP)](concepts/common_midpoint.md) | CMP/CDP gather, fold, stacking | draft |
 | [Seismic data sorts](concepts/seismic_data_sorts.md) | Shot, receiver, CMP, offset gathers and their uses | draft |
 | [Seismic data formats](concepts/seismic_data_formats.md) | SEGY, SEGD, SPS, UKOOA and data loading | draft |
+| [Amplitude effects](concepts/amplitude_effects.md) | Physical causes of amplitude attenuation during propagation | draft |
+| [Spherical divergence](concepts/spherical_divergence.md) | Geometric spreading correction | draft |
+| [Automatic gain control](concepts/automatic_gain_control.md) | AGC and deterministic amplitude equalization | draft |
+| [Surface-consistent amplitude correction](concepts/surface_consistent_amplitude.md) | Four-factor surface-consistent amplitude model | draft |
+| [Seismic data QC](concepts/seismic_data_qc.md) | Input-data quality control attributes and methods | draft |
 
 ## Techniques
 
@@ -55,7 +60,9 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Hatton, Worthington & Makin (1986)](sources/hatton_worthington_makin_1986_seismic_data_processing.md) | Seismic Data Processing: Theory and Practice | textbook | reviewed |
 | [Margrave (2006)](sources/margrave_2006_methods_of_seismic_data_processing.md) | Methods of Seismic Data Processing — lecture notes | lecture notes | reviewed |
 | [Yilmaz (2001) Vol. 1](sources/yilmaz_2001_seismic_data_analysis_deconvolution.md) | Seismic Data Analysis — deconvolution chapter | textbook | reviewed |
-| [Hill & Rüger (2020)](sources/hill_ruger_2020_illustrated_seismic_processing_preimaging.md) | Illustrated Seismic Processing, Vol. 2: Preimaging | textbook | draft |
+| [Yilmaz — Practical Seismic Data Analysis, Ch. 1.3](sources/yilmaz_practical_seismic_data_analysis_amplitude.md) | Practical Seismic Data Analysis — amplitude and gain control | textbook | draft |
+| [Hill — Introduction to Seismic Processing, Ch. 21](sources/hill_introduction_to_seismic_processing_ch21.md) | Introduction to Seismic Processing — amplitude correction | textbook | draft |
+| [Brown (2002) — SCAC](sources/brown_2002_surface_consistent_amplitude_correction.md) | Surface Consistent Amplitude Correction training slides | training slides | draft || [Hill & Rüger (2020)](sources/hill_ruger_2020_illustrated_seismic_processing_preimaging.md) | Illustrated Seismic Processing, Vol. 2: Preimaging | textbook | draft |
 | [CGG ODT01 Part 1](sources/cgg_odt01_data_analysis_part1.md) | Data Analysis Part 1: recorded wavefield, shot and CMP gathers | training slides | summarized |
 | [CGG ODT01 Part 2](sources/cgg_odt01_data_analysis_part2.md) | Data Analysis Part 2: 2D/3D geometry, sorts, aliasing, noise/multiples | training slides | summarized |
 | [Noble (2020)](sources/noble_2020_whats_the_datum.md) | What's the Datum? — datums and replacement velocity | conference presentation | reviewed |
@@ -77,6 +84,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | Page | Lecture | Status |
 |------|---------|--------|
 | [Term 1 Lecture 1 — Introduction to seismic data processing](lecture_ready/term01_lec01_introduction_to_seismic_processing.md) | term01_lec01 | lecture-ready |
+| [Term 1 Lecture 2 — Amplitude Corrections and Quality Control of Input Data](lecture_ready/term01_lec02_amplitude_correction_and_qc.md) | term01_lec02 | lecture-ready |
 | [Term 1 Lecture 3 — Kinematics, Velocities and Field Statics](lecture_ready/term01_lec03_kinematics_and_field_statics.md) | term01_lec03 | lecture-ready |
 | [Term 1 Lecture 4 — Advanced Statics and the Link to Velocity Analysis](lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md) | term01_lec04 | lecture-ready |
 | [Term 1 Lecture 6 — Single-channel deconvolution](lecture_ready/term01_lec06_single_channel_deconvolution.md) | term01_lec06 | draft |
