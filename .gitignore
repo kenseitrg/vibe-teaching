@@ -206,3 +206,4 @@ Thumbs.db
 
 codebook.toml
 .pi-subagents/*
+.pi/*
