@@ -66,23 +66,25 @@ On land, the coupling between the source and the ground, and between the geophon
 
 Figure [fig:amplitude_effects] is a schematic of the main effects.
 
-![Planned figure: `figures/term01_lec02/term01_lec02_amplitude_effects_ray_diagram.png` — Ray diagram showing reflection/transmission, mode conversion, spherical divergence, absorption/scattering, and near-surface source/receiver effects.](./figures/term01_lec02/term01_lec02_amplitude_effects_ray_diagram.png)
+![Figure: `figures/term01_lec02/term01_lec02_amplitude_effects_ray_diagram.png` — Schematic diagram showing reflection/transmission, mode conversion, spherical divergence, absorption/scattering, and near-surface source/receiver effects.](./figures/term01_lec02/term01_lec02_amplitude_effects_ray_diagram.png)
 
 *Figure 1: Physical effects that reduce seismic amplitude as the wave travels from source to receiver. Not all of these can be separated in practice.*
 
 ## 2. Two philosophies of amplitude processing
 
-Before applying any amplitude correction, we must decide what we are trying to achieve. There are two broad philosophies.
+Before applying any amplitude correction, we must decide what we are trying to achieve. In modern seismic processing the default philosophy is **relative amplitude preservation (RAP)**. The aim is to keep every amplitude proportional to the underlying earth reflectivity, so that the final section can be used for quantitative interpretation. Amplitude equalization methods such as AGC and trace normalization are still widely used, but their role has changed: they are now servants of intermediate processing, not products in themselves. Equalization helps us see events, pick velocities, estimate statics, and build models, but it should never be treated as the final amplitude answer.
 
-### True amplitude / relative amplitude preservation
+### True amplitude / relative amplitude preservation (RAP)
 
-The goal is to recover amplitudes that are proportional to the earth’s reflection coefficients, or at least to preserve the relative amplitudes between traces and offsets. This is essential for AVO, AVAz, amplitude-based interpretation, and reservoir monitoring. Every step in the processing flow must be chosen with this goal in mind.
+The goal of RAP processing is to recover amplitudes that are proportional to the earth’s reflection coefficients, or at least to preserve the relative amplitudes between traces, offsets, and time gates. This is essential for AVO, AVAz, amplitude-based interpretation, and reservoir monitoring. Every step in the processing flow must be chosen with this goal in mind. A processor should therefore ask, before each operation: “Does this scale change the amplitude in a way that is physically meaningful, or does it impose an arbitrary statistical level on the data?”
 
-### Amplitude equalization for intermediate steps
+Historically, sections were often balanced only for visual appearance. Today, that is no longer acceptable when the data are destined for quantitative work. RAP does not necessarily mean that the output contains the absolute field amplitude in millivolts; it means that the relative amplitude relationships have been preserved and that any scaling applied is known, documented, and reversible where possible.
 
-The goal is to make the data visible and easy to process. The absolute amplitudes may be changed intentionally. For example, we may apply AGC so that weak deep reflections can be seen on the screen, or normalize traces so that all have the same maximum amplitude. These operations are not reversible and do not preserve physical amplitudes, but they are useful for visualization, structural interpretation, and kinematic processing (picking velocities, statics, etc.).
+### Amplitude equalization for intermediate processing
 
-The key rule is: **do not apply AGC or aggressive equalization before any amplitude-sensitive analysis**. If you do, you destroy the very signal you are trying to interpret.
+The goal of equalization is to make the data visible and easy to process. The absolute amplitudes may be changed intentionally. For example, we may apply AGC so that weak deep reflections can be seen on the screen, or normalize traces so that all have the same maximum amplitude. These operations are useful for visualization, structural interpretation, and kinematic processing (picking velocities, statics, etc.), but they are not reversible and do not preserve physical amplitudes.
+
+The key rule is: **do not apply AGC or aggressive equalization before any amplitude-sensitive analysis**. If you do, you destroy the very signal you are trying to interpret. A good practice is to keep an equalized copy for interactive work and a RAP copy for the final product and any quantitative study.
 
 ## 3. Spherical divergence correction
 
@@ -136,9 +138,9 @@ and the same sample would be scaled to $0.20$. Both conventions are correct in t
 
 Figure [fig:spherical_divergence] shows a synthetic gather before and after divergence correction.
 
-![Planned figure: `figures/term01_lec02/term01_lec02_spherical_divergence_correction.png` — Uncorrected and corrected shot gathers, with amplitude-versus-time curves.](./figures/term01_lec02/term01_lec02_spherical_divergence_correction.png)
+![`figures/term01_lec02/term01_lec02_spherical_divergence_correction.png` — Synthetic common-shot gather before and after t$^2$ geometric-spreading correction.  Top panels show wiggle traces; bottom panels show mean RMS amplitude versus time.](./figures/term01_lec02/term01_lec02_spherical_divergence_correction.png)
 
-*Figure 2: Spherical divergence correction. (Left) Raw gather with amplitude decaying with time. (Right) After applying a time-dependent $t$-gain. The lower panels show the mean amplitude decay before and after correction.*
+*Figure 2: Spherical divergence correction. (Left) Raw synthetic gather with amplitudes decaying with time because of geometric spreading. (Right) The same gather after applying a deterministic $t^2$ gain; the deep reflections are restored to amplitudes comparable to the shallow ones. The lower panels show the mean RMS amplitude decay before correction and the compensated level after correction.*
 
 ## 4. Deterministic amplitude equalization
 
@@ -186,11 +188,11 @@ AGC and normalization are appropriate for:
 
 AGC is not reversible, destroys true amplitude relationships, boosts noise, and can create misleading amplitudes. It should never be used before AVO or any quantitative amplitude study.
 
-Figure [fig:agc] shows a trace before and after AGC.
+Figure [fig:agc] shows a trace before and after AGC with different window lengths.
 
-![Planned figure: `figures/term01_lec02/term01_lec02_agc_example.png` — Trace and amplitude envelope before and after AGC.](./figures/term01_lec02/term01_lec02_agc_example.png)
+![`figures/term01_lec02/term01_lec02_agc_example.png` — Synthetic trace before and after AGC with increasing window lengths. Shaded bands show the Hilbert envelope.](./figures/term01_lec02/term01_lec02_agc_example.png)
 
-*Figure 3: Effect of AGC. (Top) Original trace and its envelope. (Bottom) After AGC, the envelope is flattened, but the relative amplitudes of different reflections are lost.*
+*Figure 3: Effect of AGC window length. From left to right on each row: original trace with envelope; 1-sample window (envelope nearly flat); 3-period window (~100 ms); ~500 ms window (covers multiple reflections); whole-trace window (shape preserved); AGC gain functions. Short windows aggressively equalize amplitudes; a long window preserves the trace shape.*
 
 ## 5. Surface-consistent amplitude correction
 
@@ -249,11 +251,11 @@ The CMP term $G_k$ contains both reflectivity and spatially varying AVO effects.
 
 Consider a land survey where some shots are fired in the weathering layer and others penetrate below it. The shots in the weathering layer may have amplitudes 10–20 dB lower. SCAC would estimate a low source term for those shots and apply a compensating gain. After correction, the amplitude variations across the section are more consistent, and the remaining variations are more likely to be geology.
 
-Figure [fig:scac] shows a synthetic CMP gather before and after surface-consistent amplitude correction.
+Figure [fig:scac] shows three synthetic CMP gathers before and after surface-consistent amplitude correction.
 
-![Planned figure: `figures/term01_lec02/term01_lec02_surface_consistent_amplitude.png` — Synthetic gather with source/receiver amplitude anomalies before and after correction.](./figures/term01_lec02/term01_lec02_surface_consistent_amplitude.png)
+![`figures/term01_lec02/term01_lec02_surface_consistent_amplitude.png` — Three synthetic CMP gathers before and after surface-consistent amplitude correction.](./figures/term01_lec02/term01_lec02_surface_consistent_amplitude.png)
 
-*Figure 4: Surface-consistent amplitude correction. (Left) Synthetic gather with source and receiver amplitude anomalies. (Right) After correction, the amplitudes are balanced and the geological AVO trend is preserved.*
+*Figure 4: Surface-consistent amplitude correction. Top row: CMP gathers with erratic amplitude variations caused by random source and receiver anomalies. Middle row: same gathers after median-based SCAC correction — the anomalies are suppressed while the CMP-to-CMP amplitude variation and the offset-dependent (AVO) trend are preserved. The red curve overlaid on each gather shows the RMS amplitude per trace. Bottom row: RMS amplitude versus offset curves (dashed = before, solid = after) for each CMP.*
 
 ## 6. Quality control of input data
 
@@ -328,22 +330,22 @@ RMS amplitude is usually preferred over simple mean amplitude because it is less
 - **Sorts by source, receiver, offset, and CMP** help separate acquisition-related patterns from geology. For example, a stripe that follows the source line is probably a source problem, not a subsurface feature.
 - **Attribute maps** plot attributes against spatial coordinates. Shallow features produce vertical stripes on shot/channel maps; stationary receiver coupling problems produce horizontal stripes; buried features produce diagonal stripes.
 
-Figure [fig:qc_geometry] shows the planned geometry QC figure.
+Figure [fig:qc_geometry] shows a first-break QC plot used for geometry verification.
 
-![Planned figure: `figures/term01_lec02/term01_lec02_qc_geometry_first_breaks.png` — Shot gather with predicted offset curves, LMO panel, and first-break residual plot.](./figures/term01_lec02/term01_lec02_qc_geometry_first_breaks.png)
+![`figures/term01_lec02/term01_lec02_qc_geometry_first_breaks.png` — First-break QC plot for geometry verification.](./figures/term01_lec02/term01_lec02_qc_geometry_first_breaks.png)
 
-*Figure 5: Geometry QC using first breaks and LMO. (Left) Shot gather with predicted direct-arrival curve. (Middle) LMO stack at the near-surface velocity. (Right) Residuals between predicted and picked first-break times.*
+*Figure 5: Geometry QC using first breaks. Shot gather with predicted direct-arrival curve for verifying source and receiver geometry.*
 
-Figure [fig:qc_amplitude_map] shows a receiver-index amplitude map.
+Figure [fig:qc_amplitude_map] shows a receiver-index amplitude map used for attribute-based QC.
 
-![Planned figure: `figures/term01_lec02/term01_lec02_qc_amplitude_map.png` — Receiver-index amplitude map with an outlier group highlighted.](./figures/term01_lec02/term01_lec02_qc_amplitude_map.png)
+![`figures/term01_lec02/term01_lec02_qc_amplitude_map.png` — Attribute QC plot showing amplitude variations across receivers.](./figures/term01_lec02/term01_lec02_qc_amplitude_map.png)
 
-*Figure 6: Receiver-index amplitude map. A group of high-amplitude receivers (red) may indicate coupling problems or a localized near-surface anomaly.*
+*Figure 6: Amplitude attribute QC. Spatial variations in trace amplitudes help identify acquisition-related problems such as bad receivers or coupling anomalies.*
 
 ## Summary
 
 - Seismic amplitudes are reduced by reflection/transmission, mode conversion, geometric spreading, absorption, scattering, and near-surface effects.
-- **True amplitude preservation** aims to keep amplitudes proportional to reflection coefficients; **amplitude equalization** only makes data visible and processable.
+- **Relative amplitude preservation (RAP)** is the default goal of modern processing: keep amplitudes proportional to reflection coefficients. **Amplitude equalization** is still useful, but only as a tool for visualization and intermediate steps; it should not be the final product.
 - **Spherical divergence correction** is a deterministic $t^n$ gain that compensates for wavefront spreading. The choice of $n$ depends on package convention.
 - **Amplitude normalization** and **AGC** are statistical methods useful for visualization and kinematic processing, but they destroy true amplitude relationships and should not be used before AVO.
 - **Surface-consistent amplitude correction** separates source, receiver, offset, and CMP terms using a multiplicative model solved by Gauss–Seidel iteration.
