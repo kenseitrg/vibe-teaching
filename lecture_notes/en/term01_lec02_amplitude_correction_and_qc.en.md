@@ -363,13 +363,7 @@ Figure [fig:qc_amplitude_map] shows a receiver-index amplitude map used for attr
 
 ## References and further reading
 
-- `wiki/concepts/amplitude_effects.md`
-- `wiki/concepts/spherical_divergence.md`
-- `wiki/concepts/automatic_gain_control.md`
-- `wiki/concepts/surface_consistent_amplitude.md`
-- `wiki/concepts/seismic_data_qc.md`
-- `wiki/sources/yilmaz_practical_seismic_data_analysis_amplitude.md`
-- `wiki/sources/hill_introduction_to_seismic_processing_ch21.md`
-- `wiki/sources/brown_2002_surface_consistent_amplitude_correction.md`
-- `wiki/sources/cgg_odt01_data_analysis_part1.md`
-- `wiki/sources/cgg_odt01_data_analysis_part2.md`
+- Yilmaz, Ö. (2001). *Seismic Data Analysis*. SEG. Chapter 1.3, pp. 25–31.
+- Hill, S. J. *Introduction to Seismic Processing*. SEG course notes, Chapter 21, pp. 88–100.
+- Brown, D. (2002). *Surface Consistent Amplitude Correction (SCAC)*. CGG training slides.
+- CGG. ODT01 — Data Analysis Part 1 & Part 2 (training slides).
