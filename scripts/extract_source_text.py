@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Extract text from PDF and PPT/PPTX files for LLM ingestion.
+Extract text from PDF, PPT/PPTX, and DJVU/DJV files for LLM ingestion.
 
 Usage:
     python scripts/extract_source_text.py <input_file_or_dir> [--output <dir>] [--pages <range>]
@@ -79,6 +79,21 @@ def extract_ppt_text(path: Path) -> str:
     raise RuntimeError("Legacy .ppt extraction requires 'catppt'. Install with your package manager.")
 
 
+def extract_djvu_text(path: Path, page_range: str | None = None) -> str:
+    """Extract text from DJVU/DJV files using djvutxt."""
+    result = subprocess.run(["which", "djvutxt"], stdout=subprocess.DEVNULL)
+    if result.returncode != 0:
+        raise RuntimeError("DJVU extraction requires 'djvutxt'. Install DjVuLibre.")
+
+    cmd = ["djvutxt"]
+    if page_range:
+        cmd.append(f"-page={page_range}")
+    cmd.append(str(path))
+
+    proc = subprocess.run(cmd, stdout=subprocess.PIPE, text=True, check=True)
+    return proc.stdout
+
+
 def _parse_page_range(page_range: str | None, max_pages: int) -> tuple[int, int]:
     if not page_range:
         return 0, max_pages
@@ -97,6 +112,8 @@ def extract_file(path: Path, page_range: str | None = None) -> str:
         return extract_pptx_text(path)
     elif suffix == ".ppt":
         return extract_ppt_text(path)
+    elif suffix in (".djvu", ".djv"):
+        return extract_djvu_text(path, page_range)
     else:
         raise ValueError(f"Unsupported file type: {suffix}")
 
@@ -129,7 +146,7 @@ def main():
         if p.is_file():
             files.append(p)
         else:
-            files.extend(sorted(q for q in p.iterdir() if q.suffix.lower() in {".pdf", ".ppt", ".pptx"}))
+            files.extend(sorted(q for q in p.iterdir() if q.suffix.lower() in {".pdf", ".ppt", ".pptx", ".djvu", ".djv"}))
 
     ocr_script = Path(__file__).parent / "extract_source_text_ocr.py"
 
