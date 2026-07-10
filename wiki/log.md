@@ -439,3 +439,26 @@ Created lecture-ready page for Term 1 Lecture 2:
 Updated `wiki/index.md` to include the new lecture-ready page.
 
 Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-10] wiki | Spectral-analysis and filtering concepts for Term 1 Lecture 5
+
+Extracted source text for the new Term 1 Lecture 5 (spectral analysis and frequency filtering):
+
+- Hatton, Worthington & Makin (1986) DJVU pages 19–23, 29–32, 47–48 — Fourier theory, DFT, aliasing, filtering, spectral analysis.
+- Margrave (2006) *Methods of Seismic Data Processing*, PDF pages 36–111 — Chapter 2 signal-processing concepts.
+- Yilmaz, *Practical Seismic Data Analysis*, PDF pages 20–31 — sampling, z-transform, aliasing, Fourier amplitude spectrum.
+
+Created concept pages:
+
+- `wiki/concepts/spectral_analysis.md`
+- `wiki/concepts/frequency_filtering.md`
+- `wiki/concepts/discrete_fourier_transform.md`
+- `wiki/concepts/aliasing.md`
+
+Updated source summaries:
+
+- `wiki/sources/hatton_worthington_makin_1986_seismic_data_processing.md`
+- `wiki/sources/margrave_2006_methods_of_seismic_data_processing.md`
+- `wiki/sources/yilmaz_practical_seismic_data_analysis_amplitude.md`
+
+Updated `wiki/index.md` with the new concept pages and source-title change.

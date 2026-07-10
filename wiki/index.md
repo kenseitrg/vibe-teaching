@@ -43,6 +43,10 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Automatic gain control](concepts/automatic_gain_control.md) | AGC and deterministic amplitude equalization | draft |
 | [Surface-consistent amplitude correction](concepts/surface_consistent_amplitude.md) | Four-factor surface-consistent amplitude model | draft |
 | [Seismic data QC](concepts/seismic_data_qc.md) | Input-data quality control attributes and methods | draft |
+| [Spectral analysis](concepts/spectral_analysis.md) | Frequency content of traces and wavelets | draft |
+| [Frequency filtering](concepts/frequency_filtering.md) | Shaping seismic spectra by filter operators | draft |
+| [Discrete Fourier transform](concepts/discrete_fourier_transform.md) | DFT and its properties for sampled seismic data | draft |
+| [Aliasing](concepts/aliasing.md) | Nyquist sampling and alias folding | draft |
 
 ## Techniques
 
@@ -60,7 +64,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Hatton, Worthington & Makin (1986)](sources/hatton_worthington_makin_1986_seismic_data_processing.md) | Seismic Data Processing: Theory and Practice | textbook | reviewed |
 | [Margrave (2006)](sources/margrave_2006_methods_of_seismic_data_processing.md) | Methods of Seismic Data Processing — lecture notes | lecture notes | reviewed |
 | [Yilmaz (2001) Vol. 1](sources/yilmaz_2001_seismic_data_analysis_deconvolution.md) | Seismic Data Analysis — deconvolution chapter | textbook | reviewed |
-| [Yilmaz — Practical Seismic Data Analysis, Ch. 1.3](sources/yilmaz_practical_seismic_data_analysis_amplitude.md) | Practical Seismic Data Analysis — amplitude and gain control | textbook | draft |
+| [Yilmaz — Practical Seismic Data Analysis, Ch. 1.2–1.3](sources/yilmaz_practical_seismic_data_analysis_amplitude.md) | Practical Seismic Data Analysis — sampling, aliasing, Fourier, amplitude and gain control | textbook | draft |
 | [Hill — Introduction to Seismic Processing, Ch. 21](sources/hill_introduction_to_seismic_processing_ch21.md) | Introduction to Seismic Processing — amplitude correction | textbook | draft |
 | [Brown (2002) — SCAC](sources/brown_2002_surface_consistent_amplitude_correction.md) | Surface Consistent Amplitude Correction training slides | training slides | draft || [Hill & Rüger (2020)](sources/hill_ruger_2020_illustrated_seismic_processing_preimaging.md) | Illustrated Seismic Processing, Vol. 2: Preimaging | textbook | draft |
 | [CGG ODT01 Part 1](sources/cgg_odt01_data_analysis_part1.md) | Data Analysis Part 1: recorded wavefield, shot and CMP gathers | training slides | summarized |

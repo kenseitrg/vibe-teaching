@@ -16,7 +16,11 @@ concepts:
   - statistical_deconvolution
   - static_corrections
   - normal_moveout
-tags: [deconvolution, wavelet, phase, wiener-filter, predictive-decon, deterministic-decon, textbook]
+  - spectral_analysis
+  - frequency_filtering
+  - discrete_fourier_transform
+  - aliasing
+tags: [deconvolution, wavelet, phase, wiener-filter, predictive-decon, deterministic-decon, textbook, spectral-analysis, frequency-filtering, dft, aliasing]
 ---
 
 # Hatton, Worthington & Makin (1986) — Seismic Data Processing
@@ -28,11 +32,14 @@ Text extracted from the DJVU version in `papers/general/`.
 
 | Section | Pages (Russian edition) | Topic |
 |---------|------------------------|-------|
+| 2.2 | ~19–20 | Fourier theory: continuous periodic, continuous non-periodic, discrete cases |
+| 2.3–2.3.3 | ~21–23 | DFT definition, periodicity, real-signal symmetry, sampling and aliasing |
 | 2.4 | ~35–40 | Convolution and discrete filters |
+| 2.5 | ~29–32 | Filter types, slopes, decibels, ringing/Gibbs effect |
 | 2.6 | ~33–37 | Z-transform, phase, delay, minimum/maximum/zero phase, dipoles |
 | 2.7 | ~37–43 | Autocorrelation and cross-correlation |
 | 2.8 | ~43–47 | Wiener filter, shaping filter, inverse filter, predictive deconvolution, white-noise parameter |
-| 2.9 | ~47– | Spectral analysis, spectrum of autocorrelation |
+| 2.9–2.9.2 | ~47–48 | Spectral analysis, convolutional spectrum model, power spectrum |
 | 3.4.1.5 | ~96–103 | Deterministic deconvolution: designature, ghosts, instrument response, wavelet estimation |
 | 3.4.1.6 | ~103–108 | Statistical deconvolution with Wiener filters: assumptions, parameters, operator length, prediction gap |
 | 3.5.1.4 | ~ | Predictive deconvolution in processing flows |
@@ -56,6 +63,29 @@ Text extracted from the DJVU version in `papers/general/`.
 - If the dipole is minimum-phase (`|a| > |b|`), the inverse series `1/(a+bz)` converges in **positive** powers of `z`, i.e. the inverse filter is causal (pure delay components).
 - If the dipole is maximum-phase (`|b| > |a|`), the causal expansion diverges; the convergent expansion uses **negative** powers of `z`, i.e. the inverse filter has non-causal (leading) components.
 - For mixed-phase signals one generally needs a two-sided filter.
+
+### Fourier theory and the DFT
+- Fourier theory has three forms: continuous periodic (Fourier series), continuous non-periodic (Fourier transform), and discrete (DFT).
+- The DFT is periodic with period `N`; for a real time series only the first `N/2 + 1` frequency samples are independent.
+- The DFT exactly reconstructs the original discrete samples; it approximates the continuous Fourier transform as `N` increases and the sample interval decreases.
+- Frequency spacing is `Δf = 1/(NΔt) = 1/T`, so a longer record gives finer frequency resolution.
+
+### Aliasing and the Nyquist criterion
+- The Nyquist frequency is `f_N = 1/(2Δt)`. Frequencies above it fold back into the principal band.
+- Example: at 4 ms sampling, `f_N = 125` Hz; a 150 Hz component aliases to 100 Hz.
+- The only remedy is analog anti-alias filtering before digitization.
+
+### Frequency filtering
+- Filtering is a modification of one time series by another; in practice it usually means multiplying the amplitude spectrum of the trace by a filter spectrum.
+- Common types: low-pass, high-pass, band-pass, and notch (reject).
+- Cutoff frequencies are usually defined at the -3 dB (half-power) point.
+- Slope steepness is given in dB per octave; real finite-length filters cannot have infinite slope.
+- Truncating an ideal sharp filter creates **pulsations (Gibbs ringing)** in the time domain; longer operators and tapered windows reduce this.
+
+### Spectral analysis
+- The trace spectrum is approximately the product of the wavelet, reflectivity, instrument, and noise spectra.
+- Power spectrum can be computed directly from the DFT or via the Fourier transform of the autocorrelation.
+- Finite record length causes spectral leakage (convolution with a sinc function); sampling causes periodic replication of the spectrum.
 
 ### Wiener filter
 - Discrete convolution can be written as a matrix equation `Y = XH`.
@@ -96,6 +126,8 @@ Text extracted from the DJVU version in `papers/general/`.
 
 ## Figures useful for teaching
 
+- Fig. 2.13–2.16: amplitude spectra of band-pass, high-pass, low-pass, and notch filters.
+- Fig. 2.17–2.18: ideal band-pass filter and its ringing time response.
 - Fig. 2.21–2.24: minimum-phase vs. zero-phase band-pass filters and their convolution products.
 - Fig. 2.35: schematic of predictive deconvolution (prediction gap = multiple period).
 - Fig. 3.54: undesirable operator spectrum from a bad desired-output choice.
@@ -115,3 +147,4 @@ Text extracted from the DJVU version in `papers/general/`.
 - Explains deterministic designature and ghost removal.
 - Provides the 4-component surface-consistent residual statics model and Gauss–Seidel solution (Section 5.10) for Term 1 Lecture 4.
 - Discusses vertical-ray statics and the role of datums/floating datum (Section 3.7.1).
+- **Supports Term 1 Lecture 5 (spectral analysis and frequency filtering) through the Fourier/DFT, aliasing, filtering, and spectral-analysis sections of Chapter 2.**

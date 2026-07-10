@@ -1,32 +1,55 @@
 ---
-title: Yilmaz — Practical Seismic Data Analysis, Chapter 1.3 (Amplitude and Gain Control)
+title: Yilmaz — Practical Seismic Data Analysis, Chapter 1.2–1.3 (Sampling, Aliasing, Fourier, Amplitude and Gain Control)
 status: draft
 type: textbook
 source_file: papers/textbooks/Yilmaz - Seismic Data Analysis_1.pdf
 language: en
-pages: 25-31
+pages: 20-31
 concepts:
   - amplitude_effects
   - spherical_divergence
   - automatic_gain_control
   - seismic_wavelet
-tags: [seismic-processing, amplitude, gain-control, geometric-spreading, AGC, AVO]
+  - spectral_analysis
+  - frequency_filtering
+  - discrete_fourier_transform
+  - aliasing
+tags: [seismic-processing, amplitude, gain-control, geometric-spreading, AGC, AVO, spectral-analysis, frequency-filtering, dft, aliasing]
 ---
 
-# Yilmaz — *Practical Seismic Data Analysis*, Chapter 1.3 (Amplitude and Gain Control)
+# Yilmaz — *Practical Seismic Data Analysis*, Chapter 1.2–1.3 (Sampling, Aliasing, Fourier, Amplitude and Gain Control)
 
-Textbook chapter that introduces seismic amplitude, the physical factors that affect it, and the basic gain-control tools used in processing.
+Textbook chapter that introduces sampled time series, the z-transform, sampling and aliasing, Fourier analysis, seismic amplitude, the physical factors that affect it, and the basic gain-control tools used in processing.
 
 ## Relevant sections
 
 | Section | Book pages | Topic |
 |---------|------------|-------|
+| 1.2.1 | 22 | Sampled time series |
+| 1.2.2 | 23 | The z-transform |
+| 1.2.3 | 23–25 | Sampling theorem and temporal aliasing |
+| 1.2.4 | 25–26 | Spatial aliasing |
 | 1.3.1 | 25–26 | Seismic amplitude; gain controls; Fourier/amplitude spectrum |
 | 1.3.2 | 26–30 | Source radiation pattern; intrinsic attenuation; geometric spreading; structural properties |
 | 1.3.3 | 30–31 | Gain control: AGC, RMS AGC, surface-consistent gain |
 | 1.3.4 | 31 | Amplitude-versus-offset (AVO) and why AGC harms it |
 
 ## Key takeaways
+
+### Sampled time series
+- A seismic trace is a sampled time series: amplitudes recorded at regular time intervals (e.g., 2 ms or 4 ms).
+- The z-transform represents a discrete time series as a polynomial in the unit-delay operator `z`.
+
+### Aliasing and the Nyquist condition
+- A time series must be sampled at least twice per cycle for the highest frequency present.
+- The Nyquist frequency is `f_N = 1/(2Δt)`; energy above it folds back into the principal band.
+- Practical sampling rates are often 5–10 points per cycle to allow for noise and unexpected frequencies.
+- Spatial aliasing occurs when dipping events are undersampled in space.
+
+### Fourier decomposition
+- The Fourier transform decomposes a trace into sinusoidal components.
+- The amplitude spectrum shows how much energy is present at each frequency.
+- Figure 1.13 gives a clear visual decomposition of a trace and its amplitude spectrum.
 
 ### Seismic amplitude
 - Amplitude is the magnitude of the seismic wiggles; it quantifies the energy level of the wavefield as a function of time, space, and frequency.
@@ -48,6 +71,8 @@ Textbook chapter that introduces seismic amplitude, the physical factors that af
 - AGC is useful for display but is **harmful to any study that depends on amplitude integrity**, such as AVO.
 
 ## Figures useful for teaching
+- Figure 1.10: a signal and its echo.
+- Figure 1.12: spatial aliasing examples.
 - Figure 1.13: Fourier decomposition of a trace and its amplitude spectrum.
 - Figure 1.14: Airgun array radiation pattern at different frequencies.
 - Figure 1.15: Typical amplitude decay curve, between cylindrical and spherical spreading.
@@ -56,5 +81,6 @@ Textbook chapter that introduces seismic amplitude, the physical factors that af
 
 ## Relation to lecture notes
 - Provides the physical amplitude-effects section for Term 1 Lecture 2 (amplitude corrections and QC).
+- Supports the sampling, aliasing, and Fourier-decomposition sections of Term 1 Lecture 5 (spectral analysis and frequency filtering).
 - Supports the AGC discussion and the warning about AVO-sensitive processing.
 - Explains the energy-conservation argument behind geometric-spreading correction.

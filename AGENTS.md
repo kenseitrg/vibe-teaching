@@ -45,7 +45,7 @@ wiki/                                                        # Persistent knowle
 
 ## Known gotchas
 
-- **Lecture 5 does not exist.** The deconvolution topic was split into lec06 (single-channel) and lec07 (surface-consistent). There is no lec05.
+- **Lecture 5 covers spectral analysis and frequency filtering.** It sits between Lecture 4 (advanced statics and the velocity-analysis link) and Lecture 6 (single-channel deconvolution). The earlier "no lec05" note was a temporary artefact of the deconvolution split into lec06/lec07.
 - **No test framework.** No CI. The wiki linter is the only validation tool.
 - **Git ignores everything in `papers/`** (*.pdf, *.pptx, *.docx), the OCR model (`/models/`, `*.gguf`), vendored `tools/llama.cpp/`, PI agent state (`.pi/*`, `.pi-subagents/*`), `.opencode/*`, and generated PDFs. Only Markdown sources and scripts are tracked.
 

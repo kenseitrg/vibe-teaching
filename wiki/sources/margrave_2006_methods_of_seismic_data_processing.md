@@ -19,7 +19,12 @@ concepts:
   - seismic_velocities
   - normal_moveout
   - velocity_analysis
-tags: [seismic-processing, deconvolution, convolutional-model, minimum-phase, wiener-filter, predictive-decon, q-attenuation, lecture-notes, statics, residual-statics, floating-datum, layer-replacement, velocities, nmo, velocity-analysis]
+  - spectral_analysis
+  - frequency_filtering
+  - discrete_fourier_transform
+  - aliasing
+  - z_transform
+tags: [seismic-processing, deconvolution, convolutional-model, minimum-phase, wiener-filter, predictive-decon, q-attenuation, lecture-notes, statics, residual-statics, floating-datum, layer-replacement, velocities, nmo, velocity-analysis, spectral-analysis, frequency-filtering, dft, aliasing]
 ---
 
 # Margrave (2006) — Methods of Seismic Data Processing
@@ -27,13 +32,20 @@ tags: [seismic-processing, deconvolution, convolutional-model, minimum-phase, wi
 Course lecture notes for Geophysics 557/657, University of Calgary, Winter 2006.
 Extracted pages 125–205 cover minimum phase, the convolutional model, and deconvolution.
 **OCR-extracted pages 206–298 cover surface-consistent methods, velocity definitions, and normal moveout/stack.**
-Chapter 1 (pages 1-2 of the notes) provides a high-level “big picture” useful for an introductory lecture.
+**Extracted PDF pages 36–111 cover Chapter 2 signal-processing concepts: convolution, Fourier transforms, DFT, sampling, filtering, Z-transform, correlation, and spectral estimation.**
 
 ## Relevant chapters / sections
 
 | Section | Pages | Topic |
 |---------|-------|-------|
 | 1-1 to 1-2 | 6–9 | The big picture: imaging vs deconvolution, inverse problems, bandlimited reflectivity |
+| 2-1 to 2-5 | 36–40 | Convolution as shifting/scaling/summing; matrix view |
+| 2-6 to 2-16 | 49–51 | Fourier transforms and convolution; Ricker wavelet amplitude/phase spectra |
+| 2-17 to 2-24 | 55–59 | Fourier analysis/synthesis, transform pairs, the delta function |
+| 2-25 to 2-32 | 61–67 | DFT, sampling, spectrum replication, aliasing, anti-alias filtering |
+| 2-33 to 2-40 | 73–75 | Filtering and five generic wavelets |
+| 2-41 to 2-44 | 75–77 | Z-transform and minimum phase |
+| 2-49 to 2-52 | 83–87 | Spectral estimation and windowing |
 | 3-14 to 3-18 | 125–129 | Constant-Q attenuation; non-stationary wavelet |
 | 3-18 to 3-26 | 129–137 | Minimum phase: intuitive, Hilbert transform, partial energy, dispersion |
 | 4-1 to 4-5 | 145–149 | Bandlimited reflectivity; convolutional model and simplifying assumptions |
@@ -42,7 +54,7 @@ Chapter 1 (pages 1-2 of the notes) provides a high-level “big picture” usefu
 | 5-10 to 5-16 | 216–222 | Statics and datums; statics with uphole times |
 | 5-17 to 5-24 | 223–230 | Surface-consistent residual statics; Wiggins model; Gauss–Seidel solution |
 | 5-25 to 5-29 | 231–234 | Refraction statics; delay-time geometry |
-| 6-1 to 6-7 | 235–241 | Velocity definitions: instantaneous, vertical traveltime, average, RMS |
+| 6-1 to 6-7 | 235–241 | Velocity definitions: instantaneous, average, RMS |
 | 6-8 to 6-17 | 242–251 | Interval velocity, Dix formula, constraints on physically plausible RMS decreases |
 | 6-18 to 6-25 | 252–260 | Snell's law; ray parameter; raytracing in v(z); linear v(z) rays are circular arcs |
 | 7-1 to 7-5 | 261–265 | Normal moveout; stacking velocity as best-fit hyperbola |
@@ -60,6 +72,31 @@ Chapter 1 (pages 1-2 of the notes) provides a high-level “big picture” usefu
   - **Imaging processes** place energy at the correct spatial position (NMO, CMP stack, migration).
   - **Deconvolution processes** remove the illuminating wavelet and improve resolution (gain recovery, statistical deconvolution, inverse-Q filtering, wavelet processing).
 - The simplest usable model is the **convolutional model**: trace ≈ wavelet convolved with reflectivity.
+
+### Convolution and the Fourier view
+- Convolution is the operation of shifting, scaling, and summing one waveform against another.
+- It can be written as a matrix multiplication, which makes the stationary nature of the operator explicit.
+- In the Fourier domain, convolution becomes multiplication: filtering a trace is equivalent to multiplying their spectra.
+- A Ricker wavelet is zero phase; its amplitude spectrum peaks at the dominant frequency and its phase spectrum is zero.
+
+### DFT, sampling, and aliasing
+- The DFT samples the continuous Fourier transform at discrete frequencies.
+- Sampling in time makes the spectrum periodic; the period is the sampling frequency `f_s = 1/Δt`.
+- Energy above the Nyquist frequency `f_N = f_s/2` folds back into the principal band; anti-alias filters are required before digitization.
+
+### Filtering
+- Frequency-domain filtering multiplies the trace spectrum by the filter spectrum.
+- Common types: low-pass, high-pass, band-pass, notch.
+- Truncating an ideal sharp filter causes ringing (Gibbs effect); longer filters and windowing reduce this.
+
+### Spectral estimation
+- Estimating spectra from finite, noisy windows involves leakage; tapering the window reduces edge effects.
+- Power spectrum can be computed from the DFT of the time series or from the Fourier transform of the autocorrelation.
+
+### Z-transform and minimum phase
+- The Z-transform is a polynomial in the unit-delay operator `z`; setting `z = exp(-iωΔt)` gives the Fourier transform.
+- A causal, stable time series with a causal, stable inverse is minimum phase.
+- Factoring the Z-transform into elementary dipoles shows whether a wavelet is minimum, maximum, or mixed phase.
 
 ### Convolutional model
 - Ultimate goal: recover the earth's reflectivity as a function of position.
@@ -115,6 +152,11 @@ Chapter 1 (pages 1-2 of the notes) provides a high-level “big picture” usefu
 
 ## Figures useful for teaching
 
+- Convolution matrix examples (pages 38–47).
+- Ricker wavelet time and frequency plots (pages 49–51).
+- DFT and sampling replication figures (pages 61–67).
+- Generic wavelets and their amplitude spectra (pages 73–75).
+- Spectral estimation comparison (pages 83–87).
 - Constant-Q amplitude spectra at increasing time (pages 125–126).
 - Minimum-phase vs. zero-phase bandlimited reflectivity (page 146).
 - Matrix representation of convolution (page 146).
@@ -128,4 +170,5 @@ Chapter 1 (pages 1-2 of the notes) provides a high-level “big picture” usefu
 - Good source for the Hilbert-transform link between amplitude and phase spectrum.
 - Explains why bandlimited reflectivity, not the full impulse response, is the realistic processing target.
 - Provides matrix view of convolution and Wiener normal equations.
-- **Chapters 5–7 directly support Term 1 Lecture 03 (kinematics, velocities, field statics) and Lecture 04 (advanced statics, residual statics, floating datum, velocity-analysis link).**
+- **Chapter 2 directly supports Term 1 Lecture 5 (spectral analysis and frequency filtering).**
+- Chapters 5–7 directly support Term 1 Lecture 03 (kinematics, velocities, field statics) and Lecture 04 (advanced statics, residual statics, floating datum, velocity-analysis link).
