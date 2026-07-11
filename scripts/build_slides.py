@@ -163,7 +163,7 @@ def parse_outline(text: str):
             continue
 
         # Figure reference (with optional backticks and optional bold markdown)
-        fig_m = re.match(r"^(?:[-*]\s+|\*\*)?Figure:\*\*?\s*`?([^`]+)`?$", line, re.IGNORECASE)
+        fig_m = re.match(r"^(?:[-*]\s+|\*\*)?Figure:(?:\*\*)?\s*`?([^`]+)`?$", line, re.IGNORECASE)
         if fig_m:
             current["figure"] = fig_m.group(1).strip()
             if "optional" in current["figure"].lower() or "can be added" in current["figure"].lower():
