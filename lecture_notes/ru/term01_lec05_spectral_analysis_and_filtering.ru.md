@@ -316,4 +316,4 @@ $$
 - Hatton, Worthington & Makin (1986), *Seismic Data Processing: Theory and Practice*, гл. 2.2–2.5, 2.9 — теория Фурье, ДПФ, алиасинг, фильтрация и спектральный анализ.
 - Margrave (2006), *Methods of Seismic Data Processing*, гл. 2 — свёртка, преобразования Фурье, ДПФ, дискретизация, фильтрация и спектральная оценка.
 - Yilmaz, *Practical Seismic Data Analysis*, гл. 1.2–1.3.1 — дискретизированные временные ряды, алиасинг и амплитудный спектр Фурье.
-- Пошаговый вывод: `lecture_notes/derivations/dft_and_spectral_leakage_derivation.en.md`.
+- Пошаговый вывод: `lecture_notes/derivations/dft_and_spectral_leakage_derivation.ru.md`.
