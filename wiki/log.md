@@ -2,6 +2,21 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-11] lecture-ready | Term 1 Lectures 6 and 7
+
+Updated `wiki/lecture_ready/term01_lec06_single_channel_deconvolution.md` and `wiki/lecture_ready/term01_lec07_surface_consistent_deconvolution.md` from `draft` to `lecture-ready`:
+
+- Changed frontmatter status to `lecture-ready` and removed redundant `lecture-ready` tag.
+- Added one-line summary, key concepts covered, generated-figures table, lecture-materials list, related concept pages, and instructor notes to match the lecture-ready format.
+- Fixed the Lecture 6 dipole Z-transform to match the lecture notes ($W(z) = a + bz^{-1}$, minimum phase when the zero is inside the unit circle).
+- Aligned the Lecture 7 surface-consistent equations with the notation used in the lecture notes and glossary.
+- Referenced all generated artifacts: English and Russian notes, rendered PDFs, derivations, exercises, slide outlines, starter PowerPoint decks, and figure scripts.
+- Added a note that the Lecture 6 slide outline still contains the old dipole formula and should be aligned before presentation.
+
+Updated `wiki/index.md` to reflect the new status.
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
 ## [2026-06-22] init | Wiki structure and deconvolution pilot
 
 - Created `wiki/` structure: `concepts/`, `techniques/`, `sources/`, `comparisons/`, `lecture_ready/`.
@@ -462,3 +477,9 @@ Updated source summaries:
 - `wiki/sources/yilmaz_practical_seismic_data_analysis_amplitude.md`
 
 Updated `wiki/index.md` with the new concept pages and source-title change.
+
+## [2026-07-11] translate | Russian version of Term 1 Lecture 5
+
+Created `lecture_notes/ru/term01_lec05_spectral_analysis_and_filtering.ru.md` — full Russian translation of the English lecture notes on spectral analysis and frequency filtering.
+
+Updated `wiki/index.md` to include the new Russian notes.

@@ -91,8 +91,8 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Term 1 Lecture 2 — Amplitude Corrections and Quality Control of Input Data](lecture_ready/term01_lec02_amplitude_correction_and_qc.md) | term01_lec02 | lecture-ready |
 | [Term 1 Lecture 3 — Kinematics, Velocities and Field Statics](lecture_ready/term01_lec03_kinematics_and_field_statics.md) | term01_lec03 | lecture-ready |
 | [Term 1 Lecture 4 — Advanced Statics and the Link to Velocity Analysis](lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md) | term01_lec04 | lecture-ready |
-| [Term 1 Lecture 6 — Single-channel deconvolution](lecture_ready/term01_lec06_single_channel_deconvolution.md) | term01_lec06 | draft |
-| [Term 1 Lecture 7 — Surface-consistent deconvolution](lecture_ready/term01_lec07_surface_consistent_deconvolution.md) | term01_lec07 | draft |
+| [Term 1 Lecture 6 — Single-channel deconvolution](lecture_ready/term01_lec06_single_channel_deconvolution.md) | term01_lec06 | lecture-ready |
+| [Term 1 Lecture 7 — Surface-consistent deconvolution](lecture_ready/term01_lec07_surface_consistent_deconvolution.md) | term01_lec07 | lecture-ready |
 
 ---
 

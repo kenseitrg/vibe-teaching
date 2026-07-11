@@ -38,7 +38,7 @@ Typical values are:
 
 - sample interval $\Delta t = 1$, $2$, or $4$ ms (high-resolution surveys may use $0.25$ or $0.5$ ms);
 - record length $T$ from a few seconds to several seconds;
-- number of samples $N = T / \Delta t$, often $1000$–$16000$.
+- number of samples $N = T / \Delta t$, often $1000$–$20000$.
 
 Both sampling and finite length have direct consequences in the frequency domain. Sampling makes the spectrum periodic, and finite length smears the spectrum. The DFT is the practical tool that computes that spectrum.
 
