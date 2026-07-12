@@ -7,8 +7,12 @@ language: en
 pages: 333
 concepts:
   - seismic_acquisition
+  - 3d_seismic_acquisition
   - common_midpoint
   - seismic_data_sorts
+  - cross_spread_gather
+  - ovt_cov_panels
+  - grid_binning
   - seismic_data_processing
 tags: [acquisition, survey-design, geometry, symmetric-sampling, 2d, 3d, fold, offset, textbook]
 ---
@@ -63,9 +67,10 @@ SEG Geophysical References Series No. 12, second edition. A definitive reference
 - Figure 2.7–2.10: midpoint/offset coordinate systems and 3D subsets of the 5D wavefield.
 - Figure 2.11–2.14: binning, unit cell, aspect ratios.
 - Figure 3.1–3.3: direct waves, scattered waves, and array responses.
-
 ## Relation to lecture notes
+
 - Provides the geometric foundation for Term 1 Lecture 1: why offset is a dimension, how fold arises, and what acquisition parameters matter.
+- Chapter 2 (sections 2.2–2.5) is the main reference for Term 3 Lecture 1, covering 3D geometry classes, the continuous wavefield, 3D subsets, fold, the unit cell, binning, aspect ratios, and OVT/COV panels.
 - The 2D symmetric sampling chapter is especially suitable for an undergraduate introduction before moving to 3D in Term 3.
 - The figures in this book are excellent for slide and note illustrations.
 

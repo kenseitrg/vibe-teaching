@@ -35,14 +35,21 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Wiener filter](concepts/wiener_filter.md) | Optimal least-squares shaping filter and normal equations | draft |
 | [Seismic data processing](concepts/seismic_data_processing.md) | Overview, goals, and typical processing flow | draft |
 | [Seismic acquisition](concepts/seismic_acquisition.md) | 2D acquisition essentials, CMP method, parameters | draft |
+| [3D seismic acquisition](concepts/3d_seismic_acquisition.md) | 3D geometry, unit cell, fold, and acquisition parameters | draft |
 | [Common midpoint (CMP)](concepts/common_midpoint.md) | CMP/CDP gather, fold, stacking | draft |
 | [Seismic data sorts](concepts/seismic_data_sorts.md) | Shot, receiver, CMP, offset gathers and their uses | draft |
+| [Cross-spread gather](concepts/cross_spread_gather.md) | 3D gather from one source line and one receiver line | draft |
+| [OVT / COV panels](concepts/ovt_cov_panels.md) | Offset-vector tiles for azimuth-preserved 3D processing | draft |
+| [Grid binning](concepts/grid_binning.md) | Assigning midpoints to regular CMP bins | draft |
 | [Seismic data formats](concepts/seismic_data_formats.md) | SEGY, SEGD, SPS, UKOOA and data loading | draft |
 | [Amplitude effects](concepts/amplitude_effects.md) | Physical causes of amplitude attenuation during propagation | draft |
 | [Spherical divergence](concepts/spherical_divergence.md) | Geometric spreading correction | draft |
 | [Automatic gain control](concepts/automatic_gain_control.md) | AGC and deterministic amplitude equalization | draft |
 | [Surface-consistent amplitude correction](concepts/surface_consistent_amplitude.md) | Four-factor surface-consistent amplitude model | draft |
 | [Seismic data QC](concepts/seismic_data_qc.md) | Input-data quality control attributes and methods | draft |
+| [Seismic processing QC](concepts/seismic_processing_qc.md) | Processing-stage QC for kinematics, noise, deconvolution, demultiple | draft |
+| [Seismic well tie](concepts/seismic_well_tie.md) | Synthetic seismograms, wavelet estimation, phase, and correlation | draft |
+| [AVO analysis](concepts/avo_analysis.md) | Amplitude versus offset and its use as a QC tool | draft |
 | [Spectral analysis](concepts/spectral_analysis.md) | Frequency content of traces and wavelets | draft |
 | [Frequency filtering](concepts/frequency_filtering.md) | Shaping seismic spectra by filter operators | draft |
 | [Discrete Fourier transform](concepts/discrete_fourier_transform.md) | DFT and its properties for sampled seismic data | draft |
@@ -75,6 +82,12 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [SEG-Y rev 2.0](sources/seg_y_rev2_format.md) | SEG-Y rev 2.0 Data Exchange format | technical standard | draft |
 | [SEG SPS rev 2.1](sources/seg_sps_format_rev21.md) | Shell Processing Support format for 3D surveys | technical standard | draft |
 | [Vermeer (2012)](sources/vermeer_2012_3d_seismic_survey_design.md) | 3D Seismic Survey Design, 2nd ed. | textbook | draft |
+| [White (1997)](sources/white_1997_accuracy_of_well_ties.md) | The accuracy of well ties: practical procedures and examples | paper | draft |
+| [Walden & White (1998)](sources/walden_white_1998_seismic_wavelet_estimation.md) | Seismic wavelet estimation: a frequency domain solution to a noisy input-output problem | paper | draft |
+| [Carvajal et al. (2023)](sources/carvajal_2023_well_tie_tutorial.md) | Well tie tutorial and its importance in seismic interpretation and inversion | conference paper | draft |
+| [Shuey (1985)](sources/shuey_1985_simplification_of_zoeppritz_equations.md) | A simplification of the Zoeppritz equations | paper | draft |
+| [Rüger (1996)](sources/ruger_1996_p_wave_reflectivity_offset_azimuth.md) | Variation of P-wave reflectivity with offset and azimuth in anisotropic media | conference abstract | draft |
+| [Longbottom et al. (1988)](sources/longbottom_1988_maximum_kurtosis_phase_estimation.md) | Principles and application of maximum kurtosis phase estimation | paper | draft |
 | [Li (1999)](sources/li_1999_introduction_to_residual_statics_analysis.md) | Residual statics analysis using prestack equivalent offset migration (Chapters 1–2) | thesis | summarized |
 
 ## Comparisons
@@ -93,6 +106,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Term 1 Lecture 4 — Advanced Statics and the Link to Velocity Analysis](lecture_ready/term01_lec04_advanced_statics_and_velocity_link.md) | term01_lec04 | lecture-ready |
 | [Term 1 Lecture 6 — Single-channel deconvolution](lecture_ready/term01_lec06_single_channel_deconvolution.md) | term01_lec06 | lecture-ready |
 | [Term 1 Lecture 7 — Surface-consistent deconvolution](lecture_ready/term01_lec07_surface_consistent_deconvolution.md) | term01_lec07 | lecture-ready |
+| [Term 3 Lecture 1 — Quality Control of Seismic Processing and Introduction to 3D Seismic Data](lecture_ready/term03_lec01_processing_qc_and_3d_introduction.md) | term03_lec01 | draft |
 
 ---
 

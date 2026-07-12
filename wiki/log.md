@@ -2,6 +2,108 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-12] concept | Term 3 Lecture 1 — QC and 3D introduction
+
+Started work on Term 3 Lecture 1 (quality control of seismic processing and introduction to 3D seismic data):
+
+- Created slide outline: `slides/term03/lec01_processing_qc_and_3d_introduction/slide_outline.md`.
+- Drafted English lecture notes: `lecture_notes/en/term03_lec01_processing_qc_and_3d_introduction.en.md`.
+- Created wiki concept pages:
+  - `wiki/concepts/seismic_processing_qc.md` — processing-stage QC.
+  - `wiki/concepts/seismic_well_tie.md` — synthetic seismograms and wavelet estimation.
+  - `wiki/concepts/avo_analysis.md` — AVO/AVAz as a QC tool.
+  - `wiki/concepts/3d_seismic_acquisition.md` — 3D geometry basics, unit cell, fold.
+  - `wiki/concepts/cross_spread_gather.md` — cross-spread gathers.
+  - `wiki/concepts/ovt_cov_panels.md` — OVT/COV panels.
+  - `wiki/concepts/grid_binning.md` — CMP grid binning.
+- Created lecture-ready page: `wiki/lecture_ready/term03_lec01_processing_qc_and_3d_introduction.md`.
+- Updated `wiki/index.md` with new pages and lecture-ready entry.
+
+## [2026-07-12] ingest | Vermeer ch.2 and AVO/well-tie references
+
+Expanded wiki with sourced details:
+
+- Extracted Vermeer (2012), Chapter 2 (pages 42–72) to `/tmp/opencode/vermeer_ch2/chapter2.txt`.
+- Updated `wiki/sources/vermeer_2012_3d_seismic_survey_design.md` to reference new 3D concept pages and Term 3 Lecture 1.
+- Expanded `wiki/concepts/3d_seismic_acquisition.md` with geometry classes (areal, parallel, orthogonal, slanted, zigzag), 3D subsets, minimal data sets, unit cell, fold formulas, aspect ratios, spatial continuity, and symmetric sampling.
+- Expanded `wiki/concepts/cross_spread_gather.md` with properties, extraction from orthogonal geometry, comparison with template, and limitations.
+- Expanded `wiki/concepts/ovt_cov_panels.md` with pseudo-COV construction, OVT parameters, reciprocal OVTs, and coverage/fold notes.
+- Expanded `wiki/concepts/grid_binning.md` with natural bin size, offset distribution in the unit cell, and midpoint smear discussion.
+- Expanded `wiki/concepts/seismic_processing_qc.md` with multi-attribute assessment and detailed QC workflows.
+- Expanded `wiki/concepts/seismic_well_tie.md` with time-depth conversion, Roy-White method, and common pitfalls.
+- Expanded `wiki/concepts/avo_analysis.md` with AVO classes, intercept-gradient crossplots, Ruger equation, and AVO QC workflow.
+- Created source pages for cited papers not in the local library:
+  - `wiki/sources/white_1998_properties_of_the_statistical_wavelet.md`
+  - `wiki/sources/shuey_1985_simplification_of_zoeppritz_equations.md`
+  - `wiki/sources/ruger_1997_azimuthal_avo_analysis.md`
+- Updated `wiki/index.md` with new source pages.
+- Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-12] refine | Slide outline aligned with refined lecture notes
+
+Updated `slides/term03/lec01_processing_qc_and_3d_introduction/slide_outline.md` to match the refined lecture notes:
+
+- **Slide 13 (Seismic well tie):** added time-depth conversion, Roy-White frequency-domain method, PEP vs NMSE accuracy metrics, White (1997) phase-error tolerances, and the need to repeat ties after conditioning.
+- **Slide 14 (AVO analysis):** added the two-term Shuey approximation, intercept-gradient crossplot, and the Rüger (1996) HTI/orthorhombic azimuthal AVO equation.
+- **Slide 16 (3D acquisition):** added 3D symmetric sampling and minimal data sets.
+- **Slide 20 (Fold):** added inline/crossline fold formulas and the Vermeer midpoint-area / unit-cell-area interpretation.
+- **Slide 22 (OVT/COV):** added unit-cell-sized tiles and pseudo-COV gathers.
+- **Slide 23 (OVT construction):** added reciprocal OVTs and their role in reducing edge effects.
+- **Slide 26 (Comprehension questions):** added questions on PEP/NMSE, AVO mismatch, and reciprocal OVTs / symmetric sampling.
+
+## [2026-07-12] refine | Term 3 Lecture 1 English notes refined with ingested sources
+
+Refined `lecture_notes/en/term03_lec01_processing_qc_and_3d_introduction.en.md` using the papers extracted from `papers/qc/` and Vermeer Chapter 2:
+
+- **Seismic well tie (§1.10):**
+  - Added time-depth conversion equation and the role of checkshots.
+  - Added the Roy-White frequency-domain wavelet estimation method (Walden & White, 1998) as a noisy input-output problem with multiple coherence analysis.
+  - Added White (1997) phase-error tolerances for different applications (correlation, AVO, zero-phasing, absolute-impedance inversion).
+  - Added the distinction between goodness-of-fit (PEP) and true accuracy (NMSE), and the rule of keeping analysis bandwidth well below data bandwidth.
+  - Noted that the best match location for time-migrated data is often up-dip from the well.
+  - Added Carvajal et al. (2023) note that well ties should be repeated after seismic conditioning.
+
+- **AVO QC (§1.11):**
+  - Added the two-term Shuey approximation and the intercept-gradient crossplot.
+  - Added the Rüger (1996) HTI azimuthal AVO equation and noted the orthorhombic extension.
+  - Clarified that AVAz inversion targets symmetry-plane directions and fracture parameters.
+
+- **3D acquisition (§2.1–2.7):**
+  - Added the concept of 3D symmetric sampling and minimal data sets.
+  - Expanded the fold section with inline/crossline fold formulas and the Vermeer midpoint-area / unit-cell-area interpretation.
+  - Expanded the OVT section to describe pseudo-COV gathers, unit-cell-sized tiles, and reciprocal OVTs for spatial continuity.
+
+- **Suggested reading:** updated to use the correct local source citations.
+
+Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
+## [2026-07-12] ingest | Corrected AVO/well-tie sources and ingested actual papers from `papers/qc/`
+
+The previous White (1998) and Rüger (1997) source pages were hallucinated; they have been removed. The actual papers supplied by the instructor in `papers/qc/` have been ingested:
+
+- `papers/qc/10.1190@1.1826488.pdf` — Rüger (1996), SEG Expanded Abstracts, "Variation of P-wave reflectivity with offset and azimuth in anisotropic media."
+- `papers/qc/white1997.pdf` — White (1997), "The accuracy of well ties: practical procedures and examples."
+- `papers/qc/walden1998.pdf` — Walden & White (1998), IEEE TGRS, "Seismic wavelet estimation: a frequency domain solution to a geophysical noisy input-output problem."
+- `papers/qc/shuey1985.pdf` — Shuey (1985), *Geophysics*.
+- `papers/qc/93120-well-tie-tutorial-and-its-importan.pdf` — Carvajal et al. (2023), GeoConvention, "Well tie tutorial..."
+- `papers/qc/longbottom1988.pdf` — Longbottom et al. (1988), *Geophysical Prospecting*, "Principles and application of maximum kurtosis phase estimation."
+
+Actions taken:
+
+- Removed `wiki/sources/white_1998_properties_of_the_statistical_wavelet.md` and `wiki/sources/ruger_1997_azimuthal_avo_analysis.md`.
+- Created accurate source pages:
+  - `wiki/sources/ruger_1996_p_wave_reflectivity_offset_azimuth.md`
+  - `wiki/sources/white_1997_accuracy_of_well_ties.md`
+  - `wiki/sources/walden_white_1998_seismic_wavelet_estimation.md`
+  - `wiki/sources/carvajal_2023_well_tie_tutorial.md`
+  - `wiki/sources/longbottom_1988_maximum_kurtosis_phase_estimation.md`
+- Updated `wiki/sources/shuey_1985_simplification_of_zoeppritz_equations.md` to point to the actual PDF and removed the "not in library" note.
+- Updated frontmatter sources and in-text references in `wiki/concepts/seismic_well_tie.md` and `wiki/concepts/avo_analysis.md`.
+- Updated frontmatter sources and suggested reading in `wiki/lecture_ready/term03_lec01_processing_qc_and_3d_introduction.md`.
+- Updated frontmatter sources and suggested reading in `lecture_notes/en/term03_lec01_processing_qc_and_3d_introduction.en.md`.
+- Updated `wiki/index.md` with the corrected source entries.
+- Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
 ## [2026-07-11] lecture-ready | Term 1 Lectures 6 and 7
 
 Updated `wiki/lecture_ready/term01_lec06_single_channel_deconvolution.md` and `wiki/lecture_ready/term01_lec07_surface_consistent_deconvolution.md` from `draft` to `lecture-ready`:
