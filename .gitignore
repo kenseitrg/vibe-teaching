@@ -205,6 +205,6 @@ Thumbs.db
 .DS_Store
 
 codebook.toml
-.pi-subagents/*
-.pi/*
-.opencode/*
+.pi-subagents
+.opencode/
+.pi/
