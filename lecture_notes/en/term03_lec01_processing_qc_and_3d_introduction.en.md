@@ -66,10 +66,6 @@ Attributes turn a volume of traces into scalars that can be mapped, histogrammed
 
 These attributes are computed in windows, sorted by source, receiver, offset, CMP, and midpoint coordinates, and displayed as maps and histograms. Common patterns include vertical stripes (source-related), horizontal stripes (receiver-related), and diagonal stripes (geology or offset-dependent effects). Fold maps are another attribute: they show holes, overlaps, and low-fold areas that explain noise or amplitude variations.
 
-![Figure: `figures/term03_lec01/term03_lec01_attribute_maps.png` — Examples of amplitude, dominant frequency, and signal-to-noise ratio maps. Stripes in the source or receiver direction indicate acquisition problems; geological trends are usually more irregular.](./figures/term03_lec01/term03_lec01_attribute_maps.png)
-
-*Figure 2: Attribute maps reveal acquisition footprints and geological trends. Stripes that follow source or receiver lines are usually an acquisition effect, not geology.*
-
 ### 1.4 Multi-attribute assessment
 
 No single attribute is reliable enough to judge data quality by itself. A trace can have normal amplitude but anomalous frequency; a gather can have good signal-to-noise ratio but poor flatness. Modern QC therefore combines several attributes into an overall quality metric.
@@ -91,10 +87,6 @@ Kinematic processing includes velocity analysis, NMO correction, stacking and im
 - **Structural QC.** Horizon maps in time and depth should be geologically plausible. Cross-plots of horizon time or depth against well data reveal systematic shifts that point to velocity errors or residual statics.
 - **Residual NMO.** After NMO correction, gathers should be flat. Residual curvature means the stacking velocity is wrong, anisotropy is ignored, or residual statics remain. A small residual moveout can be tolerated before stack, but it must be understood before AVO or prestack migration.
 
-![Figure: `figures/term03_lec01/term03_lec01_residual_nmo_qc.png` — A CMP gather before and after NMO correction. Left panel shows residual curvature; right panel shows a flat gather after velocity update.](./figures/term03_lec01/term03_lec01_residual_nmo_qc.png)
-
-*Figure 3: A flat CMP gather after NMO is the simplest and most reliable QC of velocity analysis. Residual curvature means the velocity is still wrong or anisotropy is unaccounted for.*
-
 ### 1.6 QC of noise attenuation
 
 Noise attenuation removes unwanted energy. The danger is that it also removes signal. The standard QC procedure is:
@@ -104,10 +96,6 @@ Noise attenuation removes unwanted energy. The danger is that it also removes si
 - Check **lateral resolution** by migrating the difference section. Lateral resolution is preserved only if the difference has no focused energy after migration.
 - Compare vertical and horizontal slices in the same time/depth windows before and after the process.
 
-![Figure: `figures/term03_lec01/term03_lec01_noise_attenuation_difference.png` — Input, output, and difference sections of a noise-attenuation process. Coherent signal in the difference indicates over-processing.](./figures/term03_lec01/term03_lec01_noise_attenuation_difference.png)
-
-*Figure 4: The difference between input and output is the fastest QC for noise attenuation. Coherent signal in the difference means the process is too aggressive.*
-
 ### 1.7 QC of Q-compensation and deconvolution
 
 Q-compensation and deconvolution reshape the wavelet and restore high frequencies. Their QC focuses on resolution and stability:
@@ -116,10 +104,6 @@ Q-compensation and deconvolution reshape the wavelet and restore high frequencie
 - **Lateral stability.** Maps of dominant frequency and bandwidth should be smooth except where geology changes. FX slices show how the spectrum varies with inline and crossline position.
 - **Wavelet shape.** Extract wavelets in different time windows and across the survey. A stable process gives similar wavelets everywhere; an unstable process gives wavelets that vary from trace to trace.
 - **Phase and well tie.** A successful Q-compensation and deconvolution should leave the seismic data with a wavelet that matches the synthetic seismogram in phase and timing.
-
-![Figure: `figures/term03_lec01/term03_lec01_wavelet_stability_map.png` — Maps of dominant frequency and extracted wavelet shape across a survey. Lateral variation indicates an unstable operator.](./figures/term03_lec01/term03_lec01_wavelet_stability_map.png)
-
-*Figure 5: Wavelet-stability maps check that deconvolution and Q-compensation have produced a consistent wavelet across the survey.*
 
 ### 1.8 QC of demultiple
 
@@ -142,10 +126,6 @@ The idea is not to replace the processor with the interpreter, but to add geolog
 - Geological maps and cross-sections constrain structural QC.
 
 The main instruments of this framework are the seismic well tie and AVO analysis, which are described next.
-
-![Figure: `figures/term03_lec01/term03_lec01_iso_workflow.png` — A processing flow with interpreter feedback loops: well tie, AVO QC, and structural validation feed back into parameter choices.](./figures/term03_lec01/term03_lec01_iso_workflow.png)
-
-*Figure 6: In interpretation-supervised processing, well ties and AVO checks feed back into parameter choices before the next processing step.*
 
 ### 1.10 Seismic well tie
 
@@ -174,10 +154,6 @@ $$
 - **Wavelet shape and bandwidth.** A stable, compact wavelet is better than a long, noisy one. The Roy-White method trades wavelet length against bandwidth: a short wavelet is smooth but may not capture the phase; a wide bandwidth gives a better phase estimate but requires a longer wavelet and can become unstable in noise. The analysis bandwidth should be kept well below the data bandwidth (the ratio of wavelet length to data segment duration should be less than about 0.5).
 - **Accuracy measures.** Predictability (PEP = 1 − relative energy of residuals) measures fit; the normalized mean square error (NMSE = error energy in the wavelet / wavelet energy) measures accuracy. Error bars on the amplitude and phase spectra allow wavelets from different wells or time windows to be compared and combined.
 - **Quality of the extracted wavelet.** A well tie is not just about maximizing correlation; it is about extracting a wavelet that is geologically reasonable and can be used across the survey. Well-tie should be repeated after each processing step.
-
-![Figure: `figures/term03_lec01/term03_lec01_seismic_well_tie.png` — Sonic and density logs, computed reflectivity, extracted wavelet, synthetic seismogram, and comparison with the seismic trace at the well.](./figures/term03_lec01/term03_lec01_seismic_well_tie.png)
-
-*Figure 7: A seismic well tie convolves log-derived reflectivity with an estimated wavelet and compares the result to the seismic trace at the well location.*
 
 ### 1.11 AVO analysis as a QC tool
 
@@ -213,10 +189,6 @@ If the measured AVO response is wrong, the cause may be:
 - unresolved multiples,
 - wrong rock-physics model.
 
-![Figure: `figures/term03_lec01/term03_lec01_avo_qc.png` — Measured AVO amplitudes compared with the Shuey or Ruger theoretical response. A mismatch indicates amplitude, velocity, or wavelet problems.](./figures/term03_lec01/term03_lec01_avo_qc.png)
-
-*Figure 8: AVO QC compares measured seismic amplitudes with a theoretical model. Discrepancies point to amplitude, velocity, or wavelet problems.*
-
 ## Part 2 — Introduction to 3D seismic data
 
 ### 2.1 From 2D to 3D acquisition
@@ -248,7 +220,7 @@ A 3D land or transition-zone survey is built from source lines and receiver line
 
 ![Figure: `figures/term03_lec01/term03_lec01_3d_geometry_elements.png` — Source lines, receiver lines, template, salvo, and swath in a land 3D survey.](./figures/term03_lec01/term03_lec01_3d_geometry_elements.png)
 
-*Figure 9: A 3D land survey is built from source and receiver lines. Templates, salvos, and swaths are the repeating units used to cover the area.*
+*Figure 2: A 3D land survey is built from source and receiver lines. Templates, salvos, and swaths are the repeating units used to cover the area.*
 
 ### 2.3 The unit cell
 
@@ -264,7 +236,7 @@ For an orthogonal geometry with source line spacing $S$ and receiver line spacin
 
 ![Figure: `figures/term03_lec01/term03_lec01_unit_cell.png` — Source and receiver positions and the repeating unit cell of an orthogonal 3D geometry.](./figures/term03_lec01/term03_lec01_unit_cell.png)
 
-*Figure 10: The unit cell is the smallest repeating area of the geometry. Its size and shape control the sampling of the 5D wavefield.*
+*Figure 3: The unit cell is the smallest repeating area of the geometry. Its size and shape control the sampling of the 5D wavefield.*
 
 ### 2.4 Acquisition parameters and their influence
 
@@ -316,10 +288,6 @@ Fold maps are a basic QC tool. A uniform fold is desirable, but it is rarely per
 - skipped shots or receivers,
 - irregular terrain or obstructions.
 
-![Figure: `figures/term03_lec01/term03_lec01_3d_fold_map.png` — A 3D fold map showing uniform fold in the center and lower fold at the edges.](./figures/term03_lec01/term03_lec01_3d_fold_map.png)
-
-*Figure 11: A 3D fold map reveals holes, overlaps, and edge effects. The interpreter should know where fold is low before interpreting amplitudes.*
-
 ### 2.6 Cross-spread gathers
 
 A **cross-spread gather** is the set of all traces recorded from one source line into one receiver line. It is a natural 3D gather because it preserves the 2D shot/receiver character in both the inline and crossline directions.
@@ -333,7 +301,7 @@ The cross-spread is one example of a **minimal data set** — a subset of the 5D
 
 ![Figure: `figures/term03_lec01/term03_lec01_cross_spread_gather.png` — A cross-spread gather: one source line and one receiver line. The traces form a 2D grid of source and receiver positions.](./figures/term03_lec01/term03_lec01_cross_spread_gather.png)
 
-*Figure 12: A cross-spread gather contains all traces from one source line into one receiver line. It is a natural 3D processing unit.*
+*Figure 4: A cross-spread gather contains all traces from one source line into one receiver line. It is a natural 3D processing unit.*
 
 ### 2.7 OVT / COV panels
 
@@ -356,7 +324,7 @@ Because reciprocity requires that source and receiver offsets be treated symmetr
 
 ![Figure: `figures/term03_lec01/term03_lec01_ovt_panel.png` — An OVT/COV panel: traces with a narrow range of inline and crossline offsets.](./figures/term03_lec01/term03_lec01_ovt_panel.png)
 
-*Figure 13: An OVT panel is a single-fold 3D volume with a narrow range of offset vectors. It preserves azimuthal information.*
+*Figure 5: An OVT panel is a single-fold 3D volume with a narrow range of offset vectors. It preserves azimuthal information.*
 
 ### 2.8 Offset and midpoint coverage for OVTs
 
@@ -376,10 +344,6 @@ $$
 
 The offset-vector bin limits and the midpoint bin size determine how many traces fall into each OVT panel. Panels with small offset-vector bins have fewer traces but better azimuth preservation; panels with large bins have more traces but mix azimuths.
 
-![Figure: `figures/term03_lec01/term03_lec01_ovt_offset_distribution.png` — Offset-vector distribution in $(h_x, h_y)$ space and the corresponding OVT bins.](./figures/term03_lec01/term03_lec01_ovt_offset_distribution.png)
-
-*Figure 14: Offset vectors are sorted into bins in $(h_x, h_y)$ space. Each bin becomes an OVT panel. The midpoint coverage of each panel depends on the geometry.*
-
 ### 2.9 Grid binning
 
 Grid binning is the step that assigns each trace to a regular (inline, crossline) CMP bin. The bin size is a design choice:
@@ -395,7 +359,7 @@ Binning QC checks:
 
 ![Figure: `figures/term03_lec01/term03_lec01_binning_midpoint_distribution.png` — Midpoints scattered within CMP bins; the bin center is marked. Fold and midpoint deviation are the main binning QC metrics.](./figures/term03_lec01/term03_lec01_binning_midpoint_distribution.png)
 
-*Figure 15: Binning assigns midpoints to regular cells. QC checks fold uniformity and how far midpoints are from the bin centers.*
+*Figure 6: Binning assigns midpoints to regular cells. QC checks fold uniformity and how far midpoints are from the bin centers.*
 
 ## Summary
 

@@ -86,28 +86,19 @@ $$
 | Figure | Path |
 |--------|------|
 | Input vs processing QC flow | `figures/term03_lec01/term03_lec01_input_vs_processing_qc.png` |
-| Attribute maps | `figures/term03_lec01/term03_lec01_attribute_maps.png` |
-| Residual NMO QC | `figures/term03_lec01/term03_lec01_residual_nmo_qc.png` |
-| Noise attenuation difference | `figures/term03_lec01/term03_lec01_noise_attenuation_difference.png` |
-| Wavelet stability map | `figures/term03_lec01/term03_lec01_wavelet_stability_map.png` |
-| ИСО / WDS workflow | `figures/term03_lec01/term03_lec01_iso_workflow.png` |
-| Seismic well tie | `figures/term03_lec01/term03_lec01_seismic_well_tie.png` |
-| AVO QC | `figures/term03_lec01/term03_lec01_avo_qc.png` |
 | 3D geometry elements | `figures/term03_lec01/term03_lec01_3d_geometry_elements.png` |
 | Unit cell | `figures/term03_lec01/term03_lec01_unit_cell.png` |
-| 3D fold map | `figures/term03_lec01/term03_lec01_3d_fold_map.png` |
 | Cross-spread gather | `figures/term03_lec01/term03_lec01_cross_spread_gather.png` |
 | OVT panel | `figures/term03_lec01/term03_lec01_ovt_panel.png` |
-| OVT offset distribution | `figures/term03_lec01/term03_lec01_ovt_offset_distribution.png` |
 | Binning midpoint distribution | `figures/term03_lec01/term03_lec01_binning_midpoint_distribution.png` |
 
 ## Lecture materials
 
 - Lecture notes (English): `lecture_notes/en/term03_lec01_processing_qc_and_3d_introduction.en.md`
 - Slide outline: `slides/term03/lec01_processing_qc_and_3d_introduction/slide_outline.md`
-- Starter deck: *(to be generated)* `slides/term03/lec01_processing_qc_and_3d_introduction/lec01_processing_qc_and_3d_introduction.pptx`
+- Starter deck: `slides/term03/lec01_processing_qc_and_3d_introduction/lec01_processing_qc_and_3d_introduction.pptx`
 - Exercises: *(to be added)* `exercises/term03_lec01_processing_qc_and_3d_introduction.md`
-- Russian notes: *(to be added)* `lecture_notes/ru/term03_lec01_processing_qc_and_3d_introduction.ru.md`
+- Russian notes: `lecture_notes/ru/term03_lec01_processing_qc_and_3d_introduction.ru.md`
 
 ## Related concept pages
 

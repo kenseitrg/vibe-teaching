@@ -2,6 +2,31 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-13] figures | Term 3 Lecture 1 — figure-list cleanup
+
+- Generated `figures/term03_lec01/term03_lec01_input_vs_processing_qc.png` with a Russian graphviz flowchart.
+- Reused existing raw images:
+  - `slides/raw/field_layout_3d.png` as `figures/term03_lec01/term03_lec01_3d_geometry_elements.png`.
+  - `slides/raw/unit_cell.png` as `figures/term03_lec01/term03_lec01_unit_cell.png`.
+  - `slides/raw/cross-spread.png` as `figures/term03_lec01/term03_lec01_cross_spread_gather.png`.
+  - `slides/raw/ovt_construction.png` as `figures/term03_lec01/term03_lec01_ovt_panel.png`.
+  - `slides/raw/binning.png` as `figures/term03_lec01/term03_lec01_binning_midpoint_distribution.png`.
+- Removed the following planned figures from the lecture notes and slide outline; the instructor will show real-data examples in class instead:
+  - `term03_lec01_attribute_maps.png`
+  - `term03_lec01_residual_nmo_qc.png`
+  - `term03_lec01_noise_attenuation_difference.png`
+  - `term03_lec01_wavelet_stability_map.png`
+  - `term03_lec01_seismic_well_tie.png`
+  - `term03_lec01_avo_qc.png`
+  - `term03_lec01_3d_fold_map.png`
+  - `term03_lec01_ovt_offset_distribution.png`
+  - `term03_lec01_iso_workflow.png`
+- Renumbered the remaining Term 3 Lecture 1 figures in the lecture notes (Figure 1–Figure 6).
+- Translated lecture notes to Russian: `lecture_notes/ru/term03_lec01_processing_qc_and_3d_introduction.ru.md`.
+- Updated the generated-figures table on `wiki/lecture_ready/term03_lec01_processing_qc_and_3d_introduction.md`.
+- Built starter slide deck: `slides/term03/lec01_processing_qc_and_3d_introduction/lec01_processing_qc_and_3d_introduction.pptx`.
+- Fixed slide outline formatting: added `---` separators so `build_slides.py` parses the outline correctly. Rebuilt deck with content and embedded figures.
+
 ## [2026-07-12] concept | Term 3 Lecture 1 — QC and 3D introduction
 
 Started work on Term 3 Lecture 1 (quality control of seismic processing and introduction to 3D seismic data):
