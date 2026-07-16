@@ -14,7 +14,7 @@ By the end of this lecture you should be able to:
 - Describe first-break picking as the input to refraction-based near-surface model building.
 - Compare single-trace pickers (STA/LTA, threshold, envelope) with multichannel methods and explain why the latter are more robust.
 - Sketch the diving-wave tomography workflow: picks, rays, slowness model, residuals, and QC.
-- Distinguish short-period statics (restore hyperbolicity) from long-period statics (bias velocities).
+- Distinguish effects of short-period statics (restore hyperbolicity) from long-period statics (bias velocities).
 - Define effective velocity and marginal effective velocity and explain how statics change them.
 - Explain why statics and velocity model compete for the same near-surface time distortions.
 - Choose between a flat datum, a floating datum, and a smooth-surface datum for imaging.
@@ -84,7 +84,7 @@ Multichannel methods are generally preferable because they use the physical mode
 
 ### 1.4 Diving-wave tomography: the big picture
 
-Diving-wave tomography (*томография по ныряющим волнам*), also called turning-ray or tomostatics, is the most common modern refraction method. Instead of assuming discrete layers, it models the near surface as a grid of cells with smoothly varying velocity. Rays that leave the source and turn back to the surface are used to constrain the model.
+Diving-wave tomography (*томография по ныряющим волнам*), also called turning-ray tomography, is the most common modern refraction method. Instead of assuming discrete layers, it models the near surface as a grid of cells with smoothly varying velocity. Rays that leave the source and turn back to the surface are used to constrain the model.
 
 The key physical fact is that, in a velocity that increases continuously with depth, a ray will bend until its ray parameter becomes zero and then return to the surface. The traveltime of that diving ray is an integral of slowness along the curved path.
 
@@ -196,6 +196,8 @@ $$
 V_\text{marg}^2 = \left. \frac{dx^2}{d(t^2)} \right|_{x \to 0} .
 $$
 
+A step-by-step derivation of the equivalent form $V_\text{marg}^2 = 1/[t_0 \, t''(0)]$ is given in `lecture_notes/derivations/marginal_effective_velocity_derivation.en.md`.
+
 For a purely hyperbolic event this is exactly the NMO velocity. For a real event with non-hyperbolic moveout (e.g., from anisotropy or from a complex near surface), the marginal effective velocity is the local slope at zero offset. It is the velocity that would be measured with very short offsets and is often the target of velocity analysis near the well location.
 
 ![Marginal effective velocity](figures/term03_lec02/term03_lec02_marginal_effective_velocity.png){width=90%}
@@ -228,7 +230,7 @@ The second derivative $c''(x)$ means that the curvature of the static field, not
 
 ![Statics bias on velocity spectrum](figures/term03_lec02/term03_lec02_statics_velocity_bias.png){width=90%}
 
-**Figure 6.** *Effect of long-wavelength statics on a velocity spectrum. Left: correct velocity spectrum with a single peak at $V_\text{nmo}$. Right: after a long-wavelength static shift, the peak moves to a different velocity because $t_0$ has changed while the curvature has not.*
+**Figure 6.** *Long-wavelength statics bias the velocity picked from velocity analysis. Left: semblance spectrum with the picked velocity peak shifted away from the true $V_\text{nmo}$. Centre: CMP gather after NMO using the biased velocity; the event is not flat. Right: stack section showing the residual structure caused by the velocity error. The static changes $t_0$ while the moveout curvature stays the same, so the best-fit hyperbola returns a different effective velocity.*
 
 ### 2.5 Datum choice and velocity estimation
 
@@ -267,7 +269,7 @@ Three datums are commonly used for migration:
 
 ![Datum choice](figures/term03_lec02/term03_lec02_datum_choice.png){width=90%}
 
-**Figure 7.** *Datum choices. Left: flat datum requires large static shifts and may distort velocities. Middle: floating datum keeps moveout hyperbolic but breaks surface consistency. Right: smooth surface datum preserves surface-consistent source/receiver statics while giving a smooth reference for migration.*
+**Figure 7.** *Surface consistency versus CMP-dependent statics for datum choice. (a) CMP-dependent shifts: the static applied to each shot and receiver depends on the CMP location, so the correction is not surface-consistent and traces in the same CMP can be shifted by different amounts. (b) Surface-consistent statics to a floating datum: each source and receiver has a single shift to a smooth datum, preserving the physical meaning of source and receiver statics and matching the datum used in prestack imaging.*
 
 ### 3.4 Why surface consistency matters at the smooth surface
 
@@ -298,7 +300,7 @@ These anomalies follow the near-surface pattern, not the deeper geology. They ar
 
 ![Near-surface velocity error](figures/term03_lec02/term03_lec02_near_surface_velocity_error.png){width=90%}
 
-**Figure 8.** *Inaccurate near-surface velocity model. Left: a low-velocity pocket in the weathering layer. Center: the NMO-corrected gather has residual non-hyperbolic moveout. Right: the migrated section shows a false structural pull-down below the pocket.*
+**Figure 8.** *Effects of an inaccurate near-surface velocity model on gathers and migration. Left: NMO-corrected gathers at offsets 50 m, 1050 m, and 3550 m; residual moveout appears at the far offset when the near-surface velocity is wrong. Centre: Kirchhoff prestack depth-migrated sections with the correct near-surface velocity (top) and without the low-velocity channel (bottom); the missing channel distorts the structure. Right: raypath diagram and raw gather showing how a shallow low-velocity channel creates a counter-intuitive pull-up below the canyon and over-corrected far offsets.*
 
 ### 4.3 Migration defocusing
 

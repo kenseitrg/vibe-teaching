@@ -33,36 +33,62 @@ v_update = gaussian_filter(v_true, sigma=(2, 5))
 # Ray tracing for a diving wave in a v(z) medium: x(p) = integral p v / sqrt(1 - p^2 v^2) dz
 # Use a constant gradient v = v0 + k*z; ray parameter p = sin(theta)/v
 # For a source at x_s, turning depth where p*v_max = 1.
-def diving_ray_x(xs, p, vz):
-    """Return x(z) for a diving ray from source xs with ray parameter p in a v(z) medium."""
-    theta = np.arcsin(np.clip(p * vz, -1, 1))
+def diving_ray_x(xs, p, vz, z):
+    """Return (x, z) arrays for a diving ray from source xs in a v(z) medium.
+
+    The ray is traced downward until p*v(z) approaches 1 (the turning point),
+    then reflected upward.  This avoids the singularity at the turning point
+    and keeps the ray inside the model bounds.
+    """
+    # Turning index: last valid depth before p*vz would exceed 1
+    valid = p * vz < 0.999
+    if not np.any(valid):
+        return np.array([xs]), np.array([z[0]])
+    turn_idx = np.where(valid)[0][-1]
+    if turn_idx < 2:
+        return np.array([xs]), np.array([z[0]])
+
+    theta = np.arcsin(np.clip(p * vz[: turn_idx + 1], -1, 1))
     dx_dz = np.tan(theta)
-    x_ray = np.zeros_like(z)
-    x_ray[0] = xs
-    for i in range(1, len(z)):
+    x_down = np.zeros(turn_idx + 1)
+    x_down[0] = xs
+    for i in range(1, turn_idx + 1):
         dz = z[i] - z[i - 1]
-        x_ray[i] = x_ray[i - 1] + 0.5 * (dx_dz[i] + dx_dz[i - 1]) * dz
-    return x_ray
+        x_down[i] = x_down[i - 1] + 0.5 * (dx_dz[i] + dx_dz[i - 1]) * dz
+
+    x_turn = x_down[-1]
+    # Downward branch + mirrored upward branch (exclude duplicate turning point)
+    z_ray = np.concatenate([z[: turn_idx + 1], z[turn_idx - 1 :: -1]])
+    x_ray = np.concatenate([x_down, 2 * x_turn - x_down[-2 :: -1]])
+
+    return x_ray, z_ray
 
 # 1D starting velocity profile (same at every x)
 vz_start = v0 + k * z
 
-# Choose a few rays
 source_positions = [500, 1500, 2500, 3500]
-p = 1.0 / 1700.0  # turning depth around z ~ 480 m
+# Ray parameters for a few takeoff angles; smaller p = steeper ray, deeper turn.
+ray_specs = [
+    (1.0 / 1462.0, "white", r"$20^{\circ}$"),   # turn ~ z = 385 m
+    (1.0 / 871.0, COLORS[0], r"$35^{\circ}$"),  # turn ~ z = 148 m
+    (1.0 / 653.0, COLORS[1], r"$50^{\circ}$"),  # turn ~ z = 61 m
+]
 
 fig, axes = plt.subplots(1, 2, figsize=(10, 6), dpi=150)
 
 # Starting model with rays
 ax = axes[0]
 im = ax.pcolormesh(X, Z, v_start, shading="auto", cmap="viridis", vmin=400, vmax=2000)
-for xs in source_positions:
-    x_ray = diving_ray_x(xs, p, vz_start)
-    ax.plot(x_ray, z, color="white", lw=0.8, alpha=0.7)
-ax.invert_yaxis()
+for p, color, label in ray_specs:
+    for xs in source_positions:
+        x_ray, z_ray = diving_ray_x(xs, p, vz_start, z)
+        ax.plot(x_ray, z_ray, color=color, lw=1.2, alpha=0.9, label=label if xs == source_positions[0] else "")
+ax.set_xlim(x.min(), x.max())
+ax.set_ylim(z.max(), z.min())
 ax.set_xlabel("Distance (m)")
 ax.set_ylabel("Depth (m)")
 ax.set_title("Starting model and diving rays")
+ax.legend(title="Takeoff angle", loc="lower right", fontsize=8, title_fontsize=8)
 cb = plt.colorbar(im, ax=ax, label="Velocity (m/s)")
 
 # Updated tomographic model
