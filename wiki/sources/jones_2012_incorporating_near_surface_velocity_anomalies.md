@@ -5,10 +5,18 @@ type: journal article
 source_file: papers/statics/Jones - Near Surface.pdf
 language: en
 pages: 12
+lectures:
+  - term03_lec02
 concepts:
   - static_corrections
   - seismic_velocities
   - velocity_analysis
+related_concepts:
+  - static_corrections
+  - seismic_velocities
+  - velocity_analysis
+  - near_surface_velocity_model
+  - migration_datum
 tags: [statics, near-surface, floating-datum, velocity-anomaly, tomography, fwi]
 ---
 

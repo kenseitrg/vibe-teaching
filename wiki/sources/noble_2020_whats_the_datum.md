@@ -5,9 +5,15 @@ type: conference presentation
 source_file: papers/statics/What's the Datum.pdf
 language: en
 pages: 7
+lectures:
+  - term03_lec02
 concepts:
   - static_corrections
   - seismic_velocities
+related_concepts:
+  - static_corrections
+  - seismic_velocities
+  - migration_datum
 tags: [statics, datum, replacement-velocity, floating-datum]
 ---
 

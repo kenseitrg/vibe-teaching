@@ -36,6 +36,11 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Seismic data processing](concepts/seismic_data_processing.md) | Overview, goals, and typical processing flow | draft |
 | [Seismic acquisition](concepts/seismic_acquisition.md) | 2D acquisition essentials, CMP method, parameters | draft |
 | [3D seismic acquisition](concepts/3d_seismic_acquisition.md) | 3D geometry, unit cell, fold, and acquisition parameters | draft |
+| [First-break picking](concepts/first_break_picking.md) | Identifying first-arrival times for refraction statics and QC | draft |
+| [Diving-wave tomography](concepts/diving_wave_tomography.md) | Turning-ray tomography for near-surface velocity models | draft |
+| [Effective velocity](concepts/effective_velocity.md) | Stacking/NMO velocity after static corrections and its biases | draft |
+| [Migration datum](concepts/migration_datum.md) | Reference surface for migration and replacement velocity | draft |
+| [Near-surface velocity model](concepts/near_surface_velocity_model.md) | Shallow velocity model for statics and migration datums | draft |
 | [Common midpoint (CMP)](concepts/common_midpoint.md) | CMP/CDP gather, fold, stacking | draft |
 | [Seismic data sorts](concepts/seismic_data_sorts.md) | Shot, receiver, CMP, offset gathers and their uses | draft |
 | [Cross-spread gather](concepts/cross_spread_gather.md) | 3D gather from one source line and one receiver line | draft |
@@ -73,11 +78,18 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Yilmaz (2001) Vol. 1](sources/yilmaz_2001_seismic_data_analysis_deconvolution.md) | Seismic Data Analysis — deconvolution chapter | textbook | reviewed |
 | [Yilmaz — Practical Seismic Data Analysis, Ch. 1.2–1.3](sources/yilmaz_practical_seismic_data_analysis_amplitude.md) | Practical Seismic Data Analysis — sampling, aliasing, Fourier, amplitude and gain control | textbook | draft |
 | [Hill — Introduction to Seismic Processing, Ch. 21](sources/hill_introduction_to_seismic_processing_ch21.md) | Introduction to Seismic Processing — amplitude correction | textbook | draft |
-| [Brown (2002) — SCAC](sources/brown_2002_surface_consistent_amplitude_correction.md) | Surface Consistent Amplitude Correction training slides | training slides | draft || [Hill & Rüger (2020)](sources/hill_ruger_2020_illustrated_seismic_processing_preimaging.md) | Illustrated Seismic Processing, Vol. 2: Preimaging | textbook | draft |
+| [Brown (2002) — SCAC](sources/brown_2002_surface_consistent_amplitude_correction.md) | Surface Consistent Amplitude Correction training slides | training slides | draft |
+| [Hill & Rüger (2020)](sources/hill_ruger_2020_illustrated_seismic_processing_preimaging.md) | Illustrated Seismic Processing, Vol. 2: Preimaging | textbook | draft |
 | [CGG ODT01 Part 1](sources/cgg_odt01_data_analysis_part1.md) | Data Analysis Part 1: recorded wavefield, shot and CMP gathers | training slides | summarized |
 | [CGG ODT01 Part 2](sources/cgg_odt01_data_analysis_part2.md) | Data Analysis Part 2: 2D/3D geometry, sorts, aliasing, noise/multiples | training slides | summarized |
 | [Noble (2020)](sources/noble_2020_whats_the_datum.md) | What's the Datum? — datums and replacement velocity | conference presentation | reviewed |
 | [Jones (2012)](sources/jones_2012_incorporating_near_surface_velocity_anomalies.md) | Near-surface velocity anomalies in pre-stack depth migration | journal article | reviewed |
+| [Law and Trad (2017)](sources/law_trad_comparison_of_refraction_inversion_methods.md) | Comparison of refraction inversion methods | paper | draft |
+| [Davletkhanov (2017)](sources/davletkhanov_nsm_and_velocity.md) | Near-surface model and velocity | thesis | draft |
+| [Sabbione and Velis (2010)](sources/fbpicking.md) | Automatic first-break picking algorithms | paper | draft |
+| [Sysoev (2011)](sources/sysoev_statics.md) | Statics and kinematic corrections | course notes | draft |
+| [Novokreschin et al. (2021)](sources/velocity_artefacts.md) | Velocity artifacts from near-surface errors | paper | draft |
+| [Term 3 Lecture 2 presentation](sources/term03_lecture02_statics_and_kinematics_presentation.md) | Statics and Kinematics (legacy presentation) | presentation | draft |
 | [Refraction Seismic notes](sources/refraction_seismic_university_notes.md) | Refraction Seismic Method — delay-time methods | course notes | reviewed |
 | [SEG-Y rev 2.0](sources/seg_y_rev2_format.md) | SEG-Y rev 2.0 Data Exchange format | technical standard | draft |
 | [SEG SPS rev 2.1](sources/seg_sps_format_rev21.md) | Shell Processing Support format for 3D surveys | technical standard | draft |
@@ -107,6 +119,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Term 1 Lecture 6 — Single-channel deconvolution](lecture_ready/term01_lec06_single_channel_deconvolution.md) | term01_lec06 | lecture-ready |
 | [Term 1 Lecture 7 — Surface-consistent deconvolution](lecture_ready/term01_lec07_surface_consistent_deconvolution.md) | term01_lec07 | lecture-ready |
 | [Term 3 Lecture 1 — Quality Control of Seismic Processing and Introduction to 3D Seismic Data](lecture_ready/term03_lec01_processing_qc_and_3d_introduction.md) | term03_lec01 | draft |
+| [Term 3 Lecture 2 — Statics and Velocity Modeling](lecture_ready/term03_lec02_statics_and_velocity_modeling.md) | term03_lec02 | draft |
 
 ---
 

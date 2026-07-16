@@ -2,6 +2,43 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-16] ingest | Term 3 Lecture 2 — statics and kinematics sources
+
+Extracted raw text from `wiki/sources/_raw_text/` for Term 3 Lecture 2 (statics and velocity modeling):
+
+- `Bernard Law and Daniel Trad - Comparison of refraction inversion methods.txt`
+- `Davletkhanov_NSM_and_Velocity.txt`
+- `FBPicking.txt`
+- `Steve J Hill - Introduction to Seismic Processing.txt` (Chapter 22 only)
+- `Sysoev_Statics.txt` (Chapters 4 and 5)
+- `velocity_artefacts.txt`
+- `term03_lecture02_statics_and_kinematics.txt`
+
+Created source summary pages:
+
+- `wiki/sources/law_trad_comparison_of_refraction_inversion_methods.md`
+- `wiki/sources/davletkhanov_nsm_and_velocity.md`
+- `wiki/sources/fbpicking.md`
+- `wiki/sources/hill_introduction_to_seismic_processing_ch22.md`
+- `wiki/sources/sysoev_statics.md`
+- `wiki/sources/velocity_artefacts.md`
+- `wiki/sources/term03_lecture02_statics_and_kinematics_presentation.md`
+
+Updated existing source pages:
+
+- `wiki/sources/jones_2012_incorporating_near_surface_velocity_anomalies.md` — added `term03_lec02` to `lectures`; added `near_surface_velocity_model` and `migration_datum` to `related_concepts`.
+- `wiki/sources/noble_2020_whats_the_datum.md` — added `term03_lec02` to `lectures`; added `migration_datum` to `related_concepts`.
+
+Created concept pages for concepts referenced by the new sources:
+
+- `wiki/concepts/first_break_picking.md`
+- `wiki/concepts/diving_wave_tomography.md`
+- `wiki/concepts/effective_velocity.md`
+- `wiki/concepts/migration_datum.md`
+- `wiki/concepts/near_surface_velocity_model.md`
+
+Updated `wiki/index.md` with new concept and source entries. Ran `uv run python scripts/lint_wiki.py`; no issues found.
+
 ## [2026-07-13] figures | Term 3 Lecture 1 — figure-list cleanup
 
 - Generated `figures/term03_lec01/term03_lec01_input_vs_processing_qc.png` with a Russian graphviz flowchart.
