@@ -135,4 +135,8 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | $R_j$ | Receiver amplitude component in SCAC | амплитудная компонента приёмника |
 | $G_k$ | CMP/geology amplitude component in SCAC | амплитудная компонента ОСТ/геологии |
 | $M_l$ | Offset amplitude component in SCAC | амплитудная компонента удаления |
-| $v_\text{near}$ | Near-surface velocity for first-break QC | скорость в верхней части разреза |
+| $v_\text{near}$ | Near-surface velocity for first-break QC | скорость ВЧР (скорость в верхней части разреза) |
+| ВЧР | Near surface / upper part of section | верхняя часть разреза |
+| NSM | Near-surface model | модель ВЧР |
+| FBP | First-break picking | пикирование первых вступлений |
+| Refracted waves | Refracted / head waves | рефрагированные волны |
