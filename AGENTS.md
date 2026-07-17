@@ -140,3 +140,16 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | NSM | Near-surface model | модель ВЧР |
 | FBP | First-break picking | пикирование первых вступлений |
 | Refracted waves | Refracted / head waves | рефрагированные волны |
+| $V_R$ | Rayleigh-wave phase velocity | фазовая скорость поверхностной волны |
+| $c(f)$ | Frequency-dependent phase velocity | фазовая скорость (зависит от частоты) |
+| $U(f)$ | Group velocity | групповая скорость |
+| $V_s$ | Shear-wave velocity | скорость поперечной волны |
+| $V_p$ | Compressional-wave velocity | скорость продольной волны |
+| $\mu$, $\lambda$ | Lamé parameters | параметры Ламе |
+| $\rho$ | Density | плотность |
+| $k$ | Wavenumber | волновое число |
+| $\omega$ | Angular frequency | круговая частота |
+| $D(f)$ | Dispersion curve | дисперсионная кривая |
+| $n$ | Mode number | номер моды |
+| $G(f, c)$, $P(f, c)$ | Dispersion spectrum / FK-MUSIC pseudo-spectrum | спектр дисперсии |
+| $\hat{h}[n]$ | Adaptive filter coefficients | коэффициенты адаптивного фильтра |

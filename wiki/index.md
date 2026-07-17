@@ -59,6 +59,12 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Frequency filtering](concepts/frequency_filtering.md) | Shaping seismic spectra by filter operators | draft |
 | [Discrete Fourier transform](concepts/discrete_fourier_transform.md) | DFT and its properties for sampled seismic data | draft |
 | [Aliasing](concepts/aliasing.md) | Nyquist sampling and alias folding | draft |
+| [Surface waves](concepts/surface_waves.md) | Rayleigh and Love waves, ground roll vs. near-surface signal | draft |
+| [Surface wave dispersion](concepts/surface_wave_dispersion.md) | Phase velocity, group velocity, and layered-medium dispersion | draft |
+| [Surface wave multimodality](concepts/surface_wave_multimodality.md) | Fundamental and higher modes, mode misidentification | draft |
+| [Surface wave inversion](concepts/surface_wave_inversion.md) | MASW/SWI from dispersion curve to S-wave profile | draft |
+| [FK-MUSIC / array analysis](concepts/fk_music_surface_waves.md) | Beamforming, f–k-MUSIC, and high-resolution dispersion imaging | draft |
+| [Adaptive subtraction](concepts/adaptive_subtraction.md) | Model and adaptively subtract surface waves from reflection data | draft |
 
 ## Techniques
 
@@ -101,6 +107,15 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Rüger (1996)](sources/ruger_1996_p_wave_reflectivity_offset_azimuth.md) | Variation of P-wave reflectivity with offset and azimuth in anisotropic media | conference abstract | draft |
 | [Longbottom et al. (1988)](sources/longbottom_1988_maximum_kurtosis_phase_estimation.md) | Principles and application of maximum kurtosis phase estimation | paper | draft |
 | [Li (1999)](sources/li_1999_introduction_to_residual_statics_analysis.md) | Residual statics analysis using prestack equivalent offset migration (Chapters 1–2) | thesis | summarized |
+| [Foti et al. (2011)](sources/foti_surface_wave_methods.md) | Application of Surface-Wave Methods for Seismic Site Characterization | paper | draft |
+| [Foti et al. (2018)](sources/foti_interpacific_guidelines.md) | Guidelines for the good practice of surface wave analysis: a product of the InterPACIFIC project | paper | draft |
+| [Ivanov et al. (2017)](sources/ivanov_hrlrt_masw.md) | Benefits of using the HRLRT with the MASW method | conference abstract | draft |
+| [Novotny (1999)](sources/novotny_seismic_surface_waves.md) | Seismic Surface Waves | lecture notes | draft |
+| [Igel (2007)](sources/sedi_surface_waves.md) | Surface Waves and Free Oscillations | course notes | draft |
+| [Rawlinson (2007)](sources/rawlinson_surface_waves_dispersion.md) | Surface waves and dispersion | lecture notes | draft |
+| [Datta (2018)](sources/datta_2018.md) | On the application of the f-k-MUSIC method to multimode surface wave dispersion | paper | draft |
+| [Priestley (2024)](sources/priestley_surface_wave_practical.md) | Surface Wave Practical | course notes | draft |
+| [Mi et al. (2016)](sources/mi_surface_waves_dispersion_energy.md) | Dispersion energy analysis of Rayleigh and Love waves using finite-difference modeling | paper | draft |
 
 ## Comparisons
 
@@ -120,6 +135,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Term 1 Lecture 7 — Surface-consistent deconvolution](lecture_ready/term01_lec07_surface_consistent_deconvolution.md) | term01_lec07 | lecture-ready |
 | [Term 3 Lecture 1 — Quality Control of Seismic Processing and Introduction to 3D Seismic Data](lecture_ready/term03_lec01_processing_qc_and_3d_introduction.md) | term03_lec01 | draft |
 | [Term 3 Lecture 2 — Statics and Velocity Modeling](lecture_ready/term03_lec02_statics_and_velocity_modeling.md) | term03_lec02 | draft |
+| [Term 3 Lecture 3 — Surface Waves](lecture_ready/term03_lec03_surface_waves.md) | term03_lec03 | draft |
 
 ---
 

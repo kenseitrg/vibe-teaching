@@ -2,6 +2,47 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-17] ingest | Term 3 Lecture 3 — surface-wave sources
+
+Extracted raw text from `papers/surface_waves/` into `wiki/sources/_raw_text/`:
+
+- `Foti - Surface Wave Methods.txt`
+- `Sebastiano Foti - Guidelines for the good practice of surface wave analysis - a product of the InterPACIFIC project.txt`
+- `Julian Ivanov - Benefits of using the high-resolution linear Radon transform with the multichannel analysis of....txt`
+- `Novotny-SeismicSurfaceWaves-ocr.txt`
+- `SEDI Surface Waves.txt`
+- `seismology_lectures.txt`
+- `datta2018.txt`
+- `surface_waves_practical.txt`
+- `surface_waves_dispersion_energy_analysis.txt`
+
+Created source summary pages:
+
+- `wiki/sources/foti_surface_wave_methods.md`
+- `wiki/sources/foti_interpacific_guidelines.md`
+- `wiki/sources/ivanov_hrlrt_masw.md`
+- `wiki/sources/novotny_seismic_surface_waves.md`
+- `wiki/sources/sedi_surface_waves.md`
+- `wiki/sources/rawlinson_surface_waves_dispersion.md`
+- `wiki/sources/datta_2018.md`
+- `wiki/sources/priestley_surface_wave_practical.md`
+- `wiki/sources/mi_surface_waves_dispersion_energy.md`
+
+Created concept pages:
+
+- `wiki/concepts/surface_waves.md`
+- `wiki/concepts/surface_wave_dispersion.md`
+- `wiki/concepts/surface_wave_multimodality.md`
+- `wiki/concepts/surface_wave_inversion.md`
+- `wiki/concepts/fk_music_surface_waves.md`
+- `wiki/concepts/adaptive_subtraction.md`
+
+Created lecture-ready page:
+
+- `wiki/lecture_ready/term03_lec03_surface_waves.md`
+
+Updated `wiki/index.md` with new source, concept, and lecture-ready entries. Ran `uv run python scripts/lint_wiki.py` to validate.
+
 ## [2026-07-16] ingest | Term 3 Lecture 2 — statics and kinematics sources
 
 Extracted raw text from `wiki/sources/_raw_text/` for Term 3 Lecture 2 (statics and velocity modeling):
