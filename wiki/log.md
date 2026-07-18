@@ -2,6 +2,62 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-18] derivation | FK-MUSIC beamforming derivation
+
+Created `lecture_notes/derivations/fk_music_beamforming_derivation.en.md` — full mathematical derivation of the FK-MUSIC method following Datta (2018).
+
+Ten sections:
+1. The beamforming idea (plane-wave model, steering)
+2. Spatial correlation matrix $\mathbf{R} = \mathbf{Y}\mathbf{Y}^\dagger$
+3. Conventional beamformer: $P = \mathbf{e}^\dagger \mathbf{R}\, \mathbf{e}$
+4. Minimum variance (Capon) beamformer: $P_\text{MV} = (\mathbf{e}^\dagger \mathbf{R}^{-1} \mathbf{e})^{-1}$
+5. Eigenanalysis of $\mathbf{R}$
+6. Signal and noise subspaces ($N_s$ signal eigenvectors, $M - N_s$ noise)
+7. From MV to MUSIC: dropping signal subspace, whitening noise eigenvalues
+8. SVD-based implementation (following Datta §2.3.2)
+9. Slant-stack as special case of conventional beamforming
+10. Link to lecture notes
+
+Added reference from `lecture_notes/en/term03_lec03_surface_waves.en.md` §6.4.
+
+## [2026-07-18] lecture-notes | Term 3 Lecture 3 — FK-MUSIC section revised
+
+Revised Section 6 of `lecture_notes/en/term03_lec03_surface_waves.en.md` to follow Datta (2018) more closely.
+
+Changes:
+- Renamed section from "FK-MUSIC" to "Surface-wave analysis" (now covers slant-stack, beamforming, and MUSIC)
+- Added §6.1: shared beamforming idea (cancel propagation phase, stack, sweep)
+- Added §6.2: frequency-domain slant-stack with equation (Datta eq. 1)
+- Added §6.3: correlation matrix framework and conventional beamformer output (Datta §2.3)
+- Rewrote §6.4: MUSIC as adaptive beamforming using noise subspace; signal/noise split from eigenanalysis of $\mathbf{R}$; pseudo-spectrum as inverse noise-subspace projection with "leakage test" intuition
+- Added §6.5: picking with group-velocity windowing for overtone extraction (Datta §3.1, §4.2)
+- Updated §6.6: practical requirements from Datta (array aperture 3-4× wavelength, aliasing, combining events)
+- Added reference to forthcoming `fk_music_beamforming_derivation.en.md`
+
+## [2026-07-18] lecture-notes | Term 3 Lecture 3 — English lecture notes drafted
+
+Created `lecture_notes/en/term03_lec03_surface_waves.en.md` (English lecture notes).
+
+Nine sections following the outline in `lecture_notes/_drafts/term03_lec03_surface_waves_outline.md`:
+
+1. What surface waves are (Rayleigh and Love, particle motion, energy trapping)
+2. Surface waves as noise and as signal (ground roll vs. MASW/SWI)
+3. Dispersion (phase/group velocity, two-layer model, dispersion curve)
+4. Multimodality (modes, depth sensitivity, LVL effects from Mi et al. 2016)
+5. Why conventional attenuation fails
+6. FK-MUSIC analysis (eigenvector decomposition, pseudo-spectrum)
+7. Inversion for near-surface $V_s$ (MASW/SWI workflow, regularization, InterPACIFIC guidelines)
+8. Modeling and adaptive subtraction (Wiener–Hopf normal equations for adaptive filter)
+9. Summary and 10 comprehension questions
+
+Key decisions:
+- Combined derivation file kept as single document (`surface_wave_dispersion_and_multimodality_derivation.en.md`)
+- FK-MUSIC pseudo-spectrum uses normalized form $P = 1 / \| \mathbf{E}_n^H \mathbf{e} \|^2$
+- Adaptive subtraction section includes Wiener–Hopf equation with LHS/RHS explanation
+- Incorporated Foti et al. (2018) InterPACIFIC guidelines and Mi et al. (2016) LVL effects
+
+Added 4 new symbols to `AGENTS.md` notation glossary: steering vector $\mathbf{e}(f, c)$, noise subspace $\mathbf{E}_n$, model autocorrelation matrix $\mathbf{R}_{mm}$, data-model cross-correlation vector $\mathbf{r}_{dm}$.
+
 ## [2026-07-17] ingest | Term 3 Lecture 3 — surface-wave sources
 
 Extracted raw text from `papers/surface_waves/` into `wiki/sources/_raw_text/`:

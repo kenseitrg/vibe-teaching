@@ -52,6 +52,6 @@ Surface waves as both signal and noise: Rayleigh and Love wave physics, dispersi
 
 ## Lecture materials
 
-- English notes: `lecture_notes/en/term03_lec03_surface_waves.en.md` (to be drafted)
+- English notes: `lecture_notes/en/term03_lec03_surface_waves.en.md`
 - Slide outline: `slides/term03/lec03_surface_waves/slide_outline.md` (to be drafted)
 - Exercises: `exercises/term03_lec03_surface_waves.md` (to be drafted)

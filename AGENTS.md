@@ -140,6 +140,8 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | NSM | Near-surface model | модель ВЧР |
 | FBP | First-break picking | пикирование первых вступлений |
 | Refracted waves | Refracted / head waves | рефрагированные волны |
+| Ground roll | Surface-wave train on land records | конус поверхностных волн |
+| Eigenstructure | Eigenvector decomposition of a matrix | набор собственных векторов |
 | $V_R$ | Rayleigh-wave phase velocity | фазовая скорость поверхностной волны |
 | $c(f)$ | Frequency-dependent phase velocity | фазовая скорость (зависит от частоты) |
 | $U(f)$ | Group velocity | групповая скорость |
@@ -153,3 +155,7 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | $n$ | Mode number | номер моды |
 | $G(f, c)$, $P(f, c)$ | Dispersion spectrum / FK-MUSIC pseudo-spectrum | спектр дисперсии |
 | $\hat{h}[n]$ | Adaptive filter coefficients | коэффициенты адаптивного фильтра |
+| $\mathbf{e}(f, c)$ | Steering vector for FK-MUSIC at frequency $f$, test velocity $c$ | направляющий вектор FK-MUSIC |
+| $\mathbf{E}_n$ | Noise subspace of cross-spectral matrix | шумовое подпространство кросспектральной матрицы |
+| $\mathbf{R}_{mm}$ | Autocorrelation matrix of modeled surface wave | автокорреляционная матрица модельной поверхностной волны |
+| $\mathbf{r}_{dm}$ | Cross-correlation vector between data and model | вектор взаимной корреляции данных и модели |
