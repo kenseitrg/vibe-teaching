@@ -2,6 +2,15 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-19] derivation | FK-MUSIC beamforming derivation — Russian translation
+
+Translated `lecture_notes/derivations/fk_music_beamforming_derivation.en.md` to Russian as `lecture_notes/derivations/fk_music_beamforming_derivation.ru.md`.
+
+- All LaTeX formulas preserved verbatim
+- MUSIC acronym kept in Latin (standard in Russian geophysics literature)
+- Terminology aligned with AGENTS.md glossary (направляющий вектор, шумовое подпространство, собственные значения/векторы)
+- Cross-references point to English notes (term03_lec03.ru.md does not yet exist)
+
 ## [2026-07-18] derivation | FK-MUSIC beamforming derivation
 
 Created `lecture_notes/derivations/fk_music_beamforming_derivation.en.md` — full mathematical derivation of the FK-MUSIC method following Datta (2018).
