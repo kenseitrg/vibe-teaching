@@ -59,7 +59,9 @@ Body waves (P and S) spread outward in three dimensions, so their energy decays 
 
 On a typical land shot gather, ground roll appears as a high-amplitude, low-velocity, low-frequency train of energy that fans out from the source. It is often mixed with direct arrivals and air waves. Typical ground-roll velocities range from 100 to 1000 m/s — much slower than P-wave reflections (1500–5000 m/s).
 
-> **Figure idea:** Particle-motion diagrams for Rayleigh (retrograde ellipse in x-z) and Love (horizontal transverse in y); schematic of a shot gather with low-velocity surface-wave train.
+![Particle-motion diagrams](figures/term03_lec03/term03_lec03_particle_motion.png){width=90%}
+
+**Figure 1.** *Particle-motion diagrams for Rayleigh and Love waves. Top: Rayleigh wave — retrograde elliptical motion in the vertical plane (x–z). Bottom: Love wave — horizontal transverse motion (y).*
 
 ## 2. Surface waves as noise and as signal
 
@@ -84,7 +86,9 @@ The same wavefield is processed differently depending on the objective:
 | Near-surface $V_s$ estimation | Signal | Extract dispersion curve, invert |
 
 
-> **Figure idea:** Shot gather with surface waves labeled; same gather after surface-wave removal showing reflections.
+![Ground-roll removal](figures/term03_lec03/term03_lec03_ground_roll_removal.jpg){width=90%}
+
+**Figure 2.** *Ground-roll removal from a land shot gather. Left: input gather with high-amplitude surface waves masking reflections. Right: estimated surface-wave noise model. Center: residual after subtraction, revealing underlying reflections.*
 
 ## 3. Dispersion
 
@@ -119,6 +123,10 @@ For a non-dispersive wave ($dc/d\lambda = 0$), the two are equal. For dispersive
 
 > **Physical picture.** On a dispersive surface-wave record, the individual wiggles in a wave packet travel at the phase velocity, but the bump of energy you actually see travel across the gather moves at the group velocity. When the two differ, the wiggles appear to move through the envelope. See derivation §3 for the formal superposition argument.
 
+![Phase and group velocity](figures/term03_lec03/term03_lec03_phase_and_group_velocity.png){width=90%}
+
+**Figure 3.** *Phase velocity versus group velocity. The envelope of the wave packet travels at the group velocity $U$, while individual crests inside the packet move at the phase velocity $c$. When the medium is dispersive ($c \neq U$), crests appear to migrate through the envelope.*
+
 ### 3.3 Two-layer model intuition
 
 Consider a simple two-layer model:
@@ -150,7 +158,9 @@ $$
 
 with penetration depth scaling roughly with $\lambda$. For a 10 Hz Rayleigh wave at 300 m/s, $\lambda \approx 30$ m, so the wave samples the upper ~30 m.
 
-> **Figure idea:** Dispersion curve for the two-layer model above, showing asymptotes at $V_{R,1}$ and $V_{R,2}$.
+![Dispersion curve](figures/term03_lec03/term03_lec03_dispersion_curve.png){width=90%}
+
+**Figure 4.** *Dispersion curve for a two-layer model. Phase velocity $c(f)$ decreases from the half-space Rayleigh velocity $V_{R,2}$ at low frequencies toward the shallow-layer velocity $V_{R,1}$ at high frequencies. The transition encodes the layer thickness.*
 
 > **Derivation reference.** The formal derivation of the Rayleigh equation, the dispersion relation for a layered medium, and the two-layer numerical example are given in `lecture_notes/derivations/surface_wave_dispersion_and_multimodality_derivation.en.md` §§2–4.
 
@@ -187,7 +197,9 @@ A common pitfall is **mode misidentification**: an energy branch on the dispersi
 
 Misidentified curves can produce large errors in the inverted $V_s$ profile. Analysts should check whether high-frequency energy is continuous along the surface-wave branch; a lack of high-frequency energy may indicate a guided wave rather than a true surface wave.
 
-> **Figure idea:** Two panels: (left) eigenfunctions / depth sensitivity for fundamental and first higher mode; (right) dispersion curves showing two modes with the fundamental and first overtone.
+![Mode depth sensitivity](figures/term03_lec03/term03_lec03_mode_depth_sensitivity.png){width=90%}
+
+**Figure 5.** *Multimodal dispersion and depth sensitivity. Top: phase velocity versus frequency showing the fundamental mode and higher overtones with asymptotic velocities. Bottom: mode eigenfunctions (oscillations versus depth) — the fundamental mode has the simplest depth dependence, while higher modes have progressively more zero crossings.*
 
 > **Derivation reference.** The mathematical origin of modes as discrete roots of the layered dispersion relation is derived in `lecture_notes/derivations/surface_wave_dispersion_and_multimodality_derivation.en.md` §§4–5.
 
@@ -202,8 +214,6 @@ The problem is compounded by:
 - **Near-field effects**: when receivers are close to the source, the surface-wave phase velocity is biased and the wavefield is not yet planar (Foti et al., 2018).
 
 A better approach is to **model** the surface waves from a measured dispersion curve and then **subtract them adaptively**. This preserves the reflection signal because only the predicted surface-wave energy is removed.
-
-> **Figure idea:** Spectrum / amplitude comparison showing overlap of surface-wave band and reflection signal; residual after a naive band-reject filter.
 
 ## 6. Surface-wave analysis
 
@@ -282,7 +292,9 @@ From the InterPACIFIC guidelines (Foti et al., 2018) and Datta (2018):
 - **Time windowing** in the group-velocity domain is essential for extracting higher modes. Different events (earthquakes, shots) illuminate different parts of the multimode dispersion tree; combining results from multiple sources improves coverage (Datta, 2018).
 - **High-resolution methods** (MUSIC, Capon) improve mode separation but can be sensitive to noise and model errors. They should be validated against simpler methods (slant-stack) and used with appropriate array geometry.
 
-> **Figure idea:** Two panels: (left) conventional FK dispersion spectrum (blurry); (right) FK-MUSIC pseudo-spectrum (sharp peaks) with picked dispersion curves overlaid.
+![FK-MUSIC comparison](figures/term03_lec03/term03_lec03_fk_music_comparison.png){width=90%}
+
+**Figure 6.** *Dispersion-spectrum comparison on a real shot gather. Left: input gather and its frequency spectrum. Right: slant-stack, Radon, and FK-MUSIC dispersion spectra — MUSIC produces the sharpest image improving picking accuracy.*
 
 ## 7. Inversion for near-surface $V_s$
 
@@ -331,7 +343,9 @@ The output is a near-surface $V_s$ profile that can be used for:
 - **Static corrections**: the $V_s$ model supplements or replaces the refraction-based near-surface model from Term 3 Lecture 02.
 - **Migration**: a more accurate near-surface velocity model improves prestack depth migration.
 
-> **Figure idea:** Two panels: (left) observed vs. predicted dispersion curve showing the fit; (right) inverted $V_s$ profile with depth.
+![Inversion result](figures/term03_lec03/term03_lec03_inversion_result.png){width=90%}
+
+**Figure 7.** *Surface-wave inversion result. (a) Observed dispersion curve (points) and predicted curve from the best-fit model (line) — the misfit is minimized during inversion. (b) Inverted $V_s$ profile showing shear velocity versus depth, derived from the dispersion curve.*
 
 ## 8. Modeling and adaptive subtraction
 
@@ -392,7 +406,6 @@ If the filter is well designed, the residual contains mostly reflection energy w
 
 The filter length is a regularization choice: it controls how aggressively the algorithm subtracts coherent noise. In practice, the shortest filter that gives acceptable noise removal is preferred.
 
-> **Figure idea:** Three panels: (top) input gather with surface waves; (middle) modeled surface wave; (bottom) residual after adaptive subtraction. Second figure: two panels comparing short vs. long filter effects.
 
 ## 9. Summary
 
