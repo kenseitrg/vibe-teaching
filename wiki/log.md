@@ -2,6 +2,57 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-19] notes | Term 3 Lecture 4 — English lecture notes drafted
+
+- Created `lecture_notes/_drafts/term03_lec04_noise_attenuation_outline.md` — full outline with 90-min timing, 8 sections, 10 figures, 1 derivation doc.
+- Created `lecture_notes/en/term03_lec04_noise_attenuation.en.md` — full English lecture notes (8 sections, 10 figure placeholders, 10 comprehension questions).
+- Added 7 new symbols to `AGENTS.md` notation glossary: $X_n(f)$, $p_x$/$p_y$, $\sigma_i$, $\mathbf{U}$/$\mathbf{V}$, $\mathbf{H}(f)$, $K$.
+- Outline decisions: LIFT brief mention in Section 2, multichannel spectral editing integrated into Section 5 (AAA), sorting trick integrated into Section 5 (AAA).
+- Next steps: FX-deconvolution derivation doc, figure scripts, Russian translation.
+
+## [2026-07-19] ingest | Term 3 Lecture 4 — noise attenuation sources
+
+Created 6 source summary pages for Term 3 Lecture 04 (Noise Attenuation):
+
+- `wiki/sources/nucns.md` — Schlumberger NUCNS SFM technical documentation (f-x fan filters, LS coherent noise estimation, signal protection)
+- `wiki/sources/nucns_best_practice.md` — NUCNS best practice guide for land data (velocity iteration, AGC, adaptive subtraction)
+- `wiki/sources/cadzow_best_practice.md` — Cadzow SFM best practice (rank-reduction/SVD in f-x domain)
+- `wiki/sources/kneppers_basic_geophysics.md` — Kneppers training slides on noise attenuation fundamentals (signal vs noise, FK filtering, muting, deconvolution)
+- `wiki/sources/bormann_wielandt_seismic_signals_noise.md` — Bormann & Wielandt Ch.4 textbook chapter (spectral analysis, seismic/instrumental noise classification, PSDs)
+- `wiki/sources/cgg_odt02_denoise.md` — Combined CGG ODT02 course covering intro, mean/median filters, swell noise, K-filter, linear noise removal (Lift), Tau-P plane wave decomposition
+
+Updated `wiki/index.md` with new source entries.
+
+## [2026-07-19] ingest | Term 3 Lecture 4 — curvelet and f-x deconvolution sources
+
+Created 11 source summary pages for curvelet and f-x deconvolution papers:
+
+**Curvelet papers:**
+- `wiki/sources/hennenfent2006_curvelet_intro.md` — Hennenfent & Herrmann (2006), NFDCT denoising with nonuniform curvelets
+- `wiki/sources/hennenfent2011_interpretative_noise.md` — Hennenfent, Cole & Kustowski (2011), interpreter-guided curvelet attenuation
+- `wiki/sources/herrmann2007_curvelet_multiple_separation.md` — Herrmann et al. (2007), curvelet primary-multiple separation
+- `wiki/sources/kustowski2013_curvelet_model_guided.md` — Kustowski et al. (2013), model-guided curvelet denoising
+- `wiki/sources/demanet_ying_mirror_extended.md` — Demanet & Ying (2007), ME-curvelets for boundary handling
+
+**F-X deconvolution papers:**
+- `wiki/sources/canales1984_fx_decon.md` — Canales (1984), original f-x noise reduction concept
+- `wiki/sources/gulunay1986_fxdecon.md` — Gulunay (1986), FXDECON practical implementation
+- `wiki/sources/abma1995_lateral_prediction.md` — Abma & Claerbout (1995), f-x vs t-x comparison
+- `wiki/sources/treitel1974_complex_wiener.md` — Treitel (1974), complex Wiener filter theory
+
+**Russian-language papers:**
+- `wiki/sources/denisov_finikov_2009.md` — Денисов & Фиников (2009), f-x deconvolution paradoxes (language: ru)
+- `wiki/sources/denisov_finikov_2010.md` — Денисов & Фиников (2010), f-x algorithm features (language: ru)
+
+Updated concept pages:
+- `wiki/concepts/curvelet_transform.md` — added Demanet & Ying to sources
+- `wiki/concepts/fx_deconvolution.md` — added Treitel (1974) and Denisov & Finikov (2009) to sources
+- `wiki/concepts/wiener_filter.md` — added Treitel (1974) to sources
+
+Fixed concept references in source frontmatters (`noise_attenuation` → `seismic_noise`).
+
+Updated `wiki/index.md` with all 11 new source entries. Ran `uv run python scripts/lint_wiki.py`; no new errors.
+
 ## [2026-07-19] derivation | FK-MUSIC beamforming derivation — Russian translation
 
 Translated `lecture_notes/derivations/fk_music_beamforming_derivation.en.md` to Russian as `lecture_notes/derivations/fk_music_beamforming_derivation.ru.md`.

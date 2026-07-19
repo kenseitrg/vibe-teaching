@@ -116,6 +116,23 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Datta (2018)](sources/datta_2018.md) | On the application of the f-k-MUSIC method to multimode surface wave dispersion | paper | draft |
 | [Priestley (2024)](sources/priestley_surface_wave_practical.md) | Surface Wave Practical | course notes | draft |
 | [Mi et al. (2016)](sources/mi_surface_waves_dispersion_energy.md) | Dispersion energy analysis of Rayleigh and Love waves using finite-difference modeling | paper | draft |
+| [NUCNS (2020)](sources/nucns.md) | Non-Uniform Coherent Noise Suppression — SFM technical documentation | technical documentation | draft |
+| [NUCNS Best Practice (2018)](sources/nucns_best_practice.md) | NUCNS SFM Best Practice — coherent noise suppression for land data | best practice guide | draft |
+| [Cadzow Best Practice (2017)](sources/cadzow_best_practice.md) | Cadzow SFM Best Practice — rank-reduction noise suppression | best practice guide | draft |
+| [Kneppers](sources/kneppers_basic_geophysics.md) | Basic Geophysics — noise attenuation training slides | training slides | draft |
+| [Bormann & Wielandt (2013)](sources/bormann_wielandt_seismic_signals_noise.md) | Seismic Signals and Noise — NMSOP Ch. 4 | textbook chapter | draft |
+| [CGG ODT02 (2016)](sources/cgg_odt02_denoise.md) | ODT02 De-noise — marine noise attenuation course (6 parts) | training slides | draft |
+| [Hennenfent & Herrmann (2006)](sources/hennenfent2006_curvelet_intro.md) | Seismic Denoising with Nonuniformly Sampled Curvelets | paper | draft |
+| [Hennenfent et al. (2011)](sources/hennenfent2011_interpretative_noise.md) | Interpretative Noise Attenuation in the Curvelet Domain | paper | draft |
+| [Herrmann et al. (2007)](sources/herrmann2007_curvelet_multiple_separation.md) | Non-linear Primary-Multiple Separation with Directional Curvelet Frames | paper | draft |
+| [Kustowski et al. (2013)](sources/kustowski2013_curvelet_model_guided.md) | Curvelet Noise Attenuation Guided by a Signal or Noise Model | paper | draft |
+| [Demanet & Ying (2007)](sources/demanet_ying_mirror_extended.md) | Curvelets and Wave Atoms for Mirror-Extended Images | preprint | draft |
+| [Canales (1984)](sources/canales1984_fx_decon.md) | Random Noise Reduction | paper | draft |
+| [Gulunay (1986)](sources/gulunay1986_fxdecon.md) | FXDECON — Frequency Domain Complex Prediction | paper | draft |
+| [Abma & Claerbout (1995)](sources/abma1995_lateral_prediction.md) | Lateral Prediction for Noise Attenuation by t-x and f-x Techniques | paper | draft |
+| [Treitel (1974)](sources/treitel1974_complex_wiener.md) | The Complex Wiener Filter | paper | draft |
+| [Денисов & Фиников (2009)](sources/denisov_finikov_2009.md) | Парадоксы f-x деконволюции | conference paper (ru) | draft |
+| [Денисов & Фиников (2010)](sources/denisov_finikov_2010.md) | Особенности алгоритма f-x деконволюции | journal article (ru) | draft |
 
 ## Comparisons
 

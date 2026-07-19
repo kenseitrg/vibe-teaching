@@ -8,6 +8,7 @@ sources:
   - hatton_worthington_makin_1986_seismic_data_processing
   - margrave_2006_methods_of_seismic_data_processing
   - yilmaz_2001_seismic_data_analysis_deconvolution
+  - treitel1974_complex_wiener
 tags: [deconvolution, wiener-filter, least-squares, autocorrelation]
 ---
 
@@ -85,3 +86,4 @@ The autocorrelation matrix is Toeplitz and symmetric, so the system can be solve
 - [Hatton, Worthington & Makin (1986)](../sources/hatton_worthington_makin_1986_seismic_data_processing.md)
 - [Margrave (2006)](../sources/margrave_2006_methods_of_seismic_data_processing.md)
 - [Yilmaz (2001)](../sources/yilmaz_2001_seismic_data_analysis_deconvolution.md)
+- [Treitel (1974)](../sources/treitel1974_complex_wiener.md)

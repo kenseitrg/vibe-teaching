@@ -159,3 +159,9 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | $\mathbf{E}_n$ | Noise subspace of cross-spectral matrix | шумовое подпространство кросспектральной матрицы |
 | $\mathbf{R}_{mm}$ | Autocorrelation matrix of modeled surface wave | автокорреляционная матрица модельной поверхностной волны |
 | $\mathbf{r}_{dm}$ | Cross-correlation vector between data and model | вектор взаимной корреляции данных и модели |
+| $X_n(f)$ | Complex amplitude at frequency $f$, trace $n$ | комплексная амплитуда на частоте $f$, трасса $n$ |
+| $p_x$, $p_y$ | Slowness components in $x$ and $y$ | компоненты медленности |
+| $\sigma_i$ | $i$-th singular value | $i$-е сингулярное число |
+| $\mathbf{U}$, $\mathbf{V}$ | Left and right singular vector matrices | матрицы левых и правых сингулярных векторов |
+| $\mathbf{H}(f)$ | Hankel matrix at frequency $f$ | матрица Ганкеля на частоте $f$ |
+| $K$ | Rank truncation parameter | параметр усечения ранга |
