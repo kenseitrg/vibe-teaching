@@ -17,7 +17,7 @@ Lecture 06.
 
 ## 1. Signal model: linear events in the $t$-$x$ domain
 
-Consider an ensemble of $M$ seismic traces (a shot gather or a CMP gather).
+Consider an ensemble of $M$ seismic traces (a stacked section or a common offset gather).
 Following Canales (1984), model the data as a sum of $P$ events, each a
 wavelet $w_j(t)$ delayed by a moveout function $\tau_j(x)$:
 
@@ -36,8 +36,7 @@ $$
 $$
 
 where $p_j = \Delta t / \Delta x = 1 / v_{\text{app},j}$ is the slope (dip) of
-event $j$ — the reciprocal of its apparent velocity. Real reflections are
-hyperbolic, not linear, but any smooth curve is locally linear if the window
+event $j$ — the reciprocal of its apparent velocity. Real reflections can have a complex shape, but any smooth curve is locally linear if the window
 is small enough. This is why FX-deconvolution is always applied in windows.
 
 ---
@@ -365,7 +364,7 @@ Each frequency is filtered independently, with $K$ spatial coefficients per
 frequency. Abma & Claerbout (1995) observed that when the collection of
 per-frequency filters is transformed back to the $t$-$x$ domain, they combine
 into a **single 2-D prediction operator whose time length equals the full
-trace length**:
+window length**:
 
 - The operator has as many free coefficients in time as the data have
   samples.

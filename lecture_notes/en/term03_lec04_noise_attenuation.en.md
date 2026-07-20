@@ -28,7 +28,7 @@ By the end of this lecture you should be able to:
 
 ## 0. Why this lecture matters
 
-In Term 2 we learned how to use FK and tau-P transforms to separate signal from noise. A shot gather goes in, a transform is applied, and in the new domain the signal and noise occupy different regions — in principle. In practice, the separation is never perfect. Coherent noise leaks through fan filters, curved events do not map to clean lines in tau-P, and random noise fills the entire transform domain, invisible to any dip-based method.
+In Term 2 we learned how to use FK and tau-P transforms to separate signal from noise. A seismic gather gather goes in, a transform is applied, and in the new domain the signal and noise occupy different regions — in principle. In practice, the separation is never perfect. Coherent noise leaks through fan filters, curved events do not map to clean lines in tau-P, and random noise fills the entire transform domain, invisible to any dip-based method.
 
 Modern processing uses specialized algorithms designed for these limitations. This lecture covers five widely used examples: **NUCNS** for coherent noise on irregular 3D land data, **curvelet-domain thresholding** for both coherent and random noise, **frequency-dependent median filtering (AAA)** for anomalous amplitude bursts, **FX-deconvolution** for random noise via spatial prediction, and **SVD/Cadzow filtering** for random and stationary noise via rank reduction. Each exploits a different mathematical property of signal vs. noise. Understanding when each works — and when it fails — is essential for choosing the right tool.
 
@@ -65,21 +65,21 @@ The signal-to-noise ratio is:
 
 $$ \text{SNR} = \frac{\text{signal power}}{\text{noise power}} $$
 
-Stacking $N$ traces improves SNR by $\sqrt{N}$ for uncorrelated noise. This is why high-fold 3D acquisition is so effective at suppressing random noise — but stacking also mixes amplitudes and destroys the true amplitude relationships needed for AVO and inversion.
+Stacking $N$ traces improves SNR by $\sqrt{N}$ for uncorrelated noise. This is why high-fold 3D acquisition is so effective at suppressing random noise — but stacking also mixes amplitudes and can affect the true amplitude relationships needed for AVO and inversion.
 
 ### 1.4 No free lunch
 
 There is no algorithm that removes all noise without affecting the signal:
 
-- Aggressive denoising creates processing artefacts that look like geology but are not.
+- Aggressive denoising creates processing artefacts that can look like geology but are not.
 - Subtle noise that survives processing degrades velocity analysis, AVO, and inversion.
 - Every method has a parameter (threshold, filter length, rank) that trades noise removal against signal preservation.
 
 Before applying noise attenuation, correct for acquisition-related variations: statics, velocities, and surface-consistent amplitudes (SCAC). If these are not removed first, the noise attenuation algorithm will try to model them as noise and fail.
 
-![Shot gather with labeled noise types](figures/term03_lec04/term03_lec04_noise_types.png){width=90%}
+![Shot gathers from different surveys showing common noise types](figures/term03_lec04/term03_lec04_noise_types.png){width=90%}
 
-**Figure 1.** *A land shot gather showing different noise types. Coherent noise: ground-roll cone (low velocity, dispersive), refracted arrival (linear, high velocity), air wave. Random noise: background ambient noise and isolated spikes. The reflection hyperbolas are the signal.*
+**Figure 1.** *Five shot gathers from different survey environments illustrating common noise types seen in field records.*
 
 ## 2. Why transforms are not enough
 
@@ -99,18 +99,18 @@ Several factors make transform-based separation imperfect:
 - **Curved events**: real reflections are hyperbolic, not linear. In tau-P, a hyperbola maps to a curve, not a point — the separation is only approximate.
 - **Random noise**: fills the entire FK plane uniformly. No dip filter can isolate it.
 
-![FK spectrum showing overlap](figures/term03_lec04/term03_lec04_fk_overlap.png){width=90%}
+![Schematic FK plane showing signal/noise overlap](figures/term03_lec04/term03_lec04_fk_overlap.png){width=90%}
 
-**Figure 2.** *Left: shot gather with reflections and ground roll. Right: FK spectrum. The ground-roll cone (red dashed) and the reflection region (blue dashed) overlap at low frequencies. A fan filter along the red line would remove both noise and some signal.*
+**Figure 2.** *Schematic FK plane. Reflection energy forms a fan around the f-axis that opens toward low apparent velocities, because steeply dipping events and far-offset flanks have small moveout slopes. Ground roll occupies a broad cone at low velocities, widened by dispersion. Where the two overlap (red), no dip filter can separate them: the fan filter shown either loses signal (hatched) or lets noise leak through. Random noise (grey speckle) fills the entire plane and cannot be isolated by dip.*
 
 ### 2.3 Two strategies for modern algorithms
 
 Given these limitations, modern noise attenuation algorithms follow one of two strategies:
 
-1. **Model the noise** and subtract it. Examples: NUCNS (Section 3), adaptive subtraction (Term 3 Lecture 03). The idea is to build a model of the noise wavefield, then subtract it adaptively.
-2. **Model the signal** as sparse or predictable, and keep it. Examples: curvelet thresholding (Section 4), FX-deconvolution (Section 6), SVD filtering (Section 7). The idea is to find a domain where the signal is simple and the noise is not.
+1. **Model the noise** and subtract it. Examples: NUCNS, SWAMI with adaptive subtraction. The idea is to build a model of the noise wavefield, then subtract it adaptively.
+2. **Model the signal** as sparse or predictable, and keep it. Examples: curvelet thresholding, FX-deconvolution, SVD filtering. The idea is to find a domain where the signal is simple and the noise is not.
 
-A brief mention of **LIFT** (Linear Filtering): this approach models the signal (or the noise) and subtracts it from the data, treating the residual as the complementary part. It is the same adaptive-subtraction idea from Term 3 Lecture 03, applied to general coherent noise rather than surface waves specifically.
+ **LIFT** (Signal protection techniques): this approach models the signal (or the noise) and subtracts it from the data, treating the residual as the sum of leftover signal and noise. Signal is removed from the residual with some kind of filtering or thresholding. Remaining part of residual is then subtracted from the input data, which allows to preserve more signal with a cost of attenuating less noise.
 
 ## 3. NUCNS: coherent noise on non-uniform data
 
@@ -139,7 +139,7 @@ where $p_x$ and $p_y$ are slownesses in the $x$ and $y$ directions, $A_i$ is an 
 
 ![NUCNS fan-filter concept](figures/term03_lec04/term03_lec04_nucns_concept.png){width=90%}
 
-**Figure 3.** *NUCNS concept. Left: a cross-spread gather with ground roll. Center: 3D FK spectrum showing fan-filter bands (each band isolates a velocity range). Right: estimated noise model (top) and residual after subtraction (bottom).*
+**Figure 3.** *NUCNS concept. A cross-spread gather with ground roll.  3D FK spectrum showing fan-filter bands (each band isolates a velocity range). Estimated noise model doesn't have to be spatially uniform.*
 
 ### 3.4 Limitations
 
@@ -190,7 +190,7 @@ Advantages:
 
 - Handles curved events, not just linear dips.
 - Preserves amplitude and phase better than boxcar FK filters.
-- Works with irregular sampling (curvelets are frame elements, not tied to grid points).
+- Works better than conventional transforms with irregular sampling (curvelets are frame elements, not tied to grid points).
 
 Limitations:
 
@@ -200,7 +200,7 @@ Limitations:
 
 ![Curvelet denoising before/after](figures/term03_lec04/term03_lec04_curvelet_denoising.png){width=90%}
 
-**Figure 5.** *Curvelet denoising example. Left: noisy shot gather. Right: after curvelet thresholding. Random noise is suppressed while reflection continuity and amplitude are preserved.*
+**Figure 5.** *CMP gathers before (top) and after (bottom) curvelet-domain noise attenuation. Random noise is suppressed while reflection continuity is preserved.*
 
 ## 5. Frequency-dependent median filtering (AAA)
 
@@ -235,13 +235,13 @@ The window must also follow the data kinematics — flatten the data first so th
 AAA is designed for random, trace-localized noise. But it can also target coherent noise if the data are sorted so that the noise appears isolated. For example:
 
 - Ground roll in **shot sort** is coherent: every trace has it, so no trace is anomalous.
-- The same ground roll in **CMP sort** or **random sort** appears as scattered large amplitudes on isolated traces — perfect for median-based detection.
+- The same ground roll in **random sort** appears as scattered large amplitudes on isolated traces — perfect for median-based detection.
 
 The choice of sort determines what looks "anomalous." This is a powerful idea: by re-sorting, you can turn a coherent-noise problem into a random-noise problem.
 
 ### 5.6 AVO risk
 
-Over-aggressive AAA can destroy legitimate **amplitude-variation-with-offset (AVO)** trends. A real AVO gradient causes amplitudes to vary systematically with offset — AAA may mistake this for anomalous noise. The solution is to apply AAA before AVO-sensitive processing, or to use a wide enough threshold that the AVO trend is preserved.
+Over-aggressive AAA can destroy legitimate **amplitude-variation-with-offset (AVO)** trends. A real AVO gradient causes amplitudes to vary systematically with offset — AAA may mistake this for anomalous noise. The solution is to use a wide enough threshold that the AVO trend is preserved.
 
 ### 5.7 Related methods
 
@@ -250,9 +250,9 @@ Over-aggressive AAA can destroy legitimate **amplitude-variation-with-offset (AV
 
 The hierarchy is roughly AMPSCAL < TFCLEAN < AAA in sophistication and frequency selectivity.
 
-![AAA median filter](figures/term03_lec04/term03_lec04_aaa_median.png){width=90%}
+![AAA median filter concept](figures/term03_lec04/term03_lec04_aaa_median.png){width=90%}
 
-**Figure 6.** *Frequency-dependent median filtering. Left: amplitude spectra of 10 traces at a single frequency, showing one anomalous trace (red) far above the median (dashed line). Right: after AAA, the anomalous trace is scaled toward the median while normal traces are unaffected.*
+**Figure 6.** *Frequency-dependent median filter (AAA) concept. Top: traces within a frequency band — the anomalous trace (red) has abnormally high energy relative to the rest of the traces. Bottom: energy levels per trace with the median threshold; the outlier trace is scaled down while normal traces are preserved.*
 
 ## 6. FX-deconvolution
 
@@ -300,9 +300,9 @@ Practical solutions:
 - **Flatten the data**: apply NMO before FX-deconvolution so that reflections are approximately horizontal (zero dip). This minimizes the dip variation within any window.
 - **Time-varying windows**: split the trace into overlapping time gates and design a separate PEF for each gate.
 
-![FX-decon prediction schematic](figures/term03_lec04/term03_lec04_fx_decon_schematic.png){width=90%}
+![FX-decon principle schematic](figures/term03_lec04/term03_lec04_fx_decon_schematic.png){width=90%}
 
-**Figure 7.** *FX-deconvolution principle. Left: three traces with a linear dipping event (blue) and random noise. At each frequency, the complex amplitude of the dipping event rotates by a constant phase increment from trace to trace — a complex exponential (right, top). Random noise has no predictable phase pattern (right, bottom). The PEF captures the exponential and leaves the noise.*
+**Figure 7.** *FX-deconvolution principle. Left: several traces with a linear dipping event (blue) and random noise. At each frequency, the complex amplitude of the dipping event rotates by a constant phase increment from trace to trace — a complex exponential (right, top). Random noise has no predictable phase pattern (right, bottom). The PEF captures the exponential and leaves the noise.*
 
 ### 6.5 Extensions
 
@@ -312,7 +312,7 @@ Practical solutions:
 
 ![FX-decon before/after](figures/term03_lec04/term03_lec04_fx_decon_result.png){width=90%}
 
-**Figure 8.** *FX-deconvolution result. Left: noisy CMP gather (after NMO). Right: after FX-deconvolution. Random noise is suppressed, reflection continuity is improved, and the amplitude character of the reflections is preserved.*
+**Figure 8.** *Stacked section before (left) and after (right) FX-deconvolution. Random noise is suppressed, reflection continuity and structural detail are improved, and the amplitude character of the reflections is preserved.*
 
 > **Derivation reference.** The full derivation from the linear event model through the complex Wiener filter to the prediction-error filter is in `lecture_notes/derivations/fx_deconvolution_derivation.en.md`.
 
@@ -374,9 +374,9 @@ The Karhunen-Loève (KL) transform decomposes the data into uncorrelated random 
 
 **Figure 9.** *SVD rank truncation. Left: singular-value spectrum showing a clear knee between signal (large values) and noise (small values). Right: denoised gather after keeping only the top 3 singular values.*
 
-![Cadzow Hankel matrix](figures/term03_lec04/term03_lec04_cadzow_hankel.png){width=90%}
+![Cadzow / Hankel-SVD filtering scheme](figures/term03_lec04/term03_lec04_cadzow_hankel.png){width=90%}
 
-**Figure 10.** *Cadzow filtering. Top: a Hankel matrix formed from a spatial sequence of complex amplitudes. The constant anti-diagonals enforce the prediction property. Bottom: a single plane wave produces a rank-1 Hankel matrix (all energy in one singular value); random noise spreads energy across all singular values.*
+**Figure 10.** *Cadzow filtering step-by-step scheme. (1) Input spatial sequence of complex amplitudes from the F-X domain. (2) Form a Hankel matrix with constant anti-diagonals enforcing the linear-prediction property. (3) Compute the SVD: signal energy concentrates in the first singular values, noise spreads across all. (4) Truncate to rank K (keep signal subspace). (5) Reconstruct by anti-diagonal averaging. (6) Output denoised sequence.*
 
 ## 8. Summary
 
