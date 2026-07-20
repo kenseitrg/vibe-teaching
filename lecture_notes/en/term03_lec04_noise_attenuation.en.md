@@ -372,7 +372,7 @@ The Karhunen-Loève (KL) transform decomposes the data into uncorrelated random 
 
 ![SVD rank truncation](figures/term03_lec04/term03_lec04_svd_rank_truncation.png){width=90%}
 
-**Figure 9.** *SVD rank truncation. Left: singular-value spectrum showing a clear knee between signal (large values) and noise (small values). Right: denoised gather after keeping only the top 3 singular values.*
+**Figure 9.** *SVD rank truncation. (a) Noisy synthetic gather with three flat reflection events. (b) Singular-value spectrum on a log scale, showing a clear knee: three large signal singular values followed by a noise floor. (c) Denoised gather after keeping only the top 3 singular values — the signal is recovered while random noise is suppressed.*
 
 ![Cadzow / Hankel-SVD filtering scheme](figures/term03_lec04/term03_lec04_cadzow_hankel.png){width=90%}
 
