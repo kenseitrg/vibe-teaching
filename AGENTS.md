@@ -163,5 +163,6 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | $p_x$, $p_y$ | Slowness components in $x$ and $y$ | компоненты медленности |
 | $\sigma_i$ | $i$-th singular value | $i$-е сингулярное число |
 | $\mathbf{U}$, $\mathbf{V}$ | Left and right singular vector matrices | матрицы левых и правых сингулярных векторов |
+| $\boldsymbol{\Sigma}$ | Diagonal matrix of singular values | диагональная матрица сингулярных чисел |
 | $\mathbf{H}(f)$ | Hankel matrix at frequency $f$ | матрица Ганкеля на частоте $f$ |
 | $K$ | Rank truncation parameter | параметр усечения ранга |

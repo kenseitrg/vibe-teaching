@@ -2,6 +2,16 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-22] derivation | SVD primer for seismic noise attenuation
+
+Created `lecture_notes/derivations/svd_primer_derivation.en.md` — a short, self-contained primer on the singular value decomposition for students who need it for rank-reduction noise attenuation.
+
+- Follows Strang, *Introduction to Linear Algebra*, Chapter 7 (Sections 7.1 and 7.2), with Strang's worked Example 3 (`A = [3 0; 4 5]`) carried through in full.
+- Covers: rank-one decomposition, the full theorem `A = U Σ V^T`, connection to `A^T A` and `A A^T`, low-rank approximation, geometric interpretation, and application to SVD-based noise attenuation of a CMP gather.
+- Notation aligned with project glossary: bold matrices `U`, `V`, `Σ`, bold vectors `u_i`, `v_i`, italic singular values `σ_i`.
+- Added `Σ` (diagonal matrix of singular values) to the notation glossary in `AGENTS.md`.
+- PDF rendering will be done once the document is reviewed.
+
 ## [2026-07-19] notes | Term 3 Lecture 4 — English lecture notes drafted
 
 - Created `lecture_notes/_drafts/term03_lec04_noise_attenuation_outline.md` — full outline with 90-min timing, 8 sections, 10 figures, 1 derivation doc.
