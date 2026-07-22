@@ -1,1 +1,0 @@
-All diagnostics confirmed. Here is the final acceptance report.

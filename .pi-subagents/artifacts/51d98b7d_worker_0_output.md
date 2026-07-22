@@ -1,1 +1,0 @@
-All edits are applied, the script runs cleanly, and all diagnostics meet the targets. Here's the structured acceptance report:
