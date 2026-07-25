@@ -13,11 +13,11 @@ By the end of this lecture you should be able to:
 
 - Define broadband seismic data in terms of octave count and explain why 6+ octaves are desirable.
 - Calculate ghost notch frequencies for a given source or receiver depth and explain how they limit bandwidth.
-- Describe the marine processing chain: de-bubble → designature → deghosting, and explain why the order matters.
+- Describe the marine processing chain: de-bubble → deghosting → designature, and explain why the order matters.
 - Compare at least three modern deghosting methods (bootstrap, dual-sensor, variable-depth streamer, sparse, low-frequency) and state the key advantage of each.
 - Explain why land data is harder to deconvolve than marine data and identify the four main challenges.
 - Describe the MBWP wavelet model, its two free parameters (Q and S/N), and how it corrects non-minimum-phase residuals that surface-consistent deconvolution cannot address.
-- Explain why conventional surface-consistent deconvolution fails in foothill environments and how robust L1/L2 optimization solves the problem.
+- Explain why conventional surface-consistent deconvolution fails when the near-surface is complex and the signal-to-noise ratio is relatively low, and how robust L1/L2 optimization solves the problem.
 
 ## Prerequisites
 
@@ -30,9 +30,9 @@ By the end of this lecture you should be able to:
 
 In Term 1 we learned that deconvolution reshapes the embedded wavelet to sharpen reflections. But conventional deconvolution — whether statistical (spiking, predictive) or surface-consistent — operates on a wavelet that is already band-limited by ghosts, bubble energy, absorption, and instrument effects. It can compress what is there, but it cannot create what is missing.
 
-Modern seismic exploration demands more. Subtle stratigraphic traps, thin reservoirs, and complex lithologies require seismic images with 6+ octaves of usable bandwidth — roughly 1–64 Hz, compared to the 2–3 octaves (e.g., 10–60 Hz) typical of conventional data. Achieving this requires **advanced deconvolution techniques** that explicitly model and remove each wavelet component: the source bubble, the ghost notches, the absorption, the detector response.
+Modern seismic exploration demands more. Subtle stratigraphic traps, thin reservoirs, and complex lithologies require seismic images with 6+ octaves of usable bandwidth — roughly 2-128 Hz, compared to the 2–3 octaves (e.g., 10–60 Hz) typical of conventional data. Achieving this requires **advanced deconvolution techniques** that explicitly model and remove each wavelet component: the source bubble, the ghost notches, the absorption, the detector response.
 
-This lecture covers two complementary domains. For **marine data**, we follow the processing chain de-bubble → designature → deghosting, which attacks the source and receiver wavelet components in sequence. For **land data**, where the wavelet is more complex and less consistent, we introduce **Model-Based Wavelet Processing (MBWP)** — a method that assembles the wavelet from physical components (source, Q, detector, instrument) and corrects non-minimum-phase residuals that no statistical method can reach. We close with **robust surface-consistent deconvolution**, which extends the classical decomposition to handle the inconsistent noise found in foothill and mountain areas.
+This lecture covers two complementary domains. For **marine data**, we follow the processing chain de-bubble → deghosting → designature, which attacks the source and receiver wavelet components in sequence. For **land data**, where the wavelet is more complex and less consistent, we introduce **Model-Based Wavelet Processing (MBWP)** — a method that assembles the wavelet from physical components (source, Q, detector, instrument) and corrects non-minimum-phase residuals that no statistical method can reach. We close with **robust surface-consistent deconvolution**, which extends the classical decomposition to handle the inconsistent noise that appears whenever the near-surface is complex and the signal-to-noise ratio is relatively low — a situation typical of foothill and mountain surveys, but not limited to them.
 
 ## 1. Introduction to broadband seismic
 
@@ -40,24 +40,26 @@ This lecture covers two complementary domains. For **marine data**, we follow th
 
 Broadband seismic data is defined by the number of **octaves** of usable bandwidth:
 
-$$ N_\text{octaves} = \log_2\left(\frac{f_\max}{f_\min}\right) $$
+$$ N_\text{octaves} = \log_2\left(\frac{f_{\max}}{f_{\min}}\right) $$
 
-An octave is a factor of two in frequency. Conventional marine data typically spans 10–60 Hz — about 2.6 octaves. Broadband data targets 1–64 Hz — about 6 octaves. The difference is dramatic:
+An octave is a factor of two in frequency. Conventional marine data typically spans 10–60 Hz — about 2.6 octaves. Broadband data targets 2-128 Hz — about 6 octaves. The difference is dramatic:
 
 | Data type | Bandwidth | Octaves | Wavelet character |
 |-----------|-----------|---------|-------------------|
 | Conventional | 10–60 Hz | ~2.6 | Oscillatory, strong side lobes |
-| Broadband | 1–64 Hz | 6 | Sharp, impulsive, minimal side lobes |
+| Broadband | 2-128 Hz | 6 | Sharp, impulsive, minimal side lobes |
 
 Why octaves? Because the wavelet's **side lobe amplitude** is controlled by relative bandwidth (octave count), not absolute bandwidth. High frequencies control the central lobe width (resolution); low frequencies control the side lobe amplitude (isolation). A 6-octave wavelet has dramatically lower side lobes than a 3-octave wavelet, even if both have the same highest frequency.
 
 The wavelet lobe width follows:
 
-$$ L_w \propto \frac{2}{f_\max - f_\min} $$
+$$ L_w \propto \frac{2}{f_{\max} - f_{\min}} $$
 
-So extending the low end from 10 Hz to 1 Hz — while keeping $f_\max = 60$ Hz — narrows the lobe from $2/50 = 0.04$ s to $2/59 \approx 0.034$ s. More importantly, it suppresses the ringing side lobes that mask thin beds and subtle impedance contrasts.
+So extending the low end from 10 Hz to 1 Hz — while keeping $f_{\max} = 60$ Hz — narrows the lobe from $2/50 = 0.04$ s to $2/59 \approx 0.034$ s. More importantly, it suppresses the ringing side lobes that mask thin beds and subtle impedance contrasts.
 
-**Figure 1.** *Wavelet comparison across octave counts. Three zero-phase wavelets (2, 3, and 6 octaves) shown in time domain with their amplitude spectra. More octaves produce a sharper central peak and lower side lobes.*
+![](figures/term03_lec05/term03_lec05_wavelet_octave_comparison.png){width=90%}
+
+**Figure 1.** *Wavelet comparison across octave counts. Three zero-phase Ormsby wavelets (2, 3, and 6 octaves) that share the same 64-80 Hz high end, shown in the time domain with their amplitude spectra. Because the high frequencies are identical, the central-lobe width (vertical resolution) barely changes; adding low octaves instead collapses the side lobes, improving event isolation. This is the visual signature of broadband data.*
 
 ### 1.2 Benefits of broadband data
 
@@ -69,37 +71,9 @@ Broader bandwidth improves every downstream task:
 - **AVO.** Ghost removal produces more consistent amplitude-versus-offset behavior, because the ghost modulation varies with angle and contaminates the true AVO response.
 - **Deep imaging.** Low frequencies are less affected by absorption ($A \propto e^{-\pi f t / Q}$), so they penetrate deeper through attenuative layers (salt, basalt, chalk).
 
-**Figure 2.** *Benefits of broadband data. A schematic showing how wavelet sharpness translates through interpretation, inversion, and AVO analysis.*
+![](figures/term03_lec05/term03_lec05_bandwidth_resolution.png){width=90%}
 
-### 1.3 The bandwidth problem: ghost notches
-
-What limits the bandwidth of conventional marine data? The primary culprit is the **ghost** — a reflection from the sea surface that arrives shortly after the primary signal with opposite polarity.
-
-Consider a source at depth $d_s$ below the sea surface. The direct downgoing wave is accompanied by an upgoing reflection from the sea surface (reflection coefficient $R \approx -1$). This creates a ghost arrival delayed by:
-
-$$ \Delta t_s = \frac{2 d_s \cos\theta}{v_w} $$
-
-where $\theta$ is the propagation angle and $v_w \approx 1500$ m/s is the water velocity. The same effect occurs at the receiver (streamer at depth $d_r$):
-
-$$ \Delta t_r = \frac{2 d_r \cos\theta}{v_w} $$
-
-In the frequency domain, the ghost acts as a **comb filter**. For vertical incidence ($\theta = 0$), the ghost transfer function is:
-
-$$ G(f) = 1 - e^{-i 2\pi f \Delta t} $$
-
-with amplitude spectrum:
-
-$$ |G(f)| = 2\left|\sin\left(\frac{\pi f \Delta t}{1}\right)\right| = 2|\sin(\pi f \Delta t)| $$
-
-This produces **spectral notches** (zeros) at frequencies:
-
-$$ f_n = \frac{n \cdot v_w}{2d}, \quad n = 0, 1, 2, \ldots $$
-
-For a streamer at 6 m depth: the first non-zero notch is at $f_1 = 1500/(2 \times 6) = 125$ Hz. But the source at 6 m depth also creates notches at 125 Hz. The combined source + receiver ghost system creates deep notches throughout the spectrum, with the most damaging effect at low frequencies where the first notch of the combined system suppresses everything below ~60–80 Hz.
-
-Crucially, the notch frequency **increases with offset** (because $\cos\theta$ decreases). A 1D deghosting operator designed for vertical incidence will misalign with the actual notches at non-zero offsets — a fundamental limitation of simple approaches.
-
-**Figure 3.** *Ghost notch diagram. Source and receiver ghost paths with ray geometry. Amplitude spectra showing notch positions for source depth 6 m and receiver depth 8 m. The combined spectrum shows deep notches that limit usable bandwidth.*
+**Figure 2.** *Resolution benefit of bandwidth extension. Acoustic (P-)impedance $Z = \rho v$ derived by seismic inversion: **extended bandwidth (left)** versus the **original, conventional bandwidth (right)**. Broadening the usable band — at the high-frequency end in this example — sharpens the impedance contrasts and resolves thinner layers that merge together in the original. This is the resolution side of the bandwidth story: as Figure 1 showed, high frequencies sharpen the central lobe (vertical resolution) while low frequencies suppress the side lobes (event isolation).
 
 ## 2. What limits bandwidth: the wavelet components
 
@@ -128,25 +102,29 @@ Recall from Term 1 Lecture 06 that statistical deconvolution (spiking, predictiv
 
 1. **White reflectivity** — the reflectivity spectrum is flat.
 2. **Minimum-phase wavelet** — all energy is front-loaded.
-3. **No noise** — the autocorrelation of the trace equals the autocorrelation of the wavelet.
+3. **White noise** — the autocorrelation of the trace equals the autocorrelation of the wavelet.
 4. **Stationarity** — the wavelet does not change within the design window.
 
 These assumptions are violated in practice:
 
-- Real reflectivity is **colored** (typically "blue" — enriched in high frequencies).
+- Real reflectivity can be **colored** (typically "blue" — enriched in high frequencies).
 - The wavelet contains **non-minimum-phase components** (ghosts, geophone response, instrument filters).
 - **Noise** distorts the autocorrelation, leading to phase errors in the derived operator.
 - The wavelet is **non-stationary** due to absorption (Q) — high frequencies are lost with depth.
 
 Surface-consistent deconvolution (Term 1 Lecture 07) partially addresses noise through spectral averaging across traces, but it still assumes minimum phase and cannot correct non-minimum-phase residuals. We need methods that explicitly model each physical component.
 
-**Figure 4.** *Wavelet components and their effects on the spectrum. Source (bubble ripple), propagation (Q absorption slope), receiver ghost (notches), detector (resonance peak), and instrument (high-cut) — each shown separately and combined.*
+![](figures/term03_lec05/term03_lec05_wavelet_components.png){width=60%}
+
+**Figure 3.** *Factors that shape the recorded wavelet. This cartoon depicts the physical effects that act on the seismic wave as it travels from source to receiver — the source signature (bubble energy and the source ghost), propagation through the earth (absorption/$Q$ and scattering), the receiver ghost, and the detector, instrument, and near-surface responses. In the convolutional model above, each of these is one link in the chain: in the frequency domain they multiply the spectrum, so every factor leaves its own imprint on the wavelet's amplitude and phase.*
 
 ## 3. Marine broadband processing
 
 Marine data has a well-characterized wavelet: the source signature is measured or modeled, the ghost geometry is known (source depth, cable depth, water velocity). This makes **deterministic** processing possible. The standard chain is:
 
-$$ \text{Raw wavelet} \xrightarrow{\text{De-bubble}} \xrightarrow{\text{Designature}} \xrightarrow{\text{Deghosting}} \text{Zero-phase, broadband} $$
+$$ \text{Raw wavelet} \xrightarrow{\text{De-bubble}} \xrightarrow{\text{Deghosting}} \xrightarrow{\text{Designature}} \text{Broadband, minimum-phase wavelet} $$
+
+This ordering — de-bubble, then deghosting, then de-signature as the final wavelet-shaping step — is the standard modern marine broadband workflow (Bekara et al., 2025).
 
 ### 3.1 De-bubble
 
@@ -162,61 +140,66 @@ The de-bubble operator is a **deterministic inverse filter** designed from a phy
 
 After de-bubble, the wavelet has no oscillatory tail and the associated spectral ripple disappears from the amplitude spectrum.
 
-**Critical ordering rule:** De-bubble must be applied **before** zero-phasing. If you zero-phase first, the zero-phase operator will attempt to symmetrize the bubble energy — spreading the oscillation symmetrically around zero time instead of removing it. The result is a wavelet that is zero-phase but still contains bubble artifacts.
+**Critical ordering rule:** De-bubble is the **first** wavelet-processing step — it must be applied **before** deghosting and designature. If you designature first, the shaping operator matches the bubble oscillation along with the primary, embedding the bubble artifacts into the output instead of removing them.
 
 Similarly, de-bubble must precede amplitude recovery (Q-compensation, spherical divergence correction), because those processes amplify the bubble tail along with the signal.
 
-**Figure 5.** *De-bubble workflow. Source wavelet before and after de-bubble in time domain (bubble tail removed) and frequency domain (spectral ripple flattened).*
+![](figures/term03_lec05/term03_lec05_debubble.png){width=90%}
 
-### 3.2 Designature (zero-phase conversion)
+**Figure 4.** *De-bubble, modeled with a Berlage source wavelet $p(t) = t^n e^{-\alpha t}\sin(2\pi f_0 t)$ — a causal source pulse. The raw airgun signature (top row) is this pulse convolved with a decaying bubble pulse train $g(t) = \sum_k r^k\,\delta(t - kT_b)$. In the time domain (a) the re-radiated echoes form a ringy tail; in the frequency domain (b) the bubble train acts as a comb filter, producing ripples spaced by $1/T_b$. De-bubble applies the inverse of $g(t)$ and recovers the clean Berlage pulse: the tail disappears (c) and the spectrum is flattened (d).*
 
-**Goal:** Convert the source wavelet to a zero-phase equivalent, or reshape it to a desired target.
-
-The designature toolbox includes several options:
-
-| Method | Target | Use case |
-|--------|--------|----------|
-| Spiking deconvolution | Spike ($\delta(t)$) | Maximum resolution (rarely used alone) |
-| Zero-phase conversion | Zero-phase equivalent | Standard production |
-| Wavelet shaping | Arbitrary target wavelet | 4D matching, well tie |
-
-**Why not spiking deconvolution?** Spiking decon designs an operator that is the inverse of the wavelet's amplitude spectrum. At ghost notch frequencies, the amplitude is near zero, so the inverse amplifies those frequencies enormously — boosting noise by 20–40 dB. On real data with noise, the result is unstable. Pre-whitening tames the noise boost but at the cost of bandwidth, defeating the purpose.
-
-**Zero-phase conversion workflow:**
-
-1. Take the Fourier transform of the (de-bubbled) input wavelet: $W(f) = |W(f)| e^{i\phi(f)}$.
-2. Construct the zero-phase target: $W_\text{ZP}(f) = |W(f)|$ (same amplitude, zero phase).
-3. Design a Wiener shaping filter that converts the input wavelet to the zero-phase target:
-
-$$ H(f) = \frac{W^*(f) \cdot W_\text{ZP}(f)}{|W(f)|^2 + \varepsilon^2} $$
-
-4. Apply the filter to the data.
-
-The result is a wavelet with the same bandwidth as the input but symmetric (zero-phase) — maximum energy concentrated at zero time, no phase distortion.
-
-**Pre-whitening** ($\varepsilon^2$) controls the trade-off between resolution and stability. Typical values: 0.1–1.0% of the zero-lag autocorrelation.
-
-**Figure 6.** *Designature workflow. Input wavelet (mixed phase, with bubble removed) → zero-phase wavelet. Amplitude and phase spectra before and after. The amplitude spectrum is preserved; the phase is flattened to zero.*
-
-### 3.3 Deghosting
+### 3.2 Deghosting
 
 **Goal:** Remove source and receiver ghosts to fill the spectral notches and recover the full bandwidth.
 
-Deghosting is the key step that distinguishes broadband processing from conventional processing. Without deghosting, the ghost notches permanently remove bands of frequencies from the data — no amount of statistical deconvolution can recover them.
+Deghosting is the key step that distinguishes broadband processing from conventional processing. Without deghosting, the ghost notches permanently remove bands of frequencies from the data — no amount of statistical deconvolution can recover them. To understand what deghosting must undo, we first look at where these notches come from.
 
-#### 3.3.1 Why 1D deghosting fails
+#### 3.2.1 Where the notches come from
+
+What limits the bandwidth of conventional marine data? The primary culprit is the **ghost** — a reflection from the sea surface that arrives shortly after the primary signal with opposite polarity.
+
+Consider a source at depth $d_s$ below the sea surface. The direct downgoing wave is accompanied by an upgoing reflection from the sea surface (reflection coefficient $R \approx -1$). This creates a ghost arrival delayed by:
+
+$$ \Delta t_s = \frac{2 d_s \cos\theta}{v_w} $$
+
+where $\theta$ is the propagation angle and $v_w \approx 1500$ m/s is the water velocity. The same effect occurs at the receiver (streamer at depth $d_r$):
+
+$$ \Delta t_r = \frac{2 d_r \cos\theta}{v_w} $$
+
+In the frequency domain, the ghost acts as a **comb filter**. For vertical incidence ($\theta = 0$), the ghost transfer function is:
+
+$$ G(f) = 1 - e^{-i 2\pi f \Delta t} $$
+
+with amplitude spectrum:
+
+$$ |G(f)| = 2\left|\sin\left(\frac{\pi f \Delta t}{1}\right)\right| = 2|\sin(\pi f \Delta t)| $$
+
+This produces **spectral notches** (zeros) at frequencies:
+
+$$ f_n = \frac{n \cdot v_w}{2d}, \quad n = 0, 1, 2, \ldots $$
+
+For a streamer at 6 m depth: the first non-zero notch is at $f_1 = 1500/(2 \times 6) = 125$ Hz. But the source at 6 m depth also creates notches at 125 Hz. The combined source + receiver ghost system creates deep notches throughout the spectrum, with the most damaging effect at low frequencies where the first notch of the combined system suppresses everything below ~60–80 Hz.
+
+Crucially, the notch frequency **increases with offset** (because $\cos\theta$ decreases): the notches are not fixed in frequency but migrate upward as the propagation angle grows (Figure 5b). The entire notch pattern is therefore set by the acquisition geometry — source depth, cable depth, and offset. This raises the obvious question: can we simply invert the ghost filter and divide the notches out?
+
+![](figures/term03_lec05/term03_lec05_ghost_notch.png){width=90%}
+
+**Figure 5.** *Ghost notch diagram. Both source and receiver ghosts act as the same two-path interference filter $G(f) = 1 - e^{-i2\pi f \Delta t}$ with $\Delta t = 2d\cos\theta/v_w$, so the analysis below applies to either one. (a) **Depth sets the notch frequency** (vertical incidence, $\theta = 0$): the first notch is at $f_1 = v_w/(2d)$, so doubling the depth from 6 m to 12 m halves it from 125 Hz to 62.5 Hz. (b) **Offset shifts the notches higher**: at non-zero propagation angle the delay shrinks by $\cos\theta$, so the first notch migrates upward (62.5 Hz at $\theta = 0^\circ$ → 125 Hz at $\theta = 60^\circ$ for $d = 12$ m). This angle dependence is why a 1-D deghosting operator designed for vertical incidence misaligns with the real notches at far offsets.*
+
+
+#### 3.2.2 Why 1-D deghosting fails
 
 The simplest approach is to design a deterministic inverse of the ghost filter:
 
 $$ H_\text{deghost}(f) = \frac{1}{G(f)} = \frac{1}{1 - e^{-i2\pi f \Delta t}} $$
 
-For vertical incidence, this works — but at the notch frequencies, $|G(f)| = 0$ and the inverse is infinite. Pre-whitening prevents division by zero, but leaves deep residual notches. Worse, the ghost delay $\Delta t = 2d\cos\theta/v_w$ depends on the propagation angle $\theta$. At non-zero offset, the notches shift to higher frequencies. A 1D operator designed for vertical incidence will **misalign** with the actual notches at far offsets.
+For vertical incidence, this works — but at the notch frequencies, $|G(f)| = 0$ and the inverse is infinite. Pre-whitening prevents division by zero, but leaves deep residual notches. Worse, because the notch frequencies shift with offset (Figure 5b), a single operator designed for vertical incidence **misaligns** with the actual notches at far offsets — no fixed 1-D filter can match the whole gather.
 
 This is why modern deghosting methods work in domains where the angle dependence is handled explicitly.
 
-#### 3.3.2 Bootstrap deghosting (tau-P domain)
+#### 3.2.3 Bootstrap deghosting (tau-P domain)
 
-The bootstrap method (CGG ODT04) transforms the problem to the tau-P domain, where each plane-wave component has a well-defined slowness $p = \sin\theta/v_w$ and therefore a well-defined ghost delay:
+The bootstrap method transforms the problem to the tau-P domain, where each plane-wave component has a well-defined slowness $p = \sin\theta/v_w$ and therefore a well-defined ghost delay:
 
 $$ \Delta t(p) = \frac{2d}{v_w}\sqrt{1 - (p \cdot v_w)^2} $$
 
@@ -231,7 +214,7 @@ The workflow:
 
 **Limitation:** Requires accurate water depth and cable geometry. Tau-P transform introduces edge effects and requires regularization.
 
-#### 3.3.3 Dual-sensor (PZ) deghosting
+#### 3.2.4 Dual-sensor (PZ) deghosting
 
 Dual-sensor streamers record both **pressure** (hydrophone) and **vertical particle velocity** (geophone or accelerometer). The key physics: for the upgoing primary wavefield, pressure and velocity have the **same sign**; for the downgoing ghost, they have **opposite signs**.
 
@@ -243,19 +226,7 @@ $$ P + \rho v_w V_z = 2 \cdot P_\text{upgoing} $$
 
 **Limitation:** The geophone signal-to-noise ratio is poor at low frequencies (below ~10 Hz), so the summation is typically only effective above 10 Hz. Does not recover the very low frequencies that modern broadband targets.
 
-#### 3.3.4 Variable-depth streamer (BroadSeis)
-
-Instead of towing the cable at a constant depth, a **variable-depth streamer** (e.g., CGG BroadSeis) undulates the cable so that different sections sit at different depths. Each depth produces ghost notches at different frequencies:
-
-$$ f_n(z) = \frac{n \cdot v_w}{2z} $$
-
-By combining data from all cable depths, the notches from one depth are filled by signal from another depth — **notch diversity**. Processing jointly inverts all depths to produce a ghost-free broadband result.
-
-**Advantage:** Achieves true broadband (6+ octaves, down to ~1 Hz). No special sensors required — standard hydrophones suffice.
-
-**Limitation:** Requires specialized towing equipment and careful survey design. Cable shape must be measured accurately.
-
-#### 3.3.5 Sparse deghosting (Li et al., 2020)
+#### 3.2.5 Sparse deghosting (Li et al., 2020)
 
 This method formulates deghosting as a **sparse inversion** in the frequency-slowness domain. The recorded data is modeled as:
 
@@ -271,7 +242,7 @@ The L1-norm promotes sparsity, which simultaneously suppresses noise and stabili
 
 **Limitation:** Assumes the wavefield is sparse in the frequency-slowness domain. Requires accurate streamer depth and water velocity.
 
-#### 3.3.6 Low-frequency deghosting (Amundsen & Zhou, 2013)
+#### 3.2.6 Low-frequency deghosting (Amundsen & Zhou, 2013)
 
 This trace-by-trace method targets the low-frequency band below the first notch, where conventional methods struggle with S/N. The deghosted pressure field is approximated as:
 
@@ -283,22 +254,57 @@ That is: the deghosted field equals the pressure plus a scaled time integral plu
 
 **Limitation:** The trace-by-trace approximation neglects angle-dependent effects. Effective bandwidth is limited to below the second notch.
 
-#### 3.3.7 Choosing a deghosting method
+#### 3.2.8 Choosing a deghosting method
 
 | Method | Bandwidth recovery | Complexity | Data requirement |
 |--------|-------------------|------------|-----------------|
 | 1D inverse | Poor (notch residuals) | Low | Conventional |
 | Bootstrap (tau-P) | Good | Medium | Conventional |
 | Dual-sensor (PZ) | Good (>10 Hz) | Low | Dual-sensor cable |
-| Variable-depth | Excellent (1–100+ Hz) | High | Variable-depth cable |
 | Sparse (FISTA) | Good | Medium | Conventional |
 | Low-frequency (Amundsen) | Low-freq only | Low | Conventional |
 
-In practice, methods are often combined: e.g., PZ deghosting for the mid-band plus low-frequency deghosting for the very low end, or variable-depth acquisition with bootstrap processing.
+In practice, methods are often combined: e.g., PZ deghosting for the mid-band plus low-frequency deghosting for the very low end.
 
-**Figure 7.** *Deghosting comparison. Amplitude spectra before and after deghosting for several methods, showing how each fills the ghost notches differently.*
+![](figures/term03_lec05/term03_lec05_deghosting_data.png){width=90%}
 
-**Figure 8.** *Dual-sensor deghosting principle. Hydrophone and geophone responses for upgoing primary and downgoing ghost. The ghost has opposite polarity on the two sensors; summation cancels it.*
+**Figure 6.** *Seismic data and its amplitude spectrum before and after deghosting. The data are modeled with a broadband minimum-phase source wavelet (Ormsby, 10/30/160/200 Hz corners) convolved with a sparse reflectivity, then contaminated with a source ghost (6 m) and a receiver ghost (12 m). Before deghosting (a, b) the ghosts carve deep spectral notches at 62.5 and 125 Hz and make the trace ringy; after deghosting (c, d) the notches are filled — the spectrum becomes smooth and broadband — and the ghost echoes are removed from the trace. Left column: time domain; right column: amplitude spectrum.*
+
+![](figures/term03_lec05/term03_lec05_pz_deghosting.png){width=90%}
+
+**Figure 7.** *Dual-sensor (PZ) deghosting principle, illustrated with a primary at 50 ms and its receiver ghost delayed by 40 ms. (a) Hydrophone pressure $P$: the primary and the ghost appear with the same (positive) sign. (b) Geophone vertical velocity $V_z$ (scaled by the water impedance): the ghost appears with the opposite sign to the primary. (c) The sum $P + V_z$: the primary is reinforced ($\times 2$, same sign on both sensors) while the ghost cancels (opposite sign on the two sensors), yielding the deghosted primary. The upgoing primary and the downgoing ghost are thus separated by polarity rather than by an inverse filter — so, unlike 1-D deghosting, there is no spectral-notch problem.*
+
+### 3.3 Designature (minimum-phase conversion)
+
+**Goal:** Convert the source wavelet to a minimum-phase equivalent, or reshape it to a desired target.
+
+The designature toolbox includes several options:
+
+| Method | Target | Use case |
+|--------|--------|----------|
+| Spiking deconvolution | Spike ($\delta(t)$) | Maximum resolution (rarely used alone) |
+| Minimum-phase conversion | minimum-phase equivalent | Standard production |
+| Wavelet shaping | Arbitrary target wavelet | 4D matching, well tie |
+
+**Why not spiking deconvolution?** Spiking decon designs an operator that is the inverse of the wavelet's amplitude spectrum. At frequencies where the amplitude is near zero (spectral notches or minima), the inverse amplifies those frequencies enormously — boosting noise by 20–40 dB. On real data with noise, the result is unstable. Pre-whitening tames the noise boost but at the cost of bandwidth, defeating the purpose.
+
+**Minimum-phase conversion workflow:**
+
+1. Take the Fourier transform of the (de-bubbled and deghosted) input wavelet: $W(f) = |W(f)| e^{i\phi(f)}$.
+2. Construct the minimum-phase target: $W_\text{min}(f) = |W(f)|$ (same amplitude, minimum phase).
+3. Design a Wiener shaping filter that converts the input wavelet to the minimum-phase target:
+
+$$ H(f) = \frac{W^*(f) \cdot W_\text{min}(f)}{|W(f)|^2 + \varepsilon^2} $$
+
+4. Apply the filter to the data.
+
+The result is a wavelet with the same bandwidth as the input but more front-loaded (minimum-phase) — maximum energy concentrated at the start of the wavelet, no phase distortion.
+
+**Pre-whitening** ($\varepsilon^2$) controls the trade-off between resolution and stability. Typical values: 0.1–1.0% of the zero-lag autocorrelation.
+
+![](figures/term03_lec05/term03_lec05_designature.png){width=75%}
+
+**Figure 8.** *The designature workflow. Left column — time domain; right column — amplitude spectrum. **Top row:** the input source signature and its spectrum, which carries distortions (here concentrated at low frequencies). **Middle row:** the designature filter and its spectrum. **Bottom row:** the designature output — a shorter, more compact signature with a smooth amplitude spectrum. The filter reshapes the signature toward the target wavelet.*
 
 ## 4. Land data: why it is harder
 
@@ -328,8 +334,6 @@ This is **not** the wavelet autocorrelation — it is distorted by noise. As S/N
 
 The combined effect: land wavelets contain significant **non-minimum-phase components** (geophone response, instrument filters, absorption) that violate the fundamental assumption of statistical deconvolution.
 
-**Figure 9.** *Land vs. marine wavelet comparison. Marine wavelet (airgun + ghost) is well-characterized and consistent. Land wavelet (source + Q + geophone + instrument) is complex, varies spatially, and contains non-minimum-phase components.*
-
 ### 4.2 Receiver effects and absorption
 
 **Geophone response.** A moving-coil geophone is a damped harmonic oscillator with natural frequency $f_0$ (typically 10 Hz) and damping factor $h$ (typically 0.7). Below $f_0$, the response rolls off at 12 dB/octave. Above $f_0$, it is approximately flat. This means the geophone **suppresses low frequencies** — exactly the frequencies that broadband processing aims to recover.
@@ -344,11 +348,13 @@ $$ A(f, t) = A_0(f) \cdot e^{-\pi f t / Q} $$
 
 For $Q = 30$ and two-way time $t = 1$ s, the attenuation at 60 Hz relative to 10 Hz is:
 
-$$ 20\log_{10}\left(\frac{e^{-\pi \cdot 60 / 30}}{e^{-\pi \cdot 10 / 30}}\right) = -20\log_{10}\left(e^{-\pi \cdot 50/30}\right) \approx -109 \text{ dB} $$
+$$ 20\log_{10}\left(\frac{e^{-\pi \cdot 60 / 30}}{e^{-\pi \cdot 10 / 30}}\right) = 20\log_{10}\left(e^{-\pi \cdot 50/30}\right) \approx -45 \text{ dB} $$
 
 This is an enormous dynamic range. Q-compensation (Term 2) corrects for this, but it also amplifies noise at high frequencies — creating a trade-off between resolution and S/N.
 
-**Figure 10.** *Receiver and Q effects on the wavelet spectrum. Geophone response curve (12 dB/octave rolloff below 10 Hz), Q absorption slope (progressive high-frequency loss), and their combined effect on the recorded wavelet spectrum.*
+![](figures/term03_lec05/term03_lec05_receiver_q_spectrum.png){width=90%}
+
+**Figure 9.** *Receiver and Q effects on the wavelet spectrum (geophone $f_0 = 10$ Hz, damping $h = 0.7$; $Q = 30$, two-way time $t = 1$ s). (a) The two effects as transfer functions: the geophone response is flat above $f_0$ but rolls off at 12 dB/octave below it, suppressing the low frequencies that broadband processing aims to recover; Q absorption is a progressive high-frequency loss that steepens with travel time. (b) Their combined effect on a broadband source wavelet spectrum (dashed): the geophone carves off the low end and Q carves off the high end, leaving the narrow, low-frequency-peaked recorded spectrum (solid).*
 
 ### 4.3 Colored reflectivity and noise
 
@@ -356,7 +362,7 @@ This is an enormous dynamic range. Q-compensation (Term 2) corrects for this, bu
 
 $$ |R(f)|^2 \propto f^{2 C_{LR}} $$
 
-where $C_{LR}$ (the "color" of reflectivity) is typically 0.2–0.5. If this is not corrected, the deconvolution operator will over-whiten the data — boosting high frequencies too much and suppressing lows.
+where $C_{LR}$ (the "color" of reflectivity) is typically 0.2–0.5. If this is not corrected, the deconvolution operator will fail to correctly restore high-frequency content.
 
 **Colored deconvolution** addresses this by:
 1. Estimating $C_{LR}$ from well logs or from the spectral slope of stacked data.
@@ -375,7 +381,9 @@ The noise term adds a spike at zero lag (for white noise), which is equivalent t
 
 This is a fundamental limitation of statistical deconvolution: it cannot separate wavelet phase from noise effects without an independent model of the wavelet.
 
-**Figure 11.** *Noise distortion of the deconvolution operator. Top: signal spectrum, noise spectrum, and their sum. Bottom: minimum-phase wavelet derived from the autocorrelation at different S/N levels (20 dB, 10 dB, 3 dB). As S/N decreases, the wavelet phase becomes increasingly distorted.*
+![](figures/term03_lec05/term03_lec05_noise_influence_on_decon.png){width=90%}
+
+**Figure 10.** *Influence of noise on statistical deconvolution, shown at increasing noise levels. The three panels show: the power spectra, where the noise floor rises with the noise level; the deconvolved wavelet, which becomes progressively broader (less compact) as noise increases; and the phase spectrum, which departs further from the minimum phase as the signal-to-noise ratio falls. This illustrates why statistical deconvolution struggles at low S/N — noise contaminates the trace autocorrelation ($\phi_{xx} \approx \phi_{ww} + \phi_{nn}$), so the minimum-phase wavelet derived from it has increasingly incorrect phase.*
 
 ### 4.4 Why surface-consistent deconvolution is not enough
 
@@ -394,8 +402,6 @@ However, SCD has three fundamental limitations:
 3. **Does not account for detector and instrument responses.** These are deterministic, known quantities — but SCD treats them as unknown statistical components, adding unnecessary uncertainty.
 
 The result: after SCD, the data still contains **non-minimum-phase residuals** in the wavelet. The amplitude spectrum may look good, but the phase is wrong — and phase errors are particularly damaging for interpretation and inversion.
-
-**Figure 12.** *SCD limitations. The wavelet decomposed into source, Q, detector, and instrument components. SCD can address the source component and partially average noise, but cannot correct the non-minimum-phase detector, instrument, and Q components.*
 
 ## 5. Model-Based Wavelet Processing (MBWP)
 
@@ -430,8 +436,6 @@ All other components are **known** or **measured**:
 - Source signature: from sweep recording (vibroseis) or charge configuration (dynamite).
 - Detector response: from geophone specifications (natural frequency, damping) or tap test.
 - Instrument response: from pulse test of the recording system.
-
-This is a remarkable simplification: the entire wavelet — including its non-minimum-phase character — is determined by two numbers.
 
 ### 5.3 Source models by type
 
@@ -482,7 +486,7 @@ This residual operator captures exactly the phase and amplitude errors that SCD 
 $$ Q/t = 55 / \text{slope} $$
 
 - From the level difference between signal and noise model spectra at a reference frequency (e.g., 35 Hz), estimate S/N.
-- Decompose Q and S/N surface-consistently into source and receiver components.
+- Decompose Q and S/N surface-consistently together with other components.
 - Compute average effective Q and S/N from histograms.
 
 **Step 3: Build the final operator.**
@@ -499,22 +503,22 @@ The MBWP operator is applied **after** surface-consistent deconvolution and **be
 
 $$ \text{SC Decon} \longrightarrow \boxed{\text{MBWP filter}} \longrightarrow \text{NMO/DMO} \longrightarrow \cdots $$
 
-SCD handles the bulk of the wavelet shaping (surface-consistent amplitude correction). The MBWP filter corrects the residual phase and amplitude errors — the non-minimum-phase components that SCD could not address.
+SCD handles the bulk of the wavelet shaping (surface-consistent effects correction). The MBWP filter corrects the residual phase and amplitude errors — the non-minimum-phase components that SCD could not address.
 
 ### 5.7 Advantages over SCD
 
 | Feature | SCD | MBWP |
 |---------|-----|------|
-| Non-minimum-phase correction | ✗ | ✓ |
-| Explicit Q modeling | ✗ | ✓ |
-| Noise modeling | Partial (averaging) | ✓ |
-| Detector/instrument response | ✗ | ✓ |
-| Mixed-source consistency | Limited | ✓ |
+| Non-minimum-phase correction | $\times$ | $\checkmark$ |
+| Explicit Q modeling | $\times$ | $\checkmark$ |
+| Noise modeling | Partial (averaging) | $\checkmark$ |
+| Detector/instrument response | $\times$ | $\checkmark$ |
+| Mixed-source consistency | Limited | $\checkmark$ |
 | Free parameters | 4 (S, R, M, O components) | 2 (Q, S/N) |
 
 ### 5.8 Validation
 
-MBWP is validated by three independent methods:
+MBWP can be validated by three independent methods:
 
 1. **VSP measurements.** Downhole geophones record the actual propagating wavelet. Model wavelets from MBWP closely match VSP first arrivals for both dynamite and vibroseis sources.
 
@@ -522,17 +526,17 @@ MBWP is validated by three independent methods:
 
 3. **Mixed-source phase consistency.** In surveys using both vibroseis and dynamite, the crosscorrelation phase spectrum between the two source types shows significant rotation before MBWP. After the MBWP residual filter, the phase flattens to near zero — consistent phase across sources without requiring overlapping recordings.
 
-**Figure 13.** *MBWP model diagram. The convolutional model showing source, Q, detector, and instrument components assembled into the model wavelet. The noise path through detector and instrument is shown separately.*
+**Figure 11.** *MBWP model diagram. The convolutional model showing source, Q, detector, and instrument components assembled into the model wavelet. The noise path through detector and instrument is shown separately.*
 
-**Figure 14.** *MBWP workflow. Three-step process: initial model (default Q, S/N) → parameter estimation (fit to field spectra) → final operator (residual filter). Before/after amplitude and phase spectra shown.*
+**Figure 12.** *MBWP workflow. Three-step process: initial model (default Q, S/N) → parameter estimation (fit to field spectra) → final operator (residual filter). Before/after amplitude and phase spectra shown.*
 
-**Figure 15.** *Mixed-source phase consistency. Crosscorrelation phase spectrum between vibroseis and dynamite data before MBWP (significant rotation) and after MBWP (phase near zero).*
+**Figure 13.** *Mixed-source phase consistency. Crosscorrelation phase spectrum between vibroseis and dynamite data before MBWP (significant rotation) and after MBWP (phase near zero).*
 
 ## 6. Robust surface-consistent deconvolution
 
-### 6.1 The problem: inconsistent noise in foothill areas
+### 6.1 The problem: complex near-surface and low signal-to-noise ratio
 
-Conventional SCD decomposes the wavelet spectrum using least-squares (L2 norm) optimization. This assumes that the residuals (model misfit) follow a **Gaussian distribution**. In foothill and mountain areas, this assumption is violated:
+Conventional SCD decomposes the wavelet spectrum using least-squares (L2 norm) optimization. This assumes that the residuals (model misfit) follow a **Gaussian distribution**. The assumption holds reasonably well for clean data acquired over a simple, well-behaved near-surface with high signal-to-noise ratio. But it breaks down whenever the near-surface is complex and the signal-to-noise ratio is relatively low — a condition typical of  many land environments (loose or rocky soils, karst, permafrost, urban areas with cultural noise):
 
 - **Ground roll** contaminates near-offset traces with strong, coherent low-frequency energy.
 - **Noise bursts** from cultural sources, wind, or coupling problems affect individual traces.
@@ -573,7 +577,7 @@ Apply the deconvolution operators to all traces. Because the operators are deriv
 
 ### 6.4 Field data results
 
-Zhang & Yuan (2019) demonstrate the method on foothill data from southern China:
+Zhang & Yuan (2019) demonstrate the method on foothill data from southern China — a representative example of the complex-near-surface, low-S/N regime described above:
 
 | Stage | Effective bandwidth |
 |-------|-------------------|
@@ -583,29 +587,29 @@ Zhang & Yuan (2019) demonstrate the method on foothill data from southern China:
 
 Robust SCD broadens the effective bandwidth by ~25 Hz at **both** the low and high frequency ends compared to conventional SCD. The stack section shows improved S/N and spatial energy consistency — the operators do not introduce the erratic amplitude variations seen with conventional SCD on the same data.
 
-**Figure 16.** *Traditional vs. robust SC deconvolution. Operators derived from noisy foothill data — conventional SCD produces erratic operators; robust SCD produces smooth, stable operators.*
+**Figure 14.** *Traditional vs. robust SC deconvolution. Operators derived from noisy, complex-near-surface data — conventional SCD produces erratic operators; robust SCD produces smooth, stable operators.*
 
-**Figure 17.** *Robust SC deconvolution flow. Three-step procedure: spectral analysis → robust L1/L2 decomposition → spectral application.*
+**Figure 15.** *Robust SC deconvolution flow. Three-step procedure: spectral analysis → robust L1/L2 decomposition → spectral application.*
 
-**Figure 18.** *Field data example (southern China foothill). Shot gathers and amplitude spectra before, after conventional SCD, and after robust SCD. The robust result shows broader bandwidth and better S/N.*
+**Figure 16.** *Field data example (southern China foothill, after Zhang & Yuan 2019). Shot gathers and amplitude spectra before, after conventional SCD, and after robust SCD. The robust result shows broader bandwidth and better S/N.*
 
 ## 7. Summary
 
 ### Key takeaways
 
-1. **Broadband seismic** means 6+ octaves of usable bandwidth (e.g., 1–64 Hz). More octaves produce sharper wavelets with lower side lobes — improving resolution, interpretation, and inversion.
+1. **Broadband seismic** means 6+ octaves of usable bandwidth (e.g., 2-128 Hz). More octaves produce sharper wavelets with lower side lobes — improving resolution, interpretation, and inversion.
 
 2. **Ghost notches** are the primary bandwidth limitation in marine data: $f_n = n v_w / (2d)$. They vary with offset angle, making 1D removal inadequate.
 
-3. **Marine processing chain:** De-bubble (remove bubble oscillation) → Designature (zero-phase conversion) → Deghosting (fill spectral notches). The order matters: de-bubble before zero-phasing; de-bubble before amplitude recovery.
+3. **Marine processing chain:** De-bubble (remove bubble oscillation) → Deghosting (fill spectral notches) → Designature (minimum-phase conversion), the final wavelet-shaping step. The order matters: de-bubble first; deghosting before designature; de-bubble before amplitude recovery.
 
-4. **Modern deghosting methods** handle the angle-dependent ghost problem: bootstrap (tau-P inverse), dual-sensor (PZ summation), variable-depth streamer (notch diversity), sparse inversion (FISTA), and low-frequency trace-by-trace methods.
+4. **Modern deghosting methods** handle the angle-dependent ghost problem: bootstrap (tau-P inverse), dual-sensor (PZ summation), sparse inversion (FISTA), and low-frequency trace-by-trace methods.
 
 5. **Land data is harder** because of receiver coupling, absorption (Q), colored reflectivity, and noise — all of which introduce non-minimum-phase components that statistical deconvolution cannot correct.
 
-6. **MBWP** builds the wavelet from physical components (source × Q × detector × instrument) with only two free parameters (Q and S/N). It corrects the non-minimum-phase residuals that SCD leaves behind.
+6. **MBWP** builds the wavelet from physical components with only two free parameters (Q and S/N). It corrects the non-minimum-phase residuals that SCD leaves behind.
 
-7. **Robust SCD** uses hybrid L1/L2 optimization to handle the non-Gaussian noise in foothill areas, producing stable operators and broader bandwidth than conventional L2-based SCD.
+7. **Robust SCD** uses hybrid L1/L2 optimization to handle the non-Gaussian noise that arises over a complex near-surface at relatively low S/N, producing stable operators and broader bandwidth than conventional L2-based SCD.
 
 ### The big picture
 
@@ -615,39 +619,28 @@ Robust SCD broadens the effective bandwidth by ~25 Hz at **both** the low and hi
 | Marine | Deghosting (bootstrap, PZ, variable-depth, sparse) | Ghost notches | Requires accurate geometry or special sensors |
 | Land | SCD | Surface-consistent wavelet variations | Assumes minimum phase; no Q or detector modeling |
 | Land | MBWP | Non-minimum-phase residuals (Q, detector, instrument, noise) | Requires measured instrument/detector/source responses |
-| Land (foothill) | Robust SCD | Unstable operators from inconsistent noise | Still assumes minimum phase for phase reconstruction |
+| Land (complex near-surface, low S/N) | Robust SCD | Unstable operators from inconsistent noise | Still assumes minimum phase for phase reconstruction |
 
 ## Comprehension questions
 
-1. Why is bandwidth measured in octaves rather than Hz? What is the practical difference between a 3-octave wavelet (10–80 Hz) and a 6-octave wavelet (1–64 Hz) in terms of interpretation?
+1. Why is bandwidth measured in octaves rather than Hz? What is the practical difference between a 3-octave wavelet (10–80 Hz) and a 6-octave wavelet (2-128 Hz) in terms of interpretation?
 2. Calculate the ghost notch frequencies for a source at 5 m depth and a receiver at 8 m depth (water velocity 1500 m/s). At what frequency do the source and receiver notches coincide?
-3. Why must de-bubble be applied before zero-phase conversion? What would happen if the order were reversed?
+3. Why must de-bubble be applied before designature? What would happen if the order were reversed?
 4. A colleague designs a 1D deghosting operator for vertical incidence and applies it to a full-offset gather. Why will the result be poor at far offsets? What is the physical reason?
 5. Compare bootstrap deghosting and dual-sensor (PZ) deghosting. What are the advantages and limitations of each? When would you choose one over the other?
 6. Why does statistical deconvolution produce phase errors on low-S/N land data? Explain using the autocorrelation equation $\phi_{xx} = \phi_{ww} + \phi_{nn}$.
 7. What are the two free parameters in MBWP? Why are they sufficient to describe the entire wavelet?
 8. A survey uses both vibroseis and dynamite sources. After conventional SCD, the crosscorrelation phase between the two source types shows 30° rotation. How does MBWP fix this without requiring overlapping recordings?
-9. Why does conventional SCD fail in foothill areas? What property of the noise violates the L2 assumption, and how does the L1 norm fix it?
+9. Why does conventional SCD fail when the near-surface is complex and the signal-to-noise ratio is relatively low? What property of the noise violates the L2 assumption, and how does the L1 norm fix it?
 10. The robust SCD result shows bandwidth extension from 8–55 Hz to 4–90 Hz. Is this "creating" new frequencies? Explain what is actually happening physically.
 
 ## Suggested reading and sources
 
-### Textbooks
 - Monk, D. J. (2020). *Survey Design and Seismic Acquisition*. SEG DISC No. 23, Chapter 2. — Broadband concept, benefits, ghost physics, commercial techniques. `wiki/sources/monk_2020_broadband_seismic.md`.
-
-### Marine deghosting
 - Lindsey, J. P. (1960). Elimination of seismic ghost reflections. *Geophysics*, 25(1), 130–140. — Historical first method (feedback filter). `wiki/sources/lindsey_1960_ghost_elimination.md`.
 - Ghosh, S. K. (2000). Deconvolving the ghost effect. *Geophysics*, 65(6), 1831–1836. — Spectral zeros, two-depth recording criterion. `wiki/sources/ghosh_2000_ghost_deconvolution.md`.
 - Amundsen, L., & Zhou, H. (2013). Low-frequency seismic deghosting. *Geophysics*, 78(2), WA15–WA20. — Trace-by-trace low-frequency method. `wiki/sources/amundsen_zhou_2013_deghosting.md`.
 - Li, H.-J., Yang, Q.-Y., & Cai, J.-X. (2020). Simultaneous deghosting and denoising. *Applied Geophysics*, 17(3), 411–418. — Sparse FISTA method. `wiki/sources/li_et_al_2020_sparse_deghosting.md`.
-
-### Training materials
-- CGG ODT04 Deconvolution Parts 1–2 (2015). — Wavelet components, designature toolbox, bootstrap deghosting. `wiki/sources/cgg_odt04_deconvolution_part1_wavelet.md`, `wiki/sources/cgg_odt04_deconvolution_part2_signature.md`.
-
-### MBWP
+- Bekara, M., Eid, M., Shabaan, H., & Gamal, N. (2025). Mixed-phase wavelet estimation for designature in marine seismic data processing. *Fifth EAGE Eastern Mediterranean Workshop*, Cairo. — Standard marine wavelet-processing sequence (system-delay correction, low-frequency noise attenuation, source/receiver deghosting, then de-signature as the final step); deterministic (far-field modeled) vs. data-driven (higher-order statistics) designature. `papers/marine/0011.pdf`.
 - Hart, D., & Hootman, B. (2008). Achieving Consistent and Stable Phase with Mixed-Source Surveys. WesternGeco. — MBWP theory and validation. `wiki/sources/brown_et_al_mbwp_update_2008.md`.
-- Hootman, B., & Abitbol, M. (2008–2009). MBWP Model Equations and Workflow Steps 1–3. WesternGeco. — Mathematical model and operational workflow. `wiki/sources/hootman_abitbol_mbwp_model_equations.md`, `wiki/sources/mbwp_step1_initial_operator.md`, `wiki/sources/mbwp_step2_estimating_parameters.md`, `wiki/sources/mbwp_step3_final_operator.md`.
-- Brown, D. DP3 MBWP Module. WesternGeco training. — Deconvolution context and coloured deconvolution. `wiki/sources/brown_dp3_mbwp_module.md`.
-
-### Robust deconvolution
 - Zhang, Y., & Mo, Y. (2019). Robust Deconvolution for foothill seismic data. SEG Foothill Workshop. — L1/L2 hybrid method and field example. `wiki/sources/zhang_yuan_2019_robust_deconvolution.md`.
