@@ -65,6 +65,10 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Surface wave inversion](concepts/surface_wave_inversion.md) | MASW/SWI from dispersion curve to S-wave profile | draft |
 | [FK-MUSIC / array analysis](concepts/fk_music_surface_waves.md) | Beamforming, f–k-MUSIC, and high-resolution dispersion imaging | draft |
 | [Adaptive subtraction](concepts/adaptive_subtraction.md) | Model and adaptively subtract surface waves from reflection data | draft |
+| [Broadband seismic](concepts/broadband_seismic.md) | Broadband concept, benefits, ghost notches, resolution and bandwidth | draft |
+| [Marine deghosting](concepts/marine_deghosting.md) | Ghost physics, notch frequencies, and deghosting methods (bootstrap, PZ, sparse) | draft |
+| [Source signature and designature](concepts/source_signature_designature.md) | Airgun signature, bubble oscillation, de-bubble, designature workflow | draft |
+| [Model-Based Wavelet Processing](concepts/model_based_wavelet_processing.md) | Deterministic wavelet modeling from physical components (Q, S/N, detector, instrument) | draft |
 
 ## Techniques
 
@@ -132,7 +136,21 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Abma & Claerbout (1995)](sources/abma1995_lateral_prediction.md) | Lateral Prediction for Noise Attenuation by t-x and f-x Techniques | paper | draft |
 | [Treitel (1974)](sources/treitel1974_complex_wiener.md) | The Complex Wiener Filter | paper | draft |
 | [Денисов & Фиников (2009)](sources/denisov_finikov_2009.md) | Парадоксы f-x деконволюции | conference paper (ru) | draft |
+| [Li et al. (2020)](sources/li_et_al_2020_sparse_deghosting.md) | Simultaneous receiver-side deghosting and denoising based on sparsity constraint | paper | draft |
+| [Amundsen & Zhou (2013)](sources/amundsen_zhou_2013_deghosting.md) | Low-frequency seismic deghosting | paper | draft |
+| [Ghosh (2000)](sources/ghosh_2000_ghost_deconvolution.md) | Deconvolving the ghost effect of the water surface in marine seismics | paper | draft |
+| [Lindsey (1960)](sources/lindsey_1960_ghost_elimination.md) | Elimination of seismic ghost reflections by means of a linear filter | paper | draft |
+| [Monk (2020)](sources/monk_2020_broadband_seismic.md) | Survey Design and Seismic Acquisition, Chapter 2: Broadband Seismic | textbook chapter | draft |
+| [Zhang & Yuan (2019)](sources/zhang_yuan_2019_robust_deconvolution.md) | Robust surface-consistent deconvolution for foothill seismic data | paper | draft |
+| [CGG ODT04 Part 2](sources/cgg_odt04_deconvolution_part2_signature.md) | ODT04 Deconvolution Part 2: Signature Deconvolution | training slides | reviewed |
+| [CGG ODT04 Part 3](sources/cgg_odt04_deconvolution_part3_demultiple.md) | ODT04 Deconvolution Part 3: Deconvolution as De-multiple | training slides | reviewed |
 | [Денисов & Фиников (2010)](sources/denisov_finikov_2010.md) | Особенности алгоритма f-x деконволюции | journal article (ru) | draft |
+| [Hart & Hootman (2008)](sources/brown_et_al_mbwp_update_2008.md) | MBWP Update 2008: Achieving Consistent and Stable Phase with Mixed-Source Surveys | technical presentation | reviewed |
+| [Hootman & Abitbol (2008)](sources/hootman_abitbol_mbwp_model_equations.md) | MBWP Model Equations — mathematical foundation | technical reference | reviewed |
+| [Abitbol & Hootman (2009)](sources/mbwp_step1_initial_operator.md) | MBWP Step 1: Initial Operator Creation | workflow guide | reviewed |
+| [Hootman & Abitbol (2009)](sources/mbwp_step2_estimating_parameters.md) | MBWP Step 2: Estimating Q and S/N Parameters | workflow guide | reviewed |
+| [Abitbol & Hootman (2009)](sources/mbwp_step3_final_operator.md) | MBWP Step 3: Final Operator Creation and Export | workflow guide | reviewed |
+| [Brown (DP3 Module)](sources/brown_dp3_mbwp_module.md) | DP3 MBWP Module — deconvolution training | training module | reviewed |
 
 ## Comparisons
 
@@ -153,6 +171,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Term 3 Lecture 1 — Quality Control of Seismic Processing and Introduction to 3D Seismic Data](lecture_ready/term03_lec01_processing_qc_and_3d_introduction.md) | term03_lec01 | draft |
 | [Term 3 Lecture 2 — Statics and Velocity Modeling](lecture_ready/term03_lec02_statics_and_velocity_modeling.md) | term03_lec02 | draft |
 | [Term 3 Lecture 3 — Surface Waves](lecture_ready/term03_lec03_surface_waves.md) | term03_lec03 | draft |
+| [Term 3 Lecture 5 — Broadband Deconvolution](lecture_ready/term03_lec05_broadband_deconvolution.md) | term03_lec05 | draft |
 
 ---
 

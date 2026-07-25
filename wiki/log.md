@@ -2,6 +2,88 @@
 
 Chronological record of ingests, queries, and lint passes.
 
+## [2026-07-25] ingest | MBWP materials for Term 3 Lecture 5
+
+Ingested Model-Based Wavelet Processing (MBWP) materials from converted PPTX files:
+
+**Source pages created (6):**
+- `wiki/sources/brown_et_al_mbwp_update_2008.md` — Hart & Hootman (2008): MBWP Update 2008 (theoretical foundation, VSP validation, mixed-source surveys)
+- `wiki/sources/hootman_abitbol_mbwp_model_equations.md` — Hootman & Abitbol (2008): MBWP Model Equations (mathematical foundation, wavelet components)
+- `wiki/sources/mbwp_step1_initial_operator.md` — Abitbol & Hootman (2009): MBWP Step 1 (initial operator creation workflow)
+- `wiki/sources/mbwp_step2_estimating_parameters.md` — Hootman & Abitbol (2009): MBWP Step 2 (Q and S/N parameter estimation)
+- `wiki/sources/mbwp_step3_final_operator.md` — Abitbol & Hootman (2009): MBWP Step 3 (final operator creation and export)
+- `wiki/sources/brown_dp3_mbwp_module.md` — David Brown: DP3 MBWP Module (deconvolution training, coloured deconvolution)
+
+**Concept page created (1):**
+- `wiki/concepts/model_based_wavelet_processing.md` — Comprehensive MBWP concept page covering theory, workflow, advantages over SCD
+
+**Raw texts extracted to `wiki/sources/_raw_text/`:**
+- David Brown - DP3 MBWP Module.pptx
+- MBWP Model Equations.pptx
+- MBWP Step 1 - Initial Operator.pptx
+- MBWP Step 2 - Estimating Parameters.pptx
+- MBWP Step 3 - Final Operator.pptx
+- MBWP Update 2008.pptx
+
+**Lecture-ready page updated:**
+- `wiki/lecture_ready/term03_lec05_broadband_deconvolution.md` — expanded Section 4 (Land Data Processing — MBWP) with:
+  - New subsections 4.5 (MBWP Theory) and 4.6 (MBWP Workflow)
+  - References to all 6 new MBWP source pages
+  - Links to new MBWP concept page
+  - Comparison table: SCD vs MBWP
+
+**Materials covered:**
+- MBWP theoretical foundation: wavelet modeling from physical components (source, Q, detector, instrument)
+- MBWP workflow: 3-step process (initial operator → parameter estimation → final operator)
+- Advantages over SCD: non-minimum-phase correction, explicit Q modeling, noise modeling
+- Validation methods: VSP measurements, mixed-source survey consistency
+- Practical considerations: when to use MBWP, integration with other processes
+
+**Next steps for lecture:**
+- Create lecture outline and notes
+- Create figures (MBWP workflow diagram, SCD vs MBWP comparison)
+- Russian translation
+
+## [2026-07-25] ingest | Term 3 Lecture 5 — broadband deconvolution sources
+
+Ingested materials for Term 3 Lecture 05 (Broadband Deconvolution):
+
+**Source pages created (8):**
+- `wiki/sources/cgg_odt04_deconvolution_part2_signature.md` — CGG ODT04 Part 2: Signature Deconvolution (designature, de-bubble, zero-phasing, bootstrap deghosting)
+- `wiki/sources/cgg_odt04_deconvolution_part3_demultiple.md` — CGG ODT04 Part 3: Deconvolution as De-multiple (predictive decon for water-layer reverberations)
+- `wiki/sources/amundsen_zhou_2013_deghosting.md` — Amundsen & Zhou (2013): Low-frequency seismic deghosting
+- `wiki/sources/li_et_al_2020_sparse_deghosting.md` — Li et al. (2020): Simultaneous receiver-side deghosting and denoising
+- `wiki/sources/ghosh_2000_ghost_deconvolution.md` — Ghosh (2000): Deconvolving the ghost effect of the water surface
+- `wiki/sources/lindsey_1960_ghost_elimination.md` — Lindsey (1960): Elimination of seismic ghost reflections
+- `wiki/sources/monk_2020_broadband_seismic.md` — Monk (2020): Broadband Seismic chapter from SEG Distinguished Instructor Short Course
+- `wiki/sources/zhang_yuan_2019_robust_deconvolution.md` — Zhang & Yuan (2019): Robust surface-consistent deconvolution
+
+**Concept pages created (3):**
+- `wiki/concepts/broadband_seismic.md` — Broadband concept, benefits, ghost notches, resolution and bandwidth
+- `wiki/concepts/marine_deghosting.md` — Ghost physics, notch frequencies, and deghosting methods (bootstrap, PZ, sparse, variable-depth)
+- `wiki/concepts/source_signature_designature.md` — Airgun signature, bubble oscillation, de-bubble, designature workflow
+
+**Raw texts extracted to `wiki/sources/_raw_text/`:**
+- ODT04 Part 2 and Part 3
+- Amundsen & Zhou (2013)
+- Li et al. (2020)
+- Ghosh (2000)
+- Lindsey (1960)
+- Monk (2020) Chapter 2
+- Zhang & Yuan (2019)
+
+**Materials covered:**
+- Marine processing: de-bubble, designature, deghosting (classical and modern methods)
+- Land processing: MBWP (from ODT04 and MBWP presentations), receiver effects, absorption recap, blueness correction, noise effects
+- Broadband concept: bandwidth, resolution, octaves, benefits for interpretation
+- Robust surface-consistent deconvolution: L1/L2 optimization for foothill data
+
+**Still needed for lecture:**
+- Extract and summarize MBWP presentations (legacy .ppt format, need catppt tool)
+- Create lecture outline and notes
+- Create figures
+- Russian translation
+
 ## [2026-07-22] derivation | SVD primer for seismic noise attenuation
 
 Created `lecture_notes/derivations/svd_primer_derivation.en.md` — a short, self-contained primer on the singular value decomposition for students who need it for rank-reduction noise attenuation.

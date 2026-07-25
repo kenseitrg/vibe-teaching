@@ -78,7 +78,11 @@ The source signature and ghosts vary with propagation angle:
 
 - [Deconvolution](deconvolution.md)
 - [Predictive deconvolution](predictive_deconvolution.md)
+- [Broadband seismic](broadband_seismic.md)
+- [Marine deghosting](marine_deghosting.md)
+- [Source signature and designature](source_signature_designature.md)
 
 ## Sources
 
 - [CGG ODT04 Part 1](../sources/cgg_odt04_deconvolution_part1_wavelet.md)
+- [CGG ODT04 Part 2](../sources/cgg_odt04_deconvolution_part2_signature.md)
