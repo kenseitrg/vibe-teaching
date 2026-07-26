@@ -896,3 +896,27 @@ Updated `wiki/index.md` with the new concept pages and source-title change.
 Created `lecture_notes/ru/term01_lec05_spectral_analysis_and_filtering.ru.md` — full Russian translation of the English lecture notes on spectral analysis and frequency filtering.
 
 Updated `wiki/index.md` to include the new Russian notes.
+
+## [2026-07-26] ingest | Regularization & interpolation foundation for Term 3 Lecture 06
+
+Built the wiki knowledge base to support Term 3 Lecture 06 (regularization and interpolation of seismic data). Extracted raw text from 13 papers in `papers/regularization/` to `wiki/sources/_raw_text/`.
+
+**Concept pages created (6):**
+- `wiki/concepts/seismic_data_regularization.md` — umbrella: why regularize, interpolation vs regularization, the 3D→4D→5D dimensionality ladder, method families.
+- `wiki/concepts/spatial_spectral_leakage.md` — leakage from irregular sampling; least-squares vs ALFT remedies.
+- `wiki/concepts/anti_leakage_fourier_transform.md` — ALFT/AA-ALFT/MPFI algorithm, weighting, windowing, anti-alias, QC.
+- `wiki/concepts/matching_pursuit.md` — MP/OMP greedy sparse recovery.
+- `wiki/concepts/nonuniform_fourier_transform.md` — irregular-grid DFT, gridding, computational role in ALFT.
+- `wiki/concepts/radon_interpolation.md` — sparse high-resolution Radon reconstruction (Trad 2002; Feng 2022 CNN priors).
+
+**Concept page expanded (1):**
+- `wiki/concepts/radon_transform.md` — was a stub; now covers linear/parabolic/hyperbolic variants and uses (demultiple, noise, interpolation).
+
+**Source pages created (13):**
+- `xu2010_antileakage_fourier_transform`, `schonewille2009_aa_alft`, `schonewille2013_mpfi_priors`, `trad2009_5d_interpolation`, `trad2002_radon_interpolation`, `zwartjes2006_fourier_reconstruction`, `tropp2007_omp`, `feng2022_cnn_radon`, `abma2005_interpolation_comparison`, `tang2017_5d_mpfi_srme`, `spitz1991_fx_interpolation`, `naghizadeh2009_fx_adaptive`, `gulunay2003_ft_interpolation`.
+
+Updated `wiki/index.md` with the 6 new concept pages and 13 new source pages; refreshed the Radon transform summary.
+
+**Reference decisions (from planning):**
+- Chose Radon-domain interpolation (over curvelet/compressed sensing) for the modern-extensions section; `papers/regularization/` gained `trad2002.pdf` and `gxac041.pdf` (Feng 2022).
+- Dropped the Persian-language `article_58889_…pdf` as a reading reference.

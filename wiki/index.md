@@ -30,7 +30,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Deterministic deconvolution](concepts/deterministic_deconvolution.md) | Deconvolution with a known or measured wavelet | draft |
 | [Statistical deconvolution](concepts/statistical_deconvolution.md) | Estimating the inverse filter from the data itself | draft |
 | [Predictive deconvolution](concepts/predictive_deconvolution.md) | Removing repetitive signals by prediction error filtering | draft |
-| [Radon transform](concepts/radon_transform.md) | Transform data to ray-parameter domain for filtering and deconvolution | draft |
+| [Radon transform](concepts/radon_transform.md) | Transform data to ray-parameter domain for filtering, demultiple and interpolation | draft |
 | [Surface-consistent deconvolution](concepts/surface_consistent_deconvolution.md) | Separating source/receiver coupling and near-surface effects | draft |
 | [Wiener filter](concepts/wiener_filter.md) | Optimal least-squares shaping filter and normal equations | draft |
 | [Seismic data processing](concepts/seismic_data_processing.md) | Overview, goals, and typical processing flow | draft |
@@ -69,6 +69,12 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Marine deghosting](concepts/marine_deghosting.md) | Ghost physics, notch frequencies, and deghosting methods (bootstrap, PZ, sparse) | draft |
 | [Source signature and designature](concepts/source_signature_designature.md) | Airgun signature, bubble oscillation, de-bubble, designature workflow | draft |
 | [Model-Based Wavelet Processing](concepts/model_based_wavelet_processing.md) | Deterministic wavelet modeling from physical components (Q, S/N, detector, instrument) | draft |
+| [Seismic data regularization](concepts/seismic_data_regularization.md) | Mapping irregular/sparse data to a regular grid for migration and SRME; 3D/4D/5D | draft |
+| [Spatial spectral leakage](concepts/spatial_spectral_leakage.md) | Fourier energy crosstalk from irregular sampling and how to control it | draft |
+| [Anti-leakage Fourier transform](concepts/anti_leakage_fourier_transform.md) | Iterative matching-pursuit Fourier regularization (ALFT/AA-ALFT/MPFI) | draft |
+| [Matching pursuit](concepts/matching_pursuit.md) | Greedy sparse recovery (MP/OMP) with a transform dictionary | draft |
+| [Non-uniform Fourier transform](concepts/nonuniform_fourier_transform.md) | Fourier analysis/synthesis on irregular grids; gridding and the NUFFT | draft |
+| [Radon interpolation](concepts/radon_interpolation.md) | Sparse high-resolution Radon reconstruction of missing traces | draft |
 
 ## Techniques
 
@@ -151,6 +157,19 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Hootman & Abitbol (2009)](sources/mbwp_step2_estimating_parameters.md) | MBWP Step 2: Estimating Q and S/N Parameters | workflow guide | reviewed |
 | [Abitbol & Hootman (2009)](sources/mbwp_step3_final_operator.md) | MBWP Step 3: Final Operator Creation and Export | workflow guide | reviewed |
 | [Brown (DP3 Module)](sources/brown_dp3_mbwp_module.md) | DP3 MBWP Module — deconvolution training | training module | reviewed |
+| [Xu, Zhang & Lambaré (2010)](sources/xu2010_antileakage_fourier_transform.md) | Antileakage Fourier transform for regularization in higher dimensions | paper | draft |
+| [Schonewille et al. (2009)](sources/schonewille2009_aa_alft.md) | Anti-alias anti-leakage Fourier transform | paper | draft |
+| [Schonewille et al. (2013)](sources/schonewille2013_mpfi_priors.md) | Matching pursuit Fourier interpolation with priors from a second dataset | paper | draft |
+| [Trad (2009)](sources/trad2009_5d_interpolation.md) | Five-dimensional interpolation: recovering from acquisition constraints | paper | draft |
+| [Trad, Ulrych & Sacchi (2002)](sources/trad2002_radon_interpolation.md) | Accurate interpolation with high-resolution time-variant Radon transforms | paper | draft |
+| [Zwartjes & Sacchi (2007)](sources/zwartjes2006_fourier_reconstruction.md) | Fourier reconstruction of nonuniformly sampled, aliased seismic data | paper | draft |
+| [Tropp & Gilbert (2007)](sources/tropp2007_omp.md) | Signal recovery from random measurements via orthogonal matching pursuit | paper | draft |
+| [Feng et al. (2022)](sources/feng2022_cnn_radon.md) | De-aliased high-resolution Radon transform with CNN sparse priors | paper | draft |
+| [Abma & Kabir (2005)](sources/abma2005_interpolation_comparison.md) | Comparisons of interpolation methods | paper | draft |
+| [Tang et al. (2017)](sources/tang2017_5d_mpfi_srme.md) | 5D MPFI and its application in SRME for large-offset coil data | paper | draft |
+| [Spitz (1991)](sources/spitz1991_fx_interpolation.md) | Seismic trace interpolation in the F-X domain | paper | draft |
+| [Naghizadeh & Sacchi (2009)](sources/naghizadeh2009_fx_adaptive.md) | f-x adaptive seismic-trace interpolation | paper | draft |
+| [Gülünay (2003)](sources/gulunay2003_ft_interpolation.md) | Seismic trace interpolation in the Fourier transform domain | paper | draft |
 
 ## Comparisons
 
