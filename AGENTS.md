@@ -166,3 +166,57 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | $\boldsymbol{\Sigma}$ | Diagonal matrix of singular values | диагональная матрица сингулярных чисел |
 | $\mathbf{H}(f)$ | Hankel matrix at frequency $f$ | матрица Ганкеля на частоте $f$ |
 | $K$ | Rank truncation parameter | параметр усечения ранга |
+| — | Broadband seismic data | широкополосные сейсмические данные |
+| — | Octave | октава |
+| — | Ghost (source / receiver) | волна-спутник (источника / приёмника) |
+| — | Spectral notch | провал (нуль) спектра; интерференционный провал |
+| — | Deghosting | подавление волн-спутников |
+| — | Bubble oscillation / bubble pulse | пульсация газового пузыря; пузырьковый импульс |
+| — | De-bubble | подавление пузырькового импульса |
+| — | Airgun | пневмоисточник (пневматический излучатель) |
+| — | Streamer | сейсмокоса |
+| — | Designature | формирующая фильтрация |
+| — | Hydrophone | гидрофон |
+| — | Vertical particle velocity | вертикальная колебательная скорость частиц |
+| — | Dual-sensor (PZ) streamer | двухкомпонентная (PZ) сейсмокоса |
+| — | Upgoing / downgoing wavefield | восходящее / нисходящее волновое поле |
+| — | Far-field signature | импульс (диаграмма) в дальней зоне |
+| — | Comb filter | гребенчатый фильтр |
+| $v_w$ | Water velocity (sound speed in water) | скорость звука в воде |
+| — | Side lobe / central lobe | боковой / центральный лепесток |
+| — | Tuning thickness | резонансная толщина (толщина настройки) |
+| — | Minimum-phase wavelet | минимально-фазовый импульс |
+| — | Spiking deconvolution | деконволюция сжатия |
+| — | Predictive deconvolution | предсказывающая деконволюция |
+| — | Colored reflectivity / colored deconvolution | окрашенность спектра коэффициентов отражения; окрашенная деконволюция |
+| — | White reflectivity | белый спектр отражений |
+| — | Wavelet shaping | формирование импульса |
+| — | Spectral slope | наклон спектра |
+| — | Amplitude recovery / spherical divergence | восстановление амплитуд / сферическое расхождение |
+| — | Vibroseis source | вибросейсмический источник (вибратор) |
+| — | Klauder wavelet | импульс Клаудера |
+| — | Sweep | ЛЧМ-сигнал (свип) |
+| — | Dynamite (buried charge) | взрывной источник (скважинный заряд ВВ) |
+| — | Mixed-source survey | съёмка со смешанными источниками |
+| — | Geophone | геофон |
+| — | Moving-coil geophone | электродинамический (магнитоэлектрический) геофон |
+| — | Accelerometer | акселерометр |
+| — | MEMS sensor | МЭМС-датчик |
+| $f_0$ | Natural frequency (geophone) | собственная частота (геофона) |
+| $h$ | Damping factor (geophone) | коэффициент демпфирования (затухания) геофона |
+| — | Coupling (receiver–ground) | контакт (геофона) с грунтом; связь с грунтом |
+| — | DC response | отклик на нулевой частоте |
+| — | Cultural noise | техногенные помехи |
+| — | Noise burst | сильные шумы |
+| — | Foothill data | данные предгорных зон |
+| — | Permafrost | многолетнемёрзлые породы (криолитозона) |
+| — | Heavy-tailed distribution | распределение с тяжёлыми хвостами |
+| — | Outlier | выброс |
+| — | Least absolute deviations | метод наименьших абсолютных отклонений (МНАА) |
+| — | JOR (Jacobi over-relaxation) | метод Якоби со сверхрелаксацией |
+| — | Well-to-seismic tie | сейсмостратиграфическая привязка |
+| — | Synthetic seismogram | синтетическая сейсмограмма |
+| — | AVO | АВО (амплитуда в зависимости от удаления) |
+| — | VSP | вертикальное сейсмическое профилирование (ВСП) |
+| — | MBWP (Model-Based Wavelet Processing) | модельно-ориентированная обработка импульса (MBWP) |
+| — | FISTA | FISTA (быстрый итеративный пороговый алгоритм) |

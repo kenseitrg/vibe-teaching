@@ -423,6 +423,10 @@ where:
 
 The crucial distinction from SCD: **MBWP does not assume minimum phase, white reflectivity, or zero noise.** Instead, it builds the wavelet from measured or modeled components, each of which may be non-minimum-phase.
 
+![](figures/term03_lec05/term03_lec05_mbwp_model.png){width=95%}
+
+**Figure 11.** *MBWP model diagram, drawn along the physical wave path. The diagram follows the wave's journey from source to record, top to bottom: the **source** launches a signal $s(t)$; **earth absorption** applies $Q(t)$; the wave is shaped by the **reflectivity** $r(t)$; random noise $n(t)$, scaled by the **S/N level** ($\times$), joins at the $(+)$ junction; and the combined signal passes through the **detector** response $D(t)$ and the **instrument** response $I(t)$ to form the recorded trace $x(t)$. Arrows denote convolution ($*$). The orange boxes are the MBWP model components linked to the stage each one describes — the source signature $S(t)$, the effective absorption $Q_\text{eff}$, the detector response $D(t)$, and the instrument response $I(t)$. Of these, only $Q$ and S/N (bold outline) are free parameters estimated from the data; the rest are measured. Convolving the four components gives the model wavelet $W(t) = S(t) * Q(t) * D(t) * I(t)$.
+
 ### 5.2 Only two free parameters
 
 Despite the apparent complexity, the model has only **two free parameters** that must be estimated from the data:
@@ -497,6 +501,10 @@ $$ Q/t = 55 / \text{slope} $$
 - Condition: apply 100 ms Hanning taper to both ends; remove high-frequency artifacts if present.
 - Export as a filter for production application.
 
+![](figures/term03_lec05/term03_lec05_mbwp_workflow.png){width=85%}
+
+**Figure 12.** *MBWP workflow. Three sequential steps. **Step 1 — Initial model:** the measured source, detector, and instrument responses are loaded and, starting from default values ($Q = 30$, S/N $= 20$ dB), convolved into the initial model wavelet $W(t)$. **Step 2 — Parameter estimation:** log power spectra of field traces are computed and the model log-spectrum is fitted to them, so the spectral slope gives $Q$ and the signal-to-noise level gives S/N; both are then decomposed surface-consistently and averaged. **Step 3 — Final operator:** the model wavelet is rebuilt with the estimated $Q$ and S/N, the residual filter is derived, and its amplitude and phase spectra are QC'd before export.*
+
 ### 5.6 Production application
 
 The MBWP operator is applied **after** surface-consistent deconvolution and **before** moveout correction:
@@ -526,11 +534,9 @@ MBWP can be validated by three independent methods:
 
 3. **Mixed-source phase consistency.** In surveys using both vibroseis and dynamite, the crosscorrelation phase spectrum between the two source types shows significant rotation before MBWP. After the MBWP residual filter, the phase flattens to near zero — consistent phase across sources without requiring overlapping recordings.
 
-**Figure 11.** *MBWP model diagram. The convolutional model showing source, Q, detector, and instrument components assembled into the model wavelet. The noise path through detector and instrument is shown separately.*
+![](figures/term03_lec05/term03_lec05_mbwp_xcor_correction.png){width=100%}
 
-**Figure 12.** *MBWP workflow. Three-step process: initial model (default Q, S/N) → parameter estimation (fit to field spectra) → final operator (residual filter). Before/after amplitude and phase spectra shown.*
-
-**Figure 13.** *Mixed-source phase consistency. Crosscorrelation phase spectrum between vibroseis and dynamite data before MBWP (significant rotation) and after MBWP (phase near zero).*
+**Figure 13.** *Mixed-source phase consistency (two rows, three columns). **Top row — after deconvolution, before MBWP:** the dynamite wavelet (left) and the vibroseis wavelet (middle) still differ in phase, so their cross-correlation (right) shows significant phase rotation. **Bottom row — after the MBWP correction:** the dynamite wavelet (left) and the vibroseis wavelet (middle) are brought to a common phase, and their cross-correlation (right) flattens to near zero.*
 
 ## 6. Robust surface-consistent deconvolution
 
@@ -587,11 +593,9 @@ Zhang & Yuan (2019) demonstrate the method on foothill data from southern China 
 
 Robust SCD broadens the effective bandwidth by ~25 Hz at **both** the low and high frequency ends compared to conventional SCD. The stack section shows improved S/N and spatial energy consistency — the operators do not introduce the erratic amplitude variations seen with conventional SCD on the same data.
 
-**Figure 14.** *Traditional vs. robust SC deconvolution. Operators derived from noisy, complex-near-surface data — conventional SCD produces erratic operators; robust SCD produces smooth, stable operators.*
+![](figures/term03_lec05/term03_lec05_robust_scd_data.png){width=70%}
 
-**Figure 15.** *Robust SC deconvolution flow. Three-step procedure: spectral analysis → robust L1/L2 decomposition → spectral application.*
-
-**Figure 16.** *Field data example (southern China foothill, after Zhang & Yuan 2019). Shot gathers and amplitude spectra before, after conventional SCD, and after robust SCD. The robust result shows broader bandwidth and better S/N.*
+**Figure 14.** *Field data example (southern China foothill, after Zhang & Yuan 2019). Shot gathers and amplitude spectra before, after conventional SCD, and after robust SCD. The robust result shows broader bandwidth and better S/N.*
 
 ## 7. Summary
 

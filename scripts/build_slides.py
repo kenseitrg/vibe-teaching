@@ -11,6 +11,7 @@ import argparse
 import re
 from pathlib import Path
 
+from PIL import Image as PILImage
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN
@@ -166,7 +167,8 @@ def parse_outline(text: str):
         fig_m = re.match(r"^(?:[-*]\s+|\*\*)?Figure:(?:\*\*)?\s*`?([^`]+)`?$", line, re.IGNORECASE)
         if fig_m:
             current["figure"] = fig_m.group(1).strip()
-            if "optional" in current["figure"].lower() or "can be added" in current["figure"].lower():
+            fig_lower = current["figure"].lower()
+            if fig_lower in ("none", "") or "optional" in fig_lower or "can be added" in fig_lower:
                 current["figure"] = None
             continue
 
@@ -252,12 +254,22 @@ def add_content_slide(prs, title: str, bullets: list[str], figure_path: str | No
                     break
 
         if path and Path(path).exists():
-            # Place figure on the right half of the slide
-            left = Inches(6.8)
-            top = Inches(1.6)
-            width = Inches(6.0)
-            height = Inches(5.5)
-            slide.shapes.add_picture(path, left, top, width=width, height=height)
+            # Place figure on the right half of the slide, scaled to fit a
+            # 6.0 x 5.5 in box while preserving the native aspect ratio.
+            max_w, max_h = 6.0, 5.5
+            with PILImage.open(path) as im:
+                iw, ih = im.size
+            aspect = iw / ih
+            fig_w = max_w
+            fig_h = fig_w / aspect
+            if fig_h > max_h:            # tall figure: limit by height instead
+                fig_h = max_h
+                fig_w = fig_h * aspect
+            box_left, box_top = 6.8, 1.6
+            left = box_left + (max_w - fig_w) / 2     # center horizontally in panel
+            top = box_top + (max_h - fig_h) / 2       # center vertically in panel
+            slide.shapes.add_picture(path, Inches(left), Inches(top),
+                                     width=Inches(fig_w), height=Inches(fig_h))
             # Shrink text box to make room
             body.left = Inches(0.5)
             body.top = Inches(1.6)
