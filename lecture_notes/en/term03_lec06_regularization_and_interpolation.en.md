@@ -35,7 +35,7 @@ Almost every advanced processing step assumes the data live on a **regular grid*
 
 But real surveys are never acquired on a perfect grid. Obstacles, permit boundaries, roads, rivers, and economics leave gaps and irregular spacing. Wide-azimuth and long-offset surveys — exactly the ones we want for complex imaging — are typically the *most* sparsely and irregularly sampled. So before we can image or demultiple, we must **regularize**: map the recorded traces from their irregular acquisition grid onto the regular grid that the downstream algorithm expects.
 
-This lecture traces the evolution of that idea. We start from *why* it matters (migration artifacts), clarify the terminology, then move through the legacy prediction-filter methods (T–X, F–X, F–K) and their limits, to the modern workhorse — sparse Fourier reconstruction via the **anti-leakage Fourier transform** — and its Radon-domain and machine-learning extensions. Throughout, one principle ties everything together: **every method succeeds by assuming the data are sparse or simple in some domain, and fails where that assumption breaks.**
+This lecture traces the evolution of that idea. We start from *why* it matters (migration artifacts), clarify the terminology, then move through the legacy prediction-filter methods (T–X, F–X, F–K) and their limits, to the modern workhorse — sparse Fourier reconstruction via the **anti-leakage Fourier transform** — and its modern extensions. Throughout, one principle ties everything together: **every method succeeds by assuming the data are sparse or simple in some domain, and fails where that assumption breaks.**
 
 ## 1. Why regularization is necessary
 
@@ -51,9 +51,9 @@ When traces are missing or irregularly spaced, the sum is incomplete. The impuls
 
 ![](figures/term03_lec06/term03_lec06_migration_artifacts.png){width=90%}
 
-**Figure 1.** *Migration impulse response with and without regularization. A single point diffractor is migrated from (left) a sparsely/irregularly sampled input and (right) the same data after regularization. The irregular input produces a smeared impulse response with prominent tails; regularization restores a focused response. The artifacts are not noise — they are the signature of an incomplete aperture summation.*
+**Figure 1.** *Migration impulse response with and without regularization. Every panel migrates the same number of traces; the only difference between columns is the trace placement — irregular (left) versus regular (right). Top row: a single point diffractor. The irregular aperture produces a smeared impulse response with prominent tails, while the regular aperture focuses the energy at the diffractor. Bottom row: a flat horizon. The irregular aperture contaminates the reflector with scattered artifacts, while the regular aperture reconstructs a clean, continuous flat event at the correct depth. The artifacts are not noise — they are the signature of an incomplete aperture summation, and regularization (reconstructing the wavefield onto a regular grid) removes them.*
 
-The same logic applies to wave-equation migration and to any multi-channel process. 3D SRME, for instance, requires data on a regular offset–azimuth grid; gaps produce incomplete multiple predictions that leave residual multiples after subtraction.
+The same logic applies to wave-equation migration and to any multi-channel process. 3D SRME, for instance, requires data on a regular offset–azimuth or source-receiver grid; gaps produce incomplete multiple predictions that leave residual multiples after subtraction.
 
 ### 1.2 What "regular" means depends on the migration domain
 
@@ -62,11 +62,11 @@ There is no single "regular grid." The target grid is defined by the **migration
 - **Offset migration** — data should be regular in midpoint and offset. Each offset class is imaged separately.
 - **OVT / COV migration** (Term 3 Lecture 01) — data should be regular in **offset-vector tiles**: midpoint $\times$ offset-x $\times$ offset-y. This preserves azimuth, which is essential for azimuthally anisotropic (TTI/HTI) imaging and for amplitude-versus-azimuth analysis.
 
-The regularization algorithm must therefore be told which domain to regularize into, and its dimensionality (Section 4.1) must match that domain.
+The regularization algorithm must therefore be told which geometry to regularize into, and its dimensionality (Section 4.1) must match that domain.
 
-![](figures/term03_lec06/term03_lec06_regular_vs_irregular.png){width=80%}
+![](figures/term03_lec06/term03_lec06_regular_vs_irregular.png){width=90%}
 
-**Figure 2.** *Irregular acquisition versus a regular target grid. Recorded midpoint–offset locations (dots, left) are scattered and gappy. Regularization (right) reconstructs the wavefield onto a fixed, evenly spaced grid of bins and offsets defined by the chosen migration domain. The output grid is fixed by the algorithm's requirements — not by where data happen to be missing.*
+**Figure 2.** *Irregular acquisition versus a regular target grid, shown as a fold map (traces per CMP–offset bin) for a single inline of an orthogonal land geometry. Top row: (a) the recorded fold is irregular, banded and gappy, because the perpendicular source and receiver lines and the finite spread sample the midpoint–offset plane unevenly; (b) the regularized target for common-offset migration is a uniform regular grid, every bin filled to the same designed fold. Bottom row: the same contrast collapsed to the average fold per offset bin — (c) the recorded fold varies strongly with offset, whereas (d) the regularized fold is flat.*
 
 ## 2. Terminology and the unifying principle
 
@@ -75,9 +75,8 @@ The regularization algorithm must therefore be told which domain to regularize i
 The two words are often used interchangeably, but their emphasis differs:
 
 - **Regularization** is the primary goal: produce a *regularly sampled* dataset so that downstream algorithms behave correctly. The output locations are fixed by the target grid.
-- **Interpolation** is filling in *missing* traces at specific locations. It is sometimes a beneficial side effect of regularization, and occasionally the explicit goal — for example, densifying data so that a noise-attenuation step can handle aliased coherent noise.
+- **Interpolation** is filling in *missing* traces at specific locations. It is sometimes a beneficial side effect of regularization, and occasionally the explicit goal — for example, increasing data density so that a noise-attenuation step can handle aliased coherent noise.
 
-Most algorithms marketed as "interpolation" are, in practice, regularization engines. We will use both terms but keep the distinction in mind.
 
 ### 2.2 The unifying principle: sparsity in a domain
 
@@ -94,7 +93,7 @@ This single idea — *find the domain in which the data are simplest, model them
 
 ![](figures/term03_lec06/term03_lec06_sparsity_domains.png){width=90%}
 
-**Figure 3.** *The same CMP gather represented in four domains. In the time–offset domain the data look complex, but each transform concentrates the energy differently: a few dominant dips in F–K, focused peaks in the Radon domain, a sparse set of components in the spatial Fourier domain. Interpolation = keep the few large coefficients, discard the rest, transform back onto the regular grid.*
+**Figure 3.** *The unifying principle of §2.2: the same data — three linear events of different dip — represented in three domains. In the time–space domain (a) the events overlap and cross, so the data look complex. In the F–K domain (b) each linear event maps to a single dip (a line through the origin), so the spectrum has only a few dominant components. In the linear Radon (τ–p) domain (c) each event focuses to a single point at its intercept and slowness. What looks complex in (a) is sparse in (b) and (c): interpolation means keeping the few large coefficients in such a domain, discarding the rest, and transforming back onto a regular grid.*
 
 ## 3. Legacy methods and their shortcomings
 
@@ -141,6 +140,10 @@ All three legacy methods are **filter-based** and rest on linearity/stationarity
 
 These limitations motivated a different philosophy: rather than predicting trace-to-trace, **estimate a sparse transform model of the whole wavefield and invert it onto the target grid**. This is the sparse-reconstruction approach, and its Fourier version is the subject of Section 4.
 
+![](figures/term03_lec06/term03_lec06_interpolation_methods.png){width=100%}
+
+**Figure 4.** *Why regular sampling matters. The three legacy methods (T–X, F–X, F–K) are applied to the three-event panel of Figure 3 under two decimations, each keeping half the traces: regular (every second trace removed) and irregular (a random half removed). On regular decimation the sampling mask is a periodic comb, so in the Fourier domain the spectrum is merely replicated — structured, invertible aliasing — and all three methods reconstruct the missing traces mostly accurately. On irregular decimation the mask is an aperiodic comb whose transform has sidelobes at every wavenumber; convolving with those sidelobes smears each component into many false ones (spectral leakage — equivalently, the DFT basis is no longer orthogonal on the irregular grid), and every method degrades, F–K most of all. The RMS error annotated on each panel is measured over the missing traces; T–X carries a larger error throughout, the honest signature of its single-dip assumption on this multi-dip data (§3.1). The degradation is not method-specific but fundamental — it is exactly what motivates the sparse-reconstruction and anti-leakage approach of Section 4 (Figure 5).*
+
 ## 4. Modern regularization: multi-dimensional sparse reconstruction
 
 ### 4.1 The dimensionality of the transform
@@ -155,13 +158,7 @@ The defining feature of modern regularization is that it operates on **multi-dim
 
 A 3D regularization works within a single offset class: it can repair the spatial (midpoint) sampling but says nothing about missing offsets. Adding the offset axis (4D) fills offset gaps, but because azimuth is not a separate axis, all azimuths at a given offset are averaged together — smearing the azimuthal signal we need for TTI imaging and AVAz analysis. Only a **5D** transform, which uses every spatial axis (inline, crossline, offset, azimuth, time), has enough information to preserve azimuth and AVO while filling gaps. 5D is the state of the art (Trad 2009).
 
-> **Naming pitfall.** "4D" and "5D" here count the **axes of the data cube** (spatial dimensions plus time). They have nothing to do with *4D time-lapse* seismic. This confusion is common — flag it explicitly.
-
 The dimensionality is chosen to match the migration domain of Section 1.2: an OVT migration calls for 5D regularization so that offset and azimuth are both made regular.
-
-![](figures/term03_lec06/term03_lec06_dimensionality_ladder.png){width=90%}
-
-**Figure 4.** *The dimensionality ladder. The same irregular wide-azimuth dataset reconstructed at 3D, 4D, and 5D. 3D repairs structure but leaves offset gaps; 4D fills offsets but smears azimuth; 5D preserves both offset and azimuth and fills the most gaps. The improvement comes from giving the inversion more of the data's spatial structure to constrain the solution.*
 
 ### 4.2 Spatial spectral leakage
 
@@ -181,9 +178,9 @@ Equivalently: the DFT basis functions $e^{i2\pi k\cdot x}$ are orthogonal only o
 
 A plain forward DFT is therefore inadequate. Least-squares Fourier estimation (Duijndam et al. 1999; Zwartjes & Sacchi 2007) solves for the coefficients that best fit the data and removes leakage when the data are band-limited and well sampled — but becomes poorly determined for sparse, gappy data. The anti-leakage Fourier transform solves this with an iterative scheme that stays stable exactly where least squares fails.
 
-![](figures/term03_lec06/term03_lec06_spectral_leakage.png){width=85%}
+![](figures/term03_lec06/term03_lec06_spectral_leakage.png){width=100%}
 
-**Figure 5.** *Spectral leakage from irregular sampling. Top: a clean spatial spectrum (a few sharp peaks) sampled on a regular grid reconstructs faithfully. Bottom: the same wavefield sampled irregularly — the sampling function's sidelobes convolve with the spectrum, smearing each peak into many false ones. A direct DFT of the irregular data returns this smeared spectrum, not the true one.*
+**Figure 5.** *Spectral leakage from irregular sampling. Left column — 1D Fourier spectra, regular vs. irregular sampling, for two signals: a sum of two sine waves (top) and a minimum-phase Ricker wavelet (bottom). Regular sampling reproduces the true spectrum (sharp peaks for the sine sum, the smooth Ricker amplitude curve); irregular sampling smears it, because the aperiodic sampling function's sidelobes convolve with the spectrum — $\hat f_s(k)=\hat f(k)*\hat L(k)$ — leaking energy into frequencies that contain none. Right column — the same contrast in two dimensions: (a) regularly sampled traces and (b) their F–K transform, with energy concentrated on clean dips; (c) the identical traces irregularly sampled and (d) their F–K transform, where each event's energy is scattered into sidelobes.*
 
 ### 4.3 The non-uniform DFT as computational enabler
 
