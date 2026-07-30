@@ -25,7 +25,7 @@ By the end of this lecture you should be able to:
 
 - Term 1 Lecture 05: the discrete Fourier transform, sampling, aliasing, and the convolution theorem.
 - Term 1 Lecture 06: prediction-error filters and the predictability of coherent events.
-- Term 2: the Radon (τ–p) transform and its use for separation.
+- Term 2: the Radon ($\tau$–$p$) transform and its use for separation.
 - Term 3 Lecture 01: 3D acquisition geometry, bins, fold, and the unit cell.
 - Term 3 Lecture 04: noise attenuation and the idea of sparsity in a transform domain (FK, Radon, curvelet).
 
@@ -87,13 +87,13 @@ No method can invent information that is not there. Every interpolation method w
 | T–X, F–X | space / frequency–space | events are **locally linear** and stationary |
 | F–K | frequency–wavenumber | events are **globally linear** |
 | ALFT / MPFI | spatial Fourier | the spatial spectrum is **sparse** |
-| Radon | intercept–curvature (τ–p) | events are **sparse in moveout/curvature** |
+| Radon | intercept–curvature ($\tau$–$p$) | events are **sparse in moveout/curvature** |
 
 This single idea — *find the domain in which the data are simplest, model them there, transform back* — is the spine of the whole lecture. It also tells us why methods fail: when the data violate the assumption (curved events, complex structure, gaps larger than the model can span), the reconstruction degrades.
 
 ![](figures/term03_lec06/term03_lec06_sparsity_domains.png){width=90%}
 
-**Figure 3.** *The unifying principle of §2.2: the same data — three linear events of different dip — represented in three domains. In the time–space domain (a) the events overlap and cross, so the data look complex. In the F–K domain (b) each linear event maps to a single dip (a line through the origin), so the spectrum has only a few dominant components. In the linear Radon (τ–p) domain (c) each event focuses to a single point at its intercept and slowness. What looks complex in (a) is sparse in (b) and (c): interpolation means keeping the few large coefficients in such a domain, discarding the rest, and transforming back onto a regular grid.*
+**Figure 3.** *The unifying principle of §2.2: the same data — three linear events of different dip — represented in three domains. In the time–space domain (a) the events overlap and cross, so the data look complex. In the F–K domain (b) each linear event maps to a single dip (a line through the origin), so the spectrum has only a few dominant components. In the linear Radon ($\tau$–$p$) domain (c) each event focuses to a single point at its intercept and slowness. What looks complex in (a) is sparse in (b) and (c): interpolation means keeping the few large coefficients in such a domain, discarding the rest, and transforming back onto a regular grid.*
 
 ## 3. Legacy methods and their shortcomings
 
@@ -212,7 +212,7 @@ Because the basis is non-orthogonal on the irregular grid, the same component ma
 
 ![](figures/term03_lec06/term03_lec06_alft_iteration.png){width=90%}
 
-**Figure 6.** *One ALFT iteration, visualized. Left: the residual's spatial spectrum (non-uniform DFT). Centre: the single strongest component selected. Right: the residual after that component is subtracted. Repeating this peeling concentrates the model on the few dominant components; the accumulated selected components form the final sparse spectrum used for reconstruction.*
+**Figure 6.** *ALFT matching pursuit, visualized as it converges. The data are the simplest possible case: a sum of three complex harmonics of unequal amplitude, sampled at irregular positions, so the true spatial spectrum is exactly three spikes. Each row is a later stage of the same run. The top row is the input (iteration 0): the full signal and its non-uniform DFT, which is already smeared with leakage sidelobes because the Fourier basis is non-orthogonal on the irregular grid. The rows below then advance through iterations 1, 3, 8. Column (a): the spatial residual — the irregular samples not yet explained — shrinks toward zero (RMS annotated). Column (b): the residual's non-uniform DFT, losing its strongest peak each iteration (red marker = the next component to be picked). Column (c): the accumulated selected spectrum (stems) against the true spectrum (open circles); the three dominant stems land on the true spikes, and matching pursuit spends later iterations mopping up the small leakage components near the base.*
 
 ### 4.5 Anti-alias ALFT: interpolation beyond aliasing
 
@@ -222,7 +222,7 @@ Standard ALFT handles steep dips well on *irregular* grids, but has a surprising
 
 ![](figures/term03_lec06/term03_lec06_antialias_weighting.png){width=80%}
 
-**Figure 7.** *Anti-alias weighting. In near-regular sampling, an event's true wavenumber and its aliases have equal amplitude (left), so selection is ambiguous. The low-frequency spectrum is un-aliased and identifies the true component; its weights (centre) are extrapolated to high frequency to suppress the aliases (right), steering the reconstruction to the correct dip.*
+**Figure 7.** *Anti-alias ALFT, step by step. (1) The input f–k spectrum of a near-regularly sampled event: its true wavenumber and its aliases carry equal amplitude, so a plain matching-pursuit selection is ambiguous and can lock onto the wrong dip. (2) A reduced-bandwidth ALFT run on the low frequencies only — there the true component lies inside the Nyquist window while the aliases fall outside it, so the low-frequency spectrum is un-aliased and identifies the true dip; this supplies the prior. (3) The spectral weights derived from that clean low-frequency estimate are extrapolated up to high frequency. (4) Applying those weights to the full aliased spectrum passes the true component and suppresses the aliases. (5) The resulting f–k spectrum, with the aliasing removed and the event restored to its correct dip.*
 
 ### 4.6 Parameters and QC
 
@@ -238,7 +238,7 @@ The essential QC is **prediction of the input**: sample the reconstructed model 
 
 ### 5.1 Radon-domain reconstruction
 
-The ALFT uses a Fourier dictionary. The same sparse-reconstruction idea works with a **Radon dictionary** — and for CMP gathers it is often a better match, because primary reflections follow hyperbolic moveout and so collapse to **focused peaks** in the τ–p domain, while gaps and noise spread out (Term 2). Filling gaps then means estimating a sparse Radon model and transforming back.
+The ALFT uses a Fourier dictionary. The same sparse-reconstruction idea works with a **Radon dictionary** — and for CMP gathers it is often a better match, because primary reflections follow hyperbolic moveout and so collapse to **focused peaks** in the $\tau$–$p$ domain, while gaps and noise spread out (Term 2). Filling gaps then means estimating a sparse Radon model and transforming back.
 
 The quality depends on how well events match the basis. A **true hyperbolic** Radon transform approximates reflections better than the parabolic one at large offsets (common in marine data), but its kernel is time-variant, so fast solvers cannot be used. Trad, Ulrych & Sacchi (2002) make it practical:
 
@@ -252,44 +252,13 @@ A modern twist (Feng et al. 2022) uses a **convolutional neural network** to ext
 
 A practical advantage of Radon-based methods is that their operators can be defined **locally without the explicit windowing** that Fourier methods require (Naghizadeh & Sacchi 2009). Their limitation is the moveout assumption: they are natural for primaries in CMP gathers but less well suited to full 3D/5D azimuthal regularization, where Fourier (ALFT/MPFI) methods dominate.
 
-![](figures/term03_lec06/term03_lec06_radon_interpolation.png){width=90%}
-
-**Figure 8.** *Radon interpolation of a gappy CMP gather. Left: input gather with missing offsets (zeroed traces). Centre: the sparse high-resolution τ–p model — primaries focus to a few peaks; the gaps contribute spread-out, low-amplitude energy that the sparsity constraint suppresses. Right: the reconstructed gather with the missing offsets filled by inverse Radon transform.*
-
 ### 5.2 Priors from a separate dataset
 
 AA-ALFT and MPFI normally derive their anti-alias prior from the data's own low frequencies. Schonewille et al. (2013) show a significant uplift when the prior comes from a **separate, more densely sampled dataset**. Practical cases include **dense-over/sparse-under** acquisitions (a dense shallow survey over a sparse deep one) and **time-lapse** data, where the baseline survey provides the prior for interpolating the monitor survey.
 
 ### 5.3 Orthogonal matching pursuit
 
-Basic matching pursuit can be slow and may re-select atoms. **Orthogonal matching pursuit (OMP)** improves on it: after each atom is selected, re-solve a least-squares fit over *all* atoms chosen so far, keeping the residual orthogonal to the selected subspace. Tropp & Gilbert (2007) showed that OMP reliably recovers a signal with $m$ non-zero coefficients from $O(m \ln d)$ random measurements — comparable to ℓ1 (basis pursuit) guarantees, but faster and simpler to implement. OMP underpins the "orthogonal matching pursuit" extensions used in modern regularization.
-
-### 5.4 5D MPFI for SRME
-
-Tang et al. (2017) apply full **5D matching-pursuit Fourier interpolation** to multivessel "dual-coil" wide-azimuth, long-offset acquisition, specifically to feed SRME. Dual-coil data give richer azimuth and longer offsets for subsalt imaging, but large-offset coverage is less uniform than the dominant azimuths — exactly the irregularity that degrades SRME. 5D MPFI regularizes across all spatial axes, producing the regular offset–azimuth grid that SRME requires. This closes the loop back to Section 1: we regularize so that SRME and migration can work.
-
-## 6. Method selection and a real-data example
-
-### 6.1 Choosing a method
-
-| Situation | Recommended method | Why |
-|-----------|-------------------|-----|
-| Gentle, continuous events; mild aliasing; 2D | F–X (Spitz) or T–X | Fast, robust for linear events |
-| Aliased linear events, moderate gaps | F–K (Gülünay) or F–X | Low→high prior handles aliasing |
-| Sparse, irregular 3D; steep dips | 3D ALFT | Stable where least squares fails |
-| Wide-azimuth; preserve offset + azimuth; AVO/AVAz | 5D ALFT / MPFI | Uses all spatial axes |
-| Beyond-aliasing, near-regular sampling | AA-ALFT | Low-freq weights suppress aliases |
-| Denser companion dataset available | MPFI with external prior | Stronger anti-alias constraint |
-| Gappy CMP gathers; primary interpolation | High-res Radon | Sparse in τ–p; local operators |
-| Feeding SRME on irregular long-offset data | 5D MPFI | Regular offset–azimuth grid |
-
-### 6.2 A real-data example
-
-The accompanying slides show an OVT migration of a wide-azimuth dataset processed three ways: with no regularization, with OVT-domain regularization, and with offset-class regularization. The un-regularized migration shows the impulse-response tails of Section 1.1; the properly regularized (OVT) migration suppresses them and preserves azimuth. A second example runs ALFT+AA on the data and shows the interpolation windows and the effect of the coefficient count — using too few coefficients (1) under-fits and leaves gaps, while a moderate count (4–64) reconstructs the events cleanly without inventing artifacts. The QC in every case is prediction of the input: the reconstructed model, sampled back at the recorded locations, must match the measured traces.
-
-![](figures/term03_lec06/term03_lec06_method_comparison.png){width=90%}
-
-**Figure 9.** *Effect of the number of Fourier coefficients in ALFT. With 1 coefficient the model under-fits and leaves gaps; with 4 and 64 coefficients the dominant events are reconstructed progressively more completely. The right choice balances fidelity to the input (QC) against sparsity — enough coefficients to explain the data, no more.*
+Basic matching pursuit can be slow and may re-select atoms. **Orthogonal matching pursuit (OMP)** improves on it: after each atom is selected, re-solve a least-squares fit over *all* atoms chosen so far, keeping the residual orthogonal to the selected subspace. Tropp & Gilbert (2007) showed that OMP reliably recovers a signal with $m$ non-zero coefficients from $O(m \ln d)$ random measurements — comparable to $\ell_1$ (basis pursuit) guarantees, but faster and simpler to implement. OMP underpins the "orthogonal matching pursuit" extensions used in modern regularization.
 
 ## 7. Summary
 
@@ -313,22 +282,15 @@ The accompanying slides show an OVT migration of a wide-azimuth dataset processe
 | F–K (Gülünay) | f–k | 2D/3D | yes | globally linear |
 | ALFT / AA-ALFT | spatial Fourier | 3D–5D | yes (AA weights) | cost grows with dimension |
 | MPFI (+priors) | spatial Fourier | up to 5D | yes, beyond aliasing | needs good prior |
-| High-res Radon | τ–p | 2D (CMP) | partial | moveout assumption; primaries |
 
 ## Comprehension questions
 
 1. Why does irregular input cause migration artifacts? Explain in terms of the aperture summation $I(\mathbf{m})=\sum_i w_i x(t_i,\mathbf{x}_i)$.
 2. What is the difference between regularization and interpolation? Give a case where interpolation is the explicit goal rather than a side effect.
-3. Why can a 3D regularization not fill missing offsets, and why does a 4D regularization smear azimuth? What does 5D add?
-4. Explain spectral leakage using the relation $\hat f_s(k)=\hat f(k)*\hat L(k)$. Why is the leakage worse for irregular than for regular sampling?
-5. Why is the DFT basis non-orthogonal on an irregular grid, and what consequence does this have for a direct forward DFT?
-6. Describe the five steps of one ALFT iteration. Why might the same Fourier component be selected more than once?
-7. Why does windowing the ALFT reduce cost but introduce Gibbs artifacts, and how does wavenumber-domain oversampling fix this?
-8. In AA-ALFT, why do aliased components cause trouble for near-regular data, and how do low-frequency weights solve the problem? How is this the same idea as Spitz's F–X interpolation?
-9. A CMP gather has missing near offsets. Why is a sparse high-resolution Radon transform a good choice here, and why is the hyperbolic transform preferred over the parabolic one at large offsets?
-10. You regularize a dataset and want to check the result. What QC do you perform, and what does a large mismatch tell you?
-11. A colleague says "we need 4D regularization for this time-lapse survey." What ambiguity should you clarify?
-12. Compare F–X interpolation and ALFT for a sparse, gappy wide-azimuth dataset with steep dips and strong aliasing. Which would you choose and why?
+3. Explain spectral leakage using the relation $\hat f_s(k)=\hat f(k)*\hat L(k)$. Why is the leakage worse for irregular than for regular sampling?
+4. Why is the DFT basis non-orthogonal on an irregular grid, and what consequence does this have for a direct forward DFT?
+5. Describe steps of one ALFT iteration. Why might the same Fourier component be selected more than once?
+6. You regularize a dataset and want to check the result. What QC do you perform, and what does a large mismatch tell you?
 
 ## Suggested reading and sources
 
