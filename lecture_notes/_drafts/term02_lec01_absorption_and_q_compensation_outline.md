@@ -238,4 +238,4 @@ New source pages: `futterman_1962_dispersive_body_waves.md`, `kjartansson_1979_c
 | $\sigma_f^2$ | Spectral variance of source spectrum | дисперсия спектра |
 | $\Lambda(\tau, \omega)$ | Stabilized amplitude compensation operator | стабилизированный амплитудный оператор |
 | MAXDB | Maximum gain limit in dB (stabilization) | предельное усиление (дБ) |
-| $Q^{-1}$ | Specific dissipation (loss) factor | фактор потерь |
+| $Q^{-1}$ | Specific dissipation (loss) factor | добротность |
