@@ -920,3 +920,23 @@ Updated `wiki/index.md` with the 6 new concept pages and 13 new source pages; re
 **Reference decisions (from planning):**
 - Chose Radon-domain interpolation (over curvelet/compressed sensing) for the modern-extensions section; `papers/regularization/` gained `trad2002.pdf` and `gxac041.pdf` (Feng 2022).
 - Dropped the Persian-language `article_58889_…pdf` as a reading reference.
+
+---
+
+## 2026-08-29 — Term 2 Lecture 01 (Absorption and Q-compensation): source ingestion
+
+**Lecture plan approved:** one 90-min lecture (`term02_lec01_absorption_and_q_compensation`), order = motivation → absorption & Q → KK/dispersion → Q models → compensation theory → practical aspects → Q estimation. KK derivation gets a dedicated document; spectral-ratio + centroid-shift derivations go inline in the notes. Slides drafted in English first. Instructor note: lecture notes must NOT reference specific module names (e.g. QAPP) — use generic "modern processing software" phrasing.
+
+**Concept pages created (5):**
+- `wiki/concepts/seismic_absorption.md` — mechanisms, Q via energy/amplitude, consequences (HF loss, nonstationarity).
+- `wiki/concepts/velocity_dispersion.md` — causality → KK, Futterman log law vs Kjartansson power law, magnitudes.
+- `wiki/concepts/q_models.md` — four families per Kjartansson Table 1 (frictional, Voigt–Ricker, NCQ, CQ).
+- `wiki/concepts/inverse_q_filtering.md` — earth Q filter, Futterman phase route, Wang stabilized amplitude+phase, gain limit, reference frequency, modes.
+- `wiki/concepts/q_estimation.md` — spectral ratio, centroid shift, LS spectrum modelling, match-filter; data prep rules (no AGC).
+
+**Source pages created (7):**
+- `futterman_1962_dispersive_body_waves`, `kjartansson_1979_constant_q`, `wang_2002_stable_inverse_q`, `wang_2006_inverse_q_resolution`, `schonleber_2014_kk_system_theory`, `cheng_margrave_2012_2013_q_estimation`, `paradigm_qapp_qest`.
+
+Raw text extracted from `papers/q_and_absorption/` (Futterman, Kjartansson, Wang×2, Schönleber, Cheng & Margrave×2, QAPP/QEST refs, Q-Compensation P22 deck, q_compensation.pptx raw deck). David Brown legacy .ppt not extractable (needs catppt) — unused.
+
+Updated `wiki/index.md` (5 concepts, 7 sources).

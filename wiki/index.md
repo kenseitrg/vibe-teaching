@@ -75,6 +75,11 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Matching pursuit](concepts/matching_pursuit.md) | Greedy sparse recovery (MP/OMP) with a transform dictionary | draft |
 | [Non-uniform Fourier transform](concepts/nonuniform_fourier_transform.md) | Fourier analysis/synthesis on irregular grids; gridding and the NUFFT | draft |
 | [Radon interpolation](concepts/radon_interpolation.md) | Sparse high-resolution Radon reconstruction of missing traces | draft |
+| [Seismic absorption](concepts/seismic_absorption.md) | Anelastic attenuation, quality factor Q, energy/amplitude definitions, HF loss | draft |
+| [Velocity dispersion](concepts/velocity_dispersion.md) | Causality, Kramers–Kronig relations, Futterman and Kjartansson dispersion laws | draft |
+| [Models of Q](concepts/q_models.md) | Four attenuation-theory families: frictional, Voigt–Ricker, Kolsky–Futterman NCQ, Kjartansson CQ | draft |
+| [Inverse Q filtering](concepts/inverse_q_filtering.md) | Absorption compensation: phase-only vs stabilized amplitude+phase, gain limit, reference frequency | draft |
+| [Q estimation](concepts/q_estimation.md) | Spectral ratio, centroid frequency shift, LS spectrum modelling, match-filter | draft |
 
 ## Techniques
 
@@ -170,6 +175,13 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Spitz (1991)](sources/spitz1991_fx_interpolation.md) | Seismic trace interpolation in the F-X domain | paper | draft |
 | [Naghizadeh & Sacchi (2009)](sources/naghizadeh2009_fx_adaptive.md) | f-x adaptive seismic-trace interpolation | paper | draft |
 | [Gülünay (2003)](sources/gulunay2003_ft_interpolation.md) | Seismic trace interpolation in the Fourier transform domain | paper | draft |
+| [Futterman (1962)](sources/futterman_1962_dispersive_body_waves.md) | Dispersive body waves — KK relations, causality, logarithmic dispersion | paper | draft |
+| [Kjartansson (1979)](sources/kjartansson_1979_constant_q.md) | Constant Q — wave propagation and attenuation; Table 1 theory taxonomy | paper | draft |
+| [Wang (2002)](sources/wang_2002_stable_inverse_q.md) | A stable and efficient approach of inverse Q filtering | paper | draft |
+| [Wang (2006)](sources/wang_2006_inverse_q_resolution.md) | Inverse Q-filter for seismic resolution enhancement — stabilized, continuous Q | paper | draft |
+| [Schönleber (2014)](sources/schonleber_2014_kk_system_theory.md) | Simple KK derivation from system theory (causality → Hilbert pair) | paper | draft |
+| [Cheng & Margrave (2012, 2013)](sources/cheng_margrave_2012_2013_q_estimation.md) | Comparison of Q-estimation methods (spectral ratio, centroid shift, match-filter) | CREWES reports | draft |
+| [Paradigm QAPP/QEST](sources/paradigm_qapp_qest.md) | Q compensation and estimation reference guide (production parameters) | software doc | draft |
 
 ## Comparisons
 
