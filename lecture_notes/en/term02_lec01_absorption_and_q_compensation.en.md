@@ -19,9 +19,7 @@ We will look at:
 4. Four classical models of Q and which of them processing actually uses.
 5. Q-compensation operators: Futterman's phase correction and Wang's stabilized amplitude + phase correction.
 6. Practical decisions: reference frequency, amplitude damping limit, compensation modes.
-7. Estimating $Q$ from VSP and reflection data: spectral ratios, central frequency shift, least-squares modelling, wavelet optimization.
-
-The mathematical core of Section 3 — the derivation of the Kramers–Kronig relations — is written out step by step in the companion document [Kramers–Kronig relations and velocity dispersion](../derivations/kramers_kronig_dispersion_derivation.en.md). You should be able to follow this lecture without it, but the derivation is strongly recommended: it is the only "heavy" mathematics in the Q story, and it is shorter than it looks.
+7. Estimating $Q$ from seismic data: spectral ratios, central frequency shift, least-squares modelling, wavelet optimization.
 
 ---
 
@@ -41,16 +39,16 @@ The cleanest way to *see* absorption is to filter the data into narrow frequency
 
 ![Figure: `figures/term02_lec01/term02_lec01_realdata_freq_panel_low.png` — 10–20 Hz frequency panel.](./figures/term02_lec01/term02_lec01_realdata_freq_panel_low.png)
 
-*Figure 2: 10–20 Hz panel. Low frequencies penetrate to the deepest part of the section with usable amplitude.*
+*Figure 2: 10–20 Hz panel. Low frequencies suffer a noticeable delay.*
 
 ![Figure: `figures/term02_lec01/term02_lec01_realdata_freq_panel_high.png` — 50–60 Hz frequency panel.](./figures/term02_lec01/term02_lec01_realdata_freq_panel_high.png)
 
-*Figure 3: 50–60 Hz panel of the same data. High frequencies fade with traveltime — the deep part of the section is essentially empty.*
+*Figure 3: 50–60 Hz panel of the same data. High frequencies are delayed less, but without gain we would see them with much lower amplitudes.*
 
 Notice what the two panels tell us:
 
-- The **10–20 Hz** energy survives to the bottom of the record. Deep events are there — just blurry.
-- The **50–60 Hz** energy dies out gradually with time. Where it dies, resolution is gone: no amount of later gain can bring back information that never reached the receivers.
+- The **10–20 Hz** energy survives to the bottom of the record. Deep events are there, but the wavelet stretches.
+- The **50–60 Hz** energy dies out gradually with time. Where it dies, resolution is gone: we would have to apply a special gain to bring back that information.
 
 This is the signature of absorption: a smooth, systematic loss of high frequencies with traveltime, not a sudden change at a "bad frequency" (that would be a ghost notch or an anti-alias filter) and not a random loss (that would be noise).
 
@@ -88,7 +86,7 @@ Laboratory and field measurements on consolidated rocks agree on one point that 
 
 > **The fractional energy loss per oscillation cycle is nearly independent of frequency** over the seismic band.
 
-Not per second — per *cycle*. A 50 Hz wave completing 50 cycles per second loses 50 times more energy per second than... no: each cycle costs the same fraction. So per second, a 50 Hz wave loses energy 5 times faster than a 10 Hz wave, simply because it oscillates 5 times more often. **High frequencies die first because they cycle more, not because any individual cycle is more lossy.** That single sentence is the physical heart of this lecture.
+Not per second — per *cycle*. So per second, a 50 Hz wave loses energy 5 times faster than a 10 Hz wave, simply because it oscillates 5 times more often. **High frequencies die first because they cycle more, not because any individual cycle is more lossy.** 
 
 ### Defining Q from energy
 
@@ -205,7 +203,7 @@ $$
 \qquad \gamma = \frac{1}{\pi}\arctan\frac{1}{Q} \approx \frac{1}{\pi Q}
 $$
 
-Since $x^{\gamma} \approx 1 + \gamma\ln x$ for small $\gamma$, the two laws are the same law to first order in $1/Q$ — good news, because software packages offer both and students should not fear the choice.
+Since $x^{\gamma} \approx 1 + \gamma\ln x$ for small $\gamma$, the two laws are the same law to first order in $1/Q$.
 
 ### How large is dispersion, in numbers?
 
@@ -336,15 +334,15 @@ Figure 8 shows the geometry of the stabilized operator.
 
 ### What each mode fixes: a synthetic experiment
 
-Figure 9 (from the instructor's deck) and Figure 10 (our own synthetic) show the classic three-panel experiment: model data, amplitude correction only, amplitude + phase correction.
+Figure 9 and Figure 10 show the classic three-panel experiment: model data, amplitude correction only, amplitude + phase correction.
 
 ![Figure: `figures/term02_lec01/term02_lec01_realdata_compensation_result.png` — Model data: amplitude correction vs amplitude+phase correction.](./figures/term02_lec01/term02_lec01_realdata_compensation_result.png)
 
-*Figure 9: From the instructor's deck — model data (left), amplitude correction (middle), amplitude + phase correction (right). Amplitude-only restores the spectrum's tilt but leaves the wavelet stretched; adding phase correction restores symmetry and sharpness.*
+*Figure 9: model data (left), amplitude correction (middle), amplitude + phase correction (right). Amplitude-only restores the spectrum's tilt but leaves the wavelet stretched; adding phase correction restores symmetry and sharpness.*
 
 ![Figure: `figures/term02_lec01/term02_lec01_compensation_modes.png` — Synthetic comparison of compensation modes.](./figures/term02_lec01/term02_lec01_compensation_modes.png)
 
-*Figure 10: Our synthetic version — three reflectors after propagation through $Q = 60$: raw (black), phase-only correction (blue), amplitude+phase with a 20 dB gain limit (red). Phase-only sharpens and re-centres without touching amplitudes; amplitude+phase additionally restores relative strength across frequency — at the price of also boosting noise in the depleted band.*
+*Figure 10: Three reflectors after propagation through $Q = 60$: raw (black), phase-only correction (blue), amplitude+phase with a 20 dB gain limit (red). Phase-only sharpens and re-centres without touching amplitudes; amplitude+phase additionally restores relative strength across frequency — at the price of also boosting noise in the depleted band.*
 
 ### Handling variable Q
 
@@ -367,15 +365,13 @@ $$
 \frac{v(f)}{v(f_\text{ref})} \approx 1 + \frac{1}{\pi Q}\,\ln\frac{f}{f_\text{ref}}
 $$
 
-the operator is normalized so that **the component at $f_\text{ref}$ keeps its traveltime unchanged**. Frequencies above $f_\text{ref}$ are pulled earlier (they were travelling "too slow" relative to it), frequencies below are pushed later. The wavelet is *anchored* at $f_\text{ref}$.
+the operator is normalized so that **the component at $f_\text{ref}$ keeps its traveltime unchanged**. Frequencies below $f_\text{ref}$ are pulled earlier (they were travelling "too slow" relative to it), frequencies above are pushed later. The wavelet is *anchored* at $f_\text{ref}$.
 
 The choice is a **processing decision, not physics**:
 
 - Anchor at the **dominant frequency** of the data (common default): event times stay close to what velocity analysis and interpretation expect.
 - Anchor **high** (e.g., 100+ Hz): all usable frequencies get pulled earlier by up to a few tens of ms — image times shift systematically; check-shot ties move.
 - **4D**: baseline and monitor must use the *same* reference convention, or a systematic time shift is manufactured between surveys.
-
-If you ever see "my Q-compensation moved my events by 15 ms", the reference frequency — not Q — is the first suspect.
 
 ### The amplitude damping factor (gain limit)
 
@@ -401,15 +397,15 @@ For deep-water and structurally complex plays, time-domain post-stack compensati
 
 ![Figure: `figures/term02_lec01/term02_lec01_realdata_amplitude_cube.png` — Amplitude behaviour used as input to Q-tomography.](./figures/term02_lec01/term02_lec01_realdata_amplitude_cube.png)
 
-*Figure 11: Input to Q-estimation in an imaging workflow: amplitude behaviour over the survey (from the instructor's deck).*
+*Figure 11: Input to Q-estimation in an imaging workflow: amplitude behaviour over the survey.*
 
 ![Figure: `figures/term02_lec01/term02_lec01_realdata_q_cubes.png` — Q model from tomography.](./figures/term02_lec01/term02_lec01_realdata_q_cubes.png)
 
-*Figure 12: The resulting interval-Q model used by Q-compensating migration (from the instructor's deck).*
+*Figure 12: The resulting interval-Q model used by Q-compensating migration.*
 
 ![Figure: `figures/term02_lec01/term02_lec01_realdata_migration_qcomp.jpg` — Migration without and with Q-compensation.](./figures/term02_lec01/term02_lec01_realdata_migration_qcomp.jpg)
 
-*Figure 13: Migration without (left) and with (right) Q-compensation on the same data. Vertical resolution and fault definition improve at target level (from the instructor's deck).*
+*Figure 13: Migration without (left) and with (right) Q-compensation on the same data. Vertical resolution and fault definition improve at target level.*
 
 ---
 
@@ -425,7 +421,7 @@ Compensation needs $Q$ — where does it come from? This section covers the four
 
 **Data preparation rule number one: no AGC.** The Q information lives precisely in the amplitude decay across frequency and time; any data-driven gain destroys it. Minimal processing before estimation: noise attenuation, (deghosting if marine), and that is nearly all. Modern estimation software will ask you to QC the time-frequency spectrogram first: it must show a smooth, systematic decay along both axes — the visual signature of Figure 5 — before any fitting is meaningful.
 
-### The spectral-ratio method (with derivation)
+### The spectral-ratio method
 
 The idea: compare the spectra of two windows at times $t_1$ and $t_2$, and let the ratio cancel everything that is *not* absorption.
 
@@ -463,7 +459,7 @@ Steeper slope — faster spectral decay — means lower Q. Figure 14 shows the w
 
 **Assessment.** In Tonn's (1991) extensive VSP comparison, the spectral-ratio method was the *most accurate* method on noise-free data — the derivation is exact, after all. But taking the ratio of two noisy spectra is statistically fragile: the noise does not cancel, it divides. Estimates degrade quickly as noise grows, and the method is sensitive to window choice, tuning effects and any residual gain.
 
-### The central frequency shift method (with derivation)
+### The central frequency shift method
 
 The idea: instead of comparing spectra point-by-point, track one robust attribute — the **centroid** (centre of mass) of the spectrum:
 
