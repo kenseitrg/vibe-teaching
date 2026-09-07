@@ -1,1 +1,8 @@
 \IfFileExists{float.sty}{\usepackage{float}}{}
+% TeX Live 2026 ships a latex-dev array.sty that references
+% \vcenter@text (a new-kernel macro) which the release format does not
+% define, breaking centered math arrays and \begin{cases}. Provide a
+% fallback so rendering works on both old and new installations.
+\makeatletter
+\@ifundefined{vcenter@text}{\def\vcenter@text{\vcenter}}{}
+\makeatother
