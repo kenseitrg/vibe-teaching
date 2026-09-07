@@ -45,7 +45,8 @@ def wang_ratio(f, q, f_ref):
 def main():
     f = np.logspace(np.log10(2), np.log10(200), 400)
 
-    fig, (ax_v, ax_d) = plt.subplots(1, 2, figsize=(10, 6))
+    fig, (ax_v, ax_d) = plt.subplots(1, 2, figsize=(10, 6),
+                                     constrained_layout=True)
 
     # --- velocity ratios ---
     ax_v.plot(f, futterman_ratio(f, Q_MAIN, F_REF), color=C_MAIN, lw=2.4,
@@ -57,7 +58,9 @@ def main():
                   label=f"power law, Q = {q:.0f}")
     ax_v.axhline(1.0, color="gray", lw=0.8)
     ax_v.axvline(F_REF, color="gray", ls=":", lw=1)
-    ax_v.text(F_REF, 1.036, " $f_{ref}$", fontsize=9, color="gray")
+    ax_v.set_ylim(0.948, 1.016)
+    ax_v.text(F_REF * 0.97, 1.0148, "$f_{ref}$",
+              ha="right", va="top", fontsize=9, color="gray")
 
     # annotate one decade of change
     dv = (wang_ratio(100.0, Q_MAIN, F_REF) - wang_ratio(10.0, Q_MAIN, F_REF))
@@ -82,6 +85,7 @@ def main():
                   label=f"Q = {q:.0f}")
     ax_d.axhline(0, color="gray", lw=0.8)
     ax_d.axvline(F_REF, color="gray", ls=":", lw=1)
+    ax_d.set_ylim(-15, 112)
     ax_d.annotate("low frequencies lag\n(wavelet stretches, peak goes late)",
                   xy=(10, 1e3 * T0 * ((10 / F_REF) ** (-gamma_of_q(Q_MAIN)) - 1)),
                   xytext=(3, 55), fontsize=10, color=C_ALT,
@@ -96,7 +100,6 @@ def main():
 
     fig.suptitle("Dispersion required by causality: "
                  "Futterman's and Wang's laws nearly coincide", fontsize=12)
-    fig.tight_layout(rect=(0, 0, 1, 0.93))
     out = os.path.join("figures",
                        "term02_lec01", "term02_lec01_velocity_dispersion.png")
     os.makedirs(os.path.dirname(out), exist_ok=True)

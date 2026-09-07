@@ -29,6 +29,9 @@ def latex_to_plain(text: str) -> str:
 
 def _convert_math(expr: str) -> str:
     """Best-effort conversion of a LaTeX math expression to plain text."""
+    # Thin-space macros first, before any backslash stripping turns them
+    # into stray commas/colons below.
+    expr = expr.replace(r"\,", " ").replace(r"\;", " ").replace(r"\:", " ")
     # Common substitutions
     replacements = {
         r"\varepsilon": "ε",
@@ -98,6 +101,9 @@ def _convert_math(expr: str) -> str:
     expr = expr.replace("{", "").replace("}", "")
     # Replace \* leftover
     expr = expr.replace("\\", "")
+
+    # Collapse runs of whitespace left by removed macros
+    expr = re.sub(r"  +", " ", expr)
 
     return expr.strip()
 
