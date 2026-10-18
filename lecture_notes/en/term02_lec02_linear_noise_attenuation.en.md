@@ -318,7 +318,7 @@ For example: $x_\text{max} = 1475$ m, $f_\text{max} = 100$ Hz gives $\Delta p \l
 
 ![Figure: `figures/term02_lec02/term02_lec02_taup_aliasing.png` — aliasing artifacts in tau-p.](./figures/term02_lec02/term02_lec02_taup_aliasing.png)
 
-*Figure 9: The running gather transformed with too-coarse p-sampling (left): artifacts appear at opposite-sign p and very large $\tau$. With adequate $\Delta p$ and a low-pass filter (right), the panel shows what it should: three reflection ellipses and focused linear noise points.*
+*Figure 9: The input gather (left). Transformed with too-coarse p-sampling ($\Delta p$ = 0.4 ms/m, middle): artifacts appear as coherent energy at opposite-sign p and very large $\tau$, and the whole panel is weaker — leaked away by the undersampled transform. With adequate $\Delta p$ and a low-pass filter (right), the panel shows what it should: three reflection ellipses (dashed) and the focused linear-noise points at $p = 1/V$. Both tau-p panels share one dB scale (reference: the clean panel's maximum; only the two noise foci clip at the top).*
 
 ### 6.2 Filtering in tau-p
 
@@ -328,13 +328,13 @@ With a clean panel, filtering is the same recipe as ever — design a mute, appl
 - **$\tau$-p windows:** combine the p-mute with a time floor (e.g. spare the shallow part of the panel), or mute only a dip band containing a specific noise train;
 - **taper every edge** — the same Gibbs logic as FK, and production practice is explicit about it: the case study in the references used 200 ms tapers and *no sharp corners* on its tau-p mutes, because hard edges ring when transformed back to t-x.
 
-QC is identical to Section 4.3 — before / after / **difference** panels; the difference must be the linear noise (Figure 10). And the same strategic choice exists: mute the noise and inverse-transform the *signal* (zero-out), or mute the signal and inverse-transform the *noise* as a model to subtract — the amplitude-preserving route described in Section 4.3.
+QC is identical to Section 4.3 — before / after / **difference** panels; the difference must be the linear noise (Figure 10). Figure 10 stages both outcomes deliberately: the air blast is low-frequency enough to be unaliased at this $\Delta x$ (its bandwidth ends exactly at $V_\text{ab}/(2\,\Delta x)$, the aliasing threshold), so it focuses entirely at $p = 1/V_\text{ab}$ and the mute removes it completely; the ground roll is aliased, and its wrapped 10–16 Hz components stack inside the keep zone — $p = 1/V_\text{gr} - 1/(f\,\Delta x)$ lands at $|p| < 0.6$ ms/m — leaving residuals in the result. Dip filtering needs unaliased (or low-pass-filtered) input: the same lesson as Section 6.1. And the same strategic choice exists: mute the noise and inverse-transform the *signal* (zero-out), or mute the signal and inverse-transform the *noise* as a model to subtract — the amplitude-preserving route described in Section 4.3.
 
 When to choose tau-p over FK? They are one transform in two coordinate systems (next section), so the separation power is the same in principle. In practice: FK masks are natural when the noise's full $(f, k)$ shape matters (frequency-selective wedges, wrapped-energy surgery); tau-p mutes are natural when the decision is a pure dip decision, independent of frequency — and they generalize (parabolic, hyperbolic variants) where FK does not. 
 
 ![Figure: `figures/term02_lec02/term02_lec02_taup_mute.png` — tau-p mute application.](./figures/term02_lec02/term02_lec02_taup_mute.png)
 
-*Figure 10: Tau-p mute on the running gather. Left: input panel with the mute zone beyond the ellipses. Middle: after mute and inverse transform, in t-x. Right: the difference (= the noise model): ground roll and air blast, no reflection arcs.*
+*Figure 10: Tau-p mute on the running gather, with the air blast made unaliased (6 Hz dominant: its bandwidth ends at $V_\text{ab}/(2\Delta x)$, the aliasing threshold; the ground roll stays aliased). The input gather (left); its tau-p panel with the mute zone beyond the ellipses (second); after mute and inverse transform, in t-x (third); the difference = the removed noise (right). The unaliased air blast vanishes completely — all of its energy lands at $p = 1/V$, inside the mute. The aliased ground roll leaves residuals: its wrapped 10–16 Hz components stack inside the keep zone $|p| < 0.6$ ms/m.*
 
 ---
 

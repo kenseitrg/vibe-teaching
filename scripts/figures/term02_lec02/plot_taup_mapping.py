@@ -1,9 +1,10 @@
 """Figure 7: Slant stacking -- how events map into tau-p.
 
-Left: three linear events in t-x with a summation trajectory (trial slope).
-Middle: after LMO with the slope that matches the middle event, that event is
-flat -- the sum over offsets then spikes. Right: the tau-p panel: each linear
-event focuses to one point at (tau0, p0).
+Left: three linear events in t-x, with the summation trajectory (white)
+highlighted on one event only. Middle: after LMO with the slope that
+matches that event, it is flat -- the sum over offsets then spikes. Right:
+the tau-p panel, gather-style (p horizontal, tau down): each linear event
+focuses to one point at (p0, tau0).
 """
 
 import numpy as np
@@ -55,7 +56,8 @@ def slant_stack(data, t, x, p_vals):
 
 def main():
     data, t, x = make_gather()
-    p_match = 0.55e-3                       # slope of the middle event [s/m]
+    tau_m, p_m = EVENTS[1]                  # the event that gets flattened
+    p_match = p_m * 1e-3                    # its slope [s/m]
 
     # LMO-corrected gather with the matching slope
     lmo = np.zeros_like(data)
@@ -63,38 +65,41 @@ def main():
         lmo[:, j] = np.interp(t + p_match * x[j], t, data[:, j],
                               left=0.0, right=0.0)
 
-    p_vals = np.linspace(-1.2e-3, 1.2e-3, 401)      # fine enough (no p-alias)
+    # 481 samples: grid step 0.005 ms/m hits all three event slopes exactly
+    p_vals = np.linspace(-1.2e-3, 1.2e-3, 481)      # fine enough (no p-alias)
     u = slant_stack(data, t, x, p_vals)
 
-    fig, axes = plt.subplots(1, 3, figsize=(13, 4.6))
+    fig, axes = plt.subplots(1, 3, figsize=(13, 4.6), sharey=True)
     clip = np.percentile(np.abs(data), 99.5)
+
+    # t-x: only the flattened event carries the summation line
     axes[0].imshow(data, aspect='auto', cmap='gray', vmin=-clip, vmax=clip,
-                   extent=[0, x[-1], t[-1], 0])
-    xx = np.array([0, x[-1]])
-    for tau0, p_ms in EVENTS:
-        axes[0].plot(xx, tau0 + p_ms * 1e-3 * xx, color='crimson', lw=1.0,
-                     alpha=0.7)
-    axes[0].plot(xx, 0.42 + p_match * xx, 'w-', lw=2.2, alpha=0.9)
-    axes[0].set(title='t-x: events + summation line\n(white: trial p = 0.55 ms/m)',
-                xlabel='x (m)', ylabel='t (s)')
+                   extent=[x[0], x[-1], t[-1], 0])
+    xx = np.array([x[0], x[-1]])           # trimmed to the actual offsets
+    axes[0].plot(xx, tau_m + p_match * xx, 'w-', lw=2.2, alpha=0.9)
+    axes[0].set_ylim(t[-1], 0)             # no white space above t = 0
+    axes[0].set(title=f't-x: summation line (white)\non the event with '
+                f'p = {p_m:.2f} ms/m', xlabel='x (m)', ylabel='t (s)')
 
     axes[1].imshow(lmo, aspect='auto', cmap='gray', vmin=-clip, vmax=clip,
-                   extent=[0, x[-1], t[-1], 0])
-    axes[1].axhline(0.42, color='w', ls='--', lw=1.2)
+                   extent=[x[0], x[-1], t[-1], 0])
+    axes[1].axhline(tau_m, color='w', ls='--', lw=1.2)
     axes[1].set(title='after LMO with matching p:\nevent flat, sums in phase',
                 xlabel='x (m)', ylabel=r'$\tau$ (s)')
 
+    # tau-p, gather-style: p horizontal, tau down (as Figures 8-9);
+    # markers at (p0, tau0) sit exactly on the focused points
     uplot = np.abs(u) / np.abs(u).max()
-    axes[2].imshow(20 * np.log10(uplot.T + 1e-3), aspect='auto', cmap='magma',
-                   vmin=-40, vmax=0, extent=[t[-1], 0, p_vals[0] * 1e3,
-                                             p_vals[-1] * 1e3])
+    axes[2].imshow(20 * np.log10(uplot + 1e-3), aspect='auto', cmap='magma',
+                   vmin=-40, vmax=0, extent=[p_vals[0] * 1e3,
+                                             p_vals[-1] * 1e3, t[-1], 0])
     for tau0, p_ms in EVENTS:
-        axes[2].plot(tau0, p_ms, 'wo', ms=7, mfc='none', mew=2)
-        axes[2].annotate(f'({tau0:.2f} s, {p_ms:+.2f})',
-                         (tau0, p_ms), textcoords='offset points',
-                         xytext=(12, 8), color='w', fontsize=9)
+        axes[2].plot(p_ms, tau0, 'wo', ms=7, mfc='none', mew=2)
+        axes[2].annotate(f'({tau0:.2f} s, {p_ms:+.2f})', (p_ms, tau0),
+                         textcoords='offset points', xytext=(12, 8),
+                         color='w', fontsize=9)
     axes[2].set(title='tau-p: linear events -> points',
-                xlabel=r'$\tau$ (s)', ylabel='p (ms/m)')
+                xlabel='p (ms/m)', ylabel=r'$\tau$ (s)')
     fig.tight_layout()
     fig.savefig('figures/term02_lec02/term02_lec02_taup_mapping.png',
                 dpi=150)
