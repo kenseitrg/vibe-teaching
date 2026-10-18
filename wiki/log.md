@@ -940,3 +940,20 @@ Updated `wiki/index.md` with the 6 new concept pages and 13 new source pages; re
 Raw text extracted from `papers/q_and_absorption/` (Futterman, Kjartansson, Wang×2, Schönleber, Cheng & Margrave×2, QAPP/QEST refs, Q-Compensation P22 deck, q_compensation.pptx raw deck). David Brown legacy .ppt not extractable (needs catppt) — unused.
 
 Updated `wiki/index.md` (5 concepts, 7 sources).
+
+## 2025 — Term 2 Lecture 02 prep (linear noise attenuation: FK and tau-p)
+
+**Source review:** surveyed `papers/radon_taup/`, `papers/noise_attenuation/`, textbooks. Margrave Ch. 2 FK/τ-p sections (§§2-53–2-76, PDF pp. 88–111) newly extracted — the primary theory reference. CGG ODT02 De-noise (K-filter, LNA, tau-P modules) already summarized. "Why Tau-P Transform.ppt" (WesternGeco) is text-poor and tau-p-decon oriented — deferred to the multiples lecture. Taner et al. 1990 and Marfurt et al. 1996 cited via Margrave (not in library).
+
+**Source pages created (5):**
+- `zhou_greenhalgh_1994_linear_parabolic_taup` — inverse-first derivations, p-direction deconvolution (aperture compensation), Rieber/CDR history.
+- `bickel_2000_hyperbolic_radon_focusing` — envelope method unifying linear/parabolic/hyperbolic Radon (z=0/z→∞/z=νT₀).
+- `maeland_1998_parabolic_radon` — parabolic Radon focusing geometry, peg-leg foci.
+- `gower_2003_intouch_taup` — production tau-p noise suppression (model-and-subtract) + demultiple case study.
+- `yilmaz_2001_seismic_data_analysis_taup` — §6.3 slant-stack chapter (RU translation): plane-wave decomposition, rho filter, f-k↔τ-p relation, Δp/aperture artifacts, dip filtering, interpolation, τ-p decon of multiples.
+
+**Updated:** `margrave_2006_methods_of_seismic_data_processing` — added §§2-53–2-76 coverage (apparent velocity, 2-D F-K, spatial aliasing, projection-slice theorem, rho filter, LS τ-p).
+
+Updated `wiki/index.md` (5 new source rows).
+
+**Concept pages created (3, drafts feeding term02_lec02):** `fk_transform` (2-D FT, slope relation, spatial Nyquist), `fk_filtering` (mask types, tapers, low-f protection, QC), `rho_filter` (ramp |f| in inverse Radon, filtered back projection).

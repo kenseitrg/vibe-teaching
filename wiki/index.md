@@ -31,6 +31,9 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Statistical deconvolution](concepts/statistical_deconvolution.md) | Estimating the inverse filter from the data itself | draft |
 | [Predictive deconvolution](concepts/predictive_deconvolution.md) | Removing repetitive signals by prediction error filtering | draft |
 | [Radon transform](concepts/radon_transform.md) | Transform data to ray-parameter domain for filtering, demultiple and interpolation | draft |
+| [FK transform](concepts/fk_transform.md) | 2-D Fourier transform: plane-wave decomposition, slope p = k/f, spatial aliasing | draft |
+| [FK filtering](concepts/fk_filtering.md) | 2-D mask filtering: k-cut, dip fan, polygonal filters, QC discipline | draft |
+| [Rho filter](concepts/rho_filter.md) | Ramp |f| filter in the inverse Radon transform (filtered back projection) | draft |
 | [Surface-consistent deconvolution](concepts/surface_consistent_deconvolution.md) | Separating source/receiver coupling and near-surface effects | draft |
 | [Wiener filter](concepts/wiener_filter.md) | Optimal least-squares shaping filter and normal equations | draft |
 | [Seismic data processing](concepts/seismic_data_processing.md) | Overview, goals, and typical processing flow | draft |
@@ -97,6 +100,11 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Hatton, Worthington & Makin (1986)](sources/hatton_worthington_makin_1986_seismic_data_processing.md) | Seismic Data Processing: Theory and Practice | textbook | reviewed |
 | [Margrave (2006)](sources/margrave_2006_methods_of_seismic_data_processing.md) | Methods of Seismic Data Processing — lecture notes | lecture notes | reviewed |
 | [Yilmaz (2001) Vol. 1](sources/yilmaz_2001_seismic_data_analysis_deconvolution.md) | Seismic Data Analysis — deconvolution chapter | textbook | reviewed |
+| [Yilmaz (2001) Vol. 2 §6.3](sources/yilmaz_2001_seismic_data_analysis_taup.md) | Seismic Data Analysis — slant-stack (τ-p) transformation | textbook | draft |
+| [Zhou & Greenhalgh (1994)](sources/zhou_greenhalgh_1994_linear_parabolic_taup.md) | Linear and parabolic τ-p transforms revisited | paper | draft |
+| [Bickel (2000)](sources/bickel_2000_hyperbolic_radon_focusing.md) | Focusing aspects of the hyperbolic Radon transform | paper | draft |
+| [Maeland (1998)](sources/maeland_1998_parabolic_radon.md) | Focusing aspects of the parabolic Radon transform | paper | draft |
+| [Gower (2003)](sources/gower_2003_intouch_taup.md) | Optimising tau-p for noise & multiple suppression: a North Sea example | internal article | draft |
 | [Yilmaz — Practical Seismic Data Analysis, Ch. 1.2–1.3](sources/yilmaz_practical_seismic_data_analysis_amplitude.md) | Practical Seismic Data Analysis — sampling, aliasing, Fourier, amplitude and gain control | textbook | draft |
 | [Hill — Introduction to Seismic Processing, Ch. 21](sources/hill_introduction_to_seismic_processing_ch21.md) | Introduction to Seismic Processing — amplitude correction | textbook | draft |
 | [Brown (2002) — SCAC](sources/brown_2002_surface_consistent_amplitude_correction.md) | Surface Consistent Amplitude Correction training slides | training slides | draft |

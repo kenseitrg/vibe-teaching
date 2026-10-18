@@ -6,6 +6,10 @@ source_file: papers/textbooks/Methods of Seismic Data Processing.pdf
 pages: 410
 concepts:
   - seismic_data_processing
+  - fk_transform
+  - spatial_aliasing
+  - radon_transform
+  - rho_filter
   - deconvolution
   - minimum_phase
   - wiener_filter
@@ -24,7 +28,7 @@ concepts:
   - discrete_fourier_transform
   - aliasing
   - z_transform
-tags: [seismic-processing, deconvolution, convolutional-model, minimum-phase, wiener-filter, predictive-decon, q-attenuation, lecture-notes, statics, residual-statics, floating-datum, layer-replacement, velocities, nmo, velocity-analysis, spectral-analysis, frequency-filtering, dft, aliasing]
+tags: [seismic-processing, fk-transform, tau-p, radon, slant-stack, rho-filter, spatial-aliasing, deconvolution, convolutional-model, minimum-phase, wiener-filter, predictive-decon, q-attenuation, lecture-notes, statics, residual-statics, floating-datum, layer-replacement, velocities, nmo, velocity-analysis, spectral-analysis, frequency-filtering, dft, aliasing]
 ---
 
 # Margrave (2006) — Methods of Seismic Data Processing
@@ -32,7 +36,7 @@ tags: [seismic-processing, deconvolution, convolutional-model, minimum-phase, wi
 Course lecture notes for Geophysics 557/657, University of Calgary, Winter 2006.
 Extracted pages 125–205 cover minimum phase, the convolutional model, and deconvolution.
 **OCR-extracted pages 206–298 cover surface-consistent methods, velocity definitions, and normal moveout/stack.**
-**Extracted PDF pages 36–111 cover Chapter 2 signal-processing concepts: convolution, Fourier transforms, DFT, sampling, filtering, Z-transform, correlation, and spectral estimation.**
+**Extracted PDF pages 36–111 cover Chapter 2 signal-processing concepts: convolution, Fourier transforms, DFT, sampling, filtering, Z-transform, correlation, and spectral estimation. Pages 88–111 (§§2-53–2-76) cover wavelength components, apparent velocity, the 2-D f-k transform, spatial aliasing, τ-p transforms (projection-slice theorem), inverse τ-p (rho filter), and least-squares τ-p/f-k — extracted for Term 2 Lecture 02.**
 
 ## Relevant chapters / sections
 
@@ -46,6 +50,12 @@ Extracted pages 125–205 cover minimum phase, the convolutional model, and deco
 | 2-33 to 2-40 | 73–75 | Filtering and five generic wavelets |
 | 2-41 to 2-44 | 75–77 | Z-transform and minimum phase |
 | 2-49 to 2-52 | 83–87 | Spectral estimation and windowing |
+| 2-53 to 2-57 | 88–92 | Wavelength components; apparent velocity; emergence angle |
+| 2-58 to 2-62 | 93–97 | The 2-D F-K transform; transform pairs; spatial aliasing (f_crit = v_a/2Δx) |
+| 2-63 to 2-67 | 98–102 | τ-p transforms via the projection-slice theorem (polar view of f-k); discrete τ-p incompleteness |
+| 2-68 to 2-70 | 103–105 | Properties and uses of τ-p: point/ellipse mapping, Δp rule, interpolation, multiples |
+| 2-71 to 2-73 | 106–108 | Inverse τ-p: Fourier method; filtered back projection (rho filter \|f\|) |
+| 2-74 to 2-76 | 109–111 | Least-squares τ-p and f-k transforms; Marfurt et al. 1996 |
 | 3-14 to 3-18 | 125–129 | Constant-Q attenuation; non-stationary wavelet |
 | 3-18 to 3-26 | 129–137 | Minimum phase: intuitive, Hilbert transform, partial energy, dispersion |
 | 4-1 to 4-5 | 145–149 | Bandlimited reflectivity; convolutional model and simplifying assumptions |
@@ -88,6 +98,27 @@ Extracted pages 125–205 cover minimum phase, the convolutional model, and deco
 - Frequency-domain filtering multiplies the trace spectrum by the filter spectrum.
 - Common types: low-pass, high-pass, band-pass, notch.
 - Truncating an ideal sharp filter causes ringing (Gibbs effect); longer filters and windowing reduce this.
+
+### Wavelength components, apparent velocity, and the 2-D F-K transform (§§2-53–2-62)
+- Wavelength components along coordinate axes: λx = λ/sinθ, λz = λ/cosθ; components add as inverse squares → the wavenumber vector and the dispersion relation k² = kx² + kz² (Fourier-domain scalar wave equation).
+- **Apparent velocities**: vx = f/kx etc.; nothing physical travels at an apparent velocity — it is a property of the recording direction. The emergence angle θ sets what a surface array measures.
+- The 2-D F-K transform presents the wavefield as a superposition of plane waves. Analytic transform pairs: a single linear event → a **radial line kx = p·f** in (kx, f); all events sharing an apparent velocity collect onto one radial line; a diffraction/hyperbola family → fan-shaped (triangular) region bounded by p_max = 1/v.
+- **Spatial aliasing** (unlike temporal aliasing, "always present" to some degree): with spatial sample rate Δx and apparent velocity va, all temporal frequencies above f_crit = va/(2Δx) are spatially aliased. Margrave points to Hatton et al. pp. 43–45 and Yilmaz pp. 62–69 for illustrations.
+- Discrete forward/backward DFT are exact inverses of each other — a convenience NOT shared by the Radon transform (see below).
+
+### τ-p transform: projection-slice theorem and properties (§§2-63–2-70)
+- Substituting p = kx/f in the f-k integral shows the τ-p transform equals the f-k transform in **polar coordinates** followed by an inverse FT from f to τ: the slant stack u(τ,p) = ∫d(x, τ+px)dx falls out by swapping integration order (development parallels Yilmaz 1987 eq. 7.5).
+- The analytic τ-p transform is complete (same information as f-k), but the **discrete** one is not: no set of discrete p values covers the (f, kx) grid uniformly, so a round trip τ-p → x-t always alters the data somewhat.
+- Mapping properties: linear event → a point at (τ0, p0); hyperbola → an **ellipse**; body waves in a constant-velocity earth occupy the compact region |p| ≤ 1/v (a triangle in f-k).
+- **Δp rule of thumb** (Taner et al., 1990, Geophysics 55, 1496–1503): Δp = 1/[f_max·(x_max − x_min)] ≈ Δkx/f_max. Slant stacks constructed in (x,t) or (x,f) are not directly affected by horizontal aliasing, but Δp choice governs p-aliasing.
+- Uses: apparent-velocity filtering by muting in either domain; "**smart interpolation**" to finer trace spacing / un-aliasing (Yilmaz 1987, p. 435); multiples are **periodic in τ-p but not in offset** → predictive decon works better there (Treitel et al. 1982); τ-p migration (Diebold & Stoffa 1981).
+
+### Inverse τ-p: filtered back projection and the rho filter (§§2-71–2-73)
+- Two routes: (a) **Fourier method** — interpolate the (f, p) spectrum back onto a rectangular (f, kx) grid, then inverse 2-D FFT; (b) **filtered back projection** — change the kx integral to a p integral (kx = fp): Ψ(x,t) = ∫∫ f·φ(p,f)e^{−2πifpx}e^{2πift}dp df, which factors into an **adjoint slant stack followed by a convolution** whose spectrum is |f| — the **rho filter**.
+- Frequency-domain implementation: ψ(x,f) = f·∫φ(p,f)e^{−2πifpx}dp — multiply by f (the ramp) per frequency, sum over p, inverse FT.
+
+### Least-squares τ-p and f-k (§§2-74–2-76)
+- Matrix view per frequency: φ = Rψ (forward), ψ = f·R*Tφ (inverse with ramp). The LS estimate φ = (RR*T)⁻¹Rf⁻¹ψ reconstructs with fewer artifacts because the discrete τ-p pair is incomplete. LS is most valuable exactly where transforms are most incomplete/ill-posed: parabolic and hyperbolic stacks, and the DFT for irregularly sampled data (see Marfurt et al. 1996, "Pitfalls of using conventional Radon transforms on poorly sampled data", Geophysics 61, 1467–1482).
 
 ### Spectral estimation
 - Estimating spectra from finite, noisy windows involves leakage; tapering the window reduces edge effects.
@@ -157,6 +188,9 @@ Extracted pages 125–205 cover minimum phase, the convolutional model, and deco
 - DFT and sampling replication figures (pages 61–67).
 - Generic wavelets and their amplitude spectra (pages 73–75).
 - Spectral estimation comparison (pages 83–87).
+- **F-K transform pairs gallery (page 2-62): flat event, six positive emergence angles, six negative angles, single and many diffraction hyperbolae with their FK amplitude spectra — ideal figure template for Term 2 Lecture 02.**
+- **Spatial aliasing diagram with principal band and k_nyquist wraparound (page 2-61).**
+- **Rectangular vs polar (f,kx) grids and radial p-lines (pages 2-66/2-67) — the geometry behind the projection-slice theorem.**
 - Constant-Q amplitude spectra at increasing time (pages 125–126).
 - Minimum-phase vs. zero-phase bandlimited reflectivity (page 146).
 - Matrix representation of convolution (page 146).
@@ -171,4 +205,5 @@ Extracted pages 125–205 cover minimum phase, the convolutional model, and deco
 - Explains why bandlimited reflectivity, not the full impulse response, is the realistic processing target.
 - Provides matrix view of convolution and Wiener normal equations.
 - **Chapter 2 directly supports Term 1 Lecture 5 (spectral analysis and frequency filtering).**
+- **Sections 2-53–2-76 are the primary reference for Term 2 Lecture 02 (linear noise attenuation: FK spectrum, spatial aliasing, τ-p, rho filter, LS teaser) and for its derivation document (projection-slice theorem → rho filter).**
 - Chapters 5–7 directly support Term 1 Lecture 03 (kinematics, velocities, field statics) and Lecture 04 (advanced statics, residual statics, floating datum, velocity-analysis link).
