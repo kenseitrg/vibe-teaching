@@ -1,24 +1,33 @@
 """Figure 2: Plane waves in t-x and their FK radial lines.
 
-Left: three linear events (plane waves) of different dips in t-x.
-Right: the FK amplitude spectrum: each event maps to a radial line through
-the origin with p = k/f (slope relation of Section 2.2). The steepest event
-(p = 0.8 ms/m) reaches exactly +0.5 cycles/trace at 50 Hz -- the spatial
-Nyquist of this sampling: no steeper dip could be represented unaliased.
+Left: three linear events (plane waves) at dx = 12.5 m -- two gentle
+dips (p = 0.25 and 0.50 ms/m, reflection-like) and one steep,
+air-blast-like event (p = 1.5 ms/m). Right: the FK amplitude
+spectrum. Each unaliased event is one clean radial line k = p f
+through the origin. The steep event's line reaches the k = +0.5
+cyc/trace edge at f_alias = 26.7 Hz and wraps around to k = -0.5:
+above f_alias its energy re-enters the spectrum from the opposite
+edge, appearing as an apparent dip of the opposite sign -- spatial
+aliasing, Section 3's subject.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 
 DT, DX = 0.004, 12.5
-NX, TMAX = 121, 1.8
+NX, TMAX = 97, 1.85
 F_DOM = 30.0                     # Hz (band ~15-50 Hz, fills the FK display)
-EVENTS = [                       # (intercept tau0 [s], slope p [ms/m], amp)
-    (0.10, 0.25, 1.0),
-    (0.42, 0.50, 1.0),
-    (0.20, 0.80, 1.0),
+EVENTS = [                       # (intercept tau0 [s], slope p [ms/m])
+    (0.20, 0.25),
+    (0.55, 0.50),
+    (0.05, 1.50),
 ]
 FMAX_PLOT = 50.0                 # Hz, top of the FK display
+KN = 0.5                         # cyc/trace, spatial Nyquist at this dx
+DB_MIN = -30.0                  # display floor: hides numerical artifacts
+C_ALIAS = 'red'                 # guide color reserved for the aliased event
+C_CLEAN = 'black'               # guide color for the unaliased events
+BBOX = dict(facecolor='white', alpha=0.75, edgecolor='none', pad=1.5)
 
 
 def ricker(f_dom, n, dt):
@@ -55,38 +64,71 @@ def main():
     nt = int(TMAX / DT) + 1
     t = np.arange(nt) * DT
     x = np.arange(NX) * DX
-    data = sum(build_event(t, x, tau0, p_ms) for tau0, p_ms, _ in EVENTS)
+    data = sum(build_event(t, x, tau0, p_ms) for tau0, p_ms in EVENTS)
 
     amp = fk_amp(data)
     f_ax = np.fft.fftshift(np.fft.fftfreq(nt, d=DT))
     k_ax = np.fft.fftshift(np.fft.fftfreq(NX, d=DX)) * DX   # cycles/trace
     sel = (f_ax >= 0) & (f_ax <= FMAX_PLOT)
 
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.8))
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.8), layout='constrained')
+
+    # ---- left: t-x panel with the event slopes and apparent velocities
     clip = np.percentile(np.abs(data), 99.5)
     axes[0].imshow(data, aspect='auto', cmap='gray', vmin=-clip, vmax=clip,
                    extent=[0, x[-1], t[-1], 0])
-    for tau0, p_ms, _ in EVENTS:
+    v_labels = [(80, 0.115, 'V = 4000 m/s'), (620, 0.72, 'V = 2000 m/s'),
+                (350, 0.50, 'V = 667 m/s')]
+    for (tau0, p_ms), (vx, vt, txt) in zip(EVENTS, v_labels):
         axes[0].plot(x, tau0 + p_ms * 1e-3 * x, color='crimson', lw=1.2,
                      alpha=0.8)
+        axes[0].text(vx, vt, txt, color='crimson', fontsize=8.5)
     axes[0].set_ylim(t[-1], 0)
-    axes[0].set(title='t-x: three plane waves', xlabel='x (m)', ylabel='t (s)')
+    axes[0].set(title='t-x: three plane waves '
+                      f'($\\Delta x$ = {DX:g} m)',
+                xlabel='x (m)', ylabel='t (s)')
 
+    # ---- right: FK spectrum with radial-line guides
+    ax = axes[1]
     db = 20 * np.log10(amp[sel] / amp[sel].max() + 1e-6)
-    im = axes[1].pcolormesh(k_ax, f_ax[sel], db, cmap='magma',
-                            vmin=-45, vmax=0, shading='auto')
-    for _, p_ms, _ in EVENTS:
-        k_end = p_ms * 1e-3 * FMAX_PLOT * DX          # k = p f, cyc/trace
-        axes[1].plot([0, k_end], [0, FMAX_PLOT], 'w--', lw=1.0, alpha=0.85)
-        axes[1].text(k_end * 0.93, FMAX_PLOT * 0.90, f'p={p_ms:.2f}',
-                     color='w', ha='right', fontsize=9)
-    axes[1].text(-0.49, 47, 'p=0.80 ends at k=+0.5\n(spatial Nyquist at '
-                 'this dx)', color='w', fontsize=8, va='top')
-    axes[1].set(title='FK spectrum: p = k/f radial lines',
-                xlabel='k (cycles/trace)', ylabel='f (Hz)')
-    fig.colorbar(im, ax=axes[1], label='amplitude (dB)')
-    fig.tight_layout()
-    fig.savefig('figures/term02_lec02/term02_lec02_fk_plane_wave.png', dpi=150)
+    im = ax.pcolormesh(k_ax, f_ax[sel], db, cmap='viridis', vmin=DB_MIN,
+                       vmax=0, shading='auto')
+
+    def k_of_f(f_hz, p_ms):
+        return p_ms * 1e-3 * f_hz * DX            # k = p f, cyc/trace
+
+    # unaliased events: one clean radial line each, inside the panel
+    for p_ms in (0.25, 0.50):
+        ax.plot([0.0, k_of_f(FMAX_PLOT, p_ms)], [0.0, FMAX_PLOT], '--',
+                color=C_CLEAN, lw=1.2)
+        ax.text(k_of_f(FMAX_PLOT, p_ms) - 0.015, 47.0, f'p = {p_ms:.2f}',
+                color=C_CLEAN, ha='right', fontsize=9, bbox=BBOX)
+
+    # aliased event: true segment up to the k_N edge, then the wrapped
+    # continuation k_apparent = p f dx - 1 re-entering from -k_N
+    p_al = EVENTS[2][1]
+    f_alias = KN / (p_al * 1e-3 * DX)             # 26.7 Hz
+    ax.plot([0.0, KN], [0.0, f_alias], '--', color=C_ALIAS, lw=1.4)
+    ax.plot([-KN, k_of_f(FMAX_PLOT, p_al) - 1.0], [f_alias, FMAX_PLOT],
+            '--', color=C_ALIAS, lw=1.4)
+    ax.plot([KN, -KN], [f_alias, f_alias], 'o', color=C_ALIAS, ms=4)
+    ax.text(0.26, 8.5, f'p = {p_al:.2f}', color=C_ALIAS, fontsize=9,
+            bbox=BBOX)
+    ax.text(0.49, 29.5, f'$f_\\mathrm{{alias}}$ = {f_alias:.1f} Hz',
+            color=C_ALIAS, ha='right', fontsize=8.5, bbox=BBOX)
+    ax.text(-0.44, 46.0, 'wrapped:\napparent dip flips', color=C_ALIAS,
+            fontsize=8.5, bbox=BBOX)
+    ax.legend(handles=[plt.Line2D([], [], ls='--', color=C_CLEAN, lw=1.2,
+                                  label='unaliased: one radial line'),
+                       plt.Line2D([], [], ls='--', color=C_ALIAS, lw=1.4,
+                                  label='aliased: wraps at $\\pm k_N$')],
+              loc='lower left', fontsize=8, framealpha=0.8)
+    ax.set(title='FK spectrum: p = k/f radial lines',
+           xlabel='k (cycles/trace)', ylabel='f (Hz)')
+    fig.colorbar(im, ax=ax, label='amplitude (dB)')
+
+    fig.savefig('figures/term02_lec02/term02_lec02_fk_plane_wave.png',
+                dpi=150)
     print('wrote term02_lec02_fk_plane_wave.png')
 
 

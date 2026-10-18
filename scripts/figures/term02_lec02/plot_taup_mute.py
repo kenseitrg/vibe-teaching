@@ -1,4 +1,4 @@
-"""Figure 9: Filtering in tau-p -- a p-mute with QC panels.
+"""Figure 10: Filtering in tau-p -- a p-mute with QC panels.
 
 Left: the tau-p panel of the running-example gather with a tapered mute
 beyond |p| = 0.6 ms/m (past the reflection ellipses, inside the linear

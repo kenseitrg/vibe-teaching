@@ -48,7 +48,7 @@ The first split every processor must make:
 ### 1.2 The coherent-noise families
 
 - **Source-generated linear noise** — ground roll (the Rayleigh-wave train: slow, low-frequency, high amplitude), the air blast, and guided waves trapped in near-surface layers. On a shot gather these appear as straight-line events fanning out from the source. This family is the subject of this lecture.
-- **Side-scattered energy** — waves scattered from near-surface heterogeneities (wadi edges, karst, fault zones, infrastructure): linear events with scattered apparent velocities, often crossing the reflections at steep angles. Same treatment as above.
+- **Side-scattered energy** — waves scattered from near-surface heterogeneities (karst, fault zones, infrastructure): linear events with scattered apparent velocities, often crossing the reflections at steep angles. Same treatment as above.
 - **Multiples** — predictable by periodicity and by their moveout. They deserve their own lecture (Term 2 Lecture 03), where the tau-p domain we build today returns as the main stage.
 - **The first-break zone** — direct and refracted arrivals near the top of the record. Usually handled by muting, not filtering; but the same dip ideas apply.
 
@@ -56,25 +56,15 @@ Real gathers mix all of these with the random background (Figure 1).
 
 ### 1.3 Why transforms, and where this sits in the flow
 
-Look at the running example in Figure 1. The reflections (hyperbolas) and the noise (straight lines) overlap completely in time, and their amplitude spectra overlap in frequency: ground roll dominates 5–25 Hz, but so does much of the reflection energy. No 1-D filter — the whole toolbox of Term 1 Lecture 5 — can separate them, because a 1-D filter treats every trace independently and never looks *across* traces.
+The lecture often references one synthetic example: three reflection hyperbolas, a ground-roll cone, an air blast and random background noise. The reflections (hyperbolas) and the noise (straight lines) overlap completely in time, and their amplitude spectra overlap in frequency: ground roll dominates 5–25 Hz, but so does much of the reflection energy. No 1-D filter can separate them, because a 1-D filter treats every trace independently and never looks *across* traces.
 
 The one property that separates them is geometric: **dip**. Reflections are flat to moderately dipping; ground roll and air blast are steep. Dip is a spatial property, so we need a transform that looks across traces: a two-dimensional transform in which dip becomes an axis or a ray direction. This lecture builds two: the FK transform, where a dip is a *radial direction*, and the tau-p transform, where a dip is an *axis*.
 
 In the processing flow, linear-noise attenuation sits early: on prestack gathers (shot or receiver domain, often also CMP) after amplitude recovery and statics, and before detailed velocity analysis, demultiple and stack. Cleaner gathers give better deconvolution design windows, more reliable velocity picks, and a better stack. Like most noise tools it is applied *before* the steps that assume the data are mostly signal.
 
-**The running example** (used in Figures 1, 3, 5, 8–11; all figure scripts share these parameters):
+![Figure: `slides/raw/noise_types.png` — the four noise families, from the original deck.](../../slides/raw/noise_types.png)
 
-| Parameter | Value |
-|---|---|
-| Traces / spacing | 60 traces, $\Delta x = 25$ m (offsets 25–1475 m) |
-| Sampling | $\Delta t = 4$ ms, 3.0 s record |
-| Reflections | $t_0$ = 0.8, 1.4, 2.0 s at $V_\text{rms}$ = 2200, 2600, 3000 m/s |
-| Ground roll | apparent velocity 300 m/s, 6–25 Hz |
-| Air blast | apparent velocity 600 m/s |
-
-![Figure: `figures/term02_lec02/term02_lec02_noise_types.png` — synthetic shot gather with labeled events.](./figures/term02_lec02/term02_lec02_noise_types.png)
-
-*Figure 1: The running example — a synthetic shot gather. Three reflection hyperbolas (black), a ground-roll cone at 300 m/s (heavy, low-frequency), an air blast at 600 m/s, and random background noise. Everything overlaps in time and frequency; only dip separates them.*
+*Figure 1: From the original deck: the four noise families on real records — random noise, coherent linear noise, multiples, and the first-break zone. Random noise never repeats from trace to trace; everything else follows a model — a dip, a velocity, a periodicity — and that is precisely what makes it separable from reflections.*
 
 ---
 
@@ -107,12 +97,12 @@ $$
 
 where $p = dt/dx$ is the **slope**: the delay added per meter of offset. Slope is the inverse of apparent velocity, $V_\text{app} = 1/p$ — the speed at which the event sweeps across the surface array.
 
-How does this event appear in FK? Build it in two steps, exactly as the original slide deck does:
+How does this event appear in FK:
 
 1. **Transform over time.** At each offset the wavelet has the same spectrum $S(f)$; only its arrival delay differs. At a single frequency $f$, the complex amplitude across offsets is a **sinusoid in $x$**: each trace is delayed by $p x$ seconds, i.e. rotated in phase by $f \cdot p x$ cycles. One frequency, one spatial sinusoid.
 2. **Transform over space.** A sinusoid in $x$ has a single wavenumber — and the delay law tells us which one: $k = p f$.
 
-So a linear event does not occupy the FK plane; it occupies a **line through the origin**, with slope fixed by the event's dip:
+So a linear event occupies a **line through the origin**, with slope fixed by the event's dip:
 
 $$
 \boxed{\; p = \frac{dt}{dx} = \frac{k}{f}, \qquad V_\text{app} = \frac{1}{p} = \frac{f}{k} \;}
@@ -126,13 +116,13 @@ Three consequences you should internalize:
 
 ![Figure: `figures/term02_lec02/term02_lec02_fk_plane_wave.png` — construction of the FK spectrum for plane waves.](./figures/term02_lec02/term02_lec02_fk_plane_wave.png)
 
-*Figure 2: Plane waves in t-x and in FK. Left: three linear events of different dips. Right: the FK amplitude spectrum — each event maps to a radial line through the origin at an angle set by $p = k/f$; steeper dip → larger $|k|$ at the same $f$. The steepest event (p = 0.8 ms/m) ends exactly at k = +0.5 cycles/trace at 50 Hz: the spatial Nyquist of this trace spacing — no steeper dip could be represented unaliased (Section 3).*
+*Figure 2: Plane waves in t-x and in FK, at $\Delta x = 12.5$ m. Left: three linear events — two gentle, reflection-like dips ($p = 0.25$ and $0.50$ ms/m) and one steep, air-blast-like dip ($p = 1.5$ ms/m; $V_\text{app} = 667$ m/s). Right: the FK amplitude spectrum. The two gentle events are single clean radial lines $k = pf$ through the origin, well inside the panel; steeper dip → larger $|k|$ at the same $f$. The steep event's line reaches the $k = +0.5$ cyc/trace edge at $f_\text{alias} = 26.7$ Hz and wraps around to $k = -0.5$: above $f_\text{alias}$ its energy re-enters the spectrum from the opposite edge, masquerading as an apparent dip of the opposite sign — spatial aliasing, Section 3's subject.*
 
 ### 2.3 Reflections and linear noise in FK
 
-A reflection hyperbola is not a straight line — but any *piece* of it nearly is. Zoom into a window of offsets and the hyperbola is a quasi-linear segment with the local slope of that window: steep near the source, flattening with offset. (In Term 1 we made this precise without saying so: the tangent to the hyperbola at offset $x$ has slope $p = x / V^2 t(x)$.)
+A reflection hyperbola is not a straight line — but any *piece* of it nearly is. Zoom into a window of offsets and the hyperbola is a quasi-linear segment with the local slope of that window: flat near the source, steepening with offset toward the straight-line asymptote of slope $1/V$. (In Term 1 we made this precise without saying so: the tangent to the hyperbola at offset $x$ has slope $p = x / V^2 t(x)$.)
 
-So think of a reflection as a **continuum of linear segments**, one per tangent. Each tangent segment maps to its own radial line in FK. The family of tangents, from the steep near-offset slopes down to the flat far-offset slopes, sweeps out a **fan** — approximately a triangular region between the lines $k = p_\text{near} f$ and $k = p_\text{far} f$ (Figure 3). Deeper reflections (larger $t_0$, larger $V$) have flatter fans: their steepest tangent slope is smaller.
+So think of a reflection as a **continuum of linear segments**, one per tangent. Each tangent segment maps to its own radial line in FK. The family of tangents, from the flat near-offset slopes up to the steep far-offset ones (the asymptote $1/V$), sweeps out a **fan** — approximately a triangular region between the lines $k = p_\text{near} f$ and $k = p_\text{far} f$ (Figure 3). Deeper reflections (larger $t_0$, larger $V$) have flatter fans: their steepest tangent slope, the asymptote $1/V$, is smaller.
 
 The linear noise, meanwhile, is honest about what it is: ground roll at 300 m/s is a single radial line $k = f/300$ — steep, and since ground roll is low-frequency, its energy hugs the low-$f$ part of that line: a **low-frequency, high-$|k|$ wedge**. The air blast at 600 m/s is a slightly gentler line. The amplitude at a point $(f, k)$ has a clean meaning: *the energy at frequency $f$ travelling at dip $k/f$*.
 
@@ -140,7 +130,7 @@ Now the central difficulty of the subject is visible in one picture: the steep s
 
 ![Figure: `figures/term02_lec02/term02_lec02_fk_reflection_fan.png` — reflections as tangent fans in FK.](./figures/term02_lec02/term02_lec02_fk_reflection_fan.png)
 
-*Figure 3: The running gather and its FK amplitude spectrum. Left: t-x. Right: FK. The reflections fill a fan between their steepest near-offset dips and their flat far-offset asymptotes; the ground roll is a steep low-frequency wedge. Near/mid/far offset windows are shown with their local tangent dips. Note the ground-roll energy wrapping around the spectrum edges — Section 3 explains it.*
+*Figure 3: The running gather and its FK amplitude spectrum. Left: three offset windows on the shallow reflection with their local tangent dips — flat near the source ($p = 0.04$ ms/m), steepening with offset ($0.17$, $0.27$ ms/m) toward the asymptote $1/V$. Right: each colored segment maps to the color-matched radial line $k = pf$; together the tangents sweep out the reflection fan between the $f$-axis ($p \approx 0$) and the steep far-offset edge ($p_{\max}$, dashed white; its mirror on the negative-$k$ side comes from the real-valued data). The ground roll is the steep low-frequency wedge wrapping around the $\pm k_N$ spectrum edges — Section 3 explains it.*
 
 ---
 
@@ -166,21 +156,19 @@ $$
 \boxed{\; f_\text{alias} = \frac{V_\text{app}}{2\, \Delta x} \;}
 $$
 
-The same result in the deck's clock language: a steep event delayed by $\Delta t$ per trace looks "smooth" only while that delay is under half a period, $\Delta t < T/2 = 1/(2f)$; since $\Delta t = \Delta x / V_\text{app}$, the same formula follows. **Slow events alias first**: the steeper the dip, the lower the frequency at which the folding starts.
+A steep event delayed by $\Delta t$ per trace looks "smooth" only while that delay is under half a period, $\Delta t < T/2 = 1/(2f)$; since $\Delta t = \Delta x / V_\text{app}$, the same formula follows. **Slow events alias first**: the steeper the dip, the lower the frequency at which the folding starts.
 
 ### 3.2 Worked numbers — why land data are in trouble
 
 Plug the running example's numbers in, with $\Delta x = 25$ m:
 
-- **Ground roll, $V_\text{app} = 300$ m/s:** $f_\text{alias} = 300 / (2 \times 25) = \mathbf{6\ Hz}$. The ground-roll band is 6–25 Hz — *the entire event is aliased almost from its first cycle*. Its high-frequency part does not sit on the steep line $k = f/300$; it wraps repeatedly around the $\pm k_N$ edges and re-enters the spectrum at moderate, reflection-like dips. This is exactly the wrapped skirt visible in Figure 3.
+- **Ground roll, $V_\text{app} = 300$ m/s:** $f_\text{alias} = 300 / (2 \times 25) = \mathbf{6\ Hz}$. The ground-roll band  can reach up to 25 Hz — *the entire event is aliased almost from its first cycle*. Its high-frequency part does not sit on the steep line $k = f/300$; it wraps repeatedly around the $\pm k_N$ edges and re-enters the spectrum at moderate, reflection-like dips. 
 - **The same ground roll at $\Delta x = 12.5$ m:** $f_\text{alias} = 12$ Hz. Halving the trace spacing doubles $k_N$; now the lower half of the band is clean.
 - **A reflection, $V_\text{app} = 2500$ m/s:** $f_\text{alias} = 2500/(2\times25) = 50$ Hz. Reflections are safely unaliased across the whole useful band — the survey was *designed* for the reflections. Nobody designed it for the noise.
 
-That last sentence is the whole tragedy of land seismic: **acquisition sampling is designed for signal, but the noise arrives with much slower apparent velocities and aliases first.**
-
 ![Figure: `figures/term02_lec02/term02_lec02_spatial_aliasing.png` — spatial aliasing of a steep linear event.](./figures/term02_lec02/term02_lec02_spatial_aliasing.png)
 
-*Figure 4: A steep linear event (ground-roll-like, 300 m/s) recorded at two trace spacings. Top: at 12.5 m the event is sampled comfortably; in FK its energy lies on one radial line. Bottom: at 25 m the slope per trace exceeds half a period above $f_\text{alias}$, the apparent dip flips, and in FK the energy wraps around the $\pm k_N$ edges into the region where reflections live.*
+*Figure 4: The example ground roll ($V_\text{app} = 300$ m/s, band 6–25 Hz) at two trace spacings. Left, $\Delta x = 4$ m: $f_\text{alias} = 37.5$ Hz lies above the band — the design rule $\Delta x < V_\text{app}/(2 f_\text{max})$ of Section 3.3 is satisfied, nothing wraps, and in FK the energy is one clean radial line $k = f/V$ (white). Right, $\Delta x = 25$ m: $f_\text{alias} = 6$ Hz (Section 3.2's worked number) — the whole band wraps, and in FK the energy forms a sawtooth of parallel red segments crossing the entire k range, right through the dips where reflections live; in t-x the per-trace delay (83 ms ≈ one period at 14 Hz) flips the apparent dip trace-to-trace — shown in the zoom inset.*
 
 ### 3.3 Why aliasing breaks noise attenuation — and what to do
 
@@ -192,8 +180,6 @@ The remedies, in order of preference:
 2. **Interpolate before filtering** — densify the data (de-alias it) in processing, then dip-filter. Interpolation in the FK/Radon world is a Term 3 Lecture 06 topic; the tau-p "smart interpolator" of Section 5 is a hint of it.
 3. **Cut the wrapped energy with a k-filter** (Section 4): if the wrapped noise lands at $|k|$ beyond the reflection fan, a wavenumber cut removes it cheaply.
 4. **Use tools that tolerate aliasing** — sparsity-based and prediction-based methods (Term 3 Lecture 04).
-
-The professional habit to build now: **before promising any noise attenuation, look at the FK panel of raw shots** and find $f_\text{alias}$ for the noise trains. Everything in the next section depends on it.
 
 ---
 
@@ -215,25 +201,29 @@ The design logic comes straight from Section 2: to filter **dips** you pass or r
 
 **2. The dip filter (velocity filter).** Pass a fan of slopes $|p| < p_\text{max}$, reject outside it. The mask boundaries are radial lines through the origin; the reject wedge takes away ground roll and air blast while the reflection fan passes. The *workhorse* of linear-noise attenuation — and the filter most betrayed by aliasing (Section 3.3).
 
-**3. The narrow dip-reject.** The surgical version: reject a narrow cone around one slope, e.g. $p \approx 1/600$ s/m for the air blast. Minimal signal damage, but only when the noise occupies a slope range the signal does not visit.
+**3. The narrow dip-reject.** The surgical version: reject a narrow cone around one slope, e.g. $p \approx 1/350$ s/m for the air blast. Minimal signal damage, but only when the noise occupies a slope range the signal does not visit.
 
 **4. The polygonal filter.** An arbitrary polygon lets you combine dips and frequencies: reject the ground-roll wedge *below 30 Hz only*; keep a low-frequency protection corridor; carve the reflection fan out of the reject zone. This is the form production software actually exposes.
 
 Every mask needs **tapers**: abrupt 0/1 boundaries in FK ring in t-x — the 2-D Gibbs effect from Term 1 Lecture 5, now wrapping around all four edges of the gather. Soft transitions over a few percent of the axes are cheap insurance.
 
-![Figure: `figures/term02_lec02/term02_lec02_fk_filter_types.png` — FK filter masks and application.](./figures/term02_lec02/term02_lec02_fk_filter_types.png)
+![Figure: `figures/term02_lec02/term02_lec02_fk_filter_types.png` — the four standard FK filter masks.](./figures/term02_lec02/term02_lec02_fk_filter_types.png)
 
-*Figure 5: Top: the four standard masks (k-cut, dip fan, narrow dip-reject, polygonal with low-frequency protection). Below: application of the dip fan to the running gather — input, output, and difference, each in t-x (middle row) and in FK (bottom row). The difference panels must show the linear noise and nothing reflection-shaped; in FK, the output keeps the reflection fan while the difference collects the steep noise energy.*
+*Figure 5: The four standard masks in the (f, k) plane of the running example ($\Delta x = 25$ m, so $k_N = 0.5$ cyc/trace). Blue = pass, red = reject, cosine-tapered in between; dashed guides mark each mask's design boundaries — the $k_\text{cut}$ of the anti-alias cut, the 0.45–0.60 ms/m slope limits of the dip fan, the air-blast slope of the narrow reject, and, on the polygonal mask, the 30 Hz top of the reject wedge and its low-frequency protection corridor around $k = 0$: at very low frequencies the cut spares the region near zero wavenumber instead of pinching to the origin. Notice also how little of the panel the air-blast cone occupies: above $f_\text{alias} = V/(2\Delta x) = 12$ Hz that slope is aliased and wraps to other apparent dips (Section 3), so the surgical reject only sees its low-frequency foot.*
 
 ### 4.3 Low-frequency protection and the QC discipline
 
-A naive dip-reject fan through the origin has a side effect that matters more every year: it removes **all low-frequency energy inside the noise cone**, including the low frequencies of the reflections — precisely the band that broadband processing (Term 3 Lecture 05) fights to preserve. Production masks therefore soften the fan: the reject wedge may start above a frequency floor, widen gradually, or leave a protected corridor along the $f$-axis. The design rule: *reject the noise's (dip, frequency) combination, not the noise's dip at every frequency.*
+A naive dip-reject fan through the origin has a side effect: it removes **all low-frequency energy inside the noise cone**, including the low frequencies of the reflections — precisely the band that broadband processing (Term 3 Lecture 05) fights to preserve. Production masks therefore soften the fan: the reject wedge may start above a frequency floor, widen gradually, or leave a protected corridor along the $f$-axis. The design rule: *reject the noise's (dip, frequency) combination, not the noise's dip at every frequency.*
 
 Quality control is not optional, and it is the same in every domain of this lecture:
 
 - Always inspect **before / after / difference** panels — in t-x *and* in the transform domain.
 - The difference panel is your noise model. It must look like the noise you meant to remove: linear events, the right dips and frequencies. Reflection arcs in the difference mean your mask ate signal — fix the mask, not the data.
-- Where amplitude fidelity matters (AVO, 4D), prefer **model-and-subtract** over zero-out: transform, *keep only the noise* (reject the signal), transform back — you now have a noise model in t-x — and subtract it from the input. Any residual mismatch leaves a small error instead of a zeroed hole; adaptive subtraction (Term 3 Lecture 03) polishes this further. The production tau-p case study in the references ran exactly this strategy: transform the noise dips only, inverse-transform them as a model, subtract — and kept far offsets alive for AVO that a mute would have destroyed.
+- Where amplitude fidelity matters (AVO, 4D), prefer **model-and-subtract** over zero-out: transform, *keep only the noise* (reject the signal), transform back — you now have a noise model in t-x — and subtract it from the input. Any residual mismatch leaves a small error instead of a zeroed hole; adaptive subtraction (Term 3 Lecture 03) polishes this further. 
+
+![Figure: `figures/term02_lec02/term02_lec02_fk_filter_application.png` — dip-fan FK filter applied to the running gather.](./figures/term02_lec02/term02_lec02_fk_filter_application.png)
+
+*Figure 6: The dip-pass fan applied to the running gather — the QC triplet in action. Top: input, output, and difference in t-x; bottom: the FK spectra of exactly these three panels, with the applied fan edge overlaid (dashed). The difference is the noise model: ground roll and air blast, nothing reflection-shaped. In FK, the output keeps the reflection fan inside the dashed boundary while the difference collects the steep energy outside it.*
 
 ---
 
@@ -264,12 +254,12 @@ $$
 Refinements that matter in practice:
 
 - Several linear events **with the same slope** but different intercepts all focus onto the **same p-trace** — at different $\tau$. A p-trace is "all energy that ever crossed the array at this dip".
-- Compare with FK, where the same event lives on an entire radial line. Tau-p **focuses** linear events: fewer non-zero samples, i.e. a *sparser* representation. This is the first appearance of an idea Term 3 will beat like a drum: choose the transform in which your signal is sparse and your noise is not.
+- Compare with FK, where the same event lives on an entire radial line. Tau-p **focuses** linear events: fewer non-zero samples, i.e. a *sparser* representation. This is the first appearance of a key idea: choose the transform in which your data is sparse.
 - The inverse mapping also holds: a linear event in tau-p maps to a point in t-x. The transform treats lines symmetrically in both directions.
 
 ![Figure: `figures/term02_lec02/term02_lec02_taup_mapping.png` — slant-stack construction and event mapping.](./figures/term02_lec02/term02_lec02_taup_mapping.png)
 
-*Figure 6: Slant stacking three linear events. For each trial $p$, traces are shifted by $p x$ and summed. When the trial slope matches an event, the sum spikes (constructive stacking); otherwise the event smears. Each event ends as a focused point on its own p-trace at its intercept time.*
+*Figure 7: Slant stacking three linear events. For each trial $p$, traces are shifted by $p x$ and summed. When the trial slope matches an event, the sum spikes (constructive stacking); otherwise the event smears. Each event ends as a focused point on its own p-trace at its intercept time.*
 
 ### 5.3 Why reflections become ellipses
 
@@ -287,19 +277,19 @@ t^2 \left(1 - p^2 V^2\right) = t_0^2
 \boxed{\; \tau(p) = t - p x = t_0 \sqrt{1 - p^2 V^2}, \qquad |p| \le \frac{1}{V} \;}
 $$
 
-— an **ellipse** with apex at $(t_0, p=0)$ that closes on the $\tau = 0$ axis at $p = \pm 1/V$ (Figure 7). The deep reflections never reach large $|p|$; the steepest tangent any reflection offers is its asymptote $1/V$.
+— an **ellipse** with apex at $(t_0, p=0)$ that closes on the $\tau = 0$ axis at $p = \pm 1/V$ (Figure 8). The deep reflections never reach large $|p|$; the steepest tangent any reflection offers is its asymptote $1/V$.
 
 ![Figure: `figures/term02_lec02/term02_lec02_taup_ellipse.png` — the reflection ellipse in tau-p.](./figures/term02_lec02/term02_lec02_taup_ellipse.png)
 
-*Figure 7: A hyperbola (left) maps to an ellipse in tau-p (right). Tangent lines of the hyperbola, drawn at several offsets, each focus to a point on the ellipse: slope $p$ on the horizontal axis, intercept $\tau(p)$ on the vertical. The ellipse closes at $p = \pm 1/V$; the ground roll, a true linear event at 300 m/s, focuses to a point at $|p| = 3.3$ ms/m — far beyond every reflection ellipse.*
+*Figure 8: A hyperbola (left) maps to an ellipse in tau-p (right). Tangent lines of the hyperbola, drawn at several offsets, each focus to a point on the ellipse: slope $p$ on the horizontal axis, intercept $\tau(p)$ on the vertical. The ellipse closes at $p = \pm 1/V$ — but a finite cable offers tangent points only up to $|p| = x_\text{max}/(V^2 t_\text{max}) \approx 0.31$ ms/m, so the image fades before the closing point.*
 
 Everything we need for noise separation is now on one panel:
 
 - **Linear noise focuses to points at fixed large $|p|$** (ground roll at $1/300$ s/m $\approx 3.3$ ms/m; air blast at $\approx 1.7$ ms/m), typically low $\tau$, broad in amplitude.
-- **Reflections live inside their ellipses**, which close by $|p| = 1/V_\text{min} \approx 0.33$–$0.45$ ms/m for our running velocities.
-- Between the reflection closing points and the noise points there is, when velocities are favorable, a **no-man's-land that only noise occupies** — the mute zone of Section 6. When the noise cone overlaps the ellipses' steep flanks, surgery must again be partial — the same overlap caveat as in FK, because (Section 7) the two domains are one.
+- **Reflections live inside their ellipses**, which close by $|p| = 1/V_\text{min} \approx 0.33$–$0.45$ ms/m for our  velocities.
+- Between the reflection closing points and the noise points there is, when velocities are favorable, a **no-man's-land that only random noise occupies** — the mute zone of Section 6. When the noise cone overlaps the ellipses' steep flanks, surgery must again be partial — the same overlap caveat as in FK, because (Section 7) the two domains are one.
 
-Two remarks for the curious. The ellipse is the linear-transform version of a general fact: each Radon variant maps events it does not match into envelopes — Bickel (2000) and Maeland (1998) derive the corresponding envelope curves for the hyperbolic and parabolic transforms, where a hyperbola maps to another hyperbola-like arc or focuses to a point when transform and event match. And the ellipses are the reason the tau-p domain is a natural stage for velocity analysis and demultiple (Term 2 Lecture 03): a reflection's $p$-extent $1/V$ *is* its velocity information.
+Two remarks for the curious. The ellipse is the linear-transform version of a general fact: each Radon variant maps events it does not match into envelopes — Bickel (2000) and Maeland (1998) derive the corresponding envelope curves for the hyperbolic and parabolic transforms, where a hyperbola maps to another hyperbola-like arc or focuses to a point when transform and event match. 
 
 ---
 
@@ -316,9 +306,9 @@ $$
 \qquad\text{(rule of thumb: } \Delta p \approx \frac{\Delta k_x}{f_\text{max}} = \frac{1}{f_\text{max}\, L} \text{ over aperture } L\text{)}
 $$
 
-For our running example: $x_\text{max} = 1475$ m, $f_\text{max} = 100$ Hz gives $\Delta p \lesssim 3.4\ \mu$s/m. Over a typical noise-dip range of $\pm 4$ ms/m that is some 2400 p-values — far more than the 60 traces we started with. The tau-p panel is (and should be) an **oversampled** representation; undersampling it in $p$ produces periodic replica artifacts. (This is the Taner et al. 1990 result; Margrave's notes give the rule in the aperture form.)
+For example: $x_\text{max} = 1475$ m, $f_\text{max} = 100$ Hz gives $\Delta p \lesssim 3.4\ \mu$s/m. Over a typical noise-dip range of $\pm 4$ ms/m that is some 2400 p-values — far more than the 60 traces we started with. The tau-p panel is (and should be) an **oversampled** representation; undersampling it in $p$ produces periodic replica artifacts. 
 
-**Second: finite aperture.** The sum runs over a finite cable, not an infinite line. Truncation in $x$ is convolution in $p$: every focused point acquires side lobes smeared along the $p$ direction, and events near the aperture edges (shallow tangent points at far offsets, in particular) suffer most. The practical symptoms are recognizable once you have seen them once (Figure 8):
+**Second: finite aperture.** The sum runs over a finite cable, not an infinite line. Truncation in $x$ is convolution in $p$: every focused point acquires side lobes smeared along the $p$ direction, and events near the aperture edges (shallow tangent points at far offsets, in particular) suffer most. The practical symptoms are recognizable once you have seen them once (Figure 9):
 
 - spurious energy at **opposite-sign $p$** — steep noise leaking to the wrong side of the panel;
 - energy at **very large $\tau$**, beyond any real event — steep summation lines crossing many traces of edge-parallel energy;
@@ -328,7 +318,7 @@ For our running example: $x_\text{max} = 1475$ m, $f_\text{max} = 100$ Hz gives 
 
 ![Figure: `figures/term02_lec02/term02_lec02_taup_aliasing.png` — aliasing artifacts in tau-p.](./figures/term02_lec02/term02_lec02_taup_aliasing.png)
 
-*Figure 8: The running gather transformed with too-coarse p-sampling (left): artifacts appear at opposite-sign p and very large $\tau$. With adequate $\Delta p$ and a low-pass filter (right), the panel shows what it should: three reflection ellipses and focused linear noise points.*
+*Figure 9: The running gather transformed with too-coarse p-sampling (left): artifacts appear at opposite-sign p and very large $\tau$. With adequate $\Delta p$ and a low-pass filter (right), the panel shows what it should: three reflection ellipses and focused linear noise points.*
 
 ### 6.2 Filtering in tau-p
 
@@ -338,13 +328,13 @@ With a clean panel, filtering is the same recipe as ever — design a mute, appl
 - **$\tau$-p windows:** combine the p-mute with a time floor (e.g. spare the shallow part of the panel), or mute only a dip band containing a specific noise train;
 - **taper every edge** — the same Gibbs logic as FK, and production practice is explicit about it: the case study in the references used 200 ms tapers and *no sharp corners* on its tau-p mutes, because hard edges ring when transformed back to t-x.
 
-QC is identical to Section 4.3 — before / after / **difference** panels; the difference must be the linear noise (Figure 9). And the same strategic choice exists: mute the noise and inverse-transform the *signal* (zero-out), or mute the signal and inverse-transform the *noise* as a model to subtract — the amplitude-preserving route described in Section 4.3.
+QC is identical to Section 4.3 — before / after / **difference** panels; the difference must be the linear noise (Figure 10). And the same strategic choice exists: mute the noise and inverse-transform the *signal* (zero-out), or mute the signal and inverse-transform the *noise* as a model to subtract — the amplitude-preserving route described in Section 4.3.
 
-When to choose tau-p over FK? They are one transform in two coordinate systems (next section), so the separation power is the same in principle. In practice: FK masks are natural when the noise's full $(f, k)$ shape matters (frequency-selective wedges, wrapped-energy surgery); tau-p mutes are natural when the decision is a pure dip decision, independent of frequency — and they generalize (parabolic, hyperbolic variants) where FK does not. Software often chains them: tau-p to model and subtract the steep noise, then a mild FK fan or k-cut to polish.
+When to choose tau-p over FK? They are one transform in two coordinate systems (next section), so the separation power is the same in principle. In practice: FK masks are natural when the noise's full $(f, k)$ shape matters (frequency-selective wedges, wrapped-energy surgery); tau-p mutes are natural when the decision is a pure dip decision, independent of frequency — and they generalize (parabolic, hyperbolic variants) where FK does not. 
 
 ![Figure: `figures/term02_lec02/term02_lec02_taup_mute.png` — tau-p mute application.](./figures/term02_lec02/term02_lec02_taup_mute.png)
 
-*Figure 9: Tau-p mute on the running gather. Left: input panel with the mute zone beyond the ellipses. Middle: after mute and inverse transform, in t-x. Right: the difference (= the noise model): ground roll and air blast, no reflection arcs.*
+*Figure 10: Tau-p mute on the running gather. Left: input panel with the mute zone beyond the ellipses. Middle: after mute and inverse transform, in t-x. Right: the difference (= the noise model): ground roll and air blast, no reflection arcs.*
 
 ---
 
@@ -362,9 +352,9 @@ $$
 
 The 1-D Fourier transform over $\tau$ of the slant stack at slope $p$ equals the FK spectrum evaluated **along the radial line $k = p f$**. This is the **Fourier slice theorem** (the mathematics behind medical tomography, among other things). Its consequences:
 
-- **FK and f–p are the same spectrum in different coordinates.** Rectangular $(f, k)$ versus "polar" $(f, p)$: a radial fan through the origin of FK is a *horizontal band* of $p$-values in f–p (Figure 10). The radial-line picture (FK) and the focused-point picture (tau-p) are two snapshots of this one object: a point in tau-p spreads into the line $k = pf$ once you Fourier-transform over $\tau$.
+- **FK and f–p are the same spectrum in different coordinates.** Rectangular $(f, k)$ versus "polar" $(f, p)$: a radial fan through the origin of FK is a *horizontal band* of $p$-values in f–p (Figure 11). The radial-line picture (FK) and the focused-point picture (tau-p) are two snapshots of this one object: a point in tau-p spreads into the line $k = pf$ once you Fourier-transform over $\tau$.
 - **Filters translate across domains.** A dip-reject fan in FK is a p-band reject in f–p, and approximately a p-mute in tau-p ("approximately" because the f–p version can be made frequency-dependent, while a tau-p mute cannot — the mute applies to all frequencies of the p-trace at once).
-- **There is an amplitude price.** The coordinate change $(f, k) \to (f, p)$ with $k = pf$ is not area-preserving: cell areas scale with $f$, so spectra in the two coordinate systems differ by a factor of frequency. That factor — the ramp $|f|$ — is precisely the **rho filter** that the inverse Radon transform will demand in the next section. Nothing in this lecture is accidental.
+- **There is an amplitude price.** The coordinate change $(f, k) \to (f, p)$ with $k = pf$ is not area-preserving: cell areas scale with $f$, so spectra in the two coordinate systems differ by a factor of frequency. That factor — the ramp $|f|$ — is precisely the **rho filter** that the inverse Radon transform will demand in the next section. 
 
 | operation in t-x | FK version | f–p version | tau-p version |
 |---|---|---|---|
@@ -372,9 +362,9 @@ The 1-D Fourier transform over $\tau$ of the slant stack at slope $p$ equals the
 | keep a frequency band | horizontal band | horizontal band (same $f$ axis) | *not expressible as a mute* — per-frequency only in f–p/FK |
 | remove one noise velocity | narrow radial cone | narrow vertical p-stripe | spike mute on one p-trace |
 
-![Figure: `figures/term02_lec02/term02_lec02_fk_fp_connection.png` — FK and f-p spectra of the same gather.](./figures/term02_lec02/term02_lec02_fk_fp_connection.png)
+![Figure: `slides/raw/ft_taup.png` — the FK ↔ f–p connection, from the original deck.](../../slides/raw/ft_taup.png)
 
-*Figure 10: The running gather (oversampled to $\Delta x = 4$ m so nothing is aliased) in both Fourier views, linear amplitude. Top row: full-range FK and f–p spectra — the radial ground-roll and air-blast lines of FK become horizontal bands in f–p. Bottom row: zoom on the reflection region — the fan between the f-axis and the reflection edge lines (left) maps to the band between p = 0 and the same edges (right). One spectrum, two coordinate systems — and the |f| factor of the rho filter is the price of the conversion.*
+*Figure 11: From the original deck: the same spectrum in two coordinate systems. In FK, a linear event is a region of constant slope — energy along the radial line $k = pf$; in tau-p it is a point on the trace of that $p$. Fourier-transforming the tau-p panel over $\tau$ gives the f–p spectrum, and FK ↔ f–p is then nothing but the coordinate change $k = pf$: radial fans in FK become horizontal $p$-bands in f–p, and a point in tau-p is the line $k = pf$ seen from the other axis.*
 
 ---
 
@@ -388,9 +378,9 @@ $$
 d_\text{adj}(t, x) = \sum_j u(t - p_j x,\, p_j)\, \Delta p .
 $$
 
-For the discrete, finite-aperture, finite-p data of the real world, the adjoint is **not** the inverse. Round-trip a gather through slant stack and adjoint and you get a recognizable but **smeared, low-frequency-flavored** copy: amplitudes decay, wavelets stretch, side lobes trail the events (Figure 11, top). The deck's demonstration is worth reproducing mentally: a clean linear event goes to tau-p and back; the reconstruction is duller than the input, and a single-time slice ($t = 0.2$ s) through the gather shows broadened, asymmetric peaks instead of compact wavelets.
+For the discrete, finite-aperture, finite-p data of the real world, the adjoint is **not** the inverse. Round-trip a gather through slant stack and adjoint and you get a recognizable but **smeared, low-frequency-flavored** copy: amplitudes decay, wavelets stretch, side lobes trail the events (Figure 12, top row). The deck's demonstration is worth reproducing mentally: a clean linear event goes to tau-p and back; the reconstruction is duller than the input, with broadened, asymmetric wavelets.
 
-This is a familiar moral from deconvolution (Term 1): **the transpose of a forward operator is almost never its inverse.** The 2-D DFT pair is the lucky exception — forward and backward DFT are exact inverses, which is why FK filtering (Section 4) needed no such discussion. The discrete tau-p pair is genuinely incomplete: no set of discrete p-values covers the $(f, k)$ grid uniformly, so the round trip always loses something (Margrave's notes make this precise with the polar-versus-rectangular grid geometry; the full derivation is in the companion derivation document).
+This is a familiar moral from deconvolution (Term 1): **the transpose of a forward operator is almost never its inverse.** The 2-D DFT pair is the lucky exception — forward and backward DFT are exact inverses, which is why FK filtering (Section 4) needed no such discussion. The discrete tau-p pair is genuinely incomplete: no set of discrete p-values covers the $(f, k)$ grid uniformly, so the round trip always loses something.
 
 ### 8.2 The rho filter
 
@@ -401,9 +391,9 @@ d(t, x) = \alpha(t) \ast \sum_j u(t - p_j x,\, p_j)\, \Delta p,
 \qquad \alpha(f) = |f|
 $$
 
-— the adjoint slant stack **followed by a convolution whose frequency response is the ramp $|f|$**. This convolution is the **rho filter** ($\rho$-filter). It is the same ramp you know from two other contexts: tomography's lambda-filter, and the half-derivative in the Kirchhoff migration integral (Yilmaz's §6.3 makes the link explicitly: rho-filtering the slant stack is equivalent to differentiating the wavefield before summation).
+— the adjoint slant stack **followed by a convolution whose frequency response is the ramp $|f|$**. This convolution is the **rho filter** ($\rho$-filter).
 
-In practice: before the inverse transform, multiply the amplitude spectrum of **each p-trace** by $|f|$ — cheap, stable, standard. The result (Figure 11, bottom): wavelets regain their bandwidth and symmetry; the time slice tightens back toward the input. Production implementations apply the rho filter as a built-in part of the inverse tau-p.
+In practice: before the inverse transform, multiply the amplitude spectrum of **each p-trace** by $|f|$ — cheap, stable, standard. A light Gaussian taper of the ramp toward Nyquist keeps interpolation noise in the top octave from being boosted along with the signal. The result (Figure 12, right column): in t-x the wavelets regain bandwidth and symmetry, and in the tau-p view — where the input's events are focused points on an empty background, so the adjoint's $1/|f|$ smear cannot hide along event lines — the points come back, and the $\tau$-slice spikes recover their height. Production implementations apply the rho filter as a built-in part of the inverse tau-p.
 
 What the rho filter does **not** fix: the smearing *along p* caused by finite aperture and coarse $\Delta p$ — events remain slightly defocused and side-lobed in the p direction. Two remedies exist, both pointing beyond this lecture: a **p-direction deconvolution** that compensates the finite array length (Zhou & Greenhalgh 1994), or treating the whole transform as an **inversion** problem.
 
@@ -417,11 +407,11 @@ $$
 \phi = (R R^*)^{-1} R\, d ,
 $$
 
-(with the $|f|$ weighting absorbed as before). The LS panel reconstructs with far fewer artifacts than the adjoint, because the inversion explicitly undoes the operator's smearing — and with a sparsity constraint on $\phi$ it becomes the **high-resolution Radon transform**, which focuses reflections and noise into tight, separable blobs. This is the door to several Term 3 topics: Radon interpolation of missing traces (the "smart interpolator" of Section 5, made rigorous), de-aliased Radon on irregularly sampled data, and the general principle of *sparsity in a transform domain* that underlies modern noise attenuation. For poorly sampled data the plain transform is actively dangerous — see Marfurt et al. (1996), "Pitfalls of using conventional Radon transforms on poorly sampled data". We will build the LS machinery in Term 3 Lecture 06.
+The LS panel reconstructs with far fewer artifacts than the adjoint, because the inversion explicitly undoes the operator's smearing — and with a sparsity constraint on $\phi$ it becomes the **high-resolution Radon transform**, which focuses reflections and noise into tight, separable blobs. This is the door to several Term 3 topics: Radon interpolation of missing traces (the "smart interpolator" of Section 5, made rigorous), de-aliased Radon on irregularly sampled data, and the general principle of *sparsity in a transform domain* that underlies modern noise attenuation. For poorly sampled data the plain transform is actively dangerous — see Marfurt et al. (1996), "Pitfalls of using conventional Radon transforms on poorly sampled data". We will build the LS machinery in Term 3 Lecture 06.
 
 ![Figure: `figures/term02_lec02/term02_lec02_inverse_radon_rho.png` — inverse Radon with and without the rho filter.](./figures/term02_lec02/term02_lec02_inverse_radon_rho.png)
 
-*Figure 11: Round trip through tau-p. Top: adjoint (inverse slant stack) without the rho filter — the events are recovered but smeared and low-frequency-biased; the t = 0.2 s slice shows broadened peaks. Bottom: adjoint + rho filter (|f| ramp) — waveforms restored. Compare the time slices on the right.*
+*Figure 12: The rho filter, seen in both domains. Top row: the t-x round trip — input; adjoint only (events smeared, low-frequency-flavored); adjoint with the rho filter ($|f|$ ramp, Gaussian-tapered toward Nyquist, applied per p-trace before the inverse). Middle row: the same three datasets in tau-p (the round trips forward-transformed back): the input's events are focused points; the adjoint-only round trip smears them along $\tau$; the rho filter restores them. Bottom: a $\tau$ = 0.55 s slice across p on a common amplitude scale — without rho the spikes lose height and broaden; with rho the input slice is recovered.*
 
 ---
 
@@ -440,9 +430,8 @@ $$
 1. Classify as coherent or random: ground roll, swell noise, air blast, a water-layer multiple, side scatter from a shallow fault. Which of these does this lecture address, and by which property?
 2. A linear event shows 4 ms of moveout per trace with $\Delta x = 25$ m. Compute $V_\text{app}$, $p$, and $k$ at 30 Hz — in cycles/m and in cycles/trace. Is the event spatially aliased at this frequency? At which frequency does it start to be?
 3. Why can a dip filter not remove aliased ground roll, and why is that as much an *acquisition* failure as a processing one? Give two processing-side remedies and their costs.
-4. Explain, in geometric terms, why a hyperbola maps to an ellipse in tau-p while a linear event maps to a point. Compute the $p$-extent of the ellipse for a reflection with $t_0 = 2$ s and $V = 2500$ m/s, and mark where ground roll at 300 m/s and an air blast at 600 m/s would focus relative to it.
+4. Explain, in geometric terms, why a hyperbola maps to an ellipse in tau-p while a linear event maps to a point. Compute the $p$-extent of the ellipse for a reflection with $t_0 = 2$ s and $V = 2500$ m/s.
 5. State the Fourier slice theorem and use it to explain why a dip-reject fan in FK corresponds to a horizontal band in f–p and to a p-mute in tau-p. Where does the $|f|$ factor come from, and which filter of this lecture is it?
-6. A colleague inverse-transforms a tau-p panel by plain adjoint summation "because the adjoint of a sum is a sum back". What will the result look like, which part of the correct inverse is missing, and what does that part fix — and not fix?
 
 ## References and further reading
 
@@ -456,5 +445,4 @@ $$
 - Marfurt, K. J., Schneider, R. V. & Mueller, M. C. (1996). Pitfalls of using conventional Radon transforms on poorly sampled data. *Geophysics*, 61(5), 1467–1482.
 - Gower, R. (2003). Optimising tau-p for noise & multiple suppression: a North Sea example. WesternGeco inTouch. `wiki/sources/gower_2003_intouch_taup.md`
 - CGG ODT02 *De-noise* course, Parts 3–4 (K-filter; linear noise removal / tau-p). `wiki/sources/cgg_odt02_denoise.md`
-- Original slide deck: `slides/raw/fk_taup.pptx` (RU).
 - Companion derivation: [FK–tau-p connection and the rho filter](../derivations/fk_taup_connection_and_rho_filter_derivation.en.md)

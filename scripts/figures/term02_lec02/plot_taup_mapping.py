@@ -1,4 +1,4 @@
-"""Figure 6: Slant stacking -- how events map into tau-p.
+"""Figure 7: Slant stacking -- how events map into tau-p.
 
 Left: three linear events in t-x with a summation trajectory (trial slope).
 Middle: after LMO with the slope that matches the middle event, that event is

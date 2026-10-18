@@ -1,4 +1,4 @@
-"""Figure 8: Aliasing artifacts in the tau-p domain.
+"""Figure 9: Aliasing artifacts in the tau-p domain.
 
 Left: the running-example gather slant-stacked with too-coarse p sampling
 (dp = 0.2 ms/m, violating dp <= 1/(2 x_max f_max)): artifacts appear as

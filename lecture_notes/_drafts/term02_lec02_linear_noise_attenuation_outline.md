@@ -32,7 +32,7 @@
 ### 1.3 Why transforms, and where in the flow (2 min)
 - In t-x these events overlap in time and frequency; their distinguishing property is **apparent velocity (dip)** — a *spatial* property. We need a domain where dip is an axis: FK and tau-p
 - Typical position: prestack (shot or CMP domain) after amplitude recovery and statics, before detailed velocity analysis / demultiple; cleaner gathers → better decon design windows, velocity picks, and stacks
-- **Figure 1:** synthetic shot gather with labeled reflections, ground roll, air blast, random noise (the lecture's running example)
+- **Figure 1:** raw deck slide 2 image (`slides/raw/noise_types.png`): the four noise families on real records; the synthetic running example is defined in text (§1.3 table) and first shown in Figure 3
 
 ---
 
@@ -50,14 +50,14 @@
 - The slope relation (derive inline, 3 lines):
   $$\boxed{\; p = \frac{dt}{dx} = \frac{k}{f}, \qquad V_\text{app} = \frac{1}{p} = \frac{f}{k} \;}$$
 - A linear event of slope p → **radial line k = p·f through the origin** of the FK plane; steeper dip → wider fan
-- **Figure 2:** plane-wave construction: t-x panel → single-frequency spatial slice → sinusoid in x → point/line in FK; plus three slopes → three radial lines with p = k/f annotated (mirrors deck slides 3–7)
+- **Figure 2:** plane waves in t-x → radial lines in FK: two unaliased events (clean k = p·f lines) + one steep aliased event wrapping at ±k_N, f_alias annotated (mirrors deck slides 3–7)
 
 ### 2.3 Reflections and linear noise in FK (6 min)
 - A reflection hyperbola is **locally linear**: over a limited offset window it is a quasi-linear segment with window-dependent slope (near offsets → steep; far offsets → flat; raw deck slides 8–10)
-- Each tangent segment → energy along its radial line → the family of tangents fills a **fan-shaped (roughly triangular) region** from the steep near-offset slopes to the flat far-offset slopes (deck slide 11)
+- Each tangent segment → energy along its radial line → the family of tangents fills a **fan-shaped (roughly triangular) region** from the flat near-offset slopes to the steep far-offset ones (asymptote 1/V) (deck slide 11)
 - Intensity at a point (f, k) = energy at frequency f propagating at dip k/f
 - Ground roll: slow (250–500 m/s), low-frequency (5–30 Hz) → a **low-f, high-|k| cone** that overlaps the reflection fan's steep side — this overlap is the whole difficulty
-- **Figure 3:** running gather + FK spectrum; offset windows (near/mid/far) with their local dips and FK sub-fans (mirrors deck slides 8–11)
+- **Figure 3:** running gather + FK spectrum; near/mid/far offset windows with their local dips, each color-matched to its radial line in FK; fan edge and wrapped ground-roll wedge annotated (mirrors deck slides 8–11)
 
 ---
 
@@ -75,7 +75,7 @@
 - Ground roll $V_\text{app} = 300$ m/s, Δx = 25 m → $f_\text{alias}$ = **6 Hz**: the entire ground-roll band is aliased
 - Same ground roll with Δx = 12.5 m → 12 Hz: halving Δx doubles $k_N$ (deck slides 16–17)
 - Reflection $V_\text{app} = 2500$ m/s, Δx = 25 m → 50 Hz: reflections are safe where the survey was designed for them — but the *noise* was not designed for
-- **Figure 4:** aliased steep linear event: apparent dip flips sign above $f_\text{alias}$; FK energy wraps around ±k_N into the reflection fan (mirrors deck slides 12–15)
+- **Figure 4:** the running example's ground roll (300 m/s) unaliased at $\Delta x$ = 4 m (f_alias = 37.5 Hz above the band: one clean radial line) vs fully aliased at 25 m (f_alias = 6 Hz: sawtooth wrap across k); t-x zoom inset shows the per-trace dip flip (mirrors deck slides 12–15)
 
 ### 3.3 Why aliasing breaks noise attenuation (5 min)
 - Aliased ground roll appears at *reflection-like* dips → a dip filter cannot remove it without removing signal; the wrapped energy is indistinguishable from steep signal dips at the same (f, k)
@@ -101,7 +101,8 @@
 - Problem (deck slides 19–20): a naive dip-reject fan through the origin removes the noise cone *and* the low-frequency energy inside it — the low frequencies we now fight to preserve (broadband processing, Term 3 Lec 05)
 - Variants: fan that starts above a floor frequency, low-frequency "protection" zone with relaxed slopes, amplitude-preserving soft fans
 - QC discipline: always inspect **before / after / difference** panels and their FK spectra — the difference must look like the noise model (linear events), not like reflections; amplitude-preserving workflows prefer *model-and-subtract* over *zero-out* (adaptive subtraction is Term 3 Lec 03)
-- **Figure 5:** mask gallery (k-cut, dip-pass fan, dip-reject band, polygonal, low-f-protected fan) + application of two masks to the running gather with before/after/difference (mirrors deck slides 16–20)
+- **Figure 5:** mask gallery (k-cut, dip-pass fan, dip-reject band, polygonal, low-f-protected fan) with design guides (mirrors deck slides 16–18)
+- **Figure 6:** dip-fan application to the running gather: before/after/difference in t-x and FK (mirrors deck slides 19–20)
 
 ---
 
@@ -125,8 +126,8 @@
   an **ellipse** with apex (t_0 at p = 0) closing at τ = 0, p = ±1/V (deck slides 25–26)
 - Reading it: the reflection's dip range [−1/V, +1/V] is set by the NMO/RMS velocity → deep/fast reflections → narrow tall ellipses; slow shallow reflectors → wide flat ones
 - Why this is good for noise separation: linear noise focuses at *constant large |p|* beyond the reflection ellipses' closing points → a **p-mute region** exists where only noise lives (when velocities differ enough — same overlap caveat as FK)
-- **Figure 6:** slant-stack construction on three linear events → points (mirrors deck slides 22–24)
-- **Figure 7:** hyperbola → ellipse: tangent-line construction, annotated ellipse formula, p-extent ±1/V (mirrors deck slides 25–26)
+- **Figure 7:** slant-stack construction on three linear events → points (mirrors deck slides 22–24)
+- **Figure 8:** hyperbola → ellipse: tangent-line construction, annotated ellipse formula, p-extent ±1/V (mirrors deck slides 25–26)
 
 ---
 
@@ -138,14 +139,14 @@
   2. **finite offset aperture + discrete traces:** truncation smears energy along p
 - Symptoms (deck slide 27): spurious energy at **opposite-sign p** and **very large τ** — easy to recognize once you know the signature
 - Cheap fix (deck slide 28): temporal **low-pass filter** before/after the transform kills the aliased high-f component; proper fix: adequate Δp + aperture-aware parameters
-- **Figure 8:** tau-p of the running gather with too-large Δp → artifacts; same with adequate Δp / after LPF (mirrors deck slides 27–28)
+- **Figure 9:** tau-p of the running gather with too-large Δp → artifacts; same with adequate Δp / after LPF (mirrors deck slides 27–28)
 
 ### 6.2 Filtering in tau-p (5 min)
 - Same recipe as FK: design a mute in (τ, p), apply, inverse transform (the inverse is Section 8)
 - Typical mute: reject high-|p| region beyond the reflection ellipses' closing points, often combined with a τ-dependent floor; tapers along mute edges as in FK
 - QC: before / after / **difference** panels (deck slide 29); difference must show linear noise, not hyperbolas
 - Practice note: tau-p mutes are the tool of choice when noise and signal slopes differ but overlap in frequency; FK fan filters are the tool when the whole (f, k) shape matters; they are one transform in two coordinate systems — Section 7
-- **Figure 9:** tau-p mute applied to the running gather: before / after / difference in both t-x and tau-p (mirrors deck slide 29)
+- **Figure 10:** tau-p mute applied to the running gather: before / after / difference in both t-x and tau-p (mirrors deck slide 29)
 
 ---
 
@@ -159,7 +160,7 @@
   - A dip-reject fan in FK ≡ a p-band reject in f–p ≡ a p-mute in tau-p (approximately — per-frequency in f–p, all-frequencies in tau-p)
   - There is an amplitude price: the coordinate change is not area-preserving → a |f| factor appears → exactly the rho filter of Section 8
 - Filtering-equivalence table (FK fan ↔ f–p band ↔ tau-p mute) — the mental map students should leave with
-- **Figure 10:** running gather: FK spectrum vs f–p spectrum side by side; same ground-roll cone highlighted as a fan in FK and a band in f–p; k = p·f lines drawn (mirrors deck slide 30)
+- **Figure 11:** raw deck slide 30 image (`slides/raw/ft_taup.png`): linear events as constant-slope regions in FK and points in tau-p; FT over τ → f–p; FK ↔ f–p as a pure coordinate change (mirrors deck slide 30)
 
 ---
 
@@ -179,7 +180,7 @@
 - Treat Radon as an inversion: find the sparsest tau-p panel whose forward transform reproduces the data → **least-squares / high-resolution Radon** (conjugate gradients, sparsity constraints; Trad, Ulrych & Sacchi)
 - Fixes both artifacts and resolution; also the door to interpolation of missing traces and de-aliasing
 - Covered in Term 3 Lecture 06 (regularization and interpolation) — the |f| ramp, sparsity, and "trust the low frequencies" ideas all return
-- **Figure 11:** inverse Radon of the running gather: adjoint without rho filter vs with rho filter; t = 0.2 s time slice comparison (mirrors deck slides 31–34)
+- **Figure 12:** rho filter demo on a four-event gather: t-x round trip (adjoint vs adjoint + rho) and the same datasets viewed in tau-p, with a $\tau$-slice comparison (mirrors deck slides 31–34)
 
 ---
 
@@ -207,21 +208,22 @@ Comprehension questions (in notes + exercises file):
 
 | # | Concept | Script | Mirrors deck |
 |---|---------|--------|--------------|
-| 1 | Noise taxonomy: synthetic shot gather with labeled events (running example) | `plot_noise_types.py` | slide 2 (+ reuse `slides/raw/noise_examples.png` for real data) |
-| 2 | FK construction: plane wave, per-frequency spatial sinusoid, p = k/f radial lines | `plot_fk_plane_wave.py` | slides 3–7 |
-| 3 | Reflections as local segments → FK fan; near/mid/far offset windows | `plot_fk_reflection_fan.py` | slides 8–11 |
-| 4 | Spatial aliasing: dip flip above f_alias, FK wrap-around, two Δx values | `plot_spatial_aliasing.py` | slides 12–15 |
-| 5 | FK filter masks (k-cut, dip fan, narrow reject, polygonal, low-f protection) + before/after/difference | `plot_fk_filter_types.py` | slides 16–20 |
-| 6 | Slant stack construction; linear events → points in tau-p | `plot_taup_mapping.py` | slides 22–24 |
-| 7 | Hyperbola → ellipse: tangent construction, τ(p) = t₀√(1−p²V²) | `plot_taup_ellipse.py` | slides 25–26 |
-| 8 | Tau-p aliasing artifacts (coarse Δp) + LPF remedy | `plot_taup_aliasing.py` | slides 27–28 |
-| 9 | Tau-p mute: before / after / difference | `plot_taup_mute.py` | slide 29 |
-| 10 | FK vs f–p: same spectrum, k = p·f coordinate change; fan ≡ band | `plot_fk_fp_connection.py` | slide 30 |
-| 11 | Inverse Radon: adjoint vs adjoint + rho filter; t = 0.2 s slice | `plot_inverse_radon_rho.py` | slides 31–34 |
+| 1 | Noise taxonomy: the four families on real records | reuse `slides/raw/noise_types.png` | slide 2 |
+| 2 | FK construction: plane waves → p = k/f radial lines; two unaliased + one aliased (wrap-around preview) | `plot_fk_plane_wave.py` | slides 3–7 |
+| 3 | Reflections as local segments → FK fan; near/mid/far windows color-matched to their radial lines | `plot_fk_reflection_fan.py` | slides 8–11 |
+| 4 | Spatial aliasing: ground roll unaliased at $\Delta x$ = 4 m vs sawtooth wrap at 25 m; dip-flip zoom inset; wrap guides | `plot_spatial_aliasing.py` | slides 12–15 |
+| 5 | FK filter masks (k-cut, dip fan, narrow reject, polygonal, low-f protection) with design guides | `plot_fk_filter_types.py` | slides 16–18 |
+| 6 | FK filter application: before / after / difference in t-x and FK, fan edge overlaid | `plot_fk_filter_application.py` | slides 19–20 |
+| 7 | Slant stack construction; linear events → points in tau-p | `plot_taup_mapping.py` | slides 22–24 |
+| 8 | Hyperbola → ellipse: tangent construction, τ(p) = t₀√(1−p²V²) | `plot_taup_ellipse.py` | slides 25–26 |
+| 9 | Tau-p aliasing artifacts (coarse Δp) + LPF remedy | `plot_taup_aliasing.py` | slides 27–28 |
+| 10 | Tau-p mute: before / after / difference | `plot_taup_mute.py` | slide 29 |
+| 11 | FK vs f–p: same spectrum, k = p·f coordinate change; fan ≡ band | reuse `slides/raw/ft_taup.png` | slide 30 |
+| 12 | Inverse Radon: adjoint vs adjoint + rho in t-x and tau-p; $\tau$-slice comparison | `plot_inverse_radon_rho.py` | slides 31–34 |
 
 All scripts share the running-example parameters (60 traces, Δx = 25 m, dt = 4 ms; reflections at t₀ = 0.8/1.4/2.0 s with V = 2200/2600/3000 m/s; ground roll V = 300 m/s, 6–25 Hz; air blast V = 600 m/s) so the same gather is recognizable across figures. Candidates for merging if 11 scripts is too many: 6+7 (event mapping) and 8+9 (tau-p artifacts + mute).
 
-Real-data images to reuse from the raw deck: noise examples (slide 2), the t-x/FK pairs (slides 8–11), FK filter results (slides 19–20), tau-p mute result (slide 29), inverse Radon slices (slides 31–34).
+Real-data images to reuse from the raw deck: noise examples (slide 2), the t-x/FK pairs (slides 8–11), FK filter results (slides 19–20), tau-p mute result (slide 29), the FK↔f–p connection (slide 30, `ft_taup.png`), inverse Radon slices (slides 31–34).
 
 ## Key equations
 
