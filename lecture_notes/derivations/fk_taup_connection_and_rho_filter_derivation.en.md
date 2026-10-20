@@ -4,8 +4,6 @@ This document derives, step by step, the two results that Term 2 Lecture 02 stat
 
 > **Prerequisites.** The 1-D Fourier transform and convolution theorem (Term 1 Lecture 05), the 2-D Fourier transform and the FK picture of dips (Term 2 Lecture 02, §§2 and 7), the delta function and the identity $\int e^{2\pi i \xi t}\,dt = \delta(\xi)$ (see the [DFT and spectral leakage derivation](dft_and_spectral_leakage_derivation.en.md)), and the matrix transpose as an adjoint. No tomography background is assumed.
 
-> **What this document does not do.** It does not treat the parabolic and hyperbolic Radon transforms, nor sparse high-resolution Radon inversion — those belong to Term 3. The least-squares transform appears only as a closing outlook (§7.3).
-
 ---
 
 ## 1. Setup: three representations of one gather
@@ -93,7 +91,7 @@ $$
 
 Read it in words: *the 1-D Fourier transform over $\tau$ of the slant stack at slope $p$ equals the FK spectrum along the radial line through the origin with slope $p$.* All the lecture's dictionary between the domains follows: a linear event (energy on one radial line in FK) becomes a point on one p-trace; a dip-reject fan in FK is a band of rejected $p$-values in f–p; and a point in tau-p spreads into the line $k = pf$ once transformed over $\tau$.
 
-Read backwards, the same chain of equalities gives a legitimate *computational* route for the forward transform (Margrave's route): 2-D FFT the gather, resample the spectrum from the rectangular $(f, k)$ grid onto radial lines $k = p_j f$ for each requested $p_j$, then inverse FFT over $f$ to get $\tau$ back. No slant stacking needed.
+Read backwards, the same chain of equalities gives a legitimate *computational* route for the forward transform: 2-D FFT the gather, resample the spectrum from the rectangular $(f, k)$ grid onto radial lines $k = p_j f$ for each requested $p_j$, then inverse FFT over $f$ to get $\tau$ back. This is how tau=p transform can be computed in the frequency domain.
 
 ### 2.2 Worked example: one plane wave on a finite cable
 
@@ -103,7 +101,7 @@ $$
 \psi(x, f) = S(f)\, e^{-2\pi i f (\tau_0 + p_0 x)} .
 $$
 
-Now slant-stack it over a symmetric cable of half-length $L/2$, i.e. integrate $x$ from $-L/2$ to $+L/2$ (a one-sided cable gives the same result times an extra phase twist; the symmetric layout keeps the algebra clean). By the calculation of §2.1,
+Now slant-stack it over a symmetric cable of half-length $L/2$, i.e. integrate $x$ from $-L/2$ to $+L/2$. By the calculation of §2.1,
 
 $$
 U(f, p) = S(f)\, e^{-2\pi i f \tau_0} \int_{-L/2}^{L/2} e^{2\pi i f (p - p_0) x}\, dx
@@ -132,11 +130,11 @@ $$
 U(f, p) = S(f)\, e^{-2\pi i f \tau_0}\; \frac{\delta(p - p_0)}{|f|} :
 $$
 
-a perfect point in $p$, but a **$1/|f|$-weighted copy of the wavelet spectrum** along $\tau$. Keep this factor in mind — it is not a coincidence, and it is the seed of everything in §§4–6. (It is also the honest version of the lecture's remark that "the coordinate change $(f,k) \to (f,p)$ is not area-preserving".)
+a perfect point in $p$, but a **$1/|f|$-weighted copy of the wavelet spectrum** along $\tau$.
 
 ### 2.4 The discrete caveat
 
-The theorem equates *continuous* objects. On a grid, $D(f, k)$ is known only at rectangular $(f, k)$ samples, while the radial samples $k = p_j f$ fall between them, at positions that depend on $f$. Resampling (interpolation) is required, and there is a structural annoyance: the radial lines crowd toward the origin and spread apart at high $|k|$, so **no set of discrete $p$ values covers the $(f, k)$ grid uniformly**. The discrete tau-p transform always loses something in a round trip — unlike the DFT pair, whose forward and backward matrices are exact inverses of each other. This is why the lecture insists that "summing back" is not the inverse; quantifying *what exactly* it loses is the business of the next two sections.
+The theorem equates *continuous* objects. On a grid, $D(f, k)$ is known only at rectangular $(f, k)$ samples, while the radial samples $k = p_j f$ fall between them, at positions that depend on $f$. Resampling (interpolation) is required, and there is a structural annoyance: the radial lines crowd toward the origin and spread apart at high $|k|$, so **no set of discrete $p$ values covers the $(f, k)$ grid uniformly**. The discrete tau-p transform always loses something in a round trip — unlike the DFT pair, whose forward and backward matrices are exact inverses of each other.
 
 ---
 
@@ -180,7 +178,7 @@ $$
 
 ### 4.1 One frequency at a time
 
-The Fourier transform over $t$ turns the whole discussion into algebra, because the slant stack's time shifts become phases. From §2.1 (with the roles of the variables swapped) and §3.2, per frequency $f$:
+The Fourier transform over $t$ turns the whole discussion into algebra, because the slant stack's time shifts become phases. From §2.1 (with the roles of the variables swapped) and §3.1, per frequency $f$:
 
 $$
 \text{forward:}\quad U(p) = \int \psi(x)\, e^{+2\pi i f p x}\, dx,
@@ -213,8 +211,6 @@ This single line explains everything the lecture's Figure 12 shows about the adj
 - the output is a **low-frequency-flavored** copy — a 5 Hz component survives ten times stronger (relatively) than a 50 Hz one, so the reconstructed wavelets are broader and duller than the input's;
 - the fix is staring at us: if the round trip multiplies by $1/|f|$, then the correct inverse is the adjoint **combined with a multiplication by $|f|$**. That multiplier is the rho filter. The remaining sections make this rigorous and geometric.
 
-(For the infinite aperture of §2.3 the same $1/|f|$ was already visible inside the *forward* transform of a plane wave — two halves of one Jacobian, as §5 will show.)
-
 ### 4.3 The two truncations of real data
 
 The identity $R^*R = 1/|f|$ assumed integration over $-\infty < x < \infty$ and $-\infty < p < \infty$. Real transforms truncate both, and each truncation adds its own artifact on top of the $1/|f|$ defect:
@@ -224,7 +220,7 @@ The identity $R^*R = 1/|f|$ assumed integration over $-\infty < x < \infty$ and 
 
 | Defect | Symptom (lecture §8.1) | Cure |
 |---|---|---|
-| missing $\|f\|$ ramp | low-frequency-flavored, broadened wavelets | **rho filter** (this document) |
+| missing $\|f\|$ ramp | low-frequency-flavored, broadened wavelets | **rho filter** |
 | finite aperture | smearing + side lobes *along $p$* | p-direction deconvolution (Zhou & Greenhalgh 1994) or least-squares / high-resolution Radon (§7.3) |
 | coarse $\Delta p$ | replica artifacts, opposite-sign $p$ energy | finer $p$ sampling, low-pass before transform (lecture §6.1) |
 
@@ -307,13 +303,13 @@ $$
 
 ### 5.3 Frequency-domain implementation
 
-Taking the Fourier transform over $t$ of the boxed formula gives the version used in code (Margrave's eq. 7):
+Taking the Fourier transform over $t$ of the boxed formula gives the practical implementation:
 
 $$
 \psi(x, f) = |f| \int U(f, p)\, e^{-2\pi i f p x}\, dp :
 $$
 
-per frequency, multiply by the ramp, sum over $p$ with the steering phase $e^{-2\pi i fpx}$, then inverse-FFT over $f$. One bookkeeping remark, because books disagree and it confuses readers who compare them: with **two-sided (real) spectra** the correct factor is the even ramp $|f|$, as derived above. If instead one works with the **analytic signal** (positive frequencies only) — as some treatments implicitly do — the plain signed factor $f$ appears, since $f = |f|$ on the retained half. Both routes reconstruct the same real gather; mixing conventions (signed $f$ on a two-sided spectrum) does not.
+per frequency, multiply by the ramp, sum over $p$ with the steering phase $e^{-2\pi i fpx}$, then inverse-FFT over $f$. 
 
 ---
 
@@ -356,7 +352,7 @@ $$
 
 ### 6.3 Relatives
 
-The ramp is a familiar object wearing different clothes:
+The similar ramp can be met in other applications:
 
 - **Derivative + Hilbert transform.** With $\tfrac{d}{dt} \leftrightarrow 2\pi i f$ and the Hilbert transform $\mathcal{H} \leftrightarrow -i\,\mathrm{sgn}(f)$, their composition obeys $(2\pi i f)\cdot(-i\,\mathrm{sgn} f) = 2\pi |f|$, hence
   $$\alpha = \tfrac{1}{2\pi}\, \mathcal{H}\,\tfrac{d}{dt} = \tfrac{1}{2\pi}\, \tfrac{d}{dt}\, \mathcal{H} :$$
@@ -379,7 +375,7 @@ A production inverse tau-p with rho filtering:
 
 Why taper the ramp? The ideal ramp wants to keep growing past Nyquist; the data cannot follow it there, and the top octave is dominated by interpolation error from the $\tau$-shifts and by whatever noise survived the forward transform. Boosting $|f|$ near $f_N$ multiplies exactly those components. A soft taper trades a little brightness for a lot of noise suppression — the same philosophy as the prewhitening of Term 1 deconvolution.
 
-Why does it not matter whether $\alpha$ is applied to the p-traces *before* the adjoint (step 2–3) or to the reconstructed gather *after* it (as the lecture's formula $\alpha * \sum_j u \Delta p$ writes it)? Because convolution with a fixed filter commutes with time shifts and with sums: $(\alpha * u)(t - px) = \alpha * \big(u(t - px)\big)$ componentwise. Filter-then-spread equals spread-then-filter.
+Why does it not matter whether $\alpha$ is applied to the p-traces *before* the adjoint (step 2–3) or to the reconstructed gather *after* it (as the lecture's formula $\alpha * \sum_j u \Delta p$ writes it)? Because convolution with a fixed filter commutes with time shifts and with sums: $(\alpha * u)(t - px) = \alpha * \big(u(t - px)\big)$ componentwise. 
 
 ### 7.2 What is repaired, what is not
 
@@ -422,32 +418,6 @@ $$
 
 ---
 
-## 8. Link to the lecture notes
-
-Term 2 Lecture 02 uses the following results of this document without full proof:
-
-- **§7 (one transform, two coordinate systems):** the slice theorem $U(f,p) = D(f, pf)$ — proved in §2.1 here; the filter-translation table follows from it (§2.1, closing paragraph); the "amplitude price" of the non-area-preserving coordinate change is the Jacobian $|f|$ of §5.1.
-- **§8.1 (why you cannot just sum back):** the adjoint is derived, not postulated, in §3; the smeared, low-frequency-flavored round trip is the $1/|f|$ factor of §4.2 plus the aperture sinc of §2.2/§4.3.
-- **§8.2 (the rho filter):** the filtered-back-projection formula is derived in §5; the per-trace $|f|$ recipe with the Nyquist taper is §7.1; the impulse response $-1/(2\pi^2 t^2)$ and the derivative-plus-Hilbert interpretation are §6; "what the rho filter does not fix" is §7.2, with Zhou & Greenhalgh's p-deconvolution as the complementary $p$-direction tool (§7.3).
-- **§8.3 (least-squares teaser):** the per-frequency matrix view and the LS formula are §7.3.
-
-Figure 12 of the lecture (round trip with and without rho, in t-x and in tau-p) illustrates §4.2's $1/|f|$ defect and its repair; Figure 9's p-aliasing artifacts illustrate §4.3's third row.
-
----
-
-## Self-check questions
-
-1. Redo the substitution of §2.1 yourself and explain why the spatial phase comes out as $e^{+2\pi i f p x}$ (positive sign). What would change if the 2-D transform convention were $e^{-2\pi i(ft + kx)}$?
-2. A plane wave with $p_0 = 0.5$ ms/m crosses a symmetric cable of length $L = 3000$ m. At which distance $|p - p_0|$ does the focused image have its first null at $f = 15$ Hz? And at 45 Hz? Why does the focus sharpen with frequency?
-3. Using the scaling rule $\delta(a\xi) = \delta(\xi)/|a|$, verify $\int e^{2\pi i f p \Delta x}\,dp = \delta(\Delta x)/|f|$, then reproduce the three-line proof of $R^*R = 1/|f|$ (§4.2).
-4. After an adjoint-only round trip, by what factor is a 60 Hz component weaker, relative to a 6 Hz one, than in the input? Describe the wavelet shape you expect in the reconstruction.
-5. Show $\int L\,\mathrm{sinc}(fL(p-p_0))\,dp = 1/|f|$ by the substitution $u = fL(p - p_0)$ — i.e. verify that §2.2's finite-aperture example is consistent with §4.2's round-trip factor.
-6. In §5.1, carry out the $f<0$ change of variables explicitly and confirm that the orientation reversal turns the factor $f$ into $|f|$. Then explain the same result with the cell-area picture.
-7. Verify $(2\pi i f)\cdot(-i\,\mathrm{sgn}\,f) = 2\pi|f|$ and conclude that the rho filter equals $\tfrac{1}{2\pi}\mathcal{H}\,\tfrac{d}{dt}$. Why must the rho filter be zero-phase — what would a 90°-phase ramp do to the reconstructed wavelets?
-8. From the matrix identities of §7.3: why does inverting $(G G^* + \varepsilon^2 I)$ sharpen the panel *along p* while the rho filter's $|f|$ repairs *along $\tau$*? Which term in which matrix does each operation touch?
-
----
-
 ## References
 
 - Margrave, G. F. (2006). *Methods of Seismic Data Processing* (Geophysics 557 lecture notes), University of Calgary, §§2-63–2-73 (projection-slice theorem; inverse tau-p and filtered back projection). `wiki/sources/margrave_2006_methods_of_seismic_data_processing.md`
@@ -456,4 +426,3 @@ Figure 12 of the lecture (round trip with and without rho, in t-x and in tau-p) 
 - Taner, M. T., Koehler, F., Alhilali, K. A. & Sherwood, R. D. (1990). Aliasing in the tau-p transform and the removal of spatially aliased coherent noise. *Geophysics*, 55(9), 1496–1503 (the $\Delta p$ rule).
 - Marfurt, K. J., Schneider, R. V. & Mueller, M. C. (1996). Pitfalls of using conventional Radon transforms on poorly sampled data. *Geophysics*, 61(5), 1467–1482.
 - Trad, D., Ulrych, T. & Sacchi, M. (2002). Accurate interpolation with high-resolution time-variant Radon transforms (the sparse/LS outlook of §7.3). `wiki/sources/trad2002_radon_interpolation.md`
-- Companion lecture notes: [Term 2 Lecture 02 — Linear Noise Attenuation: FK and Tau-P](../en/term02_lec02_linear_noise_attenuation.en.md), §5–8.
