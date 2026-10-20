@@ -957,3 +957,13 @@ Updated `wiki/index.md` (5 concepts, 7 sources).
 Updated `wiki/index.md` (5 new source rows).
 
 **Concept pages created (3, drafts feeding term02_lec02):** `fk_transform` (2-D FT, slope relation, spatial Nyquist), `fk_filtering` (mask types, tapers, low-f protection, QC), `rho_filter` (ramp |f| in inverse Radon, filtered back projection).
+
+## [2026-10-04] translate | Russian version of Term 2 Lecture 02
+
+Created `lecture_notes/ru/term02_lec02_linear_noise_attenuation.ru.md` — full Russian translation of the English lecture notes on linear noise attenuation (FK and tau-p): noise taxonomy, FK spectrum, spatial aliasing, FK filter masks, slant stack, reflection ellipses, Fourier slice theorem, inverse Radon and the rho filter. Rendered to PDF successfully. Terminology follows the project glossary (конус поверхностных волн, воздушная волна, кажущаяся скорость, наклонное суммирование, время пересечения, ро-фильтр, теорема о центральном срезе).
+
+**Translation addendum:** created `lecture_notes/derivations/fk_taup_connection_and_rho_filter_derivation.ru.md` — Russian version of the companion derivation (projection-slice theorem, adjoint, round-trip 1/|f| defect, filtered back projection, rho-filter impulse response, matrix/LS view). The ru lecture's reference link now points to the ru derivation.
+
+## [2026-10-04] slides | Term 2 Lecture 02 deck draft
+
+Created `slides/term02/lec02_linear_noise_attenuation/slide_outline.md` (34 slides: title, objectives, motivation, noise taxonomy, FK spectrum, spatial aliasing, four FK masks + QC, slant stack, ellipses, tau-p aliasing/filtering, slice-theorem dictionary, inverse Radon + rho filter, LS teaser, summary, comprehension questions) and built `lec02_linear_noise_attenuation.pptx`. All 12 figures embedded (10 generated + 2 copied from the raw deck as `term02_lec02_noise_types.png`, `term02_lec02_ft_taup_connection.png`). Outline math adjusted to the plain-text LaTeX converter (no \boxed/\sqrt/\lesssim/\hat).
