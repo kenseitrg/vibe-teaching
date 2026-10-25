@@ -967,3 +967,22 @@ Created `lecture_notes/ru/term02_lec02_linear_noise_attenuation.ru.md` — full 
 ## [2026-10-04] slides | Term 2 Lecture 02 deck draft
 
 Created `slides/term02/lec02_linear_noise_attenuation/slide_outline.md` (34 slides: title, objectives, motivation, noise taxonomy, FK spectrum, spatial aliasing, four FK masks + QC, slant stack, ellipses, tau-p aliasing/filtering, slice-theorem dictionary, inverse Radon + rho filter, LS teaser, summary, comprehension questions) and built `lec02_linear_noise_attenuation.pptx`. All 12 figures embedded (10 generated + 2 copied from the raw deck as `term02_lec02_noise_types.png`, `term02_lec02_ft_taup_connection.png`). Outline math adjusted to the plain-text LaTeX converter (no \boxed/\sqrt/\lesssim/\hat).
+
+## [2026-10-25] wiki | Multiples lecture sources ingested (term02_lec03 prep)
+
+Extracted and summarized 5 chapters of Verschuur's EAGE EET multiple-removal course from `papers/multiples/`: EET 01 (what's the problem), EET 02 (move-out discrimination, LS/high-res Radon), EET 05 (SRME principles), EET 06 (practical SRME), EET 07 (adaptive subtraction). Source pages: `verschuur_2006_eet01_multiples_problem`, `verschuur_2006_eet02_moveout_discrimination`, `verschuur_2006_eet05_principles_srme`, `verschuur_2006_eet06_practical_srme`, `verschuur_2006_eet07_adaptive_subtraction`.
+
+**Concept pages:** created `multiples` (classification, characteristics, method families) and `srme` (feedback model, series/iterative forms, 2D matrix formulation, practical limitations); rewrote `adaptive_subtraction` to generalize the Wiener matching-filter/L1-L2/window-parameter treatment beyond surface waves to SRME demultiple. Updated `wiki/index.md` (5 sources + 2 concepts).
+
+## [2026-10-25] lecture | Term 2 Lectures 03–04: Multiple Attenuation (two sessions)
+
+Built the full demultiple lecture pair from the instructor's 8-point plan and the raw deck `slides/raw/multiples.pptx` (97 slides, RU), based on the ingested Verschuur EET chapters.
+
+**Deliverables:**
+- EN lecture notes: `term02_lec03_multiple_attenuation_kinematics` (nature, fingerprints, classification, FK/Radon demultiple incl. LS + high-res, limitations) and `term02_lec04_multiple_attenuation_prediction` (predictive decon → tau-p decon, SRME 1D/2D + wavelet + requirements, adaptive subtraction L1/L2 + parameters, shallow-water chain). Both rendered to PDF.
+- Figures: 19 self-contained scripts (9 + 10) with honest numerics (adjoint-vs-LS Radon round trips; 2D SRME matrix engine with 8% prediction mismatch; IRLS L1 subtraction demos: 27%→1% primary damage; tau-p decon with 98% periodicity suppression) + 11 real-data carries extracted from the raw deck.
+- Derivations: `highres_radon_derivation` (LS per-frequency → Cauchy sparsity → IRLS) and `srme_feedback_derivation` (feedback → implicit/series/iterative, surface operator, 2D matrix form, convergence condition).
+- Decks: 29 + 27 slides from outlines via build_slides.
+- Wiki: lecture_ready pages for both lectures; notation glossary extended (Δt_w, r_0, q, x_0/p_0, a(t), M, x_k, MCG, DRP, IRLS).
+
+**Decisions (instructor, 2026-10-25):** two lecture numbers (lec03/lec04); HR Radon = objective + iteration demo in notes, full IRLS in derivation; shallow-water chain gets full figure + 5 min; figures = mix of synthetic + real-data carries. Exercises deferred by instructor. RU translation pending.

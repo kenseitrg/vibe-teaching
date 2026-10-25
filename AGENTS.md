@@ -126,6 +126,17 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | $\Delta t_\text{smoothed}$ | Long-wavelength static component | длиннопериодная составляющая статики |
 | $V_\text{apparent}$ | Apparent velocity from biased velocity analysis | кажущаяся скорость |
 | $R$ | Reflection coefficient at normal incidence | коэффициент отражения |
+| $\Delta t_w$ | Water-layer multiple period ($2h_w/v_w$) | период кратных волн водного слоя |
+| $r_0$ | Free-surface reflection coefficient (≈ −1) | коэффициент отражения от свободной поверхности |
+| $q$ | Parabolic Radon curvature (residual moveout parameter) | кривизна параболического преобразования Радона |
+| $x_0(t)$ / $p_0(t)$ | Multiple-free (primary) response in SRME | однократная составляющая записи (без кратных) |
+| $a(t)$ | SRME surface operator, $-[s(t)]^{-1}$ | поверхностный оператор SRME |
+| $M(x_r, x_s)$ | Predicted multiple trace (SRME) | модельная трасса кратных (SRME) |
+| $x_k$ | Downward reflection point / virtual source (DRP) | точка нижнего отражения (мнимый источник) |
+| MCG | Multiple contribution gather | сбор кратных вкладов |
+| DRP | Downward reflection point | точка нижнего отражения |
+| $h_w$, $v_w$ | Water depth / water velocity | глубина воды / скорость в воде |
+| IRLS | Iteratively re-weighted least squares | итеративно взвешенный метод наименьших квадратов |
 | $Z$ | Acoustic impedance ($\rho v$) | акустический импеданс |
 | $Q$ | Quality factor (inverse of absorption) | добротность |
 | $G(t)$ | Amplitude gain function | функция усиления |

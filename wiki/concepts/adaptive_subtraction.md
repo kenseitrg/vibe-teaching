@@ -1,66 +1,70 @@
 ---
-title: Adaptive subtraction of surface waves
+title: Adaptive subtraction
 status: draft
 sources:
+  - verschuur_2006_eet07_adaptive_subtraction
   - foti_surface_wave_methods
   - ivanov_hrlrt_masw
-  - mi_surface_waves_dispersion_energy
-  - priestley_surface_wave_practical
-tags: [surface-waves, noise-attenuation, adaptive-subtraction, ground-roll, wiener-filter]
+tags: [adaptive-subtraction, wiener-filter, matching-filter, noise-attenuation, multiples, srme, l1-norm]
 ---
 
-# Adaptive subtraction of surface waves
+# Adaptive subtraction
 
-In reflection seismology, surface waves are usually treated as coherent noise (ground roll). One way to remove them is to build a model of the surface-wave wavefield and then subtract it from the recorded data. Because the model is never perfect, an **adaptive subtraction** step is normally used.
+**Adaptive subtraction** is the practical engine of every "model the noise, then remove it" method. A noise model (predicted multiples, modeled surface waves, anything predictable) is never exactly right in amplitude, phase and wavelet, so instead of subtracting it directly we estimate a short **matching filter** that adapts the model to the data in local windows, and subtract the *filtered* model. The filter estimation is a Wiener least-squares problem — the same machinery as Term 1 deconvolution.
 
-## Modeling the surface wave
+## Why direct subtraction fails
 
-A surface-wave model can be built from the picked dispersion curve:
+A predicted noise event is usually accurate in **kinematics** (travel times, moveout — the model got the physics of propagation right) but inaccurate in **dynamics**: amplitudes, source/receiver directivity, wavelet phase, and 3D effects are imperfectly known. Subtracting an unadapted model leaves residual noise; scaling by a single constant is not enough when errors vary with offset, time or position.
 
-- For each frequency, the phase velocity is known, so the moveout across the receiver array is also known.
-- The model is a synthetic wavefield that contains only the predicted surface-wave energy.
-- Because surface waves are dispersive, the moveout is **frequency-dependent**: long wavelengths arrive earlier relative to short wavelengths than they would for a simple linear moveout.
+## Wiener matching-filter formulation
 
-## Frequency-dependent linear moveout
+Given data $d(t)$ containing signal plus noise, and a noise model $m(t)$, estimate filter $a(t)$ minimizing the residual after subtraction:
 
-If the phase velocity c(f) is known, the travel time to offset x is approximately t(f, x) = x / c(f). Applying this frequency-dependent delay and summing over frequencies reconstructs the predicted surface-wave arrival.
+$$
+e[n] = d[n] - \sum_{k} a[k]\, m[n-k], \qquad
+J_{L2} = \sum_n |e[n]|^2 \;\rightarrow\; \min
+$$
 
-## Spatial smoothing
+This is exactly the Wiener problem: normal equations $\mathbf{R}_{mm} \mathbf{a} = \mathbf{r}_{dm}$, where $\mathbf{R}_{mm}$ is the autocorrelation matrix of the model and $\mathbf{r}_{dm}$ the cross-correlation of data and model (usually with a small prewhitening added for stability). In processing systems the correlations are summed in a local **space-time window**, so the filter adapts laterally and temporally.
 
-Real surface waves vary laterally along the profile. A modeled wavefield may be smoothed over offset or along the survey line so that it matches the slowly varying coherent noise without following every local amplitude fluctuation.
+## Parameters and their trade-offs
 
-## Why adaptive subtraction is needed
+- **Filter length.** Short filters adapt gross amplitude/phase only and are safe for signal; long filters can shape the model to fit *anything* — including the signal where it interferes with the noise, damaging primaries. Rule: the filter should be long enough to absorb wavelet errors, no longer.
+- **Window size (space and time).** Small windows → locally accurate adaptation but unstable (little data per filter, risk of adapting signal away). Large windows → stable, well-determined filters but no adaptation to local variations.
+- **Interaction of the two.** The filter length must stay small relative to the window, and the window must be large enough that signal and noise are not both "fitted". A two-stage strategy is common: big windows for a global inverse-wavelet filter (e.g. one filter per common-offset gather), then small windows for local amplitude/directivity corrections (shot domain).
+- **Mode/iteration**: single-pass vs iterative model-and-subtract loops.
 
-Direct subtraction of the raw model often leaves residual noise because:
+## L2 vs L1 subtraction
 
-- The predicted amplitudes and phases do not match the real data exactly.
-- The wavefield may be affected by source coupling, near-surface scattering, and 3D effects.
-- A simple static or deterministic filter cannot account for these variations.
+L2 assumes the subtraction **output has minimum energy** — true when the output is signal uncorrelated with the model. It fails where signal and noise interfere (crossing events): the least-squares filter compromises between fitting the noise and annihilating the signal, producing both leakage (residual noise) and primary damage.
 
-## Adaptive filter concept
+The L1 norm,
 
-An adaptive filter finds a local filter that minimizes the energy remaining after subtraction. The idea is the same as a **Wiener filter**: design a filter that best matches the predicted noise to the actual noise, then subtract the filtered model. The filter coefficients are estimated from the cross-correlation between the model and the data, under the assumption that the residual should be as small as possible.
+$$
+J_{L1} = \sum_n |e[n]| \;\rightarrow\; \min,
+$$
 
-## Filter-length trade-off
+penalizes large residuals less, i.e. it tolerates a big misfit exactly at the interfering samples (treated as outliers) instead of forcing them to zero. The price: the problem becomes non-linear and is solved iteratively (iteratively re-weighted least squares). In practice L1 preserves primaries under interference; L2 is faster and more robust when interference is mild.
 
-- A **short filter** adapts quickly to local variations but may not capture the full wavelet shape.
-- A **long filter** can match the wavelet better but may also start to remove reflected signal that is similar to the noise.
-- The filter length is a regularization choice: it controls how aggressively the algorithm subtracts coherent noise.
+Beyond norms: **curvelet-domain separation** discriminates predicted noise from signal by local dip and frequency without explicit subtraction — works when the two occupy different curvelet coefficients.
 
-## Relation to other methods
+## Applications
 
-Adaptive subtraction is conceptually related to MASW/SWI processing, but the goal is different: instead of extracting a dispersion curve for inversion, the goal is to predict and remove the surface wave so that deeper reflections are visible.
+1. **SRME / demultiple** (the main industrial use): predicted surface multiples are adaptively matched and subtracted; two-stage L2 or L1 strategies are standard. See [SRME](srme.md).
+2. **Surface-wave (ground-roll) removal**: a modeled dispersive surface-wave wavefield (from a picked dispersion curve, with frequency-dependent moveout and lateral smoothing) is adaptively subtracted from reflection data.
+3. Any model-driven noise removal: swell noise, modeled diffractions, 4D matching.
 
 ## Related concepts
 
-- [Surface waves](surface_waves.md)
-- [Surface wave dispersion](surface_wave_dispersion.md)
-- [Surface wave inversion](surface_wave_inversion.md)
-- [FK-MUSIC / array analysis](fk_music_surface_waves.md)
 - [Wiener filter](wiener_filter.md)
+- [SRME](srme.md)
+- [Multiples](multiples.md)
+- [Surface waves](surface_waves.md)
+- [Predictive deconvolution](predictive_deconvolution.md)
 
 ## Sources
 
+- [Verschuur (2006) — EAGE EET 07, Adaptive Subtraction](../sources/verschuur_2006_eet07_adaptive_subtraction.md)
 - [Foti et al. (2011) — Surface wave methods](../sources/foti_surface_wave_methods.md)
 - [Ivanov et al. (2017) — HRLRT with MASW](../sources/ivanov_hrlrt_masw.md)
 - [Mi et al. (2016) — Dispersion energy analysis](../sources/mi_surface_waves_dispersion_energy.md)

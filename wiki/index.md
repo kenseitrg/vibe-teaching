@@ -83,6 +83,8 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Models of Q](concepts/q_models.md) | Four attenuation-theory families: frictional, Voigt–Ricker, Kolsky–Futterman NCQ, Kjartansson CQ | draft |
 | [Inverse Q filtering](concepts/inverse_q_filtering.md) | Absorption compensation: phase-only vs stabilized amplitude+phase, gain limit, reference frequency | draft |
 | [Q estimation](concepts/q_estimation.md) | Spectral ratio, centroid frequency shift, LS spectrum modelling, match-filter | draft |
+| [Multiples](concepts/multiples.md) | Multiple reflections: classification, characteristics, and removal method families | draft |
+| [SRME](concepts/srme.md) | Surface-related multiple elimination: data-driven prediction by multidimensional convolution | draft |
 
 ## Techniques
 
@@ -189,6 +191,11 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Wang (2006)](sources/wang_2006_inverse_q_resolution.md) | Inverse Q-filter for seismic resolution enhancement — stabilized, continuous Q | paper | draft |
 | [Schönleber (2014)](sources/schonleber_2014_kk_system_theory.md) | Simple KK derivation from system theory (causality → Hilbert pair) | paper | draft |
 | [Cheng & Margrave (2012, 2013)](sources/cheng_margrave_2012_2013_q_estimation.md) | Comparison of Q-estimation methods (spectral ratio, centroid shift, match-filter) | CREWES reports | draft |
+| [Verschuur (2006) — EAGE EET 01, What's the Problem](sources/verschuur_2006_eet01_multiples_problem.md) | Multiples: classification, characteristics, impact, method taxonomy | course slides | reviewed |
+| [Verschuur (2006) — EAGE EET 02, Move-out Discrimination](sources/verschuur_2006_eet02_moveout_discrimination.md) | Move-out based multiple removal: Radon transforms, LS and high-resolution Radon, limitations | course slides | reviewed |
+| [Verschuur (2006) — EAGE EET 05, Principles of SRME](sources/verschuur_2006_eet05_principles_srme.md) | SRME theory: feedback model, series and iterative formulation, 2D matrix version | course slides | reviewed |
+| [Verschuur (2006) — EAGE EET 06, Practical Aspects of SRME](sources/verschuur_2006_eet06_practical_srme.md) | SRME practice: missing near offsets, interpolation, shallow water strategy, land data | course slides | reviewed |
+| [Verschuur (2006) — EAGE EET 07, Adaptive Subtraction](sources/verschuur_2006_eet07_adaptive_subtraction.md) | Adaptive subtraction: matching filters, windows, L1 vs L2, curvelet separation | course slides | reviewed |
 | [Paradigm QAPP/QEST](sources/paradigm_qapp_qest.md) | Q compensation and estimation reference guide (production parameters) | software doc | draft |
 
 ## Comparisons
@@ -211,6 +218,8 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Term 3 Lecture 2 — Statics and Velocity Modeling](lecture_ready/term03_lec02_statics_and_velocity_modeling.md) | term03_lec02 | draft |
 | [Term 3 Lecture 3 — Surface Waves](lecture_ready/term03_lec03_surface_waves.md) | term03_lec03 | draft |
 | [Term 3 Lecture 5 — Broadband Deconvolution](lecture_ready/term03_lec05_broadband_deconvolution.md) | term03_lec05 | draft |
+| [Term 2 Lecture 3 — Multiple Attenuation I (Kinematic Methods)](lecture_ready/term02_lec03_multiple_attenuation_kinematics.md) | term02_lec03 | lecture-ready |
+| [Term 2 Lecture 4 — Multiple Attenuation II (Prediction Methods)](lecture_ready/term02_lec04_multiple_attenuation_prediction.md) | term02_lec04 | lecture-ready |
 
 ---
 
