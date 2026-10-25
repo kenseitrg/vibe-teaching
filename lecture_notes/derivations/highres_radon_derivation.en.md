@@ -187,10 +187,18 @@ model-dependent:
 
 Each iteration is the same cost as one LS solve. Start from
 $\mathbf{m}^{(0)} = \mathbf{m}_\text{ls}$; 10–40 iterations suffice. In
-practice $\lambda$ is *decreased* across iterations (continuation): start
-well-damped (behave like LS), end nearly un-damped (behave like pure sparse
-inversion). Typical parameters: $\sigma \approx 0.1$–$0.5\,\max|m|$ per
-frequency slice, $\lambda$ reduced by a factor 0.5–0.9 per iteration.
+practice $\lambda$ may be *decreased* across iterations (continuation):
+start well-damped (behave like LS), end nearly un-damped (behave like pure
+sparse inversion). Beware, though: as $\lambda \to 0$ the redundant
+curvature grid re-opens near-null directions of $\mathbf{G}$ and the solve
+can blow up. The lecture figure keeps $\lambda$ fixed for exactly this
+reason and lets the weights do all the focusing. Typical parameters:
+one $\sigma \approx 0.3$–0.6\,max$_q\|m_q\|$ shared by all frequencies
+(so the sparse support stays consistent from slice to slice), and
+$\lambda = 10^{-2}\,\|\mathbf{G}\|_2^2$, fixed. A final *support polish* —
+a least-squares re-fit restricted to the curvatures the IRLS selected,
+with damping inversely proportional to their energy — removes the
+bin-to-bin solver jitter and gives clean, wavelet-shaped events.
 
 ### 3.3 What is gained, what is paid
 
@@ -221,17 +229,21 @@ adaptive subtraction section). Learn it once here; reuse it everywhere.
 The figure `term02_lec03_highres_radon.png` is generated with exactly this
 algorithm:
 
-- $N_x = 121$ offsets, $N_q = 69$ curvatures, 5 events with residuals
-  $(-10, -5, 0, +60, +105)$ ms at 3000 m, Ricker 30 Hz wavelet;
-- band 5–90 Hz; per-frequency LS start (eigenvalue-truncated);
-- IRLS: $\sigma = 0.3 \max|m|$ per slice, $\lambda_0 = 10^{-3}
-  \operatorname{tr}(\mathbf{G})/N_q$, decay 0.6, 40 iterations.
+- $N_x = 101$ offsets (0–2000 m, $\Delta x = 20$ m), $N_q = 21$ curvatures
+  spanning $-40$–$+120$ ms, 5 events with residuals $(-8, -4, 0, +15, +40)$
+  ms (three primaries, two multiples), Ricker 20 Hz wavelet;
+- band 10–60 Hz; damped LS start
+  ($\lambda = 10^{-2}\,\|\mathbf{G}\|_2^2$, fixed through all iterations);
+- IRLS: one Cauchy weight per curvature shared by all frequencies,
+  $\sigma = 0.5\,\max_q \|m_q\|$, 12 iterations.
 
 Numbers to remember: LS reconstruction residual $\approx$ 4%; HR
-reconstruction residual $\approx$ 6% — the sparse model gives up 2 points of
-fit for an order-of-magnitude reduction in off-event energy, and after the
-same mute the HR-based demultiple removes the multiple family cleanly while
-the LS-based one leaks.
+reconstruction residual $\approx$ 7% — the sparse model pays a few percent
+of fit for a panel made of compact, well-separated blobs. After the same
+mute ($|q| \le 12$ ms) the HR-based demultiple removes the close multiple
+($+15$ ms) far more completely than the LS-based one: near that multiple
+the two outputs differ by $\sim 13\%$ of its amplitude, and the difference
+panel of the figure shows exactly this leaked residue.
 
 ---
 

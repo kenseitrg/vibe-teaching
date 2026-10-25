@@ -238,7 +238,7 @@ The Cauchy term penalizes *many* coefficients more than a few *large* ones: exac
 
 ![Figure: `figures/term02_lec03/term02_lec03_highres_radon.png` — high-resolution parabolic Radon.](./figures/term02_lec03/term02_lec03_highres_radon.png)
 
-*Figure 11: High-resolution Radon. Top: the iteration — starting from the smeared LS panel (iteration 0), each re-weighted solve concentrates energy; by iteration ~10–20 the panel is a set of compact blobs. The data fit barely changes (a few percent): we gave up almost nothing in fidelity and gained a lot in separability. Bottom: demultiple by the same mute in both panels — the LS mute leaks (residual multiples in the output), the HR mute separates cleanly.*
+*Figure 11: High-resolution Radon. Top: the iteration — starting from the smeared LS panel (iteration 0), each re-weighted solve concentrates energy; by iteration ~8–12 the panel is a set of compact blobs. The data fit barely changes (a few percent): we gave up almost nothing in fidelity and gained a lot in separability. Bottom: demultiple by the same mute in both panels — the LS mute leaks (residual multiple in the output), the HR mute separates cleanly. The last panel shows the difference of the two outputs at its own amplitude scale: the leaked residue that sparseness removed.*
 
 A bonus of the sparse panel: events that *alias* (steep events on coarse offset sampling) also focus instead of smearing, so high-resolution Radon is more forgiving of sampling than its LS parent.
 

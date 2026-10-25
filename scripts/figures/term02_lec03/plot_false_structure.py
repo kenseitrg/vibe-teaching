@@ -99,26 +99,28 @@ axes[0].set_ylabel("Two-way time (s)")
 # crest of its event: primary peaks sit at t0 + 0.088 s, two-wavelet
 # multiples at sum(t0) + 0.176 s, three-wavelet at sum(t0) + 0.264 s.
 axr = axes[2]
-axr.annotate("water bottom", xy=(-1800, 0.49), xytext=(-2450, 0.28),
-             fontsize=9, color="royalblue", va="center",
+axr.annotate("water bottom", xy=(-1800, 0.49), xytext=(-2100, 0.25),
+             fontsize=8, color="royalblue", ha="center", va="center",
              arrowprops=dict(arrowstyle="->", lw=1.0, color="royalblue"))
 axr.annotate("WB multiple x2\n(false reflector)", xy=(-1800, 0.98),
-             xytext=(-2450, 0.72), fontsize=9, color="crimson", va="top",
+             xytext=(-1890, 0.74), fontsize=8, color="crimson",
+             ha="center", va="center",
              arrowprops=dict(arrowstyle="->", lw=1.0, color="crimson"))
-axr.annotate("WB multiple x3", xy=(-1800, 1.47), xytext=(-2450, 1.26),
-             fontsize=9, color="crimson", va="top",
+axr.annotate("WB multiple x3", xy=(-1800, 1.47), xytext=(-1890, 1.235),
+             fontsize=8, color="crimson", ha="center", va="center",
              arrowprops=dict(arrowstyle="->", lw=1.0, color="crimson"))
-axr.annotate("REAL anticline", xy=(60, 1.39), xytext=(300, 1.19),
-             fontsize=9, color="royalblue", va="center",
+axr.annotate("REAL anticline", xy=(60, 1.39), xytext=(640, 1.20),
+             fontsize=8, color="royalblue", ha="center", va="center",
              arrowprops=dict(arrowstyle="->", lw=1.0, color="royalblue"))
-axr.annotate("FALSE anticline\n(multiple of the real one)", xy=(600, 2.96),
-             xytext=(1350, 3.36), fontsize=9, color="crimson", va="top",
+axr.annotate("FALSE anticline", xy=(-500, 2.90), xytext=(-40, 3.39),
+             fontsize=8, color="crimson", ha="center", va="center",
+             bbox=dict(boxstyle="square", facecolor="0.5", edgecolor="none"),
              arrowprops=dict(arrowstyle="->", lw=1.0, color="crimson"))
-axr.annotate("flat reflector +\nWB reverberations", xy=(2000, 1.90),
-             xytext=(1850, 2.14), fontsize=9, color="crimson", va="top",
+axr.annotate("flat reflector", xy=(250, 1.89), xytext=(0, 1.72),
+             fontsize=8, color="crimson", ha="center", va="center",
              arrowprops=dict(arrowstyle="->", lw=1.0, color="crimson"))
-# second arrow from the same label, down to the WB+flat reverberation
-axr.annotate("", xy=(2200, 2.37), xytext=(2200, 2.08),
+axr.annotate("WB reverberation", xy=(10, 2.37), xytext=(10, 2.22),
+             fontsize=8, color="crimson", ha="center", va="center",
              arrowprops=dict(arrowstyle="->", lw=1.0, color="crimson"))
 
 fig.suptitle("Multiples mimic reflectivity: every event on the right panel is a "

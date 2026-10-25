@@ -12,13 +12,43 @@ Four schematic ray paths side by side, all recorded at the same receiver:
 Downward reflection points are marked with a red circle: that marker is
 the defining feature of a multiple. The caption reminds the student that
 all four events arrive with the same wavelet in the same frequency band.
+
+All ray paths are specular: on horizontal interfaces the reflection law
+(angle in = angle out) means every bounce point is the horizontal midpoint
+of its two neighbours. With source at 200 m and receiver at 1100 m the
+bounce points come out at x = 425, 650, 875 m, so every path is
+mirror-symmetric about the source-receiver midpoint at 650 m.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-WATER_V, H_WATER = 1480.0, 300.0          # m/s, m
 SEABED_DEPTH, DEEP_DEPTH = 300.0, 1200.0  # m
+X_SRC, X_REC = 200.0, 1100.0              # m
+
+
+def specular_x(n_bounces, x_src=X_SRC, x_rec=X_REC):
+    """Lateral positions of specular bounce points on horizontal interfaces.
+
+    The reflection law (angle in = angle out) requires each bounce point to
+    sit at the horizontal midpoint of its neighbours, with the source and
+    receiver at the ends:  2*x_i = x_{i-1} + x_{i+1}.  That linear system is
+    tridiagonal; for flat interfaces its solution is evenly spaced points
+    (e.g. 200..1100 with 3 bounces -> 425, 650, 875).
+    """
+    A = np.zeros((n_bounces, n_bounces))
+    b = np.zeros(n_bounces)
+    for i in range(n_bounces):
+        A[i, i] = 2.0
+        if i > 0:
+            A[i, i - 1] = -1.0
+        else:
+            b[i] = x_src
+        if i < n_bounces - 1:
+            A[i, i + 1] = -1.0
+        else:
+            b[i] = x_rec
+    return np.linalg.solve(A, b)
 
 fig, axes = plt.subplots(1, 4, figsize=(14, 6), sharex=True, sharey=True)
 
@@ -30,27 +60,28 @@ titles = [
 ]
 
 # Each path is a list of (x, z) vertices, plus indices of downward points.
+# Every path has three specular bounces at the same lateral positions
+# (425, 650, 875 m); only the reflecting interface at each bounce differs.
+xb = specular_x(3)                     # -> (425, 650, 875) m
+
 paths = []
 
-# 1) Primary: source at x=200, deep reflector at 1200 m, receiver at x=1100.
-paths.append(([(200, 0), (650, DEEP_DEPTH), (1100, 0)], []))
+# 1) Primary: one upward reflection at the deep reflector (midpoint of
+#    source and receiver).
+paths.append(([(X_SRC, 0), (xb[1], DEEP_DEPTH), (X_REC, 0)], []))
 
-# 2) Water-bottom multiple: down to seabed, up to surface, down to seabed,
-#    up to receiver.
-xb1 = 200 + (1100 - 200) / 3.0
-paths.append(([(200, 0), (xb1, SEABED_DEPTH), (200 + 2 * (1100 - 200) / 3.0, 0),
-               (1100 - (1100 - 200) / 3.0, SEABED_DEPTH), (1100, 0)], [2]))
+# 2) Water-bottom multiple: seabed up -> surface down -> seabed up.
+#    Bounce 2 is the downward surface bounce.
+paths.append(([(X_SRC, 0), (xb[0], SEABED_DEPTH), (xb[1], 0),
+               (xb[2], SEABED_DEPTH), (X_REC, 0)], [2]))
 
-# 3) Peg-leg: deep reflector -> surface -> seabed -> receiver.
-xb2 = 200 + (1100 - 200) / 3.0
-paths.append(([(200, 0), (200 + (1100 - 200) / 3.0, DEEP_DEPTH), (xb2, 0),
-               (200 + 2 * (1100 - 200) / 3.0, SEABED_DEPTH), (1100, 0)], [2]))
+# 3) Peg-leg: deep reflector up -> surface down -> seabed up.
+paths.append(([(X_SRC, 0), (xb[0], DEEP_DEPTH), (xb[1], 0),
+               (xb[2], SEABED_DEPTH), (X_REC, 0)], [2]))
 
-# 4) Internal multiple: deep reflector -> seabed (downward!) -> deep
-#    reflector -> receiver.
-xi = 200 + (1100 - 200) / 3.0
-paths.append(([(200, 0), (xi, DEEP_DEPTH), (200 + (1100 - 200) / 2.0, SEABED_DEPTH),
-               (200 + 2 * (1100 - 200) / 3.0, DEEP_DEPTH), (1100, 0)], [2]))
+# 4) Internal multiple: deep reflector up -> seabed DOWN -> deep reflector up.
+paths.append(([(X_SRC, 0), (xb[0], DEEP_DEPTH), (xb[1], SEABED_DEPTH),
+               (xb[2], DEEP_DEPTH), (X_REC, 0)], [2]))
 
 for ax, title, (path, down_idx) in zip(axes, titles, paths):
     # Layer background
@@ -72,8 +103,8 @@ for ax, title, (path, down_idx) in zip(axes, titles, paths):
                 mew=2.5, zorder=4)
 
     # Source and receiver
-    ax.plot(200, 0, "*", ms=16, color="darkorange", zorder=4)
-    ax.plot(1100, 0, "v", ms=10, color="darkgreen", zorder=4)
+    ax.plot(X_SRC, 0, "*", ms=16, color="darkorange", zorder=4)
+    ax.plot(X_REC, 0, "v", ms=10, color="darkgreen", zorder=4)
 
     ax.set_title(title, fontsize=11)
     ax.set_xlim(100, 1200)

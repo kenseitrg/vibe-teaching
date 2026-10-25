@@ -73,16 +73,31 @@ for label, t0, v, amp in EVENTS:
     else:
         c, ls = prim_c, "-"
     ax1.plot(x, curves[label], ls, color=c, lw=1.8)
-    ax1.text(x[-1] * 1.01, curves[label][-1], label, fontsize=8.5, color=c,
-             va="center", ha="left")
-ax1.set_xlim(0, XMAX * 1.28)
+
+# Event labels placed INSIDE the gather (white boxes) in the quiet pockets
+# between events, so the image fills the whole panel (no white band on the right).
+# Hand-tuned to avoid the text collisions at the right edge (water bottom and
+# primary 1 arrive within ~10 ms of each other at far offset).
+LABEL_POS = {
+    "water bottom":         (2985, 1.99),
+    "primary 1 (900 m)":    (2985, 2.16),
+    "WB multiple, order 1": (2985, 2.32),
+    "WB multiple, order 2": (2985, 2.48),
+    "primary 2 (1800 m)":   (2985, 2.90),
+    "WB multiple, order 3": (2985, 3.12),
+}
+for label, (tx, ty) in LABEL_POS.items():
+    c = mult_c if "multiple" in label or label == "water bottom" else prim_c
+    ax1.text(tx, ty, label, fontsize=8, color=c, ha="right", va="center",
+             bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.9),
+             zorder=5)
+ax1.set_xlim(0, XMAX)
 ax1.set_ylim(TMAX, 0)
 ax1.set_xlabel("Offset (m)")
 ax1.set_ylabel("Two-way time (s)")
 ax1.set_title("CMP gather: primaries (blue) vs multiples (red dashed)")
 
 # --- Moveout difference --------------------------------------------------------
-ax2.axhline(0, color="0.5", lw=0.8)
 t_ref = curves["primary 2 (1800 m)"]
 for label, t0, v, amp in EVENTS:
     if label in ("water bottom", "primary 2 (1800 m)"):
@@ -91,12 +106,23 @@ for label, t0, v, amp in EVENTS:
     dt_ref = t_ref - t_ref[0]                       # moveout of the deep primary
     c = mult_c if "multiple" in label else prim_c
     ax2.plot(x, (dt - dt_ref) * 1e3, color=c,
-             ls="--" if "multiple" in label else "-", lw=1.8,
-             label=label if "primary" not in label else None)
+             ls="--" if "multiple" in label else "-",
+             lw=2.4 if "primary" in label else 2.0,
+             label=label)
+
+# Zero line = the deep primary itself: same t0 as the multiples, zero by construction.
+ax2.axhline(0, color="0.4", lw=1.4, label="primary 2 (1800 m): 0 ms reference")
+
+# Bold group markers so primaries vs multiples read at a glance.
+ax2.text(1450, 330, "multiples", color=mult_c, fontsize=12,
+         fontweight="bold", ha="center", va="center")
+ax2.text(1950, 265, "primary", color=prim_c, fontsize=12,
+         fontweight="bold", ha="center", va="center")
+
 ax2.set_xlabel("Offset (m)")
 ax2.set_ylabel("Differential moveout vs deep primary (ms)")
 ax2.set_title("Same $t_0$, different moveout:\nthe discrimination signal")
-ax2.legend(fontsize=8.5, loc="lower right")
+ax2.legend(fontsize=8.5, loc="upper left")
 ax2.set_xlim(0, XMAX)
 ax2.grid(alpha=0.3)
 
