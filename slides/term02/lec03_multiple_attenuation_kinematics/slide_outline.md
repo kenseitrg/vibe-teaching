@@ -98,7 +98,7 @@
 - Axis 1 — where is the extra downward reflection: free surface vs. interbed (internal).
 - Axis 2 — period vs. wavelet length: long-period vs. short-period.
 - The axes are independent; the cell decides the treatment.
-- Figure: `term02_lec03_multiple_taxonomy.png`
+- (Draw the taxonomy grid on the blackboard: surface vs. internal × long- vs. short-period.)
 
 ---
 

@@ -23,9 +23,9 @@ First of the two demultiple sessions. Notes: `lecture_notes/en/term02_lec03_mult
 5. **Parabolic Radon**: adjoint vs. LS inverse m=(LᴴL+λ²I)⁻¹Lᴴd per frequency; Hampson (1986) workflow; high-resolution Radon (Cauchy sparsity, IRLS) — derivation doc `highres_radon_derivation`.
 6. **Four limitations**: near offsets (differential moveout → 0), velocity inversions (internal multiples move like primaries), non-hyperbolicity, AVO smear/damage → motivation for prediction methods (lec04).
 
-## Figures (9 synthetic + 5 real-data carries)
+## Figures (8 synthetic + 5 real-data carries)
 
-`multiple_raypaths`, `false_structure`, `periodicity`, `multiple_moveout`, `multiple_taxonomy`, `parabolic_radon_ls`, `radon_demultiple`, `highres_radon`, `kinematic_limits`; real: stack with multiples (Nordkapp), migration with/without demultiple, Radon demultiple input/output (North Sea).
+`multiple_raypaths`, `false_structure`, `periodicity`, `multiple_moveout`, `parabolic_radon_ls`, `radon_demultiple`, `highres_radon`, `kinematic_limits`; real: stack with multiples (Nordkapp), migration with/without demultiple, Radon demultiple input/output (North Sea).
 
 ## Teaching notes
 

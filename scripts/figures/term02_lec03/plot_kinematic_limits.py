@@ -124,37 +124,40 @@ q_axis = Q_LABEL * 1e-3 / XMAX**2
 NQ = len(Q_LABEL)
 # post-NMO gather: primary with AVO (residual -10 ms), multiple constant
 # amplitude (residual +105 ms)
-data_avo = np.zeros((nt, len(x)))
+# synthesise in the frequency domain: exact parabolas, AVO = amplitude
+# varying linearly with offset (per-sample picking would add timing jitter)
 specs = [  # (t0, residual ms, amp at zero offset, amp at far offset)
     (0.9, -10, 1.0, 0.25),     # primary with AVO
     (1.6, 105, 0.7, 0.7),      # multiple, constant amplitude
 ]
+freqs = np.fft.rfftfreq(nt, DT)
+band = np.where((freqs >= BAND[0]) & (freqs <= BAND[1]))[0]
+W = np.fft.rfft(wav, n=nt) * np.exp(2j * np.pi * freqs * 20 * DT)
+avo_f = np.zeros((len(freqs), len(x)), dtype=complex)
 for t0, res_ms, a0, a1 in specs:
     q = res_ms * 1e-3 / XMAX**2
     amp = a0 + (a1 - a0) * x / XMAX
-    for j, xj in enumerate(x):
-        tj = t0 + q * xj**2
-        i0 = int(np.floor(tj / DT))
-        frac = tj / DT - i0
-        for off, wt in ((0, 1 - frac), (1, frac)):
-            s = i0 + off - 20
-            lo, hi = max(0, s), min(nt, s + 41)
-            if hi > lo:
-                data_avo[lo:hi, j] += amp[j] * wt * wav[lo - s:hi - s]
+    for k in band:
+        avo_f[k, :] += amp * W[k] * np.exp(-2j * np.pi * freqs[k] * (t0 + q * x**2))
 
-D = np.fft.rfft(data_avo, axis=0)
-freqs = np.fft.rfftfreq(nt, DT)
+# damped least-squares inverse per frequency slice
+LAM_FRAC = 1e-2
 M = np.zeros((NQ, len(freqs)), dtype=complex)
-for k, f in enumerate(freqs):
-    if not (BAND[0] <= f <= BAND[1]):
-        continue
-    L = np.exp(2j * np.pi * f * np.outer(q_axis, x**2))
-    m, *_ = np.linalg.lstsq(L.T, D[k, :], rcond=1e-8)
-    M[:, k] = m
+Drec = np.zeros_like(avo_f)
+for k in band:
+    L = np.exp(-2j * np.pi * freqs[k] * np.outer(q_axis, x**2))
+    G = L.conj() @ L.T
+    M[:, k] = np.linalg.solve(
+        G + LAM_FRAC * np.linalg.norm(G, 2) * np.eye(NQ),
+        L.conj() @ avo_f[k, :])
+    Drec[k, :] = L.T @ M[:, k]
 
 Mf = np.zeros((NQ, nt), dtype=complex)
 Mf[:, :len(freqs)] = M
 radon_t = np.fft.irfft(Mf, n=nt, axis=1)
+rms = lambda a: float(np.sqrt(np.mean(a**2)))
+print(f"panel (c) LS data-fit residual: "
+      f"{rms(np.fft.irfft(avo_f - Drec, n=nt, axis=1)) / rms(np.fft.irfft(avo_f, n=nt, axis=1)) * 100:.1f}%")
 
 axc = fig.add_subplot(gs[1, :2])
 vp2 = np.percentile(np.abs(radon_t), 99.5)

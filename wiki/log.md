@@ -986,3 +986,7 @@ Built the full demultiple lecture pair from the instructor's 8-point plan and th
 - Wiki: lecture_ready pages for both lectures; notation glossary extended (Δt_w, r_0, q, x_0/p_0, a(t), M, x_k, MCG, DRP, IRLS).
 
 **Decisions (instructor, 2026-10-25):** two lecture numbers (lec03/lec04); HR Radon = objective + iteration demo in notes, full IRLS in derivation; shallow-water chain gets full figure + 5 min; figures = mix of synthetic + real-data carries. Exercises deferred by instructor. RU translation pending.
+
+## [2026-10-25] figures | term02_lec03: taxonomy figure dropped (blackboard drawing)
+
+Removed `term02_lec03_multiple_taxonomy.png` from `term02_lec03_multiple_attenuation_kinematics` (EN notes + slide 13 of the deck) per instructor decision: the two-axis taxonomy (surface vs. internal × long- vs. short-period) is drawn on the blackboard during the lecture. Notes renumbered (was Figure 7; Figures 8–12 → 7–11); slide 13 keeps the axes as bullets with a draw-on-board stage direction. Wiki figure list updated (8 synthetic + 5 real-data carries). The orphaned script `plot_multiple_taxonomy.py` and PNG are still in the repo pending cleanup decision.

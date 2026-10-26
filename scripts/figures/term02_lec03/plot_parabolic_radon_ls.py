@@ -1,9 +1,8 @@
 """Figure: Parabolic Radon — adjoint vs least-squares inverse.
 
 Top: a CMP gather after approximate NMO (velocity between primaries
-and multiples). Residual moveout of every event is close to parabolic:
-primaries slightly overcorrected (negative residual), multiples
-undercorrected (positive residual).
+and multiples). Primaries are properly NMO corrected (flat); multiples
+are undercorrected and keep residual moveout that is close to parabolic.
 
 Middle: the ADJOINT transform (stack along parabolas, m = L^H d).
 Energy smears across curvatures and the reconstruction L m does NOT
@@ -35,15 +34,15 @@ Q_LABEL = np.linspace(-40, 300, 69)            # residual Dt (ms) at far offset
 # with q expressed as residual moveout (ms) at XMAX.
 # (label, t0 [s], residual at far offset [ms], amplitude)
 EVENTS = [
-    ("primary 1", 0.55, -12, 1.0),
-    ("primary 2", 1.15,  -6, 0.9),
-    ("primary 3", 1.75,  -3, 0.8),
+    ("primary 1", 0.55, -10, 1.0),
+    ("primary 2", 1.15,  -5, 0.9),
+    ("primary 3", 1.75,   0, 0.8),
     ("multiple 1", 0.90, 60, 0.7),
     ("multiple 2", 1.60, 105, 0.55),
 ]
 F_DOM = 30.0                     # [Hz] dominant frequency of the wavelet
 BAND = (5.0, 90.0)               # [Hz] frequencies used in the inversion
-LAM_FRAC = 3e-4                  # damping as fraction of ||G||^2
+LAM_FRAC = 1e-4                  # damping as fraction of ||G||^2
 
 
 def ricker(f_dom, n, dt):
@@ -93,15 +92,15 @@ for k in band:
 def to_time(M):
     """Inverse temporal FFT of a q-f panel; keep only signal band."""
     Mf = np.zeros((len(q_axis), nt), dtype=complex)
-    Mf[:, band] = M
+    Mf[:, :nf] = M
     return np.fft.irfft(Mf, n=nt, axis=1)
 
 
 def data_recon(M):
     """Data-space reconstruction d = L^T m per frequency, then inverse FFT."""
     Drec = np.zeros((nf, nx), dtype=complex)
-    for i, k in enumerate(band):
-        Drec[k, :] = L_op(freqs[k]).T @ M[:, i]
+    for k in band:
+        Drec[k, :] = L_op(freqs[k]).T @ M[:, k]
     return np.fft.irfft(Drec, n=nt, axis=0)
 
 
@@ -119,18 +118,23 @@ print(f"LS reconstruction residual:      {res_ls:.1f}%")
 # --- figure ---------------------------------------------------------------------
 fig, axes = plt.subplots(2, 3, figsize=(15, 8))
 v = np.percentile(np.abs(data), 99.5)
-vp = max(np.percentile(np.abs(radj), 99.5), np.percentile(np.abs(rls), 99.5))
-qext = [Q_LABEL[0], Q_LABEL[-1], TMAX, 0.0]
+vp_adj = np.percentile(np.abs(radj), 99.5)   # per-panel clips: the raw adjoint
+vp_ls = np.percentile(np.abs(rls), 99.5)     # overshoots LS amplitudes ~17x
+QZOOM = (-40.0, 150.0)           # display range of the q axis (ms)
+qext = [QZOOM[0], QZOOM[1], TMAX, 0.0]
+# keep only the displayed q range: with the full 69-sample axis (-40..300 ms)
+# imshow would compress it into the extent and displace every event visually
+qdisp = (Q_LABEL >= QZOOM[0]) & (Q_LABEL <= QZOOM[1])
 xext = [0, XMAX, TMAX, 0.0]
 
 axes[0, 0].imshow(data, extent=xext, aspect="auto", cmap="gray", vmin=-v, vmax=v)
-axes[0, 0].set_title("CMP after approx. NMO\n(primaries overcorrected, "
-                     "multiples undercorrected)")
+axes[0, 0].set_title("CMP after approx. NMO\n(primaries flat, multiples "
+                     "undercorrected)")
 axes[0, 0].set_xlabel("Offset (m)")
 axes[0, 0].set_ylabel("Time (s)")
 
-axes[0, 1].imshow(radj.T, extent=qext, aspect="auto", cmap="gray",
-                  vmin=-vp, vmax=vp)
+axes[0, 1].imshow(radj[qdisp].T, extent=qext, aspect="auto", cmap="gray",
+                  vmin=-vp_adj, vmax=vp_adj)
 axes[0, 1].set_title("ADJOINT Radon panel\n(smearing across curvatures)")
 axes[0, 1].set_xlabel("Residual moveout at 3000 m (ms)")
 
@@ -145,21 +149,27 @@ axes[1, 0].set_title("Input (repeated for comparison)")
 axes[1, 0].set_xlabel("Offset (m)")
 axes[1, 0].set_ylabel("Time (s)")
 
-axes[1, 1].imshow(rls.T, extent=qext, aspect="auto", cmap="gray",
-                  vmin=-vp, vmax=vp)
+axes[1, 1].imshow(rls[qdisp].T, extent=qext, aspect="auto", cmap="gray",
+                  vmin=-vp_ls, vmax=vp_ls)
 axes[1, 1].set_title("LEAST-SQUARES Radon panel\n(events focus into blobs)")
 axes[1, 1].set_xlabel("Residual moveout at 3000 m (ms)")
 
 axes[1, 2].imshow(data - dls, extent=xext, aspect="auto", cmap="gray",
                   vmin=-v, vmax=v)
 axes[1, 2].set_title(f"LS reconstruction residual\n"
-                     f"{res_ls:.0f}% of data — invertible")
+                     f"{res_ls:.1f}% of data — invertible")
 axes[1, 2].set_xlabel("Offset (m)")
 
-# annotate event families in the LS panel
+# annotate event families in the LS panel. Arrows point at the focused
+# blobs (EVENTS above: primaries at q = -10..0 ms, multiples at 60/105 ms);
+# each label sits on its own side of the q = 20 ms mute line.
 axes[1, 1].axvline(20, color="crimson", ls="--", lw=1.5)
-axes[1, 1].text(25, 0.12, "primaries\n(q < 20 ms)", color="royalblue", fontsize=10)
-axes[1, 1].text(180, 0.12, "multiples", color="crimson", fontsize=10)
+axes[1, 1].annotate("primaries\n(q < 20 ms)", xy=(-10, 1.15), xytext=(-38, 0.85),
+                    color="royalblue", fontsize=10, ha="left", va="center",
+                    arrowprops=dict(arrowstyle="->", color="royalblue", lw=1.2))
+axes[1, 1].annotate("multiples", xy=(105, 1.60), xytext=(122, 2.18),
+                    color="crimson", fontsize=10, ha="center",
+                    arrowprops=dict(arrowstyle="->", color="crimson", lw=1.2))
 
 fig.suptitle("Parabolic Radon: redefine the forward transform as the "
              "least-squares inverse of the adjoint", fontsize=14)

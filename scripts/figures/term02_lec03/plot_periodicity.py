@@ -1,17 +1,13 @@
 """Figure: Periodicity of water-layer reverberations (zero-offset view).
 
-Left: normal-incidence raypath family of one reflector below a water
-layer — the primary, then first-, second- and third-order reverberations,
-each one bouncing one extra round trip in the water layer.
-Middle: the resulting zero-offset trace. Every extra round trip adds the
+Two synthetic zero-offset traces. Left: a water layer of thickness h_w
+over the seabed traps energy in reverberations — every round trip adds the
 same delay dt_w = 2 h_w / v_w and multiplies the amplitude by
 R_bottom * R_surface (both < 1), producing a decaying, strictly periodic
-train.
-Right: the same idea compared with the wavelet length — the multiple
-period of this example (~0.4 s) is much longer than the wavelet
-(~0.08 s), so this is a long-period multiple: separate events. A short
-water layer (e.g. h_w = 30 m -> dt_w = 0.04 s) would push the arrivals
-inside one wavelet: short-period multiple, i.e. reverberation 'fog'.
+train of separate events (long-period multiples).
+Right: the same physics with a shallow water layer (h_w = 30 m ->
+dt_w = 0.04 s): the multiple period is shorter than the wavelet, so the
+arrivals interfere — short-period reverberation 'fog'.
 """
 
 import numpy as np
@@ -19,8 +15,8 @@ import matplotlib.pyplot as plt
 
 DT = 0.004
 H_WATER, V_WATER = 300.0, 1480.0
-R_SURF, R_BOT = -0.85, 0.4          # free-surface and water-bottom reflectivities
-T0 = 0.55                            # two-way time of the primary below seabed
+R_SURF, R_BOT = -1.0, 0.4           # free-surface and water-bottom reflectivities
+T0 = 0.55                            # two-way time of the primary event
 
 
 def ricker(f_dom, n, dt):
@@ -37,9 +33,10 @@ def build_trace(max_order=4):
     wav = ricker(30, 41, DT)
     amp = 1.0
     t_arr = T0
+    half = (len(wav) - 1) // 2          # place the wavelet peak at t_arr
     for _ in range(max_order + 1):
-        i0 = int(round(t_arr / DT))
-        if i0 + len(wav) < nt:
+        i0 = int(round(t_arr / DT)) - half
+        if i0 >= 0 and i0 + len(wav) < nt:
             trace[i0:i0 + len(wav)] += amp * wav
         t_arr += dt_w
         amp *= R_BOT * R_SURF
@@ -48,83 +45,58 @@ def build_trace(max_order=4):
 
 trace, t, dt_w = build_trace()
 
-fig = plt.figure(figsize=(13, 7))
+fig = plt.figure(figsize=(10, 6.5))
 
-# --- Left: raypath schematic -------------------------------------------------
-ax1 = fig.add_axes((0.03, 0.14, 0.24, 0.72))
-ax1.axhspan(0, H_WATER, color="#cfe8ff", alpha=0.85)
-ax1.axhspan(H_WATER, 340, color="#d9c9a8", alpha=0.9)
-ax1.axhline(0, color="k", lw=2)
-ax1.axhline(H_WATER, color="saddlebrown", lw=2)
-ax1.axhline(340, color="dimgray", lw=2)
-
-xb = 70.0
-order_color = ["darkblue", "crimson", "darkorange", "seagreen", "purple"]
-for order in range(5):
-    # zig-zag: source/receiver at x=0, extra bounces in the water layer
-    xs = [0.0]
-    zs = [0.0]
-    for k in range(order):            # extra water round trips
-        xs += [xb, xb]
-        zs += [H_WATER, 0.0]
-    xs += [xb]                        # final trip to the deep reflector
-    zs += [340.0]
-    ax1.plot(xs, zs, color=order_color[order], lw=1.8, alpha=0.9)
-ax1.plot(0, 0, "*", ms=15, color="darkorange", zorder=5)
-ax1.set_xlim(-30, 130)
-ax1.set_ylim(340, -40)
-ax1.set_xlabel("Offset (m)")
-ax1.set_ylabel("Depth (m)")
-ax1.set_title("Normal-incidence ray family\n(primary + reverberations)", fontsize=11)
-
-# --- Middle: the zero-offset trace -------------------------------------------
-ax2 = fig.add_axes((0.36, 0.14, 0.28, 0.72))
-ax2.plot(trace, t, "k-", lw=1.0)
-ax2.fill_betweenx(t, 0, trace, where=trace > 0, color="k", alpha=0.6)
-ax2.set_ylim(2.6, 0)
-ax2.set_xlim(-1.15, 1.15)
-ax2.set_ylabel("Two-way time (s)")
-ax2.set_xlabel("Amplitude")
-ax2.set_title("Zero-offset trace:\nperiodic decaying train", fontsize=11)
+# --- Left: the zero-offset trace ---------------------------------------------
+ax1 = fig.add_axes((0.09, 0.13, 0.36, 0.74))
+ax1.plot(trace, t, "k-", lw=1.0)
+ax1.fill_betweenx(t, 0, trace, where=trace > 0, color="k", alpha=0.6)
+ax1.set_ylim(2.6, 0)
+ax1.set_xlim(-1.15, 1.15)
+ax1.set_ylabel("Two-way time (s)")
+ax1.set_xlabel("Amplitude")
+ax1.set_title("Zero-offset trace ($h_w = 300$ m):\nperiodic decaying train",
+              fontsize=11)
 for k in range(4):
     tk = T0 + k * dt_w
-    ax2.axhline(tk, color="0.6", ls=":", lw=0.8)
-    ax2.text(1.18, tk, f"$t_0 + {k}\\,\\Delta t_{{w}}$" if k else "$t_0$",
+    ax1.axhline(tk, color="0.6", ls=":", lw=0.8)
+    ax1.text(1.18, tk, f"$t_0 + {k}\\,\\Delta t_{{w}}$" if k else "$t_0$",
              fontsize=9, va="center", color="0.35")
-ax2.text(-1.12, 0.18, f"$\\Delta t_w = 2h/v = {dt_w * 1e3:.0f}$ ms",
+ax1.text(-1.12, 0.18, f"$\\Delta t_w = 2h_w/v_w = {dt_w * 1e3:.0f}$ ms",
          fontsize=10, color="crimson",
          bbox=dict(fc="white", ec="crimson", alpha=0.85))
 
 # --- Right: long- vs short-period --------------------------------------------
-ax3 = fig.add_axes((0.70, 0.14, 0.27, 0.72))
+ax2 = fig.add_axes((0.56, 0.13, 0.36, 0.74))
 nt = len(t)
 short = np.zeros(nt)
 dt_short = 2 * 30.0 / V_WATER        # 30 m water layer -> 40 ms period
 wav = ricker(30, 41, DT)
+half = (len(wav) - 1) // 2           # place the wavelet peak at t_arr
 t_arr, amp = T0, 1.0
 for _ in range(60):
-    i0 = int(round(t_arr / DT))
-    if i0 + len(wav) >= nt:
+    i0 = int(round(t_arr / DT)) - half
+    if i0 < 0 or i0 + len(wav) >= nt:
         break
     short[i0:i0 + len(wav)] += amp * wav
     t_arr += dt_short
     amp *= 0.6
-ax3.plot(short, t, "k-", lw=1.0)
-ax3.fill_betweenx(t, 0, short, where=short > 0, color="k", alpha=0.6)
-ax3.set_ylim(2.6, 0)
-ax3.set_xlim(-1.15, 1.15)
-ax3.set_xlabel("Amplitude")
-ax3.set_title("Same physics, shallow water ($h=30$ m):\nshort-period 'fog'", fontsize=11)
-ax3.text(0.02, 0.2, "$\\Delta t_w = 40$ ms\n$\\ll$ wavelet length\n$\\Rightarrow$ interference",
-         fontsize=10, color="crimson", transform=ax3.transAxes,
+ax2.plot(short, t, "k-", lw=1.0)
+ax2.fill_betweenx(t, 0, short, where=short > 0, color="k", alpha=0.6)
+ax2.set_ylim(2.6, 0)
+ax2.set_xlim(-1.15, 1.15)
+ax2.set_xlabel("Amplitude")
+ax2.set_title("Same physics, shallow water ($h_w = 30$ m):\nshort-period 'fog'",
+              fontsize=11)
+ax2.text(0.02, 0.2, "$\\Delta t_w = 40$ ms\n$\\ll$ wavelet length\n$\\Rightarrow$ interference",
+         fontsize=10, color="crimson", transform=ax2.transAxes,
          bbox=dict(fc="white", ec="crimson", alpha=0.85))
 
 fig.suptitle("Periodicity: each water round trip adds $\\Delta t_w$ and multiplies "
              "the amplitude ($R_{bot}\\,R_{surf}$ per order)", fontsize=13)
 fig.text(0.5, 0.02,
-         "Left: one subsurface reflector generates a whole family of "
-         "reverberations. Middle: long-period multiples appear as separate "
-         "events.\nRight: in shallow water the same family collapses into "
+         "Left: long-period multiples appear as separate events, one per water "
+         "round trip.\nRight: in shallow water the same train collapses into "
          "short-period multiples that interfere with everything — deconvolution "
          "territory.",
          ha="center", fontsize=10, color="0.25")

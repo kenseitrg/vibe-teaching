@@ -86,7 +86,7 @@ With $h_w = 300$ m and $v_w = 1480$ m/s: $\Delta t_w = 0.405$ s; with $R_\text{b
 
 ![Figure: `figures/term02_lec03/term02_lec03_periodicity.png` — periodicity of water-layer reverberations.](./figures/term02_lec03/term02_lec03_periodicity.png)
 
-*Figure 5: Periodicity. Left: one subsurface reflector plus a reflecting sea surface generate an infinite ray family. Middle: the zero-offset trace — a periodic train with $\Delta t_w = 2 h_w/v_w = 405$ ms, each order damped by $R_\text{bot} R_\text{surf}$. Right: the same physics in shallow water (30 m): the period (40 ms) is shorter than the wavelet — the reverberations merge into "fog" (a short-period multiple) that interferes with everything beneath.*
+*Figure 5: Periodicity. Left: the zero-offset trace — a periodic train with $\Delta t_w = 2 h_w/v_w = 405$ ms, each order damped by $R_\text{bot} R_\text{surf}$. Right: the same physics in shallow water (30 m): the period (40 ms) is shorter than the wavelet — the reverberations merge into "fog" (a short-period multiple) that interferes with everything beneath.*
 
 The deeper observation — which becomes SRME next lecture — is that a multiple is *built from primaries*: combine the primary from the water bottom with the primary from the deep reflector and you get their peg-leg. **Travel times add; amplitudes multiply.** In the language of signal processing: convolution.
 
@@ -123,10 +123,6 @@ Two more recognizable habits, both visible on field data (original deck; Verschu
 ## 3. Classification
 
 Two independent axes matter, because each one decides which treatment applies.
-
-![Figure: `figures/term02_lec03/term02_lec03_multiple_taxonomy.png` — classification of multiples.](./figures/term02_lec03/term02_lec03_multiple_taxonomy.png)
-
-*Figure 7: The taxonomy. Axis 1 — where is the extra downward reflection: at the free surface (surface-related) or inside the subsurface (internal/interbed). Axis 2 — what is the period relative to the wavelet: long-period multiples are separate events; short-period multiples are reverberation fog. Every demultiple method targets one cell.*
 
 ### 3.1 Axis 1: where the downward reflection happens
 
@@ -198,7 +194,7 @@ $$
 
 ![Figure: `figures/term02_lec03/term02_lec03_parabolic_radon_ls.png` — adjoint vs least-squares parabolic Radon.](./figures/term02_lec03/term02_lec03_parabolic_radon_ls.png)
 
-*Figure 8: Adjoint vs LS. Top: the adjoint panel smears each event across many curvatures, and its reconstruction misses 100%+ of the data energy — the pair (stack, reverse stack) is not an inverse pair. Bottom: the LS panel focuses each event into a compact blob around its true residual moveout, and the reconstruction residual is a few percent. Both panels describe the same data; only the bottom one is a faithful representation.*
+*Figure 7: Adjoint vs LS. Top: the adjoint panel smears each event across many curvatures, and its reconstruction misses 100%+ of the data energy — the pair (stack, reverse stack) is not an inverse pair. Bottom: the LS panel focuses each event into a compact blob around its true residual moveout, and the reconstruction residual is a few percent. Both panels describe the same data; only the bottom one is a faithful representation.*
 
 This is the same "adjoint $\neq$ inverse" lesson as the rho filter in Term 2 Lec 02 — but solved by explicit matrix inversion rather than a spectral ramp, because here the operator is small enough to invert per frequency.
 
@@ -213,13 +209,13 @@ The production recipe (Hampson, 1986):
 
 ![Figure: `figures/term02_lec03/term02_lec03_radon_demultiple.png` — the Hampson (1986) demultiple workflow.](./figures/term02_lec03/term02_lec03_radon_demultiple.png)
 
-*Figure 9: The workflow, end to end, on our synthetic gather: input → NMO at 2300 m/s → LS parabolic Radon panel with the mute (|residual| > 20 ms zeroed; red) → inverse transform and NMO back. Far offsets are cleaned almost perfectly; near offsets are not — see Section 4.5.*
+*Figure 8: The workflow, end to end, on our synthetic gather: input → NMO at 2300 m/s → LS parabolic Radon panel with the mute (|residual| > 50 ms zeroed; red) → inverse transform and NMO back. Far offsets are cleaned almost perfectly; near offsets are not — see Section 4.5.*
 
 ![Figure: `figures/term02_lec03/term02_lec03_real_radon_input.png` — North Sea CMP gathers before Radon demultiple.](./figures/term02_lec03/term02_lec03_real_radon_input.png)
 
 ![Figure: `figures/term02_lec03/term02_lec03_real_radon_output.png` — North Sea CMP gathers after Radon demultiple.](./figures/term02_lec03/term02_lec03_real_radon_output.png)
 
-*Figure 10: The same workflow on field data (North Sea, courtesy Equinor; from the original deck). Input CMP gathers with a strong multiple family; after parabolic Radon demultiple the primaries stand out. Production reality: dozens of gathers per second of section, per line, per survey.*
+*Figure 9: The same workflow on field data (North Sea, courtesy Equinor; from the original deck). Input CMP gathers with a strong multiple family; after parabolic Radon demultiple the primaries stand out. Production reality: dozens of gathers per second of section, per line, per survey.*
 
 **From LS to high-resolution.** The LS panel still smears each event *along the q axis* — the event is a wavelet (not a delta) in time and, worse, the parabola family is nearly linearly dependent, so the LS solution compromises. When primaries and multiples are close in curvature, the smeared tails overlap, and the mute leaks multiples into the output (and clips primary tails).
 
@@ -238,13 +234,13 @@ The Cauchy term penalizes *many* coefficients more than a few *large* ones: exac
 
 ![Figure: `figures/term02_lec03/term02_lec03_highres_radon.png` — high-resolution parabolic Radon.](./figures/term02_lec03/term02_lec03_highres_radon.png)
 
-*Figure 11: High-resolution Radon. Top: the iteration — starting from the smeared LS panel (iteration 0), each re-weighted solve concentrates energy; by iteration ~8–12 the panel is a set of compact blobs. The data fit barely changes (a few percent): we gave up almost nothing in fidelity and gained a lot in separability. Bottom: demultiple by the same mute in both panels — the LS mute leaks (residual multiple in the output), the HR mute separates cleanly. The last panel shows the difference of the two outputs at its own amplitude scale: the leaked residue that sparseness removed.*
+*Figure 10: High-resolution Radon. Top: the iteration — starting from the smeared LS panel (iteration 0), each re-weighted solve concentrates energy; by iteration ~8–12 the panel is a set of compact blobs. The data fit barely changes (a few percent): we gave up almost nothing in fidelity and gained a lot in separability. Bottom: demultiple by the same mute in both panels — the LS mute leaks (residual multiple in the output), the HR mute separates cleanly. The last panel shows the difference of the two outputs at its own amplitude scale: the leaked residue that sparseness removed.*
 
 A bonus of the sparse panel: events that *alias* (steep events on coarse offset sampling) also focus instead of smearing, so high-resolution Radon is more forgiving of sampling than its LS parent.
 
 ### 4.5 The four limitations
 
-Move-out discrimination is cheap, robust, 3D-capable — and bounded by its assumptions. Four failures matter in practice (Figure 12):
+Move-out discrimination is cheap, robust, 3D-capable — and bounded by its assumptions. Four failures matter in practice (Figure 11):
 
 **(1) Near offsets.** The discrimination signal — differential moveout — is *quadratic* in offset: it vanishes at $x \to 0$. Below roughly 500 m offset the difference between a multiple and a primary is smaller than the wavelet can express. No transform, however clever, separates identical things. Production answer: a hard mute of the near-offset strip after Radon demultiple — which throws away data, leaves a near-offset gap, and creates its own imaging problems.
 
@@ -256,7 +252,7 @@ Move-out discrimination is cheap, robust, 3D-capable — and bounded by its assu
 
 ![Figure: `figures/term02_lec03/term02_lec03_kinematic_limits.png` — limitations of kinematic demultiple.](./figures/term02_lec03/term02_lec03_kinematic_limits.png)
 
-*Figure 12: The four limitations. (a) Differential moveout dies quadratically at near offsets — below ~500 m the events are indistinguishable; (b) a velocity-inversion model: after NMO at primary velocities, the surface multiple is strongly curved (easy) but the internal multiple of the slow layer is nearly flat (leaks through); (c) in the Radon panel a constant-amplitude event focuses, an AVO-carrying event smears along q.*
+*Figure 11: The four limitations. (a) Differential moveout dies quadratically at near offsets — below ~500 m the events are indistinguishable; (b) a velocity-inversion model: after NMO at primary velocities, the surface multiple is strongly curved (easy) but the internal multiple of the slow layer is nearly flat (leaks through); (c) in the Radon panel a constant-amplitude event focuses, an AVO-carrying event smears along q.*
 
 ### 4.6 Scorecard
 
