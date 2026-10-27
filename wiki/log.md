@@ -990,3 +990,38 @@ Built the full demultiple lecture pair from the instructor's 8-point plan and th
 ## [2026-10-25] figures | term02_lec03: taxonomy figure dropped (blackboard drawing)
 
 Removed `term02_lec03_multiple_taxonomy.png` from `term02_lec03_multiple_attenuation_kinematics` (EN notes + slide 13 of the deck) per instructor decision: the two-axis taxonomy (surface vs. internal × long- vs. short-period) is drawn on the blackboard during the lecture. Notes renumbered (was Figure 7; Figures 8–12 → 7–11); slide 13 keeps the axes as bullets with a draw-on-board stage direction. Wiki figure list updated (8 synthetic + 5 real-data carries). The orphaned script `plot_multiple_taxonomy.py` and PNG are still in the repo pending cleanup decision.
+
+## [2026-11-04] lecture | Term 3 Lecture 07: Introduction to Full-Waveform Inversion (wiki ingestion)
+
+Ingested the FWI reference library from `papers/fwi/` ahead of building `term03_lec07_introduction_to_fwi`.
+
+**Source pages (10):** `jones2019_fwi_mechanics_tutorial` (First Break tutorial — gradient/RTM link, cycle skipping), `metivier2026_fwi_nonconvexity_review` (GJI CC-BY review of non-convexity mitigations), `pratt1999_frequency_domain_fwi` (frequency-domain FWI, scale model, resolution), `tarantola1984_inversion_acoustic` (founding paper), `bohlen_fwi_lecture_series` (KIT course, 10 lectures), `zhang2015_land_data_fwi` (SPE land FWI strategies), `wang2020_land_fwi_challenges` (EAGE land FWI), `baldock2023_fwi_imaging` (EAGE FWI imaging), `keating2016_anacoustic_fwi` (CREWES Q-in-FWI hazards), `cova2017_land_multicomponent_conditioning` (CREWES land conditioning).
+
+**Concept pages (2):** `full_waveform_inversion` (formulation, workflow, method comparison table, strengths) and `fwi_cycle_skipping` (mechanism, half-period criterion, mitigation taxonomy).
+
+**Figures:** 19 figures extracted from the PDFs into `figures/term03_lec07/` (per instructor decision: reuse paper/course illustrations instead of generating). Extraction QC'd page-by-page.
+
+## [2026-11-04] lecture | Term 3 Lecture 07: Introduction to Full-Waveform Inversion (built)
+
+Built `term03_lec07_introduction_to_fwi` from the instructor's 4-topic plan (ray limits → formulation/non-linearity → advantages → modern challenges), conceptual/math-light per instructor decision, with **reused figures only** (19 extracted from `papers/fwi/`, none generated).
+
+**Deliverables:**
+- EN lecture notes (23 pp. PDF, 17 figures, 10 comprehension questions, reading list).
+- Slide deck: 45 slides (18 figure slides) from `slides/term03/lec07_introduction_to_fwi/slide_outline.md`.
+- Wiki: lecture_ready page + 2 concepts (`full_waveform_inversion`, `fwi_cycle_skipping`) + 10 source pages (logged above).
+- Notation glossary (AGENTS.md) extended: FWI, RTM, m, d_obs/d_cal, C(m), ∂C/∂m, T/2, cycle skipping, frequency continuation, diving wave, adjoint source, sensitivity kernel, AWI, WRI, WEMVA, FWI imaging, parameter cross-talk.
+
+**Structure:** §1 rays→wavefields (Fresnel floor, Pratt scale model, FWI idea, scales); §2 formulation & non-linearity (loop, gradient=RTM of residual, descent, cycle skipping + 5 work-around families, unifying relaxation principle); §3 advantages (BP 2004 resolution, Permian land, FWI imaging ×2, multiparameter + elastic test); §4 challenges (f⁴ cost, starting model/low freq, land, physics gaps, source/amplitudes, data quality); §5 summary table + questions.
+
+**Pending:** instructor review of EN; RU translation after approval.
+
+## [2026-11-04] lecture | Term 3 Lecture 07: expansion pass (timing rebalance)
+
+After a timing estimate (~82–92 min for the first draft), applied the instructor-approved expansions without trimming:
+
+- **§2.4 (new): wavenumber illumination** — |k| = (2f/v)·cos(θ/2) as the bridge between gradient anatomy, refraction-then-reflection practice, and long-offset value. Generated figure `term03_lec07_wavenumber_illumination.png` (self-contained script; the only non-reused figure) after Sirgue & Pratt (2004) / Métivier & Brossier (2026).
+- **§3.1: gather-level QC figure** — Wang et al. (2020) Fig. 5 (Permian gathers flatten).
+- **§4.3: land case studies** — Inner Mongolia workflow (Zhang & Dai 2015 Figs. 8–9, composited with row titles) and onshore Mexico DMFWI (Sheng et al. 2022 Figs. 2–3; new source page `sheng2022_land_fwi_imaging`). Corrected DMFWI = dynamic-matching FWI (cross-correlation misfit).
+- **Checkpoints 1–2** — 2-minute discuss-with-neighbour moments (half-period calc; cost-vs-frequency calc), in notes and deck.
+
+Deliverables after expansion: notes 27 pp. / 21 figures; deck 52 slides / 26 figure slides; timing ≈ 100 min untrimmed — trim candidates noted in lecture_ready (§2 gradient slides, scale-model-verdict merge). Pending instructor review; RU after approval.

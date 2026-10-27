@@ -85,6 +85,8 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Q estimation](concepts/q_estimation.md) | Spectral ratio, centroid frequency shift, LS spectrum modelling, match-filter | draft |
 | [Multiples](concepts/multiples.md) | Multiple reflections: classification, characteristics, and removal method families | draft |
 | [SRME](concepts/srme.md) | Surface-related multiple elimination: data-driven prediction by multidimensional convolution | draft |
+| [Full-waveform inversion](concepts/full_waveform_inversion.md) | Wave-equation model building from full waveforms: formulation, workflow, strengths | draft |
+| [Cycle skipping in FWI](concepts/fwi_cycle_skipping.md) | FWI non-linearity: half-period criterion, local minima, and mitigation families | draft |
 
 ## Techniques
 
@@ -197,6 +199,17 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Verschuur (2006) — EAGE EET 06, Practical Aspects of SRME](sources/verschuur_2006_eet06_practical_srme.md) | SRME practice: missing near offsets, interpolation, shallow water strategy, land data | course slides | reviewed |
 | [Verschuur (2006) — EAGE EET 07, Adaptive Subtraction](sources/verschuur_2006_eet07_adaptive_subtraction.md) | Adaptive subtraction: matching filters, windows, L1 vs L2, curvelet separation | course slides | reviewed |
 | [Paradigm QAPP/QEST](sources/paradigm_qapp_qest.md) | Q compensation and estimation reference guide (production parameters) | software doc | draft |
+| [Tarantola (1984)](sources/tarantola1984_inversion_acoustic.md) | Inversion of seismic reflection data in the acoustic approximation — founding FWI paper | paper | draft |
+| [Pratt (1999)](sources/pratt1999_frequency_domain_fwi.md) | Frequency-domain waveform inversion, Part 1 — scale-model verification, resolution, starting model | paper | draft |
+| [Jones (2019)](sources/jones2019_fwi_mechanics_tutorial.md) | Tutorial: the mechanics of waveform inversion — gradient, RTM link, cycle skipping | paper | draft |
+| [Métivier & Brossier (2026)](sources/metivier2026_fwi_nonconvexity_review.md) | Review of strategies to mitigate non-convexity in FWI (CC-BY) | paper | draft |
+| [Zhang & Dai (2015)](sources/zhang2015_land_data_fwi.md) | Land Data FWI: methods and strategies (SPE-177571) | paper | draft |
+| [Wang et al. (2020)](sources/wang2020_land_fwi_challenges.md) | Land FWI: challenges and possibilities (EAGE) | paper | draft |
+| [Sheng et al. (2022)](sources/sheng2022_land_fwi_imaging.md) | Full-waveform inversion and FWI imaging for land data (TGS/Pemex) | paper | draft |
+| [Baldock et al. (2023)](sources/baldock2023_fwi_imaging.md) | FWI Imaging: the future or merely derivative? (EAGE) | paper | draft |
+| [Bohlen — KIT FWI lecture series](sources/bohlen_fwi_lecture_series.md) | Full Waveform Inversion university course (WS 2021/22), theory + applications | course | draft |
+| [Keating & Innanen (2016)](sources/keating2016_anacoustic_fwi.md) | Anacoustic FWI: implementation and challenges (CREWES) | CREWES report | draft |
+| [Cova, Law & Innanen (2017)](sources/cova2017_land_multicomponent_conditioning.md) | Land multicomponent FWI: topography and data conditioning (CREWES) | CREWES report | draft |
 
 ## Comparisons
 
@@ -218,6 +231,7 @@ This wiki is a persistent, compounding knowledge base for the undergraduate seis
 | [Term 3 Lecture 2 — Statics and Velocity Modeling](lecture_ready/term03_lec02_statics_and_velocity_modeling.md) | term03_lec02 | draft |
 | [Term 3 Lecture 3 — Surface Waves](lecture_ready/term03_lec03_surface_waves.md) | term03_lec03 | draft |
 | [Term 3 Lecture 5 — Broadband Deconvolution](lecture_ready/term03_lec05_broadband_deconvolution.md) | term03_lec05 | draft |
+| [Term 3 Lecture 7 — Introduction to Full-Waveform Inversion](lecture_ready/term03_lec07_introduction_to_fwi.md) | term03_lec07 | draft |
 | [Term 2 Lecture 3 — Multiple Attenuation I (Kinematic Methods)](lecture_ready/term02_lec03_multiple_attenuation_kinematics.md) | term02_lec03 | lecture-ready |
 | [Term 2 Lecture 4 — Multiple Attenuation II (Prediction Methods)](lecture_ready/term02_lec04_multiple_attenuation_prediction.md) | term02_lec04 | lecture-ready |
 

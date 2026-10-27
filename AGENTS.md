@@ -230,4 +230,22 @@ Keep this consistent in figures and notes. Add new symbols here once settled.
 | — | AVO | АВО (амплитуда в зависимости от удаления) |
 | — | VSP | вертикальное сейсмическое профилирование (ВСП) |
 | — | MBWP (Model-Based Wavelet Processing) | модельно-ориентированная обработка импульса (MBWP) |
+| FWI | Full-waveform inversion | полноволновая инверсия (ПВИ); FWI |
+| RTM | Reverse-time migration | обратная временная миграция (RTM) |
+| $m$ | Earth model (gridded velocity/parameters) | модель среды (сеточная модель скоростей/параметров) |
+| $d_\text{obs}$, $d_\text{cal}$ | Observed (field) / calculated (modelled) data | наблюдённые / расчётные (модельные) данные |
+| $C(m)$, $E(m)$ | FWI misfit (objective) function | функция невязки (целевая функция) FWI |
+| $\partial C/\partial m$ | FWI gradient | градиент FWI |
+| $\|d_\text{obs} - d_\text{cal}\|^2$ | Least-squares waveform misfit | квадратичная невязка волновых полей |
+| $T/2$ | Half-period (cycle-skip) criterion | критерий полупериода (соскок фазы) |
+| — | Cycle skipping | соскок фазы (пропуск цикла) в FWI |
+| — | Frequency continuation / multiscale FWI | многомасштабная FWI (частотное продолжение) |
+| — | Diving wave | рефрагированная (ныряющая) волна |
+| — | Adjoint source (back-propagated residual) | сопряжённый источник (обратно распространяемая невязка) |
+| — | Sensitivity kernel | ядро чувствительности (функция чувствительности) |
+| AWI | Adaptive waveform inversion | адаптивная волновая инверсия (AWI) |
+| WRI | Wavefield reconstruction inversion | инверсия восстановления волнового поля (WRI) |
+| WEMVA | Wave-equation migration velocity analysis | волновое уравнение: анализ скоростей (WEMVA) |
+| — | FWI imaging (derivative image) | FWI-изображение (изображение по производной модели) |
+| — | Parameter cross-talk | взаимное влияние параметров (перекрёстные помехи параметров) |
 | — | FISTA | FISTA (быстрый итеративный пороговый алгоритм) |
